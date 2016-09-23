@@ -1,5 +1,17 @@
 Project web app for online shopping.
 --------------------------------------------------------------------------------------------
+Phone number: +375(29) 293884624
+E-mail: alexeydruzik@inbox.ru
+--------------------------------------------------------------------------------------------
+On this website you can choice with criteria your goods and put required amount
+in cart (in user interface you will see quantity and sum), also you can make order with
+relationship many to many. The goods, orders and goods in orders will be store in a
+separate table. You can choice your language - English or French. On the separate
+page, you will can see properies of goods.
+
+If you are an administrator, you can view all additional elements, it's realized with
+Spring Security. You can navigate on sate pages free.
+--------------------------------------------------------------------------------------------
 The project was developed using the  technologies MAVEN, HIBERNATE, SPRING, MYSQL, APACHE TOMCAT
 
 --------------------------------------------------------------------------------------------
@@ -25,7 +37,7 @@ db.username = root
 db.password = root
 db.url = jdbc:mysql://localhost:3306/internetshop
 If you  have anather username and parol, please change in /dao/src/main/resources/daoApplication.properties
-If you  have anather username and parol, please change them in ExecuteBuild.bat on your username and parol
+and username and parol in ExecuteBuild.bat on your username and parol
 
 2.MAVEN http://maven.apache.org/
 Open the file settings.xml in your maven(...\maven3.3.9\conf\settings.xml)
