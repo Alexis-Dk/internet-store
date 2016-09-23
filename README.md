@@ -55,11 +55,11 @@
 <br>Open the file tomcat-users.xml in your tomcat(...\apache-tomcat-8.0.33\conf\tomcat-users.xml)
 <br>and write inside the tag
 <br>
-<br><tomcat-users>
+<br><!-<tomcat-users>
 <br>	<role rolename="manager-gui"/>
 <br>	<role rolename="manager-script"/>
 <br>	<user username="user" password="user" roles="manager-gui,manager-script" />
-<br></tomcat-users>
+<br></tomcat-users> ->
 <br>
 <br>4. Check registration of the environment variables
 <br>Use command line: write command "set"
