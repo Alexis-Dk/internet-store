@@ -91,12 +91,15 @@ PATH= ..\apache-maven-3.3.9\bin
 5. Create on disc C, folder with name - PvtProject1
 
 6. Download project from GitHub github.com/Alexis-Dk/internet-store, and put his in this folder PvtProject1.
+Like here C:\PvtProject1\Online-shopping
 
 7. Run ExecuteBuild.bat in root folder of project.
 
 8. If shell ask you access to replace file, please press 'Y' twice in shell to access change.
 
 9. Go to http://localhost:8080/Internet-store/
+
+10. To see cobertura reports, go to root - ..applfolder/web/target/site/cobertura/index
 
 ---------------------------------------------------------------------------
 DEFAULT USER:
