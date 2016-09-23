@@ -4,7 +4,7 @@
 .DS_Store
 .idea
 .bin
-logs/
+logs
 service/target/
 dao/target/
 web/target/
