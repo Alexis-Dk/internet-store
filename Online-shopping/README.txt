@@ -1,6 +1,6 @@
 Project web app for online shopping.
 --------------------------------------------------------------------------------------------
-Phone number: +375(29) 293884624
+Phone number: +375(29) 3884624
 E-mail: alexeydruzik@inbox.ru
 --------------------------------------------------------------------------------------------
 On this website you can choice with criteria your goods and put required amount
