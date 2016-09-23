@@ -1,0 +1,27 @@
+package com.superinc.europe.onlineshopping.gu.dao.orm.hibernate;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+
+import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
+import com.superinc.europe.onlineshopping.gu.entity.Goods;
+import com.superinc.europe.onlineshopping.gu.entity.NumbersOfPages;
+
+/**
+ * Created by Alexey Druzik on 29.08.2016.
+ */
+public interface IDaoNavigation<T> {
+
+	List<NumbersOfPages> getNumberInResult(int number)
+			throws ClassNotFoundException, SQLException, DaoException;
+
+	List<Goods> getFilterPosts(List<Goods> goodsInput, int i)
+			throws ClassNotFoundException, SQLException, DaoException;
+	
+	Session getCurrentSession() throws DaoException;
+	
+	List<Goods> sortedByCriteria(Criteria criteria, String priveLower, String priceHighter) throws DaoException;
+}
