@@ -97,9 +97,11 @@ Like here C:\PvtProject1\Online-shopping
 
 8. If shell ask you access to replace file, please press 'Y' twice in shell to access change.
 
-9. Go to http://localhost:8080/Internet-store/
+9. For greater reliability, please copy the Internet-store.war to the folder 'webapps' on your server.
 
-10. To see cobertura reports, go to root - ..applfolder/web/target/site/cobertura/index
+10. Go to http://localhost:8080/Internet-store/
+
+11. To see cobertura reports, go to root - ..applfolder/web/target/site/cobertura/index
 
 ---------------------------------------------------------------------------
 DEFAULT USER:
