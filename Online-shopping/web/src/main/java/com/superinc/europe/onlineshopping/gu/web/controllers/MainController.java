@@ -139,7 +139,7 @@ public class MainController {
 		session.setAttribute(RequestHandler.GOODS_IN_CART, HttpUtils.setSession(session, addGoods_in_orders));
 		try {
 		model.put(RequestHandler.CART, HttpUtils.sessionInitialize(session));
-		model.put(RequestHandler.QUANTITY_SUM, HttpUtils.getListQuantitiAndSum(session));
+		model.put(RequestHandler.QUANTITY_SUM, HttpUtils.getListQuantityAndSum(session));
 		} catch (Exception e) {
 			log.error(e);
 			return RequestHandler.ERROR_PAGE;
@@ -166,7 +166,7 @@ public class MainController {
 		List<Goods_in_orders> goodsInOrders = (List<Goods_in_orders>) session.getAttribute(RequestHandler.GOODS_IN_CART);
 		try {
 		model.put(RequestHandler.CART, goodService.deleteFromCartGoodsInOrders(deleteByDescription, goodsInOrders));
-		model.put(RequestHandler.QUANTITY_SUM, HttpUtils.getListQuantitiAndSum(session));
+		model.put(RequestHandler.QUANTITY_SUM, HttpUtils.getListQuantityAndSum(session));
 		} catch (Exception e) {
 			log.error(e);
 			return RequestHandler.ERROR_PAGE;

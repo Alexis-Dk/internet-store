@@ -59,22 +59,22 @@ public class HttpUtils {
 		return addNewGoodsToCart(HttpUtils.sessionInitialize(session), addGoods_in_orders);
 	}
 	
-	public static List<QuantityAndSum> getListQuantitiAndSum(HttpSession session)
+	public static List<QuantityAndSum> getListQuantityAndSum(HttpSession session)
 			throws DaoException {
 
-		List<QuantityAndSum> quantitiAndSum = null;
+		List<QuantityAndSum> quantityAndSum = null;
 		List<Goods_in_orders> list = null;
 		int sumFinal = SUM_FINAL_VALUE;
 		
 		if (listExistOrEmpty(session) == true){
 			sumFinal = getSum(session);
 			list  = getListGoodsInCart(session);
-			quantitiAndSum = addQuantitiAndSum(session, list, sumFinal);
-			setAttributeQuantitiAndSum(session, quantitiAndSum);
-			quantitiAndSum = getAttributeQuantitiAndSum(session, quantitiAndSum);
+			quantityAndSum = addQuantityAndSum(session, list, sumFinal);
+			setAttributeQuantityAndSum(session, quantityAndSum);
+			quantityAndSum = getAttributeQuantityAndSum(session, quantityAndSum);
 			setSumToSession(session, sumFinal);
 			}
-		return quantitiAndSum;
+		return quantityAndSum;
 	}
 	
 	public static boolean listExistOrEmpty (HttpSession session) {
@@ -103,21 +103,21 @@ public class HttpUtils {
 		return list;
 	}
 	
-	public static List<QuantityAndSum> addQuantitiAndSum(HttpSession session,
+	public static List<QuantityAndSum> addQuantityAndSum(HttpSession session,
 			List<Goods_in_orders> list, int sumFinal) {
-		ArrayList<QuantityAndSum> quantitiAndSum = new ArrayList<QuantityAndSum>();
-		quantitiAndSum.add(new QuantityAndSum(list.size(), sumFinal));
-		return quantitiAndSum;
+		ArrayList<QuantityAndSum> quantityAndSum = new ArrayList<QuantityAndSum>();
+		quantityAndSum.add(new QuantityAndSum(list.size(), sumFinal));
+		return quantityAndSum;
 	}
 	
-	static void setAttributeQuantitiAndSum(HttpSession session, List<QuantityAndSum> quantitiAndSum){
-		session.setAttribute(RequestHandler.QUANTITY_SUM, quantitiAndSum);
+	static void setAttributeQuantityAndSum(HttpSession session, List<QuantityAndSum> quantityAndSum){
+		session.setAttribute(RequestHandler.QUANTITY_SUM, quantityAndSum);
 	}
 	
-	static List<QuantityAndSum> getAttributeQuantitiAndSum(HttpSession session,
-			List<QuantityAndSum> quantitiAndSum) {
-		quantitiAndSum = (List<QuantityAndSum>) session.getAttribute(RequestHandler.QUANTITY_SUM);
-		return quantitiAndSum;
+	static List<QuantityAndSum> getAttributeQuantityAndSum(HttpSession session,
+			List<QuantityAndSum> quantityAndSum) {
+		quantityAndSum = (List<QuantityAndSum>) session.getAttribute(RequestHandler.QUANTITY_SUM);
+		return quantityAndSum;
 	}
 	
 	static void setSumToSession(HttpSession session, int sum){
@@ -184,7 +184,7 @@ public class HttpUtils {
 	}
 
 	static void cleanQuantityAndSum(HttpSession session) {
-		QuantityAndSum quantitiAndSum = new QuantityAndSum(0, 0);
-		session.setAttribute(RequestHandler.QUANTITY_SUM, quantitiAndSum);
+		QuantityAndSum quantityAndSum = new QuantityAndSum(0, 0);
+		session.setAttribute(RequestHandler.QUANTITY_SUM, quantityAndSum);
 	}
 }

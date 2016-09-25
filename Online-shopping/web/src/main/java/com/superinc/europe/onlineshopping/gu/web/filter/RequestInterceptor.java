@@ -82,16 +82,16 @@ public class RequestInterceptor implements HandlerInterceptor {
 			list = (List<Goods_in_orders>) request.getSession().getAttribute(RequestHandler.GOODS_IN_CART);
 		}
 		request.getSession().setAttribute(RequestHandler.GOODS_IN_CART, list);
-		request.setAttribute(RequestHandler.QUANTITY_SUM, getQuantitiAndSum(list, request));
+		request.setAttribute(RequestHandler.QUANTITY_SUM, getQuantityAndSum(list, request));
 		request.setAttribute(RequestHandler.GOODS_IN_CART, list);
 	}
 	
-	public List<QuantityAndSum> getQuantitiAndSum(List<Goods_in_orders> list, HttpServletRequest request){
+	public List<QuantityAndSum> getQuantityAndSum(List<Goods_in_orders> list, HttpServletRequest request){
 		int sumFinal = 0;
 		if (HttpUtils.listExistOrEmpty(request.getSession()) == true){
 			sumFinal = HttpUtils.getSum(request.getSession());
 			list  = HttpUtils.getListGoodsInCart(request.getSession());
-			return HttpUtils.addQuantitiAndSum(request.getSession(), list, sumFinal);
+			return HttpUtils.addQuantityAndSum(request.getSession(), list, sumFinal);
 			}
 		else return null;
 	}
