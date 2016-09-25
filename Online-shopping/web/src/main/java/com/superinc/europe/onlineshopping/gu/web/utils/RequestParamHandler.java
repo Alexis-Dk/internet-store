@@ -3,7 +3,7 @@ package com.superinc.europe.onlineshopping.gu.web.utils;
 /**
  * Created by Alexey Druzik on 11.09.2016.
  */
-public class RequestHandler {
+public class RequestParamHandler {
 	public static final String NUMBER_OF_PAGE = "numberOfPage";
 	public static final String NAME_ATRIBUTE = "goods";
 	public static final String PRICE_LOWER = "c1";

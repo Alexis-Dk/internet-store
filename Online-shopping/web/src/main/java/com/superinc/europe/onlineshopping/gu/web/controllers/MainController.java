@@ -28,7 +28,7 @@ import com.superinc.europe.onlineshopping.gu.service.INavaigationService;
 import com.superinc.europe.onlineshopping.gu.service.IOrdersService;
 import com.superinc.europe.onlineshopping.gu.service.IUsersService;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpUtils;
-import com.superinc.europe.onlineshopping.gu.web.utils.RequestHandler;
+import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamHandler;
 
 /**
  * Created by Alexey Druzik on 11.09.2016.
@@ -63,115 +63,115 @@ public class MainController {
 //		Goods goods = new Goods(1, "test", "tv/UE40J6200AU.jpg", 599, 630, "test", "test", "test", "test", "test", "test", "test", 30, 30, 30, 30, 30, 30, "in_stock", 3);
 //		daoGoods.add(goods);
 		try {
-			model.put(RequestHandler.NUMBER_OF_PAGE, navaigationService.putListOfNumbersOfPages(
-							(String) request.getAttribute(RequestHandler.PRICE_LOWER),
-							(String) request.getAttribute(RequestHandler.PRICE_HIGHTER)));
-			if (request.getParameter(RequestHandler.SELECTED_PAGE) == null) {
-				model.put(RequestHandler.NAME_ATRIBUTE, navaigationService.putListOfGoodsDefaultNumbers(
-								(String) request.getAttribute(RequestHandler.PRICE_LOWER),
-								(String) request.getAttribute(RequestHandler.PRICE_HIGHTER)));
+			model.put(RequestParamHandler.NUMBER_OF_PAGE, navaigationService.putListOfNumbersOfPages(
+							(String) request.getAttribute(RequestParamHandler.PRICE_LOWER),
+							(String) request.getAttribute(RequestParamHandler.PRICE_HIGHTER)));
+			if (request.getParameter(RequestParamHandler.SELECTED_PAGE) == null) {
+				model.put(RequestParamHandler.NAME_ATRIBUTE, navaigationService.putListOfGoodsDefaultNumbers(
+								(String) request.getAttribute(RequestParamHandler.PRICE_LOWER),
+								(String) request.getAttribute(RequestParamHandler.PRICE_HIGHTER)));
 			} else {
-				model.put(RequestHandler.NAME_ATRIBUTE, navaigationService.putListOfGoodsUserNumbers(
-								(String) request.getAttribute(RequestHandler.PRICE_LOWER),
-								(String) request.getAttribute(RequestHandler.PRICE_HIGHTER),
-								request.getParameter(RequestHandler.SELECTED_PAGE)));
+				model.put(RequestParamHandler.NAME_ATRIBUTE, navaigationService.putListOfGoodsUserNumbers(
+								(String) request.getAttribute(RequestParamHandler.PRICE_LOWER),
+								(String) request.getAttribute(RequestParamHandler.PRICE_HIGHTER),
+								request.getParameter(RequestParamHandler.SELECTED_PAGE)));
 			}
 		} catch (DaoException | ClassNotFoundException | SQLException e) {
 			log.error(e);
-			return RequestHandler.ERROR_PAGE;
+			return RequestParamHandler.ERROR_PAGE;
 		}
-		model.put(RequestHandler.QUANTITY_SUM, request.getAttribute(RequestHandler.QUANTITY_SUM));
-		return RequestHandler.TV;
+		model.put(RequestParamHandler.QUANTITY_SUM, request.getAttribute(RequestParamHandler.QUANTITY_SUM));
+		return RequestParamHandler.TV;
 	}
 	
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String setHelloPage(HttpServletRequest request, ModelMap model) {
 		try {
-		model.put(RequestHandler.QUANTITY_SUM, request.getAttribute(RequestHandler.QUANTITY_SUM));
+		model.put(RequestParamHandler.QUANTITY_SUM, request.getAttribute(RequestParamHandler.QUANTITY_SUM));
 		} catch (Exception e) {
 			log.error(e);
-			return RequestHandler.ERROR_PAGE;
+			return RequestParamHandler.ERROR_PAGE;
 		}
-		return RequestHandler.HELLO_PAGE;
+		return RequestParamHandler.HELLO_PAGE;
 	}
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public ModelAndView setRegistrPage() {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
-		modelAndView.setViewName(RequestHandler.REGISTRATION);
+		modelAndView.setViewName(RequestParamHandler.REGISTRATION);
 		} catch (Exception e) {
 			log.error(e);
-			modelAndView.setViewName(RequestHandler.ERROR_PAGE);
+			modelAndView.setViewName(RequestParamHandler.ERROR_PAGE);
 		}
 		return modelAndView;
 	}
 	
 	@RequestMapping(value = "/getRegistration", method = RequestMethod.GET)
 	public String getRegistrPage(ModelMap model,
-			@RequestParam(value = RequestHandler.USER_NAME) String username,
-			@RequestParam(value = RequestHandler.PASSWORD) String password) {
-		if (HttpUtils.StringOrEmpty(RequestHandler.USER_NAME)
-				&& HttpUtils.StringOrEmpty(RequestHandler.PASSWORD)){
-			Users users = new Users(username, password, RequestHandler.USER);
+			@RequestParam(value = RequestParamHandler.USER_NAME) String username,
+			@RequestParam(value = RequestParamHandler.PASSWORD) String password) {
+		if (HttpUtils.StringOrEmpty(RequestParamHandler.USER_NAME)
+				&& HttpUtils.StringOrEmpty(RequestParamHandler.PASSWORD)){
+			Users users = new Users(username, password, RequestParamHandler.USER);
 			try {
 			usersService.insertUser(users);
 			} catch (Exception e) {
 				log.error(e);
-				return RequestHandler.ERROR_PAGE;
+				return RequestParamHandler.ERROR_PAGE;
 			}
 		}
-		return RequestHandler.GET_REGISTRATION;
+		return RequestParamHandler.GET_REGISTRATION;
 	}
 	
 	@RequestMapping(value = "/addNewGoodsToCart", method = RequestMethod.GET)
 	public String addNewGoodsToCart(HttpSession session, ModelMap model, HttpServletRequest request,
-			@RequestParam(value = RequestHandler.GOODS_ID, defaultValue="") String goods_id,
-			@RequestParam(value = RequestHandler.NAME) String name,
-			@RequestParam(value = RequestHandler.DESCRIPTION) String description,
-			@RequestParam(value = RequestHandler.PRICE) String price,
-			@RequestParam(value = RequestHandler.IMAGE_PATH) String image_path) {
+			@RequestParam(value = RequestParamHandler.GOODS_ID, defaultValue="") String goods_id,
+			@RequestParam(value = RequestParamHandler.NAME) String name,
+			@RequestParam(value = RequestParamHandler.DESCRIPTION) String description,
+			@RequestParam(value = RequestParamHandler.PRICE) String price,
+			@RequestParam(value = RequestParamHandler.IMAGE_PATH) String image_path) {
 		
 		Goods_in_orders addGoods_in_orders = new Goods_in_orders(1,
 				Integer.parseInt(goods_id), name, description, 1,
 				Integer.parseInt(price), image_path);
 		
-		session.setAttribute(RequestHandler.GOODS_IN_CART, HttpUtils.setSession(session, addGoods_in_orders));
+		session.setAttribute(RequestParamHandler.GOODS_IN_CART, HttpUtils.setSession(session, addGoods_in_orders));
 		try {
-		model.put(RequestHandler.CART, HttpUtils.sessionInitialize(session));
-		model.put(RequestHandler.QUANTITY_SUM, HttpUtils.getListQuantityAndSum(session));
+		model.put(RequestParamHandler.CART, HttpUtils.sessionInitialize(session));
+		model.put(RequestParamHandler.QUANTITY_SUM, HttpUtils.getListQuantityAndSum(session));
 		} catch (Exception e) {
 			log.error(e);
-			return RequestHandler.ERROR_PAGE;
+			return RequestParamHandler.ERROR_PAGE;
 		}
-		return RequestHandler.CART;
+		return RequestParamHandler.CART;
 	}
 	 
 	@RequestMapping(value = "/ViewItemsOfCart", method = RequestMethod.GET)
 	public String viesItemsOfCart(ModelMap model, HttpServletRequest request) {
 		try {
-		model.put(RequestHandler.QUANTITY_SUM, request.getAttribute(RequestHandler.QUANTITY_SUM));
-		model.put(RequestHandler.CART, request.getAttribute(RequestHandler.GOODS_IN_CART)); 
+		model.put(RequestParamHandler.QUANTITY_SUM, request.getAttribute(RequestParamHandler.QUANTITY_SUM));
+		model.put(RequestParamHandler.CART, request.getAttribute(RequestParamHandler.GOODS_IN_CART)); 
 		} catch (Exception e) {
 			log.error(e);
-			return RequestHandler.ERROR_PAGE;
+			return RequestParamHandler.ERROR_PAGE;
 		}
-		return RequestHandler.CART;
+		return RequestParamHandler.CART;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/deleteFromCart", method = RequestMethod.GET)
-	public String deleteFromCart(@RequestParam(value = RequestHandler.DELETE_BY_DESCRIPTION) String deleteByDescription,
+	public String deleteFromCart(@RequestParam(value = RequestParamHandler.DELETE_BY_DESCRIPTION) String deleteByDescription,
 			ModelMap model, HttpSession session, HttpServletRequest request) {
-		List<Goods_in_orders> goodsInOrders = (List<Goods_in_orders>) session.getAttribute(RequestHandler.GOODS_IN_CART);
+		List<Goods_in_orders> goodsInOrders = (List<Goods_in_orders>) session.getAttribute(RequestParamHandler.GOODS_IN_CART);
 		try {
-		model.put(RequestHandler.CART, goodService.deleteFromCartGoodsInOrders(deleteByDescription, goodsInOrders));
-		model.put(RequestHandler.QUANTITY_SUM, HttpUtils.getListQuantityAndSum(session));
+		model.put(RequestParamHandler.CART, goodService.deleteFromCartGoodsInOrders(deleteByDescription, goodsInOrders));
+		model.put(RequestParamHandler.QUANTITY_SUM, HttpUtils.getListQuantityAndSum(session));
 		} catch (Exception e) {
 			log.error(e);
-			return RequestHandler.ERROR_PAGE;
+			return RequestParamHandler.ERROR_PAGE;
 		}
-		return RequestHandler.CART;
+		return RequestParamHandler.CART;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -180,42 +180,42 @@ public class MainController {
 			ModelMap model) {
 		if (HttpUtils.CheckPrincipal() && HttpUtils.IntegerOrEmpty(session)) {
 			ordersService.insertOrder(new Orders(HttpUtils.StringSplitter(HttpUtils.UsersId()),
-					RequestHandler.PROCESSING, 0, (int) session.getAttribute(RequestHandler.TOTAL_COST)));
+					RequestParamHandler.PROCESSING, 0, (int) session.getAttribute(RequestParamHandler.TOTAL_COST)));
 			goodsInOrdersService.insertGoodsInOrders(ordersService.getLastInsertId(),
-					(List<Goods_in_orders>) session.getAttribute(RequestHandler.GOODS_IN_CART));
+					(List<Goods_in_orders>) session.getAttribute(RequestParamHandler.GOODS_IN_CART));
 			try {
-				model.put(RequestHandler.CART, HttpUtils
+				model.put(RequestParamHandler.CART, HttpUtils
 						.cleanAllFromSessionGoodsInOrders(session));
-				model.put(RequestHandler.QUANTITY_SUM,
-						request.getAttribute(RequestHandler.QUANTITY_SUM));
+				model.put(RequestParamHandler.QUANTITY_SUM,
+						request.getAttribute(RequestParamHandler.QUANTITY_SUM));
 			} catch (Exception e) {
 				log.error(e);
-				return RequestHandler.ERROR_PAGE;
+				return RequestParamHandler.ERROR_PAGE;
 			}
 		}
-		return RequestHandler.ADD_PURCHASE;
+		return RequestParamHandler.ADD_PURCHASE;
 	}
 	
 	@RequestMapping(value = "/contact", method = RequestMethod.GET)
 	public String setContact(HttpServletRequest request, HttpSession session, ModelMap model) {
 		try {
-		model.put(RequestHandler.QUANTITY_SUM, request.getAttribute(RequestHandler.QUANTITY_SUM));
+		model.put(RequestParamHandler.QUANTITY_SUM, request.getAttribute(RequestParamHandler.QUANTITY_SUM));
 		} catch (Exception e) {
 			log.error(e);
-			return RequestHandler.ERROR_PAGE;
+			return RequestParamHandler.ERROR_PAGE;
 		}
-		return RequestHandler.CONTACT;
+		return RequestParamHandler.CONTACT;
 	}
 	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public ModelAndView senIndexPage(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
-			modelAndView.addObject(RequestHandler.QUANTITY_SUM, request.getAttribute(RequestHandler.QUANTITY_SUM)); 
-			modelAndView.setViewName(RequestHandler.INDEX);
+			modelAndView.addObject(RequestParamHandler.QUANTITY_SUM, request.getAttribute(RequestParamHandler.QUANTITY_SUM)); 
+			modelAndView.setViewName(RequestParamHandler.INDEX);
 		} catch (Exception e) {
 			log.error(e);
-			modelAndView.setViewName(RequestHandler.ERROR_PAGE);
+			modelAndView.setViewName(RequestParamHandler.ERROR_PAGE);
 		}
 		return modelAndView;
 	}
@@ -224,10 +224,10 @@ public class MainController {
 	public ModelAndView setAdminPage(HttpServletRequest request, HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
-		modelAndView.setViewName(RequestHandler.ADMIN_PAGE_ATTR);
+		modelAndView.setViewName(RequestParamHandler.ADMIN_PAGE_ATTR);
 		} catch (Exception e) {
 			log.error(e);
-			modelAndView.setViewName(RequestHandler.ERROR_PAGE);
+			modelAndView.setViewName(RequestParamHandler.ERROR_PAGE);
 		}
 		return modelAndView;
 	}
