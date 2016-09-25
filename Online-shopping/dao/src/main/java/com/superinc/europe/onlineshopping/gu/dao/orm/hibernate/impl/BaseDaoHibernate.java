@@ -32,7 +32,6 @@ public abstract class BaseDaoHibernate<T> implements IDaoHibernate<T> {
 	
     /**
      * add entity to DB
-     *
      * @param t
      */
 	public void add(T t) {
@@ -42,7 +41,6 @@ public abstract class BaseDaoHibernate<T> implements IDaoHibernate<T> {
 
     /**
      * update or save entity to DB
-     *
      * @param t
      */
     public void update(T t){
@@ -52,7 +50,6 @@ public abstract class BaseDaoHibernate<T> implements IDaoHibernate<T> {
 
     /**
      * get entity from DB, not lazy
-     *
      * @param id
      * @return
      */
@@ -65,7 +62,6 @@ public abstract class BaseDaoHibernate<T> implements IDaoHibernate<T> {
 
     /**
      * get lazy entity
-     *
      * @param id
      * @return
      */
@@ -78,7 +74,6 @@ public abstract class BaseDaoHibernate<T> implements IDaoHibernate<T> {
 
     /**
      * delete entity  from DB
-     *
      * @param t
      */
     public void delete(Serializable id){
@@ -88,7 +83,6 @@ public abstract class BaseDaoHibernate<T> implements IDaoHibernate<T> {
 
     /**
      * get all entity from table in DB
-     *
      * @return
      */
     public List<T> getList() {
@@ -119,7 +113,6 @@ public abstract class BaseDaoHibernate<T> implements IDaoHibernate<T> {
 
     /**
      * private method to indentify the entity T class etc
-     *
      * @return
      */
     @SuppressWarnings("rawtypes")
