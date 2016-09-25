@@ -17,7 +17,7 @@ import com.superinc.europe.onlineshopping.gu.entity.NumbersOfPages;
 /**
  * Created by Alexey Druzik on 11.09.2016.
  */
-public class TestDao {
+public class DaoNavigationTest {
 
 	@SuppressWarnings("unused")
 	private static Logger logger = Logger.getLogger(DaoGoodsTest.class);
