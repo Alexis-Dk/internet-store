@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
-import com.superinc.europe.onlineshopping.gu.entity.Goods;
 import com.superinc.europe.onlineshopping.gu.entity.Goods_in_orders;
 import com.superinc.europe.onlineshopping.gu.entity.Orders;
 import com.superinc.europe.onlineshopping.gu.entity.Users;
@@ -53,28 +52,25 @@ public class MainController {
 	private IGoodsInOrdersService goodsInOrdersService;
 
 	@Autowired
-	private INavaigationService navaigationService;
+	private INavaigationService navigationService;
     
 	@Autowired
 	private IDaoGoods daoGoods;
 	
 	@RequestMapping(value = "/tv", method = RequestMethod.GET)
-	public String setTvPage(HttpServletRequest request, ModelMap model){
-//		Goods goods = new Goods(1, "test", "tv/UE40J6200AU.jpg", 599, 630, "test", "test", "test", "test", "test", "test", "test", 30, 30, 30, 30, 30, 30, "in_stock", 3);
-//		daoGoods.add(goods);
+	public String setTvPage(HttpServletRequest request, ModelMap model,
+			@RequestParam(value = RequestParamHandler.LOWER_PRICE, defaultValue = RequestParamHandler.EMPTY) String priceLower,
+			@RequestParam(value = RequestParamHandler.HIGHTER_PRICE, defaultValue = RequestParamHandler.EMPTY) String priceHighter,
+			@RequestParam(value = RequestParamHandler.SELECTED_PAGE, defaultValue = RequestParamHandler.VALUE_STR_ONE) String selectedPage) {
 		try {
-			model.put(RequestParamHandler.NUMBER_OF_PAGE, navaigationService.putListOfNumbersOfPages(
-							(String) request.getAttribute(RequestParamHandler.PRICE_LOWER),
-							(String) request.getAttribute(RequestParamHandler.PRICE_HIGHTER)));
+			model.put(RequestParamHandler.NUMBER_OF_PAGE, navigationService
+					.putListOfNumbersOfPages((String) priceLower,(String) priceHighter));
 			if (request.getParameter(RequestParamHandler.SELECTED_PAGE) == null) {
-				model.put(RequestParamHandler.NAME_ATRIBUTE, navaigationService.putListOfGoodsDefaultNumbers(
-								(String) request.getAttribute(RequestParamHandler.PRICE_LOWER),
-								(String) request.getAttribute(RequestParamHandler.PRICE_HIGHTER)));
+				model.put(RequestParamHandler.NAME_ATRIBUTE, navigationService
+						.putListOfGoodsDefaultNumbers((String) priceLower,(String) priceHighter));
 			} else {
-				model.put(RequestParamHandler.NAME_ATRIBUTE, navaigationService.putListOfGoodsUserNumbers(
-								(String) request.getAttribute(RequestParamHandler.PRICE_LOWER),
-								(String) request.getAttribute(RequestParamHandler.PRICE_HIGHTER),
-								request.getParameter(RequestParamHandler.SELECTED_PAGE)));
+				model.put(RequestParamHandler.NAME_ATRIBUTE, navigationService
+						.putListOfGoodsUserNumbers((String) priceLower,(String) priceHighter, selectedPage));
 			}
 		} catch (DaoException | ClassNotFoundException | SQLException e) {
 			log.error(e);
@@ -132,8 +128,8 @@ public class MainController {
 			@RequestParam(value = RequestParamHandler.PRICE) String price,
 			@RequestParam(value = RequestParamHandler.IMAGE_PATH) String image_path) {
 		
-		Goods_in_orders addGoods_in_orders = new Goods_in_orders(1,
-				Integer.parseInt(goods_id), name, description, 1,
+		Goods_in_orders addGoods_in_orders = new Goods_in_orders(RequestParamHandler.VALUE_ONE,
+				Integer.parseInt(goods_id), name, description, RequestParamHandler.VALUE_ONE,
 				Integer.parseInt(price), image_path);
 		
 		session.setAttribute(RequestParamHandler.GOODS_IN_CART, HttpUtils.setSession(session, addGoods_in_orders));
