@@ -14,7 +14,7 @@ import com.superinc.europe.onlineshopping.gu.entity.Goods_in_orders;
  * Created by Alexey Druzik on 29.08.2016.
  */
 @Scope("session")
-public interface IDaoGoods<T> extends IDaoHibernate<T>{
+public interface IDaoGoods extends IDaoHibernate<Goods>{
 	
 	List<Goods_in_orders> addNewGoodsToCart(List<Goods_in_orders> list, Goods_in_orders addGoods_in_orders)
 			throws DaoException;

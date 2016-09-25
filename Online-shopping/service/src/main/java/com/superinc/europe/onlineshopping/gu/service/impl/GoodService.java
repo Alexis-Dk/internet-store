@@ -24,7 +24,7 @@ import com.superinc.europe.onlineshopping.gu.service.IGoodsService;
 public class GoodService implements IGoodsService<Object> {
 
 	@Autowired
-	private IDaoGoods<Object> daoGoods;
+	private IDaoGoods daoGoods;
  
 	/**
 	 * Method to get list Goods in orders

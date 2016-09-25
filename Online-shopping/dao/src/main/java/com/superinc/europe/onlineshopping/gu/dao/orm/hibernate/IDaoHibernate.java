@@ -12,12 +12,6 @@ public interface IDaoHibernate<T> {
     void update(T t);
     T get(Serializable id);
     T load(Serializable id);
-    void delete(T t);
+    void delete(Serializable id);
     List<T> getList();
-	
-    String ERRORSAVE = "������ ���������� ��������";
-    String ERRORUPDATE = "������ ���������� ��������";
-    String UPDATED = "c������� ���������";
-    String ERRORGET = "������ ��������� ��������";
-    String ERRORDELETE = "������ �������� ��������";
 }

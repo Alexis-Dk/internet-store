@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
+import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
+import com.superinc.europe.onlineshopping.gu.entity.Goods;
 import com.superinc.europe.onlineshopping.gu.entity.Goods_in_orders;
 import com.superinc.europe.onlineshopping.gu.entity.Orders;
 import com.superinc.europe.onlineshopping.gu.entity.Users;
@@ -53,8 +55,13 @@ public class MainController {
 	@Autowired
 	private INavaigationService navaigationService;
     
+	@Autowired
+	private IDaoGoods daoGoods;
+	
 	@RequestMapping(value = "/tv", method = RequestMethod.GET)
 	public String setTvPage(HttpServletRequest request, ModelMap model){
+//		Goods goods = new Goods(1, "test", "tv/UE40J6200AU.jpg", 599, 630, "test", "test", "test", "test", "test", "test", "test", 30, 30, 30, 30, 30, 30, "in_stock", 3);
+//		daoGoods.add(goods);
 		try {
 			model.put(RequestHandler.NUMBER_OF_PAGE, navaigationService.putListOfNumbersOfPages(
 							(String) request.getAttribute(RequestHandler.PRICE_LOWER),

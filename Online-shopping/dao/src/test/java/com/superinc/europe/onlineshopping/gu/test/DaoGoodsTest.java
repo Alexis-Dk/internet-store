@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoNavigation;
+import com.superinc.europe.onlineshopping.gu.entity.Goods;
 import com.superinc.europe.onlineshopping.gu.entity.Users;
 
 /**
@@ -22,21 +23,35 @@ import com.superinc.europe.onlineshopping.gu.entity.Users;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration(transactionManager = "txManager", defaultRollback = true)
 @Transactional
-public class TestDaoServices {
+public class DaoGoodsTest {
 
 	@SuppressWarnings("unused")
-	private static Logger logger = Logger.getLogger(TestDaoServices.class);
+	private static Logger logger = Logger.getLogger(DaoGoodsTest.class);
     
 	@Autowired
-	private IDaoGoods<Object> daoGoods;
+	private IDaoGoods daoGoods;
 
 	@Autowired
 	private IDaoNavigation<Object> daoNavigation;
-	
-    @Test
-        public void testCalls(){
-    	Users user = new Users("a7", "b7", "c7");
-    	daoGoods.add(user);
-    	System.out.println("qwerty1: "+ user);
-    }
+
+	@Test
+	public void testAddGoods() {
+		try {
+			logger.info("test add users begin");
+			Goods goods = new Goods(1, "test", "tv/UE40J6200AU.jpg", 599, 630, "UE40J6200US", "test", "test", "test", "test", "test", "test", 30, 30, 30, 30, 30, 30, "in_stock", 3);
+			daoGoods.add(goods);
+			} catch (Exception e) {
+			logger.error("Error test add users " + e);
+		}
+	}
+    
+	@Test
+	public void testDeleteGoods() {
+		try {
+			logger.info("test delete users begin");
+			daoGoods.delete(9);
+		} catch (Exception e) {
+			logger.error("Error test delete users " + e);
+		}
+	}
 }

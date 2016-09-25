@@ -20,7 +20,7 @@ import com.superinc.europe.onlineshopping.gu.entity.NumbersOfPages;
 public class TestDao {
 
 	@SuppressWarnings("unused")
-	private static Logger logger = Logger.getLogger(TestDaoServices.class);
+	private static Logger logger = Logger.getLogger(DaoGoodsTest.class);
 
 	@Autowired
 	private IDaoNavigation<Object> daoNavigation;

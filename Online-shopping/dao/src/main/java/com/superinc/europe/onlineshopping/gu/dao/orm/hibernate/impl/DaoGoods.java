@@ -20,7 +20,7 @@ import com.superinc.europe.onlineshopping.gu.entity.Goods_in_orders;
 @Repository("daoGoods")
 @Scope("session")
 @SuppressWarnings("unchecked")
-public class DaoGoods extends BaseDaoHibernate<Object> implements IDaoGoods<Object>{
+public class DaoGoods extends BaseDaoHibernate<Goods> implements IDaoGoods{
 
 	private static final String CATEGORY_ID_VALUE_2 = "category_id < 2";
 	private static final String CATEGORY_ID_VALUE_0 = "category_id > 0";

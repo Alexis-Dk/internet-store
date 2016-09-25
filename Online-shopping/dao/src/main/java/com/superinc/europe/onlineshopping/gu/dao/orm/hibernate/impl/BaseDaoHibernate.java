@@ -35,10 +35,10 @@ public abstract class BaseDaoHibernate<T> implements IDaoHibernate<T> {
      *
      * @param t
      */
-    public void add(T t) {
-                   Session session = getSession();
-            session.save(t);
-            }
+	public void add(T t) {
+		Session session = getSession();
+		session.save(t);
+	}
 
     /**
      * update or save entity to DB
@@ -81,9 +81,9 @@ public abstract class BaseDaoHibernate<T> implements IDaoHibernate<T> {
      *
      * @param t
      */
-    public void delete(T t){
-            Session session = getSession();
-            session.delete(t);
+    public void delete(Serializable id){
+		T t = (T) getSession().get(getPersistentClass(), id);
+		getSession().delete(t);
     }
 
     /**

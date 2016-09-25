@@ -112,6 +112,35 @@ public class Goods implements Serializable {
 		this.stock_status = stock_status;
 		this.rating = rating;
 	}
+	
+	public Goods(int categoty_id, String name,
+			String image_path, int price, int oldprice, String description,
+			String characteristic1, String characteristic2,
+			String characteristic3, String characteristic4,
+			String characteristic5, String characteristic6,int characteristic7, int characteristic8,
+			int characteristic9, int characteristic10, int characteristic11,
+			int delete_status, String stock_status, int rating) {
+		this.categoty_id = categoty_id;
+		this.name = name;
+		this.image_path = image_path;
+		this.price = price;
+		this.oldprice = oldprice;
+		this.description = description;
+		this.characteristic1 = characteristic1;
+		this.characteristic2 = characteristic2;
+		this.characteristic3 = characteristic3;
+		this.characteristic4 = characteristic4;
+		this.characteristic5 = characteristic5;
+		this.characteristic6 = characteristic6;
+		this.characteristic7 = characteristic7;
+		this.characteristic8 = characteristic8;
+		this.characteristic9 = characteristic9;
+		this.characteristic10 = characteristic10;
+		this.characteristic11 = characteristic11;
+		this.delete_status = delete_status;
+		this.stock_status = stock_status;
+		this.rating = rating;
+	}
 
 	public int getGoods_id() {
 		return goods_id;
@@ -284,4 +313,20 @@ public class Goods implements Serializable {
 		return serialVersionUID;
 	}
 
+	@Override
+	public String toString() {
+		return "Goods [goods_id=" + goods_id + ", categoty_id=" + categoty_id
+				+ ", name=" + name + ", image_path=" + image_path + ", price="
+				+ price + ", oldprice=" + oldprice + ", description="
+				+ description + ", characteristic1=" + characteristic1
+				+ ", characteristic2=" + characteristic2 + ", characteristic3="
+				+ characteristic3 + ", characteristic4=" + characteristic4
+				+ ", characteristic5=" + characteristic5 + ", characteristic6="
+				+ characteristic6 + ", characteristic7=" + characteristic7
+				+ ", characteristic8=" + characteristic8 + ", characteristic9="
+				+ characteristic9 + ", characteristic10=" + characteristic10
+				+ ", characteristic11=" + characteristic11 + ", delete_status="
+				+ delete_status + ", stock_status=" + stock_status
+				+ ", rating=" + rating + "]";
+	}
 }
