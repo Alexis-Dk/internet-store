@@ -58,7 +58,7 @@ public class GoodService implements IGoodsService<Object> {
 	/**
 	 * Method return all products
 	 * @param priceHighter
-	 * @param priveLower
+	 * @param priceLower
 	 * @throws DaoException
 	 */
 	@Override

@@ -59,7 +59,7 @@ public class DaoGoods extends BaseDaoHibernate<Goods> implements IDaoGoods{
 	}
 
 	/**
-	 * Method delete producta from users cart 
+	 * Method delete product from users cart 
 	 * @param deleteByDescription
 	 * @param goodsInOrders
 	 * @throws DaoException

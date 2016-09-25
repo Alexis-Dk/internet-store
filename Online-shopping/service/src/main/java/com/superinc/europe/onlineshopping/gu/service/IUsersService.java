@@ -11,6 +11,11 @@ import com.superinc.europe.onlineshopping.gu.entity.Users;
 @Scope("session")
 public interface IUsersService<T> {
 
+	/**
+	 * Method insert Users to DB
+	 * @param users
+	 * @throws DaoException
+	 */
 	void insertUser(Users users) throws DaoException;
 	
 }

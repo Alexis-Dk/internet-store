@@ -13,5 +13,11 @@ import com.superinc.europe.onlineshopping.gu.entity.Goods_in_orders;
 @Scope("session")
 public interface IDaoGoodsInOrders<T> {
 
+	/**
+	 * Method insert goodsInOrders to DB 
+	 * @param ob
+	 * @param lastInsertId
+	 * @throws DaoException
+	 */
 	void insertGoodsInOrders(int LastInsertId, List<Goods_in_orders> ob) throws DaoException;
 }

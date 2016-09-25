@@ -15,13 +15,35 @@ import com.superinc.europe.onlineshopping.gu.entity.NumbersOfPages;
  */
 public interface IDaoNavigation<T> {
 
+	/**
+	 * Method get Filtered post
+	 * @param i
+	 * @param goodsInput
+	 * @throws DaoException
+	 */
 	List<NumbersOfPages> getNumberInResult(int number)
 			throws ClassNotFoundException, SQLException, DaoException;
 
+	/**
+	 * Method get list numbers in result
+	 * @param number
+	 * @throws DaoException
+	 */
 	List<Goods> getFilterPosts(List<Goods> goodsInput, int i)
 			throws ClassNotFoundException, SQLException, DaoException;
 	
+	/**
+	 * Method sorted list by criteria
+	 * @param criteria
+	 * @param priceHighter
+	 * @param priveLower
+	 * @throws DaoException
+	 */
 	Session getCurrentSession() throws DaoException;
 	
+	/**
+	 * Method get current session
+	 * @throws DaoException
+	 */
 	List<Goods> sortedByCriteria(Criteria criteria, String priveLower, String priceHighter) throws DaoException;
 }
