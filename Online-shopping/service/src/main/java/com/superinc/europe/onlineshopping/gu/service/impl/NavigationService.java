@@ -22,6 +22,7 @@ import com.superinc.europe.onlineshopping.gu.service.INavaigationService;
 public class NavigationService implements INavaigationService {
 	
 	private static final int DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE = 10;
+	
 	@Autowired
 	private IDaoNavigation<Object> daoNavigation;
 
