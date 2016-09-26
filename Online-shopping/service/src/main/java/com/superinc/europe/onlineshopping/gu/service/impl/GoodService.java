@@ -3,6 +3,7 @@ package com.superinc.europe.onlineshopping.gu.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -14,6 +15,7 @@ import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
 import com.superinc.europe.onlineshopping.gu.entity.Goods;
 import com.superinc.europe.onlineshopping.gu.entity.Goods_in_orders;
 import com.superinc.europe.onlineshopping.gu.service.IGoodsService;
+import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
@@ -23,6 +25,8 @@ import com.superinc.europe.onlineshopping.gu.service.IGoodsService;
 @Scope("session")
 public class GoodService implements IGoodsService<Object> {
 
+	private static Logger logger = Logger.getLogger(GoodService.class);
+	
 	@Autowired
 	private IDaoGoods daoGoods;
  
@@ -35,8 +39,14 @@ public class GoodService implements IGoodsService<Object> {
 	@Override
 	public List<Goods_in_orders> addNewGoodsToCart(List<Goods_in_orders> list,
 			Goods_in_orders addGoods_in_orders) throws DaoException {
-		ArrayList<Goods_in_orders> listFiltered = (ArrayList<Goods_in_orders>) daoGoods
-				.addNewGoodsToCart(list, addGoods_in_orders);
+		List<Goods_in_orders> listFiltered;
+		try {
+			listFiltered = (ArrayList<Goods_in_orders>) daoGoods
+					.addNewGoodsToCart(list, addGoods_in_orders);
+		} catch (DaoException e) {
+			logger.error(ExceptionMessages.ERROR_IN_SERVICE + e);
+			throw new DaoException(ExceptionMessages.ERROR_IN_SERVICE, e);
+		}
 		return listFiltered;
 	}
 
@@ -50,8 +60,15 @@ public class GoodService implements IGoodsService<Object> {
 	public List<Goods_in_orders> deleteFromCartGoodsInOrders(
 			String deleteByDescription, List<Goods_in_orders> goodsInOrders)
 			throws DaoException {
-		ArrayList<Goods_in_orders> modyfiedList = (ArrayList<Goods_in_orders>) daoGoods
-				.deleteFromCartGoodsInOrders(deleteByDescription, goodsInOrders);
+		ArrayList<Goods_in_orders> modyfiedList;
+		try {
+			modyfiedList = (ArrayList<Goods_in_orders>) daoGoods
+					.deleteFromCartGoodsInOrders(deleteByDescription,
+							goodsInOrders);
+		} catch (DaoException e) {
+			logger.error(ExceptionMessages.ERROR_IN_SERVICE + e);
+			throw new DaoException(ExceptionMessages.ERROR_IN_SERVICE, e);
+		}
 		return modyfiedList;
 	}
 
@@ -65,11 +82,13 @@ public class GoodService implements IGoodsService<Object> {
 	public List<Goods> getAllProducts(String priveLower, String priceHighter)
 			throws DaoException {
 		Session session = daoGoods.getCurrentSession();
-		List <Goods> products = null;
+		List <Goods> products;
 		try {
 			products = daoGoods.sortedByCriteria(session.createCriteria(Goods.class), priveLower, priceHighter);
-		} catch (Exception e) {
+		} catch (DaoException e) {
 			session.getTransaction().rollback();
+			logger.error(ExceptionMessages.ERROR_IN_SERVICE + e);
+			throw new DaoException(ExceptionMessages.ERROR_IN_SERVICE, e);
 		}
 		return products;
 	}
@@ -81,5 +100,11 @@ public class GoodService implements IGoodsService<Object> {
 	 */
 	@Override
 	public void add(Object ob) throws DaoException {
+		try {
+			System.out.println("Hallo hibernate");
+		} catch (DaoException e) {
+			logger.error(ExceptionMessages.ERROR_IN_SERVICE + e);
+			throw new DaoException(ExceptionMessages.ERROR_IN_SERVICE, e);
+		}
 	}
 }
