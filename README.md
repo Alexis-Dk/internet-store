@@ -38,7 +38,7 @@
 <br>db.password = root
 <br>db.url = jdbc:mysql://localhost:3306/internetshop
 <br>
-<br>2. Change username and parol in ExecuteBuild.bat on your username and parol.
+<br>2. Change username and parol in ExecuteBuild.bat on your username and parol for your DB.
 <br>
 <br>3.MAVEN http://maven.apache.org/
 <br>Open the file settings.xml in your maven(...\maven3.3.9\conf\settings.xml)
