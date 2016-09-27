@@ -25,7 +25,7 @@ public class GoodsInOrders implements IGoodsInOrdersService{
 	private static Logger logger = Logger.getLogger(GoodsInOrders.class);
 	
 	@Autowired
-	private IDaoGoodsInOrders daoGoodsInOrders;
+	private IDaoGoodsInOrders<Object> daoGoodsInOrders;
 
 	/**
 	 * Method insert GoodsInOrders to DB
