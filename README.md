@@ -37,10 +37,10 @@
 <br>db.username = root
 <br>db.password = root
 <br>db.url = jdbc:mysql://localhost:3306/internetshop
-<br>If you  have anather username and parol, please change in /dao/src/main/resources/daoApplication.properties
-<br>and username and parol in ExecuteBuild.bat on your username and parol
 <br>
-<br>2.MAVEN http://maven.apache.org/
+<br>2. Change username and parol in ExecuteBuild.bat on your username and parol.
+<br>
+<br>3.MAVEN http://maven.apache.org/
 <br>Open the file settings.xml in your maven(...\maven3.3.9\conf\settings.xml)
 <br>and write inside the tag <servers>
 <br>
@@ -50,7 +50,7 @@
 <br> password root password
 <br> server
 <br>
-<br>3.APACHE TOMCAT http://tomcat.apache.org/
+<br>4.APACHE TOMCAT http://tomcat.apache.org/
 <br>
 <br>Open the file tomcat-users.xml in your tomcat(...\apache-tomcat-8.0.33\conf\tomcat-users.xml)
 <br>and write inside the tag
@@ -61,7 +61,7 @@
 <br>	user username="user" password="user" roles="manager-gui,manager-script" 
 <br> tomcat-users
 <br>
-<br>4. Check registration of the environment variables
+<br>5. Check registration of the environment variables
 <br>Use command line: write command "set"
 <br>Check whether the registered variables:
 <br>-CATALINA_HOME
@@ -89,20 +89,20 @@
 <br>the variable name as M2_HOME
 <br>PATH= ..\apache-maven-3.3.9\bin
 <br>
-<br>5. Create on disc C, folder with name - PvtProject1
+<br>6. Create on disc C, folder with name - PvtProject1
 <br>
-<br>6. Download project from GitHub github.com/Alexis-Dk/internet-store, and put his in this folder PvtProject1.
+<br>7. Download project from GitHub github.com/Alexis-Dk/internet-store, and put his in this folder PvtProject1.
 <br>Like here C:\PvtProject1\Online-shopping
 <br>
-<br>7. Run ExecuteBuild.bat in root folder of project.
+<br>8. Run ExecuteBuild.bat in root folder of project.
 <br>
-<br>8. If shell ask you access to replace file, please press 'Y' twice in shell to access change.
+<br>9. If shell ask you access to replace file, please press 'Y' twice in shell to access change.
 <br>
-<br>9. For greater reliability, please copy the Internet-store.war to the folder 'webapps' on your server.
+<br>10. For greater reliability, please copy the Internet-store.war to the folder 'webapps' on your server.
 <br>
-<br>10. Go to http://localhost:8080/Internet-store/
+<br>11. Go to http://localhost:8080/Internet-store/
 <br>
-<br>11. To see cobertura reports, go to root - ..applfolder/web/target/site/cobertura/index
+<br>12. To see cobertura reports, go to root - ..applfolder/web/target/site/cobertura/index
 <br>
 <br>---------------------------------------------------------------------------
 <br>DEFAULT USER:
