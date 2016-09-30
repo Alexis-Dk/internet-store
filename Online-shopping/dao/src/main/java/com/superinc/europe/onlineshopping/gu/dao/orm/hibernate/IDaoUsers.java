@@ -11,6 +11,7 @@ import com.superinc.europe.onlineshopping.gu.entity.Users;
 @Scope("session")
 public interface IDaoUsers<T>  {
 
+	// method javadocs is not up to date
 	/**
 	 * Method insert User to DB
 	 * @param usersgoodsInput

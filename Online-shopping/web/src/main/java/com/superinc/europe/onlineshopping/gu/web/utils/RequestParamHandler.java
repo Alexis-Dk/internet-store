@@ -3,9 +3,12 @@ package com.superinc.europe.onlineshopping.gu.web.utils;
 /**
  * Created by Alexey Druzik on 11.09.2016.
  */
+// this is not handler, this is file with constants, it does not handle anything
+// should be renamed to **Constants
 public class RequestParamHandler {
 	public static final String NUMBER_OF_PAGE = "numberOfPage";
 	public static final String NAME_ATRIBUTE = "goods";
+	// what is c1 and c2 - consider changing this names
 	public static final String PRICE_LOWER = "c1";
 	public static final String PRICE_HIGHTER = "c2";
 	public static final String SELECTED_PAGE = "number";

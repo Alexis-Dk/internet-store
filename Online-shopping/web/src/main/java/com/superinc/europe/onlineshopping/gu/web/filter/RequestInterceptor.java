@@ -44,10 +44,12 @@ public class RequestInterceptor implements HandlerInterceptor {
 			throws Exception {
 	}
 
+	// this method logic is really hard to understand
 	public void setPriceLower(HttpServletRequest request){
 		String priceLower = null;
 		if (request.getParameter(RequestParamHandler.LOWER_PRICE) == null) {
 			priceLower = RequestParamHandler.EMPTY;
+			// this has no effect as it is rewritten at the end of the method
 			request.getSession().setAttribute(RequestParamHandler.LOWER_PRICE, RequestParamHandler.EMPTY);
 		} else {
 			priceLower = (request.getParameter(RequestParamHandler.LOWER_PRICE));
@@ -55,14 +57,17 @@ public class RequestInterceptor implements HandlerInterceptor {
 		if (priceLower.equals(RequestParamHandler.EMPTY)) {
 			priceLower = RequestParamHandler.EMPTY;
 		}
+		// why do you need two low price boundary values?
 		request.getSession().setAttribute(RequestParamHandler.LOWER_PRICE, priceLower);
 		request.setAttribute(RequestParamHandler.PRICE_LOWER, priceLower);
 	}
-	
+
+	// this method logic is really hard to understand
 	public void setPriceHighter(HttpServletRequest request){
 		String priceHighter = null;
 		if (request.getParameter(RequestParamHandler.HIGHTER_PRICE) == null) {
 			priceHighter = RequestParamHandler.EMPTY;
+			// this has no effect as it is rewritten at the end of the method
 			request.getSession().setAttribute(RequestParamHandler.HIGHTER_PRICE, RequestParamHandler.EMPTY);
 		} else {
 			priceHighter = (request.getParameter(RequestParamHandler.HIGHTER_PRICE));
@@ -70,6 +75,7 @@ public class RequestInterceptor implements HandlerInterceptor {
 		if (priceHighter.equals(RequestParamHandler.EMPTY)) {
 			priceHighter = RequestParamHandler.EMPTY;
 		}
+		// why do you need two low price boundary values?
 		request.getSession().setAttribute(RequestParamHandler.HIGHTER_PRICE, priceHighter);
 		request.setAttribute(RequestParamHandler.PRICE_HIGHTER, priceHighter);
 	}
@@ -93,6 +99,7 @@ public class RequestInterceptor implements HandlerInterceptor {
 			list  = HttpUtils.getListGoodsInCart(request.getSession());
 			return HttpUtils.addQuantityAndSum(request.getSession(), list, sumFinal);
 			}
+		// else is not needed
 		else return null;
 	}
 }

@@ -40,6 +40,8 @@ public class DaoNavigation extends BaseDaoHibernate<Object> implements IDaoNavig
 			throws ClassNotFoundException, SQLException {
 		List<Goods> goods = goodsInput;
 		List<Goods> goodsFiltered = new ArrayList<Goods>();
+		//you can use Java 8 Stream API here
+		//(and not only here, check it out it's cool)
 		for (int j = 0; j < goods.size(); j++) {
 			if (j < i * DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE
 					&& j >= DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE * (i - 1)) {
@@ -103,10 +105,12 @@ public class DaoNavigation extends BaseDaoHibernate<Object> implements IDaoNavig
 	 * @param j
 	 */
 	public Goods goodsWrapper(List<Goods> goods, int j){
+		//consider extracting goods.get(j) to variable - you make your code shorter and easier to understand
 		return new Goods(goods.get(j).getGoods_id(), goods
 				.get(j).getCategoty_id(), goods.get(j).getName(), goods
 				.get(j).getImage_path(), goods.get(j).getPrice(), goods
 				.get(j).getOldprice(), goods.get(j).getDescription(),
+				// getCharacteristicXX() - is a bad name for the method
 				goods.get(j).getCharacteristic1(), goods.get(j)
 						.getCharacteristic2(), goods.get(j)
 						.getCharacteristic3(), goods.get(j)

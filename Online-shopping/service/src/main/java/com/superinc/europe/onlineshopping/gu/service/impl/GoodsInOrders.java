@@ -20,6 +20,8 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages
 @Service
 @Transactional 
 @Scope("session")
+// what is goods in orders is it in russian товары в заказе?
+// if so consider renaming the class ItemsInOrderService or similar
 public class GoodsInOrders implements IGoodsInOrdersService{
 
 	private static Logger logger = Logger.getLogger(GoodsInOrders.class);

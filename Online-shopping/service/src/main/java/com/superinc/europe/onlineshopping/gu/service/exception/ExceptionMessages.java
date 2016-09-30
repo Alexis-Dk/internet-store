@@ -1,5 +1,10 @@
 package com.superinc.europe.onlineshopping.gu.service.exception;
 
+
+// actually these methods are not really helpful
+// as you are adding stacktrace to the log
+// so it will hold the information where the error has been
+// so I suggest providing some more informative error messages - not WHERE the error was, but WHAT was it
 public class ExceptionMessages {
 
 	public static final String ERROR_IN_SERVICE = "Error in service: ";

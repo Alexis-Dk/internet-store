@@ -54,6 +54,8 @@ public abstract class BaseDaoHibernate<T> implements IDaoHibernate<T> {
      * @return
      */
 	public T get(Serializable id){
+        //variable initializer is redundant
+        //and moreover, variable is redundant too,  you can simply return entity without saving it to temporary variable
         T t = null;
             Session session = getSession();
             t = (T) session.get(getPersistentClass(), id);
@@ -66,6 +68,8 @@ public abstract class BaseDaoHibernate<T> implements IDaoHibernate<T> {
      * @return
      */
     public T load(Serializable id){
+        //variable initializer is redundant
+        //and moreover, variable is redundant too,  you can simply return entity without saving it to temporary variable
         T t = null;
             Session session = getSession();
             t = (T) session.load(getPersistentClass(), id);
@@ -86,6 +90,8 @@ public abstract class BaseDaoHibernate<T> implements IDaoHibernate<T> {
      * @return
      */
     public List<T> getList() {
+        //variable initializer is redundant
+        //and moreover, variable is redundant too,  you can simply return entity without saving it to temporary variable
         List<T> list = null;
         String hql = "FROM " + getPersistentClass().getSimpleName();
             Session session = getSession();
@@ -99,6 +105,7 @@ public abstract class BaseDaoHibernate<T> implements IDaoHibernate<T> {
      * @return
      */
     public Session getBaseCurrentSession() {
+        //you can simply return session without saving it to temporary variable
         Session session = sessionFactory.getCurrentSession();
         return session;
     }

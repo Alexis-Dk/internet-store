@@ -17,6 +17,7 @@ public class OrdersDAO implements IDAOOrders<Orders> {
 
 	private static final String INSERT_INTO_ORDERS = "INSERT INTO ORDERS (users_id, payment, delete_status, totalcost) VALUES (?, ?, ?, ?)";
 
+	//Method word is extra, it is clear that this is method comment :)
 	/**
 	 * Method insert Orders to DB
 	 * @param ob
@@ -24,6 +25,7 @@ public class OrdersDAO implements IDAOOrders<Orders> {
 	public void insert(Orders ob) {
 		Connection connection = null;
 		PreparedStatement statement = null;
+		// bad variable name
 		ResultSet set = null;
 		try {
 			connection = ConnectionPool.getPool().getConnection();
@@ -36,6 +38,8 @@ public class OrdersDAO implements IDAOOrders<Orders> {
 		} catch (SQLException e) {
 			throw new DaoException(e);
 		} finally {
+			//"set" is null
+			// btw this was suggested by Intellij IDEA (I'm not advertising it, they don't pay me)
 			ConnectionPool.getPool().closeDbResources(connection, statement, set);
 		}
 	}

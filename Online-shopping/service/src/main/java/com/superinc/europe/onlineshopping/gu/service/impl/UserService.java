@@ -19,6 +19,8 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages
  * Created by Alexey Druzik on 29.08.2016.
  */
 @Named
+// UserService and UsersService is hard for me to understand - why not to combine them in one class?
+// you need to think of people who will support your code after you, will they quickly understand the difference between these 2 files?
 public class UserService implements UserDetailsService {
 
 	private static final String USERNAME = "username";
@@ -40,6 +42,8 @@ public class UserService implements UserDetailsService {
 	 */
 	@Override
 	@Transactional
+	// consider renamin to findByUsername or loadByUsername if you like it more
+	// you are returing User - so you don't need it in method name, it is clear what are you are loading
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Users result;
 		try {
