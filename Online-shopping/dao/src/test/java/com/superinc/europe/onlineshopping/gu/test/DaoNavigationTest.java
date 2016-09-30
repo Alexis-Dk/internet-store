@@ -38,7 +38,8 @@ public class DaoNavigationTest {
 		e.printStackTrace();
 	}
 }
- 
+
+	// this should be removed, as it is not connected with you project
 	@Test
     public void testAdd(){
     	int res = 3 + 5;

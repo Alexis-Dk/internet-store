@@ -28,14 +28,21 @@ public class DaoGoodsInOrders implements IDaoGoodsInOrders<Object> {
 	@Override
 	public void insertGoodsInOrders(int lastInsertId, List<Goods_in_orders> ob)
 			throws DaoException {
+		//variable initializer is redundant
 		List<Goods_in_orders> list = null;
 
 		IDAOFactory factory = new DAOMaker();
 		IDAOGoodsInOrders<Goods_in_orders> daoGoodsInOrders = factory
 				.getDAOGoodsInOrders();
 
+		//Casting to List is redundant
+		//btw - this was suggested by Intellij IDEA
 		if ((List<Goods_in_orders>) ob != null) {
+			//same here
 			list = (List<Goods_in_orders>) ob;
+			//Alexey, I just can't understand what is going on in this code
+			//probably because of variable and method naming
+			//I recommend you Robert Martin "Clean code" (is available in Russian)
 			for (Goods_in_orders goodsInOrders : list) {
 				daoGoodsInOrders.insert(new Goods_in_orders(lastInsertId,
 						goodsInOrders.getGoods_id(), goodsInOrders.getCount()));

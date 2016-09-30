@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope("session")
+//Snake case is not a convention in Java, please use CamelCase
+//moreover goods is plural word, while this class represents single type of goods
+//consider renaming as OrderItem or something similar
 public class Goods_in_orders {
 
     private int orders_id; 
@@ -104,7 +107,9 @@ public class Goods_in_orders {
         int hash = 1;
 //        hash = hash * 31 + description.hashCode();
 //        hash = hash * 31 + goods_id;
-          hash = 31;
+        // hashCode() that always returns the same value is really bad solution
+		// please read about how HashMap works
+		hash = 31;
         return hash;
 
 	}

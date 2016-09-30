@@ -1,5 +1,7 @@
 package com.superinc.europe.onlineshopping.gu.web.utils;
 
+// this is not handler, it has no implementation, only constants
+// please rename
 public class RequestHandler {
 
 	public static final String TV = "/tv";

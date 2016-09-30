@@ -10,6 +10,8 @@ import javax.persistence.Id;
 
 @Entity 
 //@Table(name="goods")
+// entity should be singular
+// Consider renaming to Item
 public class Goods implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -36,7 +38,8 @@ public class Goods implements Serializable {
 	
 	@Column(name="description")
 	private String description;
-	
+
+	// characterictic1 and so on is bad name
 	@Column(name="characteristic1")
 	private String characteristic1;
 	

@@ -10,6 +10,7 @@ import com.superinc.europe.onlineshopping.gu.entity.NumbersOfPages;
 /**
  * Created by Alexey Druzik on 29.08.2016.
  */
+//typo - Navigation
 public interface INavaigationService {
 	
 	/**

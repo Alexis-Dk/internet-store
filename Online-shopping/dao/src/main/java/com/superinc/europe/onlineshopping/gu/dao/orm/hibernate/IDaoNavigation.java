@@ -10,6 +10,7 @@ import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.entity.Goods;
 import com.superinc.europe.onlineshopping.gu.entity.NumbersOfPages;
 
+// methods javadocs are not up to date
 /**
  * Created by Alexey Druzik on 29.08.2016.
  */
@@ -21,6 +22,7 @@ public interface IDaoNavigation<T> {
 	 * @param goodsInput
 	 * @throws DaoException
 	 */
+	// no idea what this method does
 	List<NumbersOfPages> getNumberInResult(int number)
 			throws ClassNotFoundException, SQLException, DaoException;
 

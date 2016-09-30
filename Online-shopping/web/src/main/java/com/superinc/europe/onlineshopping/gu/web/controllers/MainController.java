@@ -1,3 +1,5 @@
+// btw why such long package name
+// I'm curious is there some story behind it? :)
 package com.superinc.europe.onlineshopping.gu.web.controllers;
 
 import java.sql.SQLException;
@@ -66,6 +68,7 @@ public class MainController {
 			@RequestParam(value = RequestParamHandler.SELECTED_PAGE, defaultValue = RequestParamHandler.VALUE_STR_ONE) String selectedPage) {
 		try {
 			model.put(RequestParamHandler.NUMBER_OF_PAGE, navigationService
+					// Casting to String is redundant here and below
 					.putListOfNumbersOfPages((String) priceLower,(String) priceHighter));
 			if (request.getParameter(RequestParamHandler.SELECTED_PAGE) == null) {
 				model.put(RequestParamHandler.NAME_ATRIBUTE, navigationService
@@ -75,6 +78,7 @@ public class MainController {
 						.putListOfGoodsUserNumbers((String) priceLower,(String) priceHighter, selectedPage));
 			}
 		} catch (DaoException | ClassNotFoundException | SQLException e) {
+			// please refer to my comment in com.superinc.europe.onlineshopping.gu.service.exception.ErrorMessages
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamHandler.ERROR_PAGE;
 		}
@@ -146,6 +150,7 @@ public class MainController {
 	}
 	 
 	@RequestMapping(value = RequestHandler.VIEW_ITEMS_OF_CART, method = RequestMethod.GET)
+	//type - view
 	public String viesItemsOfCart(ModelMap model, HttpServletRequest request) {
 		try {
 		model.put(RequestParamHandler.QUANTITY_SUM, request.getAttribute(RequestParamHandler.QUANTITY_SUM));
@@ -158,6 +163,7 @@ public class MainController {
 	}
 	
 	@SuppressWarnings("unchecked")
+	//please check my comment for DaoGoods.deleteFromCartGoodsInOrders()
 	@RequestMapping(value = RequestHandler.DELETE_FROM_CART, method = RequestMethod.GET)
 	public String deleteFromCart(@RequestParam(value = RequestParamHandler.DELETE_BY_DESCRIPTION) String deleteByDescription,
 			ModelMap model, HttpSession session, HttpServletRequest request) {
@@ -206,6 +212,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = RequestHandler.INDEX, method = RequestMethod.GET)
+	// type - what is "sen"?
 	public ModelAndView senIndexPage(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		try {

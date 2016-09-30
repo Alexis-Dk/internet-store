@@ -23,6 +23,8 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages
 @Service
 @Transactional 
 @Scope("session")
+// positive name :)
+// but I suggest renaming this to ItemService
 public class GoodService implements IGoodsService<Object> {
 
 	private static Logger logger = Logger.getLogger(GoodService.class);

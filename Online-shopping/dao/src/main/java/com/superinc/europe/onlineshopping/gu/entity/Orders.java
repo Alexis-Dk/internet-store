@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 @SuppressWarnings("serial")
 @Entity 
 //@Table(name="orders")
+// entity should be singular
 public class Orders  implements Serializable{
 
 

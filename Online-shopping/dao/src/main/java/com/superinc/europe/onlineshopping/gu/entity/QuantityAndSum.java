@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope("session")
+// Consider reworking this class - here it is absolutely unclear which item quantity and sum it refers to
 public class QuantityAndSum {
 	
     private int quantity; 

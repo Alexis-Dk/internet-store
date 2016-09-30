@@ -17,6 +17,7 @@ import com.superinc.europe.onlineshopping.gu.entity.Users;
 @Scope("session")
 public class DaoUsers implements IDaoUsers<Object>  {
 
+	// usersgoodsInput param has been renamed
 	/**
 	 * Method insert User to DB
 	 * @param usersgoodsInput

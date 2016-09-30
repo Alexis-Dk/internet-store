@@ -71,6 +71,9 @@ public class NavigationService implements INavaigationService {
 	 * @throws DaoException
 	 */
 	@Override
+	// bad method name - it does not tell me much that there is some math operation going on inside
+	// it should say which exactly operation is performed
+	// as per javadoc it could be named getNumberOfProductsPerPage()
 	public int mathOperation(String priceLower, String priceHighter) {
 		try {
 			return (int) Math.ceil((double) getAllProducts(priceLower, priceHighter).size()
@@ -111,6 +114,7 @@ public class NavigationService implements INavaigationService {
 	 * @throws DaoException
 	 */
 	@Override
+	// no idea what this method does
 	public List<NumbersOfPages> putListOfNumbersOfPages(String priceLower,
 			String priceHighter) throws DaoException, ClassNotFoundException,
 			SQLException {

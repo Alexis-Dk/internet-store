@@ -84,6 +84,7 @@ public class ConnectionPool {
 			try {
 				connection.close();
 			} catch (SQLException e) {
+				//hiding exceptions is bad practice
 			}
 		}
 	}
@@ -97,6 +98,7 @@ public class ConnectionPool {
 			try {
 				statement.close();
 			} catch (SQLException e) {
+				//hiding exceptions is bad practice
 			}
 		}
 	}
@@ -110,6 +112,7 @@ public class ConnectionPool {
 			try {
 				resultSet.close();
 			} catch (SQLException e) {
+				//hiding exceptions is bad practice
 			}
 		}
 	}
