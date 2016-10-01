@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.context.annotation.Scope;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
-import com.superinc.europe.onlineshopping.gu.entity.GoodsOrders;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.

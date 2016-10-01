@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.superinc.europe.onlineshopping.gu.dto.QuantityAndSum;
-import com.superinc.europe.onlineshopping.gu.entity.GoodsOrders;
+import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpUtils;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamHandler;
 

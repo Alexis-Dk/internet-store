@@ -7,14 +7,14 @@ import org.hibernate.Session;
 import org.springframework.context.annotation.Scope;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
-import com.superinc.europe.onlineshopping.gu.entity.Goods;
-import com.superinc.europe.onlineshopping.gu.entity.GoodsOrders;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
  */
 @Scope("session")
-public interface IDaoGoods extends IDaoHibernate<Goods>{
+public interface IDaoGoods extends IBaseDao<Goods>{
 	
 	/**
 	 * Method add products to users cart 
@@ -31,7 +31,7 @@ public interface IDaoGoods extends IDaoHibernate<Goods>{
 	 * @param goodsInOrders
 	 * @throws DaoException
 	 */
-	List<GoodsOrders> deleteFromCartGoodsInOrders(
+	List<GoodsOrders> deleteFromCartGoodsOrders(
 			String deleteByDescription, List<GoodsOrders> goodsInOrders) throws DaoException;
 
 	/**

@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Named
 public class PasswordHelper implements PasswordEncoder {
 
-	private MessageDigest md;
+	public MessageDigest md;
 	
 	/**
 	 * Method code password

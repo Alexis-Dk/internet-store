@@ -8,13 +8,13 @@ import java.sql.SQLException;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.db.ConnectionPool;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOGoodsInOrders;
-import com.superinc.europe.onlineshopping.gu.entity.GoodsOrders;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
  */
 public class GoodsInOrdersDAO implements IDAOGoodsInOrders<GoodsOrders> {
-	private static final String INSERT_INTO_GOODS_IN_ORDERS = "INSERT INTO GOODS_IN_ORDERS (orders_id, goods_id, count) VALUES (?, ?, ?)";
+	private static final String INSERT_INTO_GOODS_IN_ORDERS = "INSERT INTO goodsinorders (orders_id_FK, goods_id_FK, count) VALUES (?, ?, ?)";
 
 	/**
 	 * Method insert Goods_in_orders to DB

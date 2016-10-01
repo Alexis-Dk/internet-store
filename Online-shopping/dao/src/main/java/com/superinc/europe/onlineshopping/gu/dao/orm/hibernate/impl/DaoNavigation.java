@@ -11,14 +11,14 @@ import org.springframework.stereotype.Repository;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoNavigation;
-import com.superinc.europe.onlineshopping.gu.dto.NumbersOfPages;
-import com.superinc.europe.onlineshopping.gu.entity.Goods;
+import com.superinc.europe.onlineshopping.gu.entities.dto.NumbersOfPages;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
  */
 @Repository("daoNavigation")
-public class DaoNavigation extends BaseDaoHibernate<Object> implements IDaoNavigation<Object> {
+public class DaoNavigation extends BaseDao<Object> implements IDaoNavigation<Object> {
 	
 	private static final int DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE = 10;
 	private static final int RESULT_ID_EQUALS_0 = 0;
@@ -35,7 +35,6 @@ public class DaoNavigation extends BaseDaoHibernate<Object> implements IDaoNavig
 	 * @param goodsInput
 	 * @throws DaoException
 	 */
-	@Override
 	public List<Goods> getFilterPosts(List<Goods> goodsInput, int i)
 			throws ClassNotFoundException, SQLException {
 		List<Goods> goods = goodsInput;
@@ -54,8 +53,7 @@ public class DaoNavigation extends BaseDaoHibernate<Object> implements IDaoNavig
 	 * @param number
 	 * @throws DaoException
 	 */
-	@Override
-	public List<NumbersOfPages> getNumberInResult(int number) throws ClassNotFoundException, SQLException {
+	public List<NumbersOfPages> getNumberInResult(int number) {
 		int id = RESULT_ID_EQUALS_0;
 		String[] array = new String[number];
 		ArrayList<NumbersOfPages> numberOfPage = new ArrayList<NumbersOfPages>();
@@ -74,10 +72,8 @@ public class DaoNavigation extends BaseDaoHibernate<Object> implements IDaoNavig
 	 * @throws DaoException
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Goods> sortedByCriteria(Criteria criteria, 
 			String priveLower, String priceHighter){
-//		criteria.createAlias("goods", "g");
 		criteria.add(Restrictions.sqlRestriction(CATEGORY_ID_VALUE_0));
 		criteria.add(Restrictions.sqlRestriction(CATEGORY_ID_VALUE_2));
 		if (!priveLower.equals(EMPTY_FIELD)) {
@@ -93,7 +89,6 @@ public class DaoNavigation extends BaseDaoHibernate<Object> implements IDaoNavig
 	 * Method get current session
 	 * @throws DaoException
 	 */
-	@Override
 	public Session getCurrentSession() throws DaoException {
 		return getSession();
 	}

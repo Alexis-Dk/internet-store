@@ -1,4 +1,4 @@
-package com.superinc.europe.onlineshopping.gu.dto;
+package com.superinc.europe.onlineshopping.gu.entities.dto;
 
 public class Bucket {
 

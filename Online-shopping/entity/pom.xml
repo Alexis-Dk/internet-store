@@ -7,27 +7,13 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>service</artifactId>
+	<artifactId>entity</artifactId>
 	<version>0.0.1</version>
-	<name>service</name>
-	<description>service</description>
-
-	<dependencies>
-		<dependency>
-			<groupId>com.pvt</groupId>
-			<artifactId>dao</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.pvt</groupId>
-			<artifactId>entity</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-	</dependencies>
-
+	<name>entity</name>
+	<description>entity</description>
+	
 	<build>
-		<finalName>service</finalName>
+		<finalName>entity</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -35,5 +21,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	
 </project>

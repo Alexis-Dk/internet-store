@@ -18,10 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
-import com.superinc.europe.onlineshopping.gu.entity.Goods;
-import com.superinc.europe.onlineshopping.gu.entity.GoodsOrders;
-import com.superinc.europe.onlineshopping.gu.entity.Orders;
-import com.superinc.europe.onlineshopping.gu.entity.Users;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
 import com.superinc.europe.onlineshopping.gu.service.IGoodsInOrdersService;
 import com.superinc.europe.onlineshopping.gu.service.IGoodsService;
 import com.superinc.europe.onlineshopping.gu.service.INavaigationService;

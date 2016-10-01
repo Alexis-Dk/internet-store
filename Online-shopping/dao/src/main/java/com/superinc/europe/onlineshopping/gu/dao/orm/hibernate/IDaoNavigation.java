@@ -7,8 +7,8 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
-import com.superinc.europe.onlineshopping.gu.dto.NumbersOfPages;
-import com.superinc.europe.onlineshopping.gu.entity.Goods;
+import com.superinc.europe.onlineshopping.gu.entities.dto.NumbersOfPages;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.

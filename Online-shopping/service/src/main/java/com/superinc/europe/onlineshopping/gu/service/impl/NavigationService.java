@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoNavigation;
-import com.superinc.europe.onlineshopping.gu.dto.NumbersOfPages;
-import com.superinc.europe.onlineshopping.gu.entity.Goods;
+import com.superinc.europe.onlineshopping.gu.entities.dto.NumbersOfPages;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
 import com.superinc.europe.onlineshopping.gu.service.INavaigationService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 
@@ -95,10 +95,6 @@ public class NavigationService implements INavaigationService {
 		try {
 			products = (List<Goods>)daoNavigation.sortedByCriteria(
 					session.createCriteria(Goods.class, "goods"), priveLower, priceHighter);
-//					priceHighter);
-//					session.createCriteria(Goods.class).setProjection(Projections.projectionList().add(Projections.property("goods.category_id"), "goods.category_id")), priveLower,
-//					priceHighter);
-			System.out.println("aasddfgjyjtrgtgrthhrthtrhrt");
 			for (Goods goods : products) {
 				System.out.println("qwerty123"+goods);
 			}

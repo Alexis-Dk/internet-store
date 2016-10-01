@@ -6,21 +6,19 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
-import com.superinc.europe.onlineshopping.gu.entity.Goods;
-import com.superinc.europe.onlineshopping.gu.entity.GoodsOrders;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
  */
 @Repository("daoGoods")
-@Scope("session")
 @SuppressWarnings("unchecked")
-public class DaoGoods extends BaseDaoHibernate<Goods> implements IDaoGoods{
+public class DaoGoods extends BaseDao<Goods> implements IDaoGoods{
 
 	private static final String CATEGORY_ID_VALUE_2 = "category_idg < 2";
 	private static final String CATEGORY_ID_VALUE_0 = "category_idg > 0";
@@ -34,25 +32,25 @@ public class DaoGoods extends BaseDaoHibernate<Goods> implements IDaoGoods{
 	/**
 	 * Method add products to users cart 
 	 * @param list
-	 * @param addGoods_in_orders
+	 * @param goodsOrders
 	 * @throws DaoException
 	 */
 	@Override
 	public List<GoodsOrders> addNewGoodsToCart(List<GoodsOrders> list,
-			GoodsOrders addGoods_in_orders) throws DaoException {
+			GoodsOrders goodsOrders) throws DaoException {
 		int count = COUNT_VALUE;
 		int repeatGoodsFlag = REPEAT_GOODS_FLAG_EQUALS_0;
-		if (Integer.valueOf(addGoods_in_orders.getGoodsFk().getGoodsId()) != null
-				&& addGoods_in_orders.getGoodsFk().getName() != null) {
-			for (GoodsOrders goods_in_orders : list) {
-				if (goods_in_orders.getGoodsFk().getDescription().equals(
-						addGoods_in_orders.getGoodsFk().getDescription())) {
-					goods_in_orders.setCount(goods_in_orders.getCount() + count);
+		if (Integer.valueOf(goodsOrders.getGoodsFk().getGoodsId()) != null
+				&& goodsOrders.getGoodsFk().getName() != null) {
+			for (GoodsOrders goodsInOrders : list) {
+				if (goodsInOrders.getGoodsFk().getDescription().equals(
+						goodsOrders.getGoodsFk().getDescription())) {
+					goodsInOrders.setCount(goodsInOrders.getCount() + count);
 					repeatGoodsFlag = REPEAT_GOODS_FLAG_EQUALS_1;
 				}
 			}
 			if (repeatGoodsFlag != 1) {
-				list.add(addGoods_in_orders);
+				list.add(goodsOrders);
 			}
 		}
 		return list;
@@ -65,7 +63,7 @@ public class DaoGoods extends BaseDaoHibernate<Goods> implements IDaoGoods{
 	 * @throws DaoException
 	 */
 	@Override
-	public List<GoodsOrders> deleteFromCartGoodsInOrders(
+	public List<GoodsOrders> deleteFromCartGoodsOrders(
 			String deleteByDescription, List<GoodsOrders> goodsInOrders)
 			throws DaoException {
 

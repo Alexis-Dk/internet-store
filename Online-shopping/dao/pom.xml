@@ -12,6 +12,14 @@
 	<name>dao</name>
 	<description>dao</description>
 
+	<dependencies>
+		<dependency>
+			<groupId>com.pvt</groupId>
+			<artifactId>entity</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+	</dependencies>
+
 	<build>
 		<finalName>dao</finalName>
 		<plugins>

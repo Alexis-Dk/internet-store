@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoOrders;
-import com.superinc.europe.onlineshopping.gu.entity.Orders;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
 import com.superinc.europe.onlineshopping.gu.service.IOrdersService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 

@@ -8,14 +8,14 @@ import java.sql.SQLException;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.db.ConnectionPool;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOUser;
-import com.superinc.europe.onlineshopping.gu.entity.Users;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
  */
 public class UserDAO implements IDAOUser<Users> {
 
-	private static final String INSERT_INTO_USERS = "INSERT INTO USERS (username, password, role) VALUES (?, ?, ?)";
+	private static final String INSERT_INTO_USERS = "INSERT INTO USERS (password, role, username) VALUES (?, ?, ?)";
 
 	/**
 	 * Method insert Users to DB

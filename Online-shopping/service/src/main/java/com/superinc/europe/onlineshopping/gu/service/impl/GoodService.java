@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
-import com.superinc.europe.onlineshopping.gu.entity.Goods;
-import com.superinc.europe.onlineshopping.gu.entity.GoodsOrders;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
 import com.superinc.europe.onlineshopping.gu.service.IGoodsService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 
@@ -63,7 +63,7 @@ public class GoodService implements IGoodsService<Object> {
 		ArrayList<GoodsOrders> modyfiedList;
 		try {
 			modyfiedList = (ArrayList<GoodsOrders>) daoGoods
-					.deleteFromCartGoodsInOrders(deleteByDescription,
+					.deleteFromCartGoodsOrders(deleteByDescription,
 							goodsInOrders);
 		} catch (DaoException e) {
 			logger.error(ExceptionMessages.ERROR_IN_SERVICE + e);

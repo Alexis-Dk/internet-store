@@ -3,11 +3,13 @@ package com.superinc.europe.onlineshopping.gu.dao.orm.hibernate;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.Session;
+
 /**
  * Created by Alexey Druzik on 22.08.2016.
  * Base interface for Dao
  */
-public interface IDaoHibernate<T> {
+public interface IBaseDao<T> {
 	
     /**
      * add entity to DB
@@ -47,4 +49,15 @@ public interface IDaoHibernate<T> {
      * @return
      */
     List<T> getList();
+    
+    /**
+     * method to get Current session
+     * @return
+     */
+    Session getBaseCurrentSession();
+    
+    /**
+     * method to close session
+     */
+    void closeSession(); 
 }

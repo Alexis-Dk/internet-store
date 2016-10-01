@@ -1,4 +1,4 @@
-package com.superinc.europe.onlineshopping.gu.test;
+package com.superinc.europe.onlineshopping.gu.test.orm;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,45 +10,48 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.apache.log4j.Logger;
 
-import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoNavigation;
+import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoOrders;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
 
 /**
  * Created by Alexey Druzik on 11.09.2016.
  */
+@SuppressWarnings("deprecation")
 @ContextConfiguration("/testAplContext.xml")
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration(transactionManager = "txManager", defaultRollback = true)
 @Transactional
-public class DaoGoodsTest {
+public class DaoOrdersTest {
 
-	private static Logger logger = Logger.getLogger(DaoGoodsTest.class);
+	private static Logger logger = Logger.getLogger(DaoOrdersTest.class);
     
 	@Autowired
-	private IDaoGoods daoGoods;
+	private IDaoOrders<Orders> daoOrders;
 
 	@Autowired
 	private IDaoNavigation<Object> daoNavigation;
 
 	@Test
-	public void testAddGoods() {
+	public void testInsertOrders() {
 		try {
-			logger.info("test add users begin");
-//			Goods goods = new Goods(1, "test", "tv/UE40J6200AU.jpg", 599, 630, "UE40J6200US", "test", "test", "test", "test", "test", "test", 30, 30, 30, 30, 30, 30, "in_stock", 3);
-//			daoGoods.add(goods);
+			logger.info("test add orders begin");
+			Orders orders = new Orders(new Users(1), "test",  0, 499);
+			daoOrders.insertOrder(orders);
 			} catch (Exception e) {
-			logger.error("Error test add users " + e);
+			logger.error("Error test add orders " + e);
 		}
 	}
-    
+	
 	@Test
-	public void testDeleteGoods() {
+	public void testLastGetInsertId() {
 		try {
-			logger.info("test delete users begin");
-			daoGoods.delete(9);
-		} catch (Exception e) {
-			logger.error("Error test delete users " + e);
+			logger.info("test get last insertid begin");
+			daoOrders.getLastInsertId();
+			} catch (Exception e) {
+			logger.error("test get last insertid " + e);
 		}
 	}
 }

@@ -9,9 +9,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
-import com.superinc.europe.onlineshopping.gu.dto.Bucket;
-import com.superinc.europe.onlineshopping.gu.dto.QuantityAndSum;
-import com.superinc.europe.onlineshopping.gu.entity.GoodsOrders;
+import com.superinc.europe.onlineshopping.gu.entities.dto.Bucket;
+import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamHandler;
 
 /**

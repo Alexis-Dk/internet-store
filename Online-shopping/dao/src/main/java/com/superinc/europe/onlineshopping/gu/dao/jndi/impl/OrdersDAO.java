@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.db.ConnectionPool;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOOrders;
-import com.superinc.europe.onlineshopping.gu.entity.Orders;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.

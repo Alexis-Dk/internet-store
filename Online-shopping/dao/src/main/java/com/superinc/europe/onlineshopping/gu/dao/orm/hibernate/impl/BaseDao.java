@@ -10,7 +10,7 @@ import java.lang.reflect.ParameterizedType;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoHibernate;
+import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IBaseDao;
 
 import java.util.List;
 
@@ -23,9 +23,9 @@ import java.util.List;
  */
 
 @SuppressWarnings("unchecked")
-public abstract class BaseDaoHibernate<T> implements IDaoHibernate<T> {
+public abstract class BaseDao<T> implements IBaseDao<T> {
 	@SuppressWarnings("unused")
-	private static Logger log = Logger.getLogger(BaseDaoHibernate.class);
+	private static Logger log = Logger.getLogger(BaseDao.class);
 
 	@Autowired
     private SessionFactory sessionFactory;

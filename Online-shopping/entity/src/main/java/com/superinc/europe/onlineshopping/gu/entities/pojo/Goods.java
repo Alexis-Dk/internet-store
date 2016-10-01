@@ -1,4 +1,4 @@
-package com.superinc.europe.onlineshopping.gu.entity;
+package com.superinc.europe.onlineshopping.gu.entities.pojo;
 
 import java.io.Serializable;
 
