@@ -2,7 +2,6 @@ package com.superinc.europe.onlineshopping.gu.test.jndi;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -13,8 +12,6 @@ import org.apache.log4j.Logger;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.DAOMaker;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.IDAOFactory;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOUser;
-import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoodsInOrders;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
 
 /**
@@ -29,9 +26,6 @@ import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
 public class DaoUsersTest {
 
 	private static Logger logger = Logger.getLogger(DaoUsersTest.class);
-    
-	@Autowired
-	private IDaoGoodsInOrders<GoodsOrders> daoGoodsOrders;
 
 	@Test
 	public void testInsertGoodsOrders() {

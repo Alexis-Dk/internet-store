@@ -13,7 +13,7 @@ import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
  * Created by Alexey Druzik on 07.09.2016.
  */
 @Repository("daoUsers")
-public class DaoUsers implements IDaoUsers<Object>  {
+public class DaoUsers extends BaseDao<Users> implements IDaoUsers<Object>  {
 
 	/**
 	 * Method insert User to DB
@@ -22,8 +22,6 @@ public class DaoUsers implements IDaoUsers<Object>  {
 	 */
 	@Override
 	public void insertUser(Users users) throws DaoException {
-		IDAOFactory factory = new DAOMaker();
-		IDAOUser<Users> dao = factory.getDAOUser();
-		dao.insert(users);
+		add(users);
 	}
 }

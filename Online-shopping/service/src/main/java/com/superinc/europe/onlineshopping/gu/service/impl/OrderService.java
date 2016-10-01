@@ -2,7 +2,6 @@ package com.superinc.europe.onlineshopping.gu.service.impl;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +16,6 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages
  */
 @Service
 @Transactional 
-@Scope("session")
 public class OrderService implements IOrdersService<Orders> {
 
 	private static Logger logger = Logger.getLogger(OrderService.class);
