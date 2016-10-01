@@ -18,7 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
-import com.superinc.europe.onlineshopping.gu.entity.Goods_in_orders;
+import com.superinc.europe.onlineshopping.gu.entity.Goods;
+import com.superinc.europe.onlineshopping.gu.entity.GoodsOrders;
 import com.superinc.europe.onlineshopping.gu.entity.Orders;
 import com.superinc.europe.onlineshopping.gu.entity.Users;
 import com.superinc.europe.onlineshopping.gu.service.IGoodsInOrdersService;
@@ -65,27 +66,27 @@ public class MainController {
 			@RequestParam(value = RequestParamHandler.HIGHTER_PRICE, defaultValue = RequestParamHandler.EMPTY) String priceHighter,
 			@RequestParam(value = RequestParamHandler.SELECTED_PAGE, defaultValue = RequestParamHandler.VALUE_STR_ONE) String selectedPage) {
 		try {
-			model.put(RequestParamHandler.NUMBER_OF_PAGE, navigationService
+			model.put(RequestParamHandler.NUMBER_PAGE_WIDGET, navigationService
 					.putListOfNumbersOfPages((String) priceLower,(String) priceHighter));
 			if (request.getParameter(RequestParamHandler.SELECTED_PAGE) == null) {
-				model.put(RequestParamHandler.NAME_ATRIBUTE, navigationService
+				model.put(RequestParamHandler.GOODS, navigationService
 						.putListOfGoodsDefaultNumbers((String) priceLower,(String) priceHighter));
 			} else {
-				model.put(RequestParamHandler.NAME_ATRIBUTE, navigationService
+				model.put(RequestParamHandler.GOODS, navigationService
 						.putListOfGoodsUserNumbers((String) priceLower,(String) priceHighter, selectedPage));
 			}
 		} catch (DaoException | ClassNotFoundException | SQLException e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamHandler.ERROR_PAGE;
 		}
-		model.put(RequestParamHandler.QUANTITY_SUM, request.getAttribute(RequestParamHandler.QUANTITY_SUM));
+		model.put(RequestParamHandler.QUANTITY_SUM_WIDGET, request.getAttribute(RequestParamHandler.QUANTITY_SUM_WIDGET));
 		return RequestParamHandler.TV;
 	}
 	
 	@RequestMapping(value = RequestHandler.HELLO, method = RequestMethod.GET)
 	public String setHelloPage(HttpServletRequest request, ModelMap model) {
 		try {
-		model.put(RequestParamHandler.QUANTITY_SUM, request.getAttribute(RequestParamHandler.QUANTITY_SUM));
+		model.put(RequestParamHandler.QUANTITY_SUM_WIDGET, request.getAttribute(RequestParamHandler.QUANTITY_SUM_WIDGET));
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamHandler.ERROR_PAGE;
@@ -124,52 +125,52 @@ public class MainController {
 	
 	@RequestMapping(value = RequestHandler.ADD_NEW_GOODS_TO_CART, method = RequestMethod.GET)
 	public String addNewGoodsToCart(HttpSession session, ModelMap model, HttpServletRequest request,
-			@RequestParam(value = RequestParamHandler.GOODS_ID, defaultValue="") String goods_id,
+			@RequestParam(value = RequestParamHandler.GOODS_ID) String goodsId,
 			@RequestParam(value = RequestParamHandler.NAME) String name,
 			@RequestParam(value = RequestParamHandler.DESCRIPTION) String description,
 			@RequestParam(value = RequestParamHandler.PRICE) String price,
-			@RequestParam(value = RequestParamHandler.IMAGE_PATH) String image_path) {
-
-		Goods_in_orders addGoods_in_orders = new Goods_in_orders(RequestParamHandler.VALUE_ONE,
-				Integer.parseInt(goods_id), name, description, RequestParamHandler.VALUE_ONE,
-				Integer.parseInt(price), image_path);
+			@RequestParam(value = RequestParamHandler.IMAGE_PATH) String imagePath) {
 		
-		session.setAttribute(RequestParamHandler.GOODS_IN_CART, HttpUtils.setSession(session, addGoods_in_orders));
+		Goods goods = new Goods(Integer.parseInt(goodsId), name, imagePath, Integer.parseInt(price), description);
+		GoodsOrders goodsOrders = new GoodsOrders(new Orders(RequestParamHandler.VALUE_ONE), goods, RequestParamHandler.VALUE_ONE);
+		
+		session.setAttribute(RequestParamHandler.GOODS_ORDERS, HttpUtils.setSession(session, goodsOrders));
 		try {
-		model.put(RequestParamHandler.CART, HttpUtils.sessionInitialize(session));
-		model.put(RequestParamHandler.QUANTITY_SUM, HttpUtils.getListQuantityAndSum(session));
+		model.put(RequestParamHandler.BUCKET_WIDGET, HttpUtils.getBucket(session));
+		model.put(RequestParamHandler.QUANTITY_SUM_WIDGET, HttpUtils.getListQuantityAndSum(session));
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamHandler.ERROR_PAGE;
 		}
-		return RequestParamHandler.CART;
+		return RequestParamHandler.BUCKET_WIDGET;
 	}
 	 
 	@RequestMapping(value = RequestHandler.VIEW_ITEMS_OF_CART, method = RequestMethod.GET)
-	public String viesItemsOfCart(ModelMap model, HttpServletRequest request) {
+	public String viesItemsOfCart(ModelMap model, HttpServletRequest request, HttpSession session) {
 		try {
-		model.put(RequestParamHandler.QUANTITY_SUM, request.getAttribute(RequestParamHandler.QUANTITY_SUM));
-		model.put(RequestParamHandler.CART, request.getAttribute(RequestParamHandler.GOODS_IN_CART)); 
+		model.put(RequestParamHandler.QUANTITY_SUM_WIDGET, request.getAttribute(RequestParamHandler.QUANTITY_SUM_WIDGET));
+		model.put(RequestParamHandler.BUCKET_WIDGET, HttpUtils.getBucket(session)); 
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamHandler.ERROR_PAGE;
 		}
-		return RequestParamHandler.CART;
+		return RequestParamHandler.BUCKET_WIDGET;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = RequestHandler.DELETE_FROM_CART, method = RequestMethod.GET)
 	public String deleteFromCart(@RequestParam(value = RequestParamHandler.DELETE_BY_DESCRIPTION) String deleteByDescription,
 			ModelMap model, HttpSession session, HttpServletRequest request) {
-		List<Goods_in_orders> goodsInOrders = (List<Goods_in_orders>) session.getAttribute(RequestParamHandler.GOODS_IN_CART);
+		List<GoodsOrders> goodsOrders = (List<GoodsOrders>) session.getAttribute(RequestParamHandler.GOODS_ORDERS);
 		try {
-		model.put(RequestParamHandler.CART, goodService.deleteFromCartGoodsInOrders(deleteByDescription, goodsInOrders));
-		model.put(RequestParamHandler.QUANTITY_SUM, HttpUtils.getListQuantityAndSum(session));
+			session.setAttribute(RequestParamHandler.GOODS_ORDERS, goodService.deleteFromCartGoodsInOrders(deleteByDescription, goodsOrders));
+		model.put(RequestParamHandler.BUCKET_WIDGET, HttpUtils.getBucket(session));
+		model.put(RequestParamHandler.QUANTITY_SUM_WIDGET, HttpUtils.getListQuantityAndSum(session));
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamHandler.ERROR_PAGE;
 		}
-		return RequestParamHandler.CART;
+		return RequestParamHandler.BUCKET_WIDGET;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -177,15 +178,15 @@ public class MainController {
 	public String addPurchase(HttpServletRequest request, HttpSession session,
 			ModelMap model) {
 		if (HttpUtils.CheckPrincipal() && HttpUtils.IntegerOrEmpty(session)) {
-			ordersService.insertOrder(new Orders(HttpUtils.StringSplitter(HttpUtils.UsersId()),
+			ordersService.insertOrder(new Orders(new Users(HttpUtils.StringSplitter(HttpUtils.UsersId())),
 					RequestParamHandler.PROCESSING, 0, (int) session.getAttribute(RequestParamHandler.TOTAL_COST)));
 			goodsInOrdersService.insertGoodsInOrders(ordersService.getLastInsertId(),
-					(List<Goods_in_orders>) session.getAttribute(RequestParamHandler.GOODS_IN_CART));
+					(List<GoodsOrders>) session.getAttribute(RequestParamHandler.GOODS_ORDERS));
 			try {
-				model.put(RequestParamHandler.CART, HttpUtils
+				model.put(RequestParamHandler.BUCKET_WIDGET, HttpUtils
 						.cleanAllFromSessionGoodsInOrders(session));
-				model.put(RequestParamHandler.QUANTITY_SUM,
-						request.getAttribute(RequestParamHandler.QUANTITY_SUM));
+				model.put(RequestParamHandler.QUANTITY_SUM_WIDGET,
+						request.getAttribute(RequestParamHandler.QUANTITY_SUM_WIDGET));
 			} catch (Exception e) {
 				log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 				return RequestParamHandler.ERROR_PAGE;
@@ -197,7 +198,7 @@ public class MainController {
 	@RequestMapping(value = RequestHandler.CONTACT, method = RequestMethod.GET)
 	public String setContact(HttpServletRequest request, HttpSession session, ModelMap model) {
 		try {
-		model.put(RequestParamHandler.QUANTITY_SUM, request.getAttribute(RequestParamHandler.QUANTITY_SUM));
+		model.put(RequestParamHandler.QUANTITY_SUM_WIDGET, request.getAttribute(RequestParamHandler.QUANTITY_SUM_WIDGET));
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamHandler.ERROR_PAGE;
@@ -209,7 +210,7 @@ public class MainController {
 	public ModelAndView senIndexPage(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
-			modelAndView.addObject(RequestParamHandler.QUANTITY_SUM, request.getAttribute(RequestParamHandler.QUANTITY_SUM)); 
+			modelAndView.addObject(RequestParamHandler.QUANTITY_SUM_WIDGET, request.getAttribute(RequestParamHandler.QUANTITY_SUM_WIDGET)); 
 			modelAndView.setViewName(RequestParamHandler.INDEX);
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);

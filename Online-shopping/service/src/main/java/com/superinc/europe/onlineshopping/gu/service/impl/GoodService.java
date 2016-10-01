@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
 import com.superinc.europe.onlineshopping.gu.entity.Goods;
-import com.superinc.europe.onlineshopping.gu.entity.Goods_in_orders;
+import com.superinc.europe.onlineshopping.gu.entity.GoodsOrders;
 import com.superinc.europe.onlineshopping.gu.service.IGoodsService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 
@@ -37,11 +37,11 @@ public class GoodService implements IGoodsService<Object> {
 	 * @throws DaoException
 	 */
 	@Override
-	public List<Goods_in_orders> addNewGoodsToCart(List<Goods_in_orders> list,
-			Goods_in_orders addGoods_in_orders) throws DaoException {
-		List<Goods_in_orders> listFiltered;
+	public List<GoodsOrders> addNewGoodsToCart(List<GoodsOrders> list,
+			GoodsOrders addGoods_in_orders) throws DaoException {
+		List<GoodsOrders> listFiltered;
 		try {
-			listFiltered = (ArrayList<Goods_in_orders>) daoGoods
+			listFiltered = (ArrayList<GoodsOrders>) daoGoods
 					.addNewGoodsToCart(list, addGoods_in_orders);
 		} catch (DaoException e) {
 			logger.error(ExceptionMessages.ERROR_IN_SERVICE + e);
@@ -57,12 +57,12 @@ public class GoodService implements IGoodsService<Object> {
 	 * @throws DaoException
 	 */
 	@Override
-	public List<Goods_in_orders> deleteFromCartGoodsInOrders(
-			String deleteByDescription, List<Goods_in_orders> goodsInOrders)
+	public List<GoodsOrders> deleteFromCartGoodsInOrders(
+			String deleteByDescription, List<GoodsOrders> goodsInOrders)
 			throws DaoException {
-		ArrayList<Goods_in_orders> modyfiedList;
+		ArrayList<GoodsOrders> modyfiedList;
 		try {
-			modyfiedList = (ArrayList<Goods_in_orders>) daoGoods
+			modyfiedList = (ArrayList<GoodsOrders>) daoGoods
 					.deleteFromCartGoodsInOrders(deleteByDescription,
 							goodsInOrders);
 		} catch (DaoException e) {

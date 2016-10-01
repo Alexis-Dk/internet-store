@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoNavigation;
+import com.superinc.europe.onlineshopping.gu.dto.NumbersOfPages;
 import com.superinc.europe.onlineshopping.gu.entity.Goods;
-import com.superinc.europe.onlineshopping.gu.entity.NumbersOfPages;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
@@ -77,6 +77,7 @@ public class DaoNavigation extends BaseDaoHibernate<Object> implements IDaoNavig
 	@Override
 	public List<Goods> sortedByCriteria(Criteria criteria, 
 			String priveLower, String priceHighter){
+//		criteria.createAlias("goods", "g");
 		criteria.add(Restrictions.sqlRestriction(CATEGORY_ID_VALUE_0));
 		criteria.add(Restrictions.sqlRestriction(CATEGORY_ID_VALUE_2));
 		if (!priveLower.equals(EMPTY_FIELD)) {
@@ -103,9 +104,9 @@ public class DaoNavigation extends BaseDaoHibernate<Object> implements IDaoNavig
 	 * @param j
 	 */
 	public Goods goodsWrapper(List<Goods> goods, int j){
-		return new Goods(goods.get(j).getGoods_id(), goods
-				.get(j).getCategoty_id(), goods.get(j).getName(), goods
-				.get(j).getImage_path(), goods.get(j).getPrice(), goods
+		return new Goods(goods.get(j).getGoodsId(), goods
+				.get(j).getCategoryFk(), goods.get(j).getName(), goods
+				.get(j).getImagePath(), goods.get(j).getPrice(), goods
 				.get(j).getOldprice(), goods.get(j).getDescription(),
 				goods.get(j).getCharacteristic1(), goods.get(j)
 						.getCharacteristic2(), goods.get(j)
@@ -118,7 +119,7 @@ public class DaoNavigation extends BaseDaoHibernate<Object> implements IDaoNavig
 						.getCharacteristic9(), goods.get(j)
 						.getCharacteristic10(), goods.get(j)
 						.getCharacteristic11(), goods.get(j)
-						.getDelete_status(), goods.get(j)
-						.getStock_status(), goods.get(j).getRating());
+						.getDeleteStatus(), goods.get(j)
+						.getStockStatus(), goods.get(j).getRating());
 	}
 }

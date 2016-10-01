@@ -7,26 +7,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity 
-//@Table(name="goods")
+@Table(name="goods")
 public class Goods implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-//	@Column(name = "goods_id", unique = true, nullable = false, precision = 15, scale = 0)
-	private int goods_id;
+	@Column(name = "goods_id", unique = true, nullable = false, precision = 15, scale = 0)
+	private int goodsId;
 	
-	@Column(name="category_id")
-	private int categoty_id;
+	@ManyToOne(targetEntity=Category.class)
+	@JoinColumn(name="category_id_FK", referencedColumnName = "category_id")
+	public Category categoryFk;
 	
 	@Column(name="name")
 	private String name;
 	
 	@Column(name="image_path")
-	private String image_path;
+	private String imagePath;
 	
 	@Column(name="price")
 	private int price;
@@ -71,10 +75,10 @@ public class Goods implements Serializable {
 	private int characteristic11;
 	
 	@Column(name="delete_status")
-	private int delete_status;
+	private int deleteStatus;
 	
 	@Column(name="stock_status")
-	private String stock_status;
+	private String stockStatus;
 	
 	@Column(name="rating")
 	private int rating;
@@ -82,18 +86,29 @@ public class Goods implements Serializable {
 	public Goods() {
 	}
 
-	public Goods(int goods_id, int categoty_id, String name,
+	public Goods(int goodsId) {
+		this.goodsId = goodsId;
+	}
+	
+	public Goods(int goodsId, String name, String imagePath, int price, String description) {
+		this.goodsId = goodsId;
+		this.name = name;
+		this.imagePath = imagePath;
+		this.price = price;
+		this.description = description;
+	}
+	
+	public Goods(int goodsId, Category categoryFk, String name,
 			String image_path, int price, int oldprice, String description,
 			String characteristic1, String characteristic2,
 			String characteristic3, String characteristic4,
 			String characteristic5, String characteristic6,int characteristic7, int characteristic8,
 			int characteristic9, int characteristic10, int characteristic11,
-			int delete_status, String stock_status, int rating) {
-		super();
-		this.goods_id = goods_id;
-		this.categoty_id = categoty_id;
+			int deleteStatus, String stockStatus, int rating) {
+		this.goodsId = goodsId;
+		this.categoryFk = categoryFk;
 		this.name = name;
-		this.image_path = image_path;
+		this.imagePath = image_path;
 		this.price = price;
 		this.oldprice = oldprice;
 		this.description = description;
@@ -108,21 +123,21 @@ public class Goods implements Serializable {
 		this.characteristic9 = characteristic9;
 		this.characteristic10 = characteristic10;
 		this.characteristic11 = characteristic11;
-		this.delete_status = delete_status;
-		this.stock_status = stock_status;
+		this.deleteStatus = deleteStatus;
+		this.stockStatus = stockStatus;
 		this.rating = rating;
 	}
 	
-	public Goods(int categoty_id, String name,
+	public Goods(Category categoryFk, String name,
 			String image_path, int price, int oldprice, String description,
 			String characteristic1, String characteristic2,
 			String characteristic3, String characteristic4,
 			String characteristic5, String characteristic6,int characteristic7, int characteristic8,
 			int characteristic9, int characteristic10, int characteristic11,
-			int delete_status, String stock_status, int rating) {
-		this.categoty_id = categoty_id;
+			int deleteStatus, String stockStatus, int rating) {
+		this.categoryFk = categoryFk;
 		this.name = name;
-		this.image_path = image_path;
+		this.imagePath = image_path;
 		this.price = price;
 		this.oldprice = oldprice;
 		this.description = description;
@@ -137,25 +152,25 @@ public class Goods implements Serializable {
 		this.characteristic9 = characteristic9;
 		this.characteristic10 = characteristic10;
 		this.characteristic11 = characteristic11;
-		this.delete_status = delete_status;
-		this.stock_status = stock_status;
+		this.deleteStatus = deleteStatus;
+		this.stockStatus = stockStatus;
 		this.rating = rating;
 	}
 
-	public int getGoods_id() {
-		return goods_id;
+	public int getGoodsId() {
+		return goodsId;
 	}
 
-	public void setGoods_id(int goods_id) {
-		this.goods_id = goods_id;
+	public void setGoodsId(int goodsId) {
+		this.goodsId = goodsId;
 	}
 
-	public int getCategoty_id() {
-		return categoty_id;
+	public Category getCategoryFk() {
+		return categoryFk;
 	}
 
-	public void setCategoty_id(int categoty_id) {
-		this.categoty_id = categoty_id;
+	public void setCategoryFk(Category categoryFk) {
+		this.categoryFk = categoryFk;
 	}
 
 	public String getName() {
@@ -166,12 +181,12 @@ public class Goods implements Serializable {
 		this.name = name;
 	}
 
-	public String getImage_path() {
-		return image_path;
+	public String getImagePath() {
+		return imagePath;
 	}
 
-	public void setImage_path(String image_path) {
-		this.image_path = image_path;
+	public void setImage_path(String imagePath) {
+		this.imagePath = imagePath;
 	}
 
 	public int getPrice() {
@@ -285,20 +300,20 @@ public class Goods implements Serializable {
 		this.characteristic11 = characteristic11;
 	}
 
-	public int getDelete_status() {
-		return delete_status;
+	public int getDeleteStatus() {
+		return deleteStatus;
 	}
 
-	public void setDelete_status(int delete_status) {
-		this.delete_status = delete_status;
+	public void setDeleteStatus(int deleteStatus) {
+		this.deleteStatus = deleteStatus;
 	}
 
-	public String getStock_status() {
-		return stock_status;
+	public String getStockStatus() {
+		return stockStatus;
 	}
 
-	public void setStock_status(String stock_status) {
-		this.stock_status = stock_status;
+	public void setStockStatus(String stockStatus) {
+		this.stockStatus = stockStatus;
 	}
 
 	public int getRating() {
@@ -315,8 +330,8 @@ public class Goods implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Goods [goods_id=" + goods_id + ", categoty_id=" + categoty_id
-				+ ", name=" + name + ", image_path=" + image_path + ", price="
+		return "Goods [goodsId=" + goodsId + ", categoryFk=" + categoryFk
+				+ ", name=" + name + ", imagePath=" + imagePath + ", price="
 				+ price + ", oldprice=" + oldprice + ", description="
 				+ description + ", characteristic1=" + characteristic1
 				+ ", characteristic2=" + characteristic2 + ", characteristic3="
@@ -325,8 +340,9 @@ public class Goods implements Serializable {
 				+ characteristic6 + ", characteristic7=" + characteristic7
 				+ ", characteristic8=" + characteristic8 + ", characteristic9="
 				+ characteristic9 + ", characteristic10=" + characteristic10
-				+ ", characteristic11=" + characteristic11 + ", delete_status="
-				+ delete_status + ", stock_status=" + stock_status
-				+ ", rating=" + rating + "]";
+				+ ", characteristic11=" + characteristic11 + ", deleteStatus="
+				+ deleteStatus + ", stockStatus=" + stockStatus + ", rating="
+				+ rating + "]";
 	}
+
 }

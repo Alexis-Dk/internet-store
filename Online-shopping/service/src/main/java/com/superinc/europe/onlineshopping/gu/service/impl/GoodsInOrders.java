@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoodsInOrders;
-import com.superinc.europe.onlineshopping.gu.entity.Goods_in_orders;
+import com.superinc.europe.onlineshopping.gu.entity.GoodsOrders;
 import com.superinc.europe.onlineshopping.gu.service.IGoodsInOrdersService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 
@@ -35,7 +35,7 @@ public class GoodsInOrders implements IGoodsInOrdersService{
 	 */
 	@Override
 	public void insertGoodsInOrders(int LastInsertId,
-			List<Goods_in_orders> ob) throws DaoException {
+			List<GoodsOrders> ob) throws DaoException {
 		try {
 			daoGoodsInOrders.insertGoodsInOrders(LastInsertId, ob);
 		} catch (DaoException e) {

@@ -163,7 +163,7 @@
 	<div class="single-product-area">
 		<div class="zigzag-bottom"></div>
 		<div class="container">
-			<img src="img/<%=request.getParameter("image_path")%>" alt="">
+			<img src="img/<%=request.getParameter("imagePath")%>" alt="">
 			<table class="table">
 				<tr>
 					<td><p class="user-menuMy">Name</p></td>
@@ -208,7 +208,7 @@
 				<tr>
 					<td><p class="user-menuMy">Stock availability</p></td>
 					<td><p class="user-menuMy" />
-						<h3><%=request.getParameter("stock_status")%></h3></td>
+						<h3><%=request.getParameter("stockStatus")%></h3></td>
 				</tr>
 				<tr>
 					<td><p class="user-menuMy">Rating</p></td>
@@ -243,10 +243,10 @@ description=<%=request.getParameter("description")%>
 &characteristic6=<%=request.getParameter("characteristic6")%>
 &characteristic7=<%=request.getParameter("characteristic7")%>
 &rating=<%=request.getParameter("rating")%>
-&stock_status=<%=request.getParameter("stock_status")%>
-&image_path=<%=request.getParameter("image_path")%>
+&stockStatus=<%=request.getParameter("stockStatus")%>
+&imagePath=<%=request.getParameter("imagePath")%>
 &price=<%=request.getParameter("price")%>
-&goods_id=<%=request.getParameter("goods_id")%>">Add
+&goodsId=<%=request.getParameter("goodsId")%>">Add
 									to cart</a>
 							</div>
 						</sec:authorize>

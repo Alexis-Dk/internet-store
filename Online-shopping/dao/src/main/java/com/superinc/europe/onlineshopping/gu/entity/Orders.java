@@ -8,67 +8,70 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @SuppressWarnings("serial")
 @Entity 
-//@Table(name="orders")
-public class Orders  implements Serializable{
-
+@Table(name="orders")
+public class Orders implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-//	@Column(name = "orders_id", unique = true, nullable = false, precision = 15, scale = 0)
-	private int orders_id;
+	@Column(name = "orders_id", unique = true, nullable = false, precision = 15, scale = 0)
+	private int ordersId;
 	
-//	@ManyToOne
-	@JoinColumn(name="users_id")
-	private int users_id;
+	@ManyToOne(targetEntity=Users.class)
+	@JoinColumn(name="users_id_FK", referencedColumnName = "users_id")
+	private Users usersFk;
 	
 	@Column(name="payment")
     private String payment; 
     
 	@Column(name="delete_status")
-    private int delete_status; 
+    private int deleteStatus; 
     
 	@Column(name="total_cost")
-    private int total_cost;
+    private int totalCost;
     
 	public Orders() {
 	}
 
-	public Orders(int orders_id, int users_id, String payment,
-			int delete_status, int total_cost) {
-		this.orders_id = orders_id;
-		this.users_id = users_id;
-		this.payment = payment;
-		this.delete_status = delete_status;
-		this.total_cost = total_cost;
+	public Orders(int ordersId) {
+		this.ordersId = ordersId;
 	}
 	
-	public Orders(int users_id, String payment,
-			int delete_status, int total_cost) {
-		this.users_id = users_id;
+	public Orders(int ordersId, Users usersFk, String payment,
+			int deleteStatus, int totalCost) {
+		this.ordersId = ordersId;
+		this.usersFk = usersFk;
 		this.payment = payment;
-		this.delete_status = delete_status;
-		this.total_cost = total_cost;
+		this.deleteStatus = deleteStatus;
+		this.totalCost = totalCost;
 	}
 	
-
-
-	public int getOrders_id() {
-		return orders_id;
+	public Orders(Users usersFk, String payment,
+			int deleteStatus, int totalCost) {
+		this.usersFk = usersFk;
+		this.payment = payment;
+		this.deleteStatus = deleteStatus;
+		this.totalCost = totalCost;
 	}
 
-	public void setOrders_id(int orders_id) {
-		this.orders_id = orders_id;
+	public int getOrdersId() {
+		return ordersId;
 	}
 
-	public int getUsers_id() {
-		return users_id;
+	public void setOrdersId(int ordersId) {
+		this.ordersId = ordersId;
 	}
 
-	public void setUsers_id(int users_id) {
-		this.users_id = users_id;
+	public Users getUsersFk() {
+		return usersFk;
+	}
+
+	public void setUsersFk(Users usersId) {
+		this.usersFk = usersId;
 	}
 
 	public String getPayment() {
@@ -79,27 +82,27 @@ public class Orders  implements Serializable{
 		this.payment = payment;
 	}
 
-	public int getDelete_status() {
-		return delete_status;
+	public int getDeleteStatus() {
+		return deleteStatus;
 	}
 
-	public void setDelete_status(int delete_status) {
-		this.delete_status = delete_status;
+	public void setDeleteStatus(int deleteStatus) {
+		this.deleteStatus = deleteStatus;
 	}
 
-	public int getTotal_cost() {
-		return total_cost;
+	public int getTotalCost() {
+		return totalCost;
 	}
 
-	public void setTotal_cost(int total_cost) {
-		this.total_cost = total_cost;
+	public void setTotalCost(int totalCost) {
+		this.totalCost = totalCost;
 	}
 
 	@Override
 	public String toString() {
-		return "Orders [orders_id=" + orders_id + ", users_id=" + users_id
-				+ ", payment=" + payment + ", delete_status=" + delete_status
-				+ ", total_cost=" + total_cost + "]";
+		return "Orders [ordersId=" + ordersId + ", usersFk=" + usersFk
+				+ ", payment=" + payment + ", deleteStatus=" + deleteStatus
+				+ ", totalCost=" + totalCost + "]";
 	}
-	
+
 }

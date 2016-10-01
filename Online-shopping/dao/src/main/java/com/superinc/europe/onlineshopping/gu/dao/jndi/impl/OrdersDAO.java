@@ -28,10 +28,10 @@ public class OrdersDAO implements IDAOOrders<Orders> {
 		try {
 			connection = ConnectionPool.getPool().getConnection();
 			statement = connection.prepareStatement(INSERT_INTO_ORDERS);
-			statement.setInt(1, ob.getUsers_id());
+			statement.setInt(1, ob.getUsersFk().getId());
 			statement.setString(2, ob.getPayment());
-			statement.setInt(3, ob.getDelete_status());
-			statement.setInt(4, ob.getTotal_cost());
+			statement.setInt(3, ob.getDeleteStatus());
+			statement.setInt(4, ob.getTotalCost());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			throw new DaoException(e);
@@ -50,7 +50,9 @@ public class OrdersDAO implements IDAOOrders<Orders> {
 		ResultSet set = null;
 		try {
 			connection = ConnectionPool.getPool().getConnection();
-			statement = connection.prepareStatement("SELECT  LAST_INSERT_ID()  FROM internetshop.orders");
+//			statement = connection.prepareStatement("SELECT LAST_INSERT_ID() FROM internetshop.orders");
+			statement = connection.prepareStatement("SELECT MAX(orders_id) FROM internetshop.orders");
+			
 			set = statement.executeQuery();
 			while (set.next()) {
 				id = set.getInt(1);	

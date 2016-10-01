@@ -6,7 +6,7 @@ import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOUser;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.impl.GoodsInOrdersDAO;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.impl.OrdersDAO;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.impl.UserDAO;
-import com.superinc.europe.onlineshopping.gu.entity.Goods_in_orders;
+import com.superinc.europe.onlineshopping.gu.entity.GoodsOrders;
 import com.superinc.europe.onlineshopping.gu.entity.Orders;
 import com.superinc.europe.onlineshopping.gu.entity.Users;
 
@@ -23,7 +23,7 @@ public class DAOMaker implements IDAOFactory {
 		return new OrdersDAO();
 	}
 
-	public IDAOGoodsInOrders<Goods_in_orders> getDAOGoodsInOrders() {
+	public IDAOGoodsInOrders<GoodsOrders> getDAOGoodsInOrders() {
 		return new GoodsInOrdersDAO();
 	}
 	

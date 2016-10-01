@@ -23,7 +23,7 @@ public class Users implements UserDetails {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "users_id")
-	private int users_id;
+	private int usersId;
 	
 	@Column(name="username")
 	private String username;
@@ -37,8 +37,12 @@ public class Users implements UserDetails {
 	public Users() {
 	}
 
-	public Users (int users_id, String username, String password, String role) {
-		this.users_id = users_id;
+	public Users(int usersId) {
+		this.usersId = usersId;
+	}
+	
+	public Users (int usersId, String username, String password, String role) {
+		this.usersId = usersId;
 		this.username = username;
 		this.password = password;
 		this.role = role;
@@ -51,11 +55,11 @@ public class Users implements UserDetails {
 	}
 
 	public int getId() {
-		return users_id;
+		return usersId;
 	}
 
 	public void setId(int id) {
-		this.users_id = id;
+		this.usersId = id;
 	}
 
 	public String getUsername() {
@@ -111,7 +115,7 @@ public class Users implements UserDetails {
 
 	@Override
 	public String toString() {
-		return "" + users_id + " " + username + " "+ password +"";
+		return "" + usersId + " " + username + " "+ password +"";
 	}
-	
+
 }

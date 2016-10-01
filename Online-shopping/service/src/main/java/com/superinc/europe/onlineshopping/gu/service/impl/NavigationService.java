@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoNavigation;
+import com.superinc.europe.onlineshopping.gu.dto.NumbersOfPages;
 import com.superinc.europe.onlineshopping.gu.entity.Goods;
-import com.superinc.europe.onlineshopping.gu.entity.NumbersOfPages;
 import com.superinc.europe.onlineshopping.gu.service.INavaigationService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 
@@ -49,7 +49,7 @@ public class NavigationService implements INavaigationService {
 	}
 
 	/**
-	 * Method get filtred posts
+	 * Method get filtered posts
 	 * @param i
 	 * @throws DaoException
 	 */
@@ -93,9 +93,15 @@ public class NavigationService implements INavaigationService {
 		Session session = daoNavigation.getCurrentSession();
 		List<Goods> products = null;
 		try {
-			products = daoNavigation.sortedByCriteria(
-					session.createCriteria(Goods.class), priveLower,
-					priceHighter);
+			products = (List<Goods>)daoNavigation.sortedByCriteria(
+					session.createCriteria(Goods.class, "goods"), priveLower, priceHighter);
+//					priceHighter);
+//					session.createCriteria(Goods.class).setProjection(Projections.projectionList().add(Projections.property("goods.category_id"), "goods.category_id")), priveLower,
+//					priceHighter);
+			System.out.println("aasddfgjyjtrgtgrthhrthtrhrt");
+			for (Goods goods : products) {
+				System.out.println("qwerty123"+goods);
+			}
 		} catch (Exception e) {
 			session.getTransaction().rollback();
 			logger.error(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE + e);

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Scope;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.entity.Goods;
-import com.superinc.europe.onlineshopping.gu.entity.Goods_in_orders;
+import com.superinc.europe.onlineshopping.gu.entity.GoodsOrders;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
@@ -22,7 +22,7 @@ public interface IDaoGoods extends IDaoHibernate<Goods>{
 	 * @param addGoods_in_orders
 	 * @throws DaoException
 	 */
-	List<Goods_in_orders> addNewGoodsToCart(List<Goods_in_orders> list, Goods_in_orders addGoods_in_orders)
+	List<GoodsOrders> addNewGoodsToCart(List<GoodsOrders> list, GoodsOrders addGoods_in_orders)
 			throws DaoException;
 
 	/**
@@ -31,8 +31,8 @@ public interface IDaoGoods extends IDaoHibernate<Goods>{
 	 * @param goodsInOrders
 	 * @throws DaoException
 	 */
-	List<Goods_in_orders> deleteFromCartGoodsInOrders(
-			String deleteByDescription, List<Goods_in_orders> goodsInOrders) throws DaoException;
+	List<GoodsOrders> deleteFromCartGoodsInOrders(
+			String deleteByDescription, List<GoodsOrders> goodsInOrders) throws DaoException;
 
 	/**
 	 * Method sorts by criteria

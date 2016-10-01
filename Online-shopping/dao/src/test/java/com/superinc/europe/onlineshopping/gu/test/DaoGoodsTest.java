@@ -12,8 +12,6 @@ import org.apache.log4j.Logger;
 
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoNavigation;
-import com.superinc.europe.onlineshopping.gu.entity.Goods;
-import com.superinc.europe.onlineshopping.gu.entity.Users;
 
 /**
  * Created by Alexey Druzik on 11.09.2016.
@@ -25,7 +23,6 @@ import com.superinc.europe.onlineshopping.gu.entity.Users;
 @Transactional
 public class DaoGoodsTest {
 
-	@SuppressWarnings("unused")
 	private static Logger logger = Logger.getLogger(DaoGoodsTest.class);
     
 	@Autowired
@@ -38,8 +35,8 @@ public class DaoGoodsTest {
 	public void testAddGoods() {
 		try {
 			logger.info("test add users begin");
-			Goods goods = new Goods(1, "test", "tv/UE40J6200AU.jpg", 599, 630, "UE40J6200US", "test", "test", "test", "test", "test", "test", 30, 30, 30, 30, 30, 30, "in_stock", 3);
-			daoGoods.add(goods);
+//			Goods goods = new Goods(1, "test", "tv/UE40J6200AU.jpg", 599, 630, "UE40J6200US", "test", "test", "test", "test", "test", "test", 30, 30, 30, 30, 30, 30, "in_stock", 3);
+//			daoGoods.add(goods);
 			} catch (Exception e) {
 			logger.error("Error test add users " + e);
 		}

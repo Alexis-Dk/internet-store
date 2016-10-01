@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.superinc.europe.onlineshopping.gu.entity.Goods_in_orders;
-import com.superinc.europe.onlineshopping.gu.entity.QuantityAndSum;
+import com.superinc.europe.onlineshopping.gu.dto.QuantityAndSum;
+import com.superinc.europe.onlineshopping.gu.entity.GoodsOrders;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpUtils;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamHandler;
 
@@ -75,18 +75,18 @@ public class RequestInterceptor implements HandlerInterceptor {
 	}
 	
 	public void setGoodsInCart(HttpServletRequest request){
-		List<Goods_in_orders> list = null;
-		if ((List<Goods_in_orders>) request.getSession().getAttribute(RequestParamHandler.GOODS_IN_CART) == null) {
-			list = new ArrayList<Goods_in_orders>();
+		List<GoodsOrders> list = null;
+		if ((List<GoodsOrders>) request.getSession().getAttribute(RequestParamHandler.GOODS_ORDERS) == null) {
+			list = new ArrayList<GoodsOrders>();
 		} else {
-			list = (List<Goods_in_orders>) request.getSession().getAttribute(RequestParamHandler.GOODS_IN_CART);
+			list = (List<GoodsOrders>) request.getSession().getAttribute(RequestParamHandler.GOODS_ORDERS);
 		}
-		request.getSession().setAttribute(RequestParamHandler.GOODS_IN_CART, list);
-		request.setAttribute(RequestParamHandler.QUANTITY_SUM, getQuantityAndSum(list, request));
-		request.setAttribute(RequestParamHandler.GOODS_IN_CART, list);
+		request.getSession().setAttribute(RequestParamHandler.GOODS_ORDERS, list);
+		request.setAttribute(RequestParamHandler.QUANTITY_SUM_WIDGET, getQuantityAndSum(list, request));
+		request.setAttribute(RequestParamHandler.GOODS_ORDERS, list);
 	}
 	
-	public List<QuantityAndSum> getQuantityAndSum(List<Goods_in_orders> list, HttpServletRequest request){
+	public List<QuantityAndSum> getQuantityAndSum(List<GoodsOrders> list, HttpServletRequest request){
 		int sumFinal = 0;
 		if (HttpUtils.listExistOrEmpty(request.getSession()) == true){
 			sumFinal = HttpUtils.getSum(request.getSession());

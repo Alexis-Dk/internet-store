@@ -193,11 +193,11 @@
 &characteristic6=<c:out value="${good.characteristic6}"></c:out>
 &characteristic7=<c:out value="${good.characteristic7}"></c:out> 
 &rating=<c:out value="${good.rating}"></c:out>
-&stock_status=<c:out value="${good.stock_status}"></c:out>
-&image_path=<c:out value="${good.image_path}"></c:out>
+&stockStatus=<c:out value="${good.stockStatus}"></c:out>
+&imagePath=<c:out value="${good.imagePath}"></c:out>
 &price=<c:out value="${good.price}"></c:out>
-&goods_id=<c:out value="${good.goods_id}"></c:out>">
-                        <img src="img/<c:out value="${good.image_path}"></c:out>" alt=""></a>
+&goodsId=<c:out value="${good.goodsId}"></c:out>">
+                        <img src="img/<c:out value="${good.imagePath}"></c:out>" alt=""></a>
                         </div>
 							<h2><a><c:out value="${good.name}"></c:out> <c:out value="${good.description}"></c:out></a></h2>
 						<div class="product-carousel-price">
@@ -217,10 +217,10 @@
 &characteristic6=<c:out value="${good.characteristic6}"></c:out>
 &characteristic7=<c:out value="${good.characteristic7}"></c:out>
 &rating=<c:out value="${good.rating}"></c:out>
-&stock_status=<c:out value="${good.stock_status}"></c:out>
-&image_path=<c:out value="${good.image_path}"></c:out>
+&stockStatus=<c:out value="${good.stockStatus}"></c:out>
+&imagePath=<c:out value="${good.imagePath}"></c:out>
 &price=<c:out value="${good.price}"></c:out>
-&goods_id=<c:out value="${good.goods_id}"></c:out>">Add to cart</a>
+&goodsId=<c:out value="${good.goodsId}"></c:out>">Add to cart</a>
 								</div> 
                         </sec:authorize>                      
                     </div>

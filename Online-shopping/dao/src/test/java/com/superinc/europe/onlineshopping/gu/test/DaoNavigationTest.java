@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoNavigation;
-import com.superinc.europe.onlineshopping.gu.entity.NumbersOfPages;
+import com.superinc.europe.onlineshopping.gu.dto.NumbersOfPages;
 
 
 /**

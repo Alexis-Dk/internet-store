@@ -15,7 +15,7 @@ import com.superinc.europe.onlineshopping.gu.entity.Orders;
  */
 @Repository("daoOrders")
 @Scope("session")
-public class DaoOrders implements IDaoOrders<Object> {
+public class DaoOrders extends BaseDaoHibernate<Orders> implements IDaoOrders<Object> {
 
 	/**
 	 * Method insert Orsers to DB
@@ -24,9 +24,10 @@ public class DaoOrders implements IDaoOrders<Object> {
 	 */
 	@Override
 	public void insertOrder(Orders orders) throws DaoException {
-		IDAOFactory factory = new DAOMaker();
-		IDAOOrders<Orders> daoOrders = factory.getDAOOrders();
-		daoOrders.insert(orders);
+//		IDAOFactory factory = new DAOMaker();
+//		IDAOOrders<Orders> daoOrders = factory.getDAOOrders();
+//		daoOrders.insert(orders);
+		add(orders);
 	}
 
 	/**

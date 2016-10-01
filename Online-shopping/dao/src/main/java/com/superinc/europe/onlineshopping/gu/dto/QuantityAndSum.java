@@ -1,4 +1,4 @@
-package com.superinc.europe.onlineshopping.gu.entity;
+package com.superinc.europe.onlineshopping.gu.dto;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.superinc.europe.onlineshopping.gu.entity;
+package com.superinc.europe.onlineshopping.gu.dto;
 
 public class NumbersOfPages {
 

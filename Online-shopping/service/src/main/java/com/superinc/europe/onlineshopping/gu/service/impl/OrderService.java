@@ -26,7 +26,7 @@ public class OrderService implements IOrdersService<Orders> {
 	private IDaoOrders<Object> daoOrders;
 	
 	/**
-	 * Method to insert Order to DB
+	 * Inserts Order to DB
 	 * @param orders
 	 * @throws DaoException
 	 */

@@ -165,7 +165,7 @@
                                             </td>
 
                                             <td class="product-thumbnail">
-                                                <a href="single-product.html"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="img/<c:out value="${cart.image_path}"></c:out>"></a>
+                                                <a href="single-product.html"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="img/<c:out value="${cart.imagePath}"></c:out>"></a>
                                             </td>
 
                                             <td class="product-name">
@@ -176,16 +176,16 @@
                                                 <span class="amount"><c:out value="${cart.price}"></c:out></span> 
                                             </td>
 
-                                            <td class="product-quantity">
+                                           <td class="product-quantity">
                                                 <div class="quantity buttons_added">
                                                     <input type="button" class="minus" value="-">
-                                                    <span class="input-text qty text"> <c:out value="${cart.count}"></c:out> </span> 
+                                                    <span class="input-text qty text"> <c:out value="${cart.quantity}"></c:out> </span> 
                                                     <input type="button" class="plus" value="+">
                                                 </div>
-                                            </td>
+                                            </td>  
 
                                             <td class="product-subtotal">
-                                                <span class="amount"><c:out value="${cart.goods_id}"></c:out></span> 
+                                                <span class="amount"><c:out value="${cart.goodsId}"></c:out></span> 
                                             </td>
                                         </tr>
                                         </c:forEach>
