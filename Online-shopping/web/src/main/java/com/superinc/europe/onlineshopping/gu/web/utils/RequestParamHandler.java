@@ -34,6 +34,8 @@ public class RequestParamHandler {
 	public static final String ADMIN_PAGE_ATTR = "admin";
 	public static final String LOWER_PRICE = "priceLower";
 	public static final String HIGHTER_PRICE = "priceHighter";
+	public static final String INCREASE_QUANTITY = "/increaseQuantity";
+	public static final String DECREASE_QUANTITY = "/decreaseQuantity";
 	public static final String EMPTY = "";
 	public static final String EMPTY_FIELD = " ";
 	public static final String VALUE_STR_ONE = "1";

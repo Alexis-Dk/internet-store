@@ -1,6 +1,7 @@
 package com.superinc.europe.onlineshopping.gu.web.httpUtils;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -86,7 +87,60 @@ public class HttpUtils {
 		return addNewGoodsToCart(HttpUtils.sessionInitialize(session),
 				goodsOrders);
 	}
+	
+	public static List<GoodsOrders> increaseQuantity(HttpSession session,
+			String goodsId) throws DaoException {
+		List<GoodsOrders> goodsOrders = (List<GoodsOrders>) session
+				.getAttribute(RequestParamHandler.GOODS_ORDERS);
+		goodsOrders = addToCouner(goodsId, goodsOrders);
+		updateSession(session, goodsOrders);
+		return goodsOrders;
+	}
 
+	private static List<GoodsOrders> addToCouner(String goodsId,
+			List<GoodsOrders> goodsOrders) {
+		for (GoodsOrders ob : goodsOrders) {
+			if (ob.getGoodsFk().getGoodsId() == Integer.parseInt(goodsId)) {
+				ob.setCount(ob.getCount() + COUNT_VALUE);
+			}
+		}
+		return goodsOrders;
+	}
+
+	public static List<GoodsOrders> dicreaseQuantity(HttpSession session,
+			String goodsId) throws DaoException {
+		List<GoodsOrders> goodsOrders = (List<GoodsOrders>) session
+				.getAttribute(RequestParamHandler.GOODS_ORDERS);
+		goodsOrders = subtractFromCounter(goodsId, goodsOrders);
+		goodsOrders = removeEmptyElement(goodsOrders);
+		updateSession(session, goodsOrders);
+		return goodsOrders;
+	}
+
+	private static List<GoodsOrders> removeEmptyElement(List<GoodsOrders> goodsOrders) {
+		Iterator<GoodsOrders> it = goodsOrders.iterator();
+		while (it.hasNext()) {
+			if (it.next().getCount() == 0) {
+				it.remove();
+			}
+		}
+		return goodsOrders;
+	}
+
+	private static List<GoodsOrders> subtractFromCounter(String goodsId,
+			List<GoodsOrders> goodsOrders) {
+		for (GoodsOrders ob : goodsOrders) {
+			if (ob.getGoodsFk().getGoodsId() == Integer.parseInt(goodsId)) {
+				ob.setCount(ob.getCount() - COUNT_VALUE);
+			}
+		}
+		return goodsOrders;
+	}
+	
+	public static void updateSession(HttpSession session, List<GoodsOrders> goodsOrders){
+		session.setAttribute(RequestParamHandler.GOODS_ORDERS, goodsOrders);
+	}	
+	
 	public static List<QuantityAndSum> getListQuantityAndSum(HttpSession session)
 			throws DaoException {
 

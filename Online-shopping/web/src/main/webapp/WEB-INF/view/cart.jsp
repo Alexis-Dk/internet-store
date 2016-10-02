@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.superinc.europe.onlineshopping.gu.entities.dto.*" %>
+<%@ page import="javax.servlet.http.HttpServletRequest.*" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,7 +39,15 @@
     <![endif]-->
   </head>
    <body>
-   
+   <%! String s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"; %>
+      <% String d = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+      List<Bucket> list =  (List<Bucket>) request.getAttribute ("cart");
+      if (list.isEmpty()){
+			d = "hidden";
+			s = "";
+		}
+      else {d = ""; s = "hidden";}
+      %>
     <div class="header-area">
         <div class="container">
             <div class="row">
@@ -146,7 +157,7 @@
                         <div class="woocommerce">
                             <form method="get" action="addPurchase">
                       
-                                <table class="shop_table cart">
+                                <table class="shop_table cart" <%= d %>>
                                     <thead>
                                         <tr>
                                             <th class="product-remove">&nbsp;</th>
@@ -178,12 +189,11 @@
 
                                            <td class="product-quantity">
                                                 <div class="quantity buttons_added">
-                                                    <input type="button" class="minus" value="-">
+                                                    <a href="decreaseQuantity?goodsId=<c:out value="${cart.goodsId}"></c:out>"><img width="19" height="19" alt="poster_1_up" class="shop_thumbnail" src="img/dicreaseButton.jpg"></a>
                                                     <span class="input-text qty text"> <c:out value="${cart.quantity}"></c:out> </span> 
-                                                    <input type="button" class="plus" value="+">
+                                                    <a href="increaseQuantity?goodsId=<c:out value="${cart.goodsId}"></c:out>"><img width="19" height="19" alt="poster_1_up" class="shop_thumbnail" src="img/increaseButton.jpg"></a>
                                                 </div>
                                             </td>  
-
                                             <td class="product-subtotal">
                                                 <span class="amount"><c:out value="${cart.goodsId}"></c:out></span> 
                                             </td>
@@ -204,14 +214,19 @@
                                 </table>
                             </form>
                             
-                            <div class="cart-collaterals">
+                            <div class="quantity buttons_added" <%= s %>>
+                                 <a><img width="600" height="300" alt="poster_1_up" class="shop_thumbnail" src="img/empty-cart2.jpg"></a>
+                            <br>
+                            </div>
+                            
+                            <div class="quantity buttons_added">
 								<form action="${context}/tv">
 									<button class="button" value="1" name="calc_shipping" type="submit">Return to shop</button>
 								</form>
-
                             </div>
-                        </div>                        
-                    </div>                    
+
+                        </div>                      
+                    </div>                   
                 </div>
                 </sec:authorize>
             </div>

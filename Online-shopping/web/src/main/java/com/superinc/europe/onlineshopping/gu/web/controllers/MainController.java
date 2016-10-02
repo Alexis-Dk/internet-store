@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
+import com.superinc.europe.onlineshopping.gu.entities.dto.Bucket;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
@@ -145,9 +146,41 @@ public class MainController {
 		return RequestParamHandler.BUCKET_WIDGET;
 	}
 	 
+	@RequestMapping(value = RequestParamHandler.INCREASE_QUANTITY, method = RequestMethod.GET)
+	public String increaseQuantity(HttpSession session, ModelMap model, HttpServletRequest request,
+			@RequestParam(value = RequestParamHandler.GOODS_ID) String goodsId) {
+		
+		session.setAttribute(RequestParamHandler.GOODS_ORDERS, HttpUtils.increaseQuantity(session, goodsId));
+		try {
+		model.put(RequestParamHandler.BUCKET_WIDGET, HttpUtils.getBucket(session));
+		model.put(RequestParamHandler.QUANTITY_SUM_WIDGET, HttpUtils.getListQuantityAndSum(session));
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
+			return RequestParamHandler.ERROR_PAGE;
+		}
+		return RequestParamHandler.BUCKET_WIDGET;
+	}
+	
+	@RequestMapping(value = RequestParamHandler.DECREASE_QUANTITY, method = RequestMethod.GET)
+	public String dicreaseQuantity(HttpSession session, ModelMap model, HttpServletRequest request,
+			@RequestParam(value = RequestParamHandler.GOODS_ID) String goodsId) {
+		
+		session.setAttribute(RequestParamHandler.GOODS_ORDERS, HttpUtils.dicreaseQuantity(session, goodsId));
+		try {
+		model.put(RequestParamHandler.BUCKET_WIDGET, HttpUtils.getBucket(session));
+		model.put(RequestParamHandler.QUANTITY_SUM_WIDGET, HttpUtils.getListQuantityAndSum(session));
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
+			return RequestParamHandler.ERROR_PAGE;
+		}
+		return RequestParamHandler.BUCKET_WIDGET;
+	}
+	
 	@RequestMapping(value = RequestHandler.VIEW_ITEMS_OF_CART, method = RequestMethod.GET)
 	public String viesItemsOfCart(ModelMap model, HttpServletRequest request, HttpSession session) {
 		try {
+			List<Bucket> list = HttpUtils.getBucket(session);
+			System.out.println(list);
 		model.put(RequestParamHandler.QUANTITY_SUM_WIDGET, request.getAttribute(RequestParamHandler.QUANTITY_SUM_WIDGET));
 		model.put(RequestParamHandler.BUCKET_WIDGET, HttpUtils.getBucket(session)); 
 		} catch (Exception e) {
