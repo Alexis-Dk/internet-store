@@ -152,17 +152,36 @@
                              <h4> sign for the package.</h4> 
                              <h4> For the webinar or workshop you will receive an email with information prior to the start dates.</h4>
                             <div class="cart-collaterals">
-								<form action="${context}/tv">
-									<button class="button" value="1" name="calc_shipping" type="submit">Return to shop</button>
-								</form>
+								  <table>
+                                    <thead>
+                                        <tr>
+                                            <th > 
+				                               <form action="${context}/tv">
+													<button class="button" value="1" name="calc_shipping" type="submit">Return to shop</button>
+												</form>
+                                            </th>
+                                            <th>
+	                                            <font color="#fff">
+	                                            	Hello!
+	                                            </font>
+                                            </th>
+                                            <th>
+					                            <div class="getReport">
+													<form action="getReport">
+														<button class="button" value="1" name="getReport" type="submit">Get report</button>
+													</form>
+					                            </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+								 </table>
                             </div>
-                        </div>                        
-                    </div>                    
+                        </div>             
+                    </div>           
                 </div>
             </div>
         </div>
     </div>
-
     <div class="footer-top-area">
         <div class="zigzag-bottom"></div>
         <div class="container">

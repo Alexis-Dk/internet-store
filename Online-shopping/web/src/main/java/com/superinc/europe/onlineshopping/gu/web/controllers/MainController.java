@@ -1,9 +1,12 @@
 package com.superinc.europe.onlineshopping.gu.web.controllers;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -14,11 +17,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
 import com.superinc.europe.onlineshopping.gu.entities.dto.Bucket;
+import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
@@ -31,6 +36,7 @@ import com.superinc.europe.onlineshopping.gu.service.IUsersService;
 import com.superinc.europe.onlineshopping.gu.web.utils.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestHandler;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpUtils;
+import com.superinc.europe.onlineshopping.gu.web.httpUtils.PdfGenerator;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamHandler;
 
 /**
@@ -42,6 +48,9 @@ import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamHandler;
 public class MainController {
 	
 	Logger log = Logger.getLogger(MainController.class);
+	
+	List<Bucket> bucket = null;
+	List<QuantityAndSum> quantitySum = null;
 	
 	@Autowired
 	private IGoodsService goodService;
@@ -209,7 +218,9 @@ public class MainController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = RequestHandler.ADD_PURCHASE, method = RequestMethod.GET)
 	public String addPurchase(HttpServletRequest request, HttpSession session,
-			ModelMap model) {
+			ModelMap model, HttpServletResponse response) {
+		bucket = HttpUtils.getBucket(session);
+		quantitySum = HttpUtils.getListQuantityAndSum(session);
 		if (HttpUtils.CheckPrincipal() && HttpUtils.IntegerOrEmpty(session)) {
 			ordersService.insertOrder(new Orders(new Users(HttpUtils.StringSplitter(HttpUtils.UsersId())),
 					RequestParamHandler.PROCESSING, 0, (int) session.getAttribute(RequestParamHandler.TOTAL_COST)));
@@ -225,6 +236,17 @@ public class MainController {
 				return RequestParamHandler.ERROR_PAGE;
 			}
 		}
+		return RequestParamHandler.ADD_PURCHASE;
+	}
+	
+	@RequestMapping(value = RequestHandler.GENERATE_REPORT, method = RequestMethod.GET)
+	public String generateReport(HttpServletRequest request, HttpSession session,
+			ModelMap model, HttpServletResponse response) {
+			try {
+				PdfGenerator.getReport(response, bucket, quantitySum);
+			} catch (ServletException | IOException e) {
+				log.error(ExceptionMessages.ERROR_IN_PDF_GENERATOR + e);
+			}
 		return RequestParamHandler.ADD_PURCHASE;
 	}
 	
