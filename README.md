@@ -8,7 +8,7 @@
 <br>in cart (in user interface you will see quantity and sum), also you can make order with
 <br>relationship many to many. The goods, orders and goods in orders will be store in a
 <br>separate table. You can choice your language - English or French. On the separate
-<br>page, you will can see properies of goods.
+<br>page, you will can see properies of goods. After ordering, youcan generate pdf reports.
 <br>
 <br>If you are an administrator, you can view all additional elements, it's realized with
 <br>Spring Security. You can navigate on sate pages free.
@@ -104,6 +104,15 @@
 <br>
 <br>12. To see cobertura reports, go to root - ..applfolder/web/target/site/cobertura/index
 <br>
+<br> !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Warning!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+<br>    The bat-file, automaticly change on your tomcat-server, original file server.xml. This file is required for getting 
+<br> connections from pull. Please, save your original server.xml before start up bat-file ExecuteBuild.
+<br> For correct work whith anather applications, after work with this application, please change again manually
+<br> again your saved server.xml.
+<br> This tomcat-server differs from the standard server.xml two tags:
+<br> \<Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="100" maxIdle="30" maxWait="10000" name="jdbc/TrainingDB" password="root"  type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/internetshop" username="root"/>
+<br> <ResourceLink global="jdbc/TrainingDB" name="jdbc/TrainingDB" type="javax.sql.DataSource"/>
+<br> !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Warning!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 <br>---------------------------------------------------------------------------
 <br>DEFAULT USER:
 <br>login: user
