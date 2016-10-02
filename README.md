@@ -105,7 +105,8 @@
 <br>12. To see cobertura reports, go to root - ..applfolder/web/target/site/cobertura/index
 <br>
 <br> !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Warning!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-<br>    The bat-file, automaticly change on your tomcat-server, original file server.xml. This file is required for getting 
+<br>    To use JNDI, the original server.xml is not enough. For this, application substitute the original server.xml to own.
+<br> The bat-file, automaticly change on your tomcat-server, original file server.xml. This file is required for getting 
 <br> connections from pull. Please, save your original server.xml before start up bat-file ExecuteBuild.
 <br> For correct work whith anather applications, after work with this application, please change again manually
 <br> again your saved server.xml.
