@@ -39,9 +39,9 @@
     <![endif]-->
   </head>
    <body>
-   <%! String s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"; %>
-      <% String d = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-      List<Bucket> list =  (List<Bucket>) request.getAttribute ("cart");
+   <%! String s = "";
+       String d = "";%>
+      <% List<Bucket> list =  (List<Bucket>) request.getAttribute ("cart");
       if (list.isEmpty()){
 			d = "hidden";
 			s = "";
