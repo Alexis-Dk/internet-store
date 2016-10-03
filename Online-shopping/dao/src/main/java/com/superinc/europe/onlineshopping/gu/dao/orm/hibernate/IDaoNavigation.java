@@ -7,7 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
-import com.superinc.europe.onlineshopping.gu.entities.dto.NumbersOfPages;
+import com.superinc.europe.onlineshopping.gu.entities.dto.PageNumber;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
 
 /**
@@ -21,7 +21,7 @@ public interface IDaoNavigation<T> {
 	 * @param goodsInput
 	 * @throws DaoException
 	 */
-	List<NumbersOfPages> getNumberInResult(int number)
+	List<PageNumber> getNumberInResult(int number)
 			throws ClassNotFoundException, SQLException, DaoException;
 
 	/**

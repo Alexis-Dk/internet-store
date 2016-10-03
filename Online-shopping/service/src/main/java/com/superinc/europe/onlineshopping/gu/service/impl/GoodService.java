@@ -15,6 +15,7 @@ import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
 import com.superinc.europe.onlineshopping.gu.service.IGoodsService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
+import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
@@ -31,19 +32,19 @@ public class GoodService implements IGoodsService<Object> {
 	/**
 	 * Method to get list Goods in orders
 	 * @param list
-	 * @param addGoods_in_orders
+	 * @param addGoodsOorders
 	 * @throws DaoException
 	 */
 	@Override
 	public List<GoodsOrders> addNewGoodsToCart(List<GoodsOrders> list,
-			GoodsOrders addGoods_in_orders) throws DaoException {
+			GoodsOrders addGoodsOorders) throws ServiceException {
 		List<GoodsOrders> listFiltered;
 		try {
 			listFiltered = (ArrayList<GoodsOrders>) daoGoods
-					.addNewGoodsToCart(list, addGoods_in_orders);
+					.addNewGoodsToCart(list, addGoodsOorders);
 		} catch (DaoException e) {
 			logger.error(ExceptionMessages.ERROR_IN_SERVICE + e);
-			throw new DaoException(ExceptionMessages.ERROR_IN_SERVICE, e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_SERVICE, e);
 		}
 		return listFiltered;
 	}
@@ -78,7 +79,7 @@ public class GoodService implements IGoodsService<Object> {
 	 */
 	@Override
 	public List<Goods> getAllProducts(String priveLower, String priceHighter)
-			throws DaoException {
+			throws ServiceException {
 		Session session = daoGoods.getCurrentSession();
 		List <Goods> products;
 		try {
@@ -86,7 +87,7 @@ public class GoodService implements IGoodsService<Object> {
 		} catch (DaoException e) {
 			session.getTransaction().rollback();
 			logger.error(ExceptionMessages.ERROR_IN_SERVICE + e);
-			throw new DaoException(ExceptionMessages.ERROR_IN_SERVICE, e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_SERVICE, e);
 		}
 		return products;
 	}
@@ -97,12 +98,13 @@ public class GoodService implements IGoodsService<Object> {
 	 * @throws DaoException
 	 */
 	@Override
-	public void add(Object ob) throws DaoException {
+	public void add(Object ob) throws ServiceException {
 		try {
 			System.out.println("Hallo hibernate");
 		} catch (DaoException e) {
 			logger.error(ExceptionMessages.ERROR_IN_SERVICE + e);
-			throw new DaoException(ExceptionMessages.ERROR_IN_SERVICE, e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_SERVICE, e);
 		}
 	}
+
 }

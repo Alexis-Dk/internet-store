@@ -1,10 +1,7 @@
 package com.superinc.europe.onlineshopping.gu.web.controllers;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,10 +14,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
 import com.superinc.europe.onlineshopping.gu.entities.dto.Bucket;
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
@@ -85,7 +80,7 @@ public class MainController {
 				model.put(RequestParamHandler.GOODS, navigationService
 						.putListOfGoodsUserNumbers((String) priceLower,(String) priceHighter, selectedPage));
 			}
-		} catch (DaoException | ClassNotFoundException | SQLException e) {
+		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamHandler.ERROR_PAGE;
 		}
@@ -221,21 +216,26 @@ public class MainController {
 			ModelMap model, HttpServletResponse response) {
 		bucket = HttpUtils.getBucket(session);
 		quantitySum = HttpUtils.getListQuantityAndSum(session);
-		if (HttpUtils.CheckPrincipal() && HttpUtils.IntegerOrEmpty(session)) {
-			ordersService.insertOrder(new Orders(new Users(HttpUtils.StringSplitter(HttpUtils.UsersId())),
-					RequestParamHandler.PROCESSING, 0, (int) session.getAttribute(RequestParamHandler.TOTAL_COST)));
-			goodsInOrdersService.insertGoodsInOrders(ordersService.getLastInsertId(),
-					(List<GoodsOrders>) session.getAttribute(RequestParamHandler.GOODS_ORDERS));
-			try {
-				model.put(RequestParamHandler.BUCKET_WIDGET, HttpUtils
-						.cleanAllFromSessionGoodsInOrders(session));
-				model.put(RequestParamHandler.QUANTITY_SUM_WIDGET,
-						request.getAttribute(RequestParamHandler.QUANTITY_SUM_WIDGET));
-			} catch (Exception e) {
-				log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
-				return RequestParamHandler.ERROR_PAGE;
+		try {
+			if (HttpUtils.CheckPrincipal() && HttpUtils.IntegerOrEmpty(session)) {
+				ordersService.insertOrder(new Orders(new Users(HttpUtils
+						.StringSplitter(HttpUtils.UsersId())),
+						RequestParamHandler.PROCESSING, 0, (int) session
+								.getAttribute(RequestParamHandler.TOTAL_COST)));
+				goodsInOrdersService.insertGoodsInOrders(ordersService
+						.getLastInsertId(), (List<GoodsOrders>) session
+						.getAttribute(RequestParamHandler.GOODS_ORDERS));
+
+				model.put(RequestParamHandler.BUCKET_WIDGET,
+						HttpUtils.cleanAllFromSessionGoodsInOrders(session));
+				model.put(RequestParamHandler.QUANTITY_SUM_WIDGET, request
+						.getAttribute(RequestParamHandler.QUANTITY_SUM_WIDGET));
 			}
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
+			return RequestParamHandler.ERROR_PAGE;
 		}
+		
 		return RequestParamHandler.ADD_PURCHASE;
 	}
 	
@@ -244,7 +244,7 @@ public class MainController {
 			ModelMap model, HttpServletResponse response) {
 			try {
 				PdfGenerator.getReport(response, bucket, quantitySum);
-			} catch (ServletException | IOException e) {
+			} catch (Exception e) {
 				log.error(ExceptionMessages.ERROR_IN_PDF_GENERATOR + e);
 			}
 		return RequestParamHandler.ADD_PURCHASE;

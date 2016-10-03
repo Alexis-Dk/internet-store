@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.apache.log4j.Logger;
 
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
-import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
 /**
  * Created by Alexey Druzik on 11.09.2016.

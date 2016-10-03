@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoNavigation;
-import com.superinc.europe.onlineshopping.gu.entities.dto.NumbersOfPages;
+import com.superinc.europe.onlineshopping.gu.entities.dto.PageNumber;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
 
 /**
@@ -42,7 +42,7 @@ public class DaoNavigation extends BaseDao<Object> implements IDaoNavigation<Obj
 		for (int j = 0; j < goods.size(); j++) {
 			if (j < i * DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE
 					&& j >= DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE * (i - 1)) {
-				goodsFiltered.add(goodsWrapper(goods, j));
+				goodsFiltered.add(buildGoods(goods, j));
 			}
 		}
 		return goodsFiltered;
@@ -53,13 +53,13 @@ public class DaoNavigation extends BaseDao<Object> implements IDaoNavigation<Obj
 	 * @param number
 	 * @throws DaoException
 	 */
-	public List<NumbersOfPages> getNumberInResult(int number) {
+	public List<PageNumber> getNumberInResult(int number) {
 		int id = RESULT_ID_EQUALS_0;
 		String[] array = new String[number];
-		ArrayList<NumbersOfPages> numberOfPage = new ArrayList<NumbersOfPages>();
+		ArrayList<PageNumber> numberOfPage = new ArrayList<PageNumber>();
 		for (int i = 0; i < array.length; i++) {
 			id = id+RESULT_ID_EQUALS_1; 
-			numberOfPage.add(new NumbersOfPages(id));
+			numberOfPage.add(new PageNumber(id));
 		}
 		return numberOfPage;
 	}
@@ -98,7 +98,7 @@ public class DaoNavigation extends BaseDao<Object> implements IDaoNavigation<Obj
 	 * @param goods
 	 * @param j
 	 */
-	public Goods goodsWrapper(List<Goods> goods, int j){
+	public Goods buildGoods(List<Goods> goods, int j){
 		return new Goods(goods.get(j).getGoodsId(), goods
 				.get(j).getCategoryFk(), goods.get(j).getName(), goods
 				.get(j).getImagePath(), goods.get(j).getPrice(), goods

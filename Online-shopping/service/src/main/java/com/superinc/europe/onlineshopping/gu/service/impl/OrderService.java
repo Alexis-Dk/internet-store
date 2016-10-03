@@ -10,6 +10,7 @@ import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoOrders;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
 import com.superinc.europe.onlineshopping.gu.service.IOrdersService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
+import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
@@ -29,7 +30,7 @@ public class OrderService implements IOrdersService<Orders> {
 	 * @throws DaoException
 	 */
 	@Override
-	public void insertOrder(Orders orders) throws DaoException {
+	public void insertOrder(Orders orders) throws ServiceException {
 		daoOrders.insertOrder(orders);
 		
 	}
@@ -39,12 +40,12 @@ public class OrderService implements IOrdersService<Orders> {
 	 * @throws DaoException
 	 */
 	@Override
-	public int getLastInsertId() throws DaoException {
+	public int getLastInsertId() throws ServiceException {
 		try {
 			return daoOrders.getLastInsertId();
 		} catch (DaoException e) {
 			logger.error(ExceptionMessages.ERROR_IN_ORDER_SERVICE + e);
-			throw new DaoException(ExceptionMessages.ERROR_IN_ORDER_SERVICE, e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_ORDER_SERVICE, e);
 		}
 	}
 }

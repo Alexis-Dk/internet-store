@@ -1,13 +1,13 @@
 package com.superinc.europe.onlineshopping.gu.entities.dto;
 
-public class NumbersOfPages {
+public class PageNumber {
 
 	int numberOfPageId;
 
-	public NumbersOfPages() {
+	public PageNumber() {
 	}
 	
-	public NumbersOfPages(int numberOfPageId) {
+	public PageNumber(int numberOfPageId) {
 		this.numberOfPageId = numberOfPageId;
 	}
 	

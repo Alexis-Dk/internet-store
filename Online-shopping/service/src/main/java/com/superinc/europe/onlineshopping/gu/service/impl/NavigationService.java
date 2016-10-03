@@ -1,6 +1,5 @@
 package com.superinc.europe.onlineshopping.gu.service.impl;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -11,10 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoNavigation;
-import com.superinc.europe.onlineshopping.gu.entities.dto.NumbersOfPages;
+import com.superinc.europe.onlineshopping.gu.entities.dto.PageNumber;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
 import com.superinc.europe.onlineshopping.gu.service.INavaigationService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
+import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
@@ -38,13 +38,13 @@ public class NavigationService implements INavaigationService {
 	 * @throws DaoException
 	 */
 	@Override
-	public List<NumbersOfPages> getNumberInResult(int number)
-			throws ClassNotFoundException, SQLException, DaoException {
+	public List<PageNumber> getNumberInResult(int number)
+			throws ServiceException {
 		try {
 			return daoNavigation.getNumberInResult(number);
-		} catch (DaoException e) {
+		} catch (Exception e) {
 			logger.error(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE + e);
-			throw new DaoException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
 		}
 	}
 
@@ -55,12 +55,12 @@ public class NavigationService implements INavaigationService {
 	 */
 	@Override
 	public List<Goods> getFilterPosts(List<Goods> goodsInput, int i)
-			throws ClassNotFoundException, SQLException, DaoException {
+			throws ServiceException {
 		try {
 			return daoNavigation.getFilterPosts(goodsInput, i);
-		} catch (DaoException e) {
+		} catch (Exception e) {
 			logger.error(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE + e);
-			throw new DaoException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
 		}
 	}
 	
@@ -68,16 +68,17 @@ public class NavigationService implements INavaigationService {
 	 * Method get number integer number products in the page
 	 * @param priceLower
 	 * @param priceHighter
+	 * @throws ServiceException 
 	 * @throws DaoException
 	 */
 	@Override
-	public int mathOperation(String priceLower, String priceHighter) {
+	public int mathOperation(String priceLower, String priceHighter) throws ServiceException {
 		try {
 			return (int) Math.ceil((double) getAllProducts(priceLower, priceHighter).size()
 					/ DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE);
-		} catch (DaoException e) {
+		} catch (Exception e) {
 			logger.error(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE + e);
-			throw new DaoException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
 		}
 	}
 	
@@ -89,7 +90,7 @@ public class NavigationService implements INavaigationService {
 	 */
 	@Override
 	public List<Goods> getAllProducts(String priveLower, String priceHighter)
-			throws DaoException {
+			throws ServiceException {
 		Session session = daoNavigation.getCurrentSession();
 		List<Goods> products = null;
 		try {
@@ -101,7 +102,7 @@ public class NavigationService implements INavaigationService {
 		} catch (Exception e) {
 			session.getTransaction().rollback();
 			logger.error(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE + e);
-			throw new DaoException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
 		}
 		return products;
 	}
@@ -113,14 +114,13 @@ public class NavigationService implements INavaigationService {
 	 * @throws DaoException
 	 */
 	@Override
-	public List<NumbersOfPages> putListOfNumbersOfPages(String priceLower,
-			String priceHighter) throws DaoException, ClassNotFoundException,
-			SQLException {
+	public List<PageNumber> putListOfNumbersOfPages(String priceLower,
+			String priceHighter) throws ServiceException {
 		try {
 			return getNumberInResult(mathOperation(priceLower, priceHighter));
 		} catch (DaoException e) {
 			logger.error(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE + e);
-			throw new DaoException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
 		}
 	}
 	
@@ -132,12 +132,12 @@ public class NavigationService implements INavaigationService {
 	 */
 	@Override
 	public List<Goods> putListOfGoodsDefaultNumbers(String priceLower,
-			String priceHighter) throws ClassNotFoundException, SQLException, DaoException {
+			String priceHighter) throws ServiceException {
 		try {
 			return getFilterPosts(getAllProducts(priceLower, priceHighter), INT_ONE);
 		} catch (DaoException e) {
 			logger.error(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE + e);
-			throw new DaoException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
 		}
 	}
 	
@@ -150,13 +150,13 @@ public class NavigationService implements INavaigationService {
 	@Override
 	public List<Goods> putListOfGoodsUserNumbers(String priceLower,
 			String priceHighter, String userNumberOfPage)
-			throws ClassNotFoundException, SQLException, DaoException {
+			throws ServiceException {
 		try {
 			return getFilterPosts(getAllProducts(priceLower, priceHighter),
 					Integer.parseInt(userNumberOfPage));
 		} catch (DaoException e) {
 			logger.error(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE + e);
-			throw new DaoException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
 		}
 	}
 }

@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Scope;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
+import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
@@ -16,6 +17,6 @@ public interface IUsersService<T> {
 	 * @param users
 	 * @throws DaoException
 	 */
-	void insertUser(Users users) throws DaoException;
+	void insertUser(Users users) throws ServiceException;
 	
 }

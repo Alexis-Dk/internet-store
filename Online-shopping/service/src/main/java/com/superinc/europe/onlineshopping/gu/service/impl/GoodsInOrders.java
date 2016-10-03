@@ -12,6 +12,7 @@ import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoodsInOrders
 import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
 import com.superinc.europe.onlineshopping.gu.service.IGoodsInOrdersService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
+import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
@@ -33,12 +34,12 @@ public class GoodsInOrders implements IGoodsInOrdersService{
 	 */
 	@Override
 	public void insertGoodsInOrders(int LastInsertId,
-			List<GoodsOrders> ob) throws DaoException {
+			List<GoodsOrders> ob) throws ServiceException {
 		try {
 			daoGoodsInOrders.insertGoodsInOrders(LastInsertId, ob);
 		} catch (DaoException e) {
 			logger.error(ExceptionMessages.ERROR_IN_GIO_SERVICE + e);
-			throw new DaoException(ExceptionMessages.ERROR_IN_GIO_SERVICE, e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_GIO_SERVICE, e);
 		}
 	}
 }

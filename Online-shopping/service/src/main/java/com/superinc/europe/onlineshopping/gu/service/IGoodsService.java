@@ -7,12 +7,13 @@ import org.springframework.context.annotation.Scope;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
+import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
  */
 @Scope("session")
-public interface IGoodsService<T> extends IAdd<T> {
+public interface IGoodsService<T> extends IBaseService<T> {
 	
 	/**
 	 * Method to get list Goods in orders
@@ -21,7 +22,7 @@ public interface IGoodsService<T> extends IAdd<T> {
 	 * @throws DaoException
 	 */
 	List<GoodsOrders> addNewGoodsToCart(List<GoodsOrders> list, GoodsOrders addGoods_in_orders)
-			throws DaoException;
+			throws ServiceException;
 
 	/**
 	 * Method to delete list from Goods in orders
@@ -30,7 +31,7 @@ public interface IGoodsService<T> extends IAdd<T> {
 	 * @throws DaoException
 	 */
 	List<GoodsOrders> deleteFromCartGoodsInOrders(String deleteByDescription,
-			List<GoodsOrders> goodsInOrders) throws DaoException;
+			List<GoodsOrders> goodsInOrders) throws ServiceException;
 	
 	/**
 	 * Method return all products
@@ -38,5 +39,5 @@ public interface IGoodsService<T> extends IAdd<T> {
 	 * @param priveLower
 	 * @throws DaoException
 	 */
-	List<Goods> getAllProducts(String priveLower, String priceHighter) throws DaoException;
+	List<Goods> getAllProducts(String priveLower, String priceHighter) throws ServiceException;
 }

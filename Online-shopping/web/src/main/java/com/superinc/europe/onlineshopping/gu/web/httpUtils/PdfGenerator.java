@@ -29,7 +29,7 @@ public class PdfGenerator extends HttpServlet {
 	public static void getReport(HttpServletResponse response, List<Bucket> bucket, List<QuantityAndSum> quantitySum) throws ServletException, IOException {
 		String [] dataUsers = {"", "", ""};	
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String line = auth.getPrincipal().toString(); //get logged in username 
+		String line = auth.getPrincipal().toString();
 		String [] dataUsers2 = line.split(" "); 
 		if (dataUsers2.length!=1){
 			dataUsers = line.split(" ");}
