@@ -234,7 +234,8 @@
                         <nav>
                           <ul class="pagination">
                             <li>
-                              <a href="#" aria-label="Previous">
+                              <a href='' 
+							 onclick=" this.href='?number=1&priceLower='+document.getElementById('priceLower').value+'&priceHighter='+document.getElementById('priceHighter').value" id="add-product-save-link" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
@@ -244,7 +245,8 @@
 							 </li>
 							 </c:forEach>
                         <li>
-                          <a href="#" aria-label="Next">
+                          <a href='' 
+							 onclick=" this.href='?number=2&priceLower='+document.getElementById('priceLower').value+'&priceHighter='+document.getElementById('priceHighter').value" id="add-product-save-link" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>

@@ -18,7 +18,7 @@ public class RequestParamHandler {
 	public static final String PASSWORD = "password";
 	public static final String USER = "user";
 	public static final String GET_REGISTRATION = "getRegistration";
-	public static final String GOODS_ORDERS = "GoodsInCart";
+	public static final String BUCKET = "GoodsInCart";
 	public static final String GOODS_ID = "goodsId";
 	public static final String NAME = "name";
 	public static final String DESCRIPTION = "description";

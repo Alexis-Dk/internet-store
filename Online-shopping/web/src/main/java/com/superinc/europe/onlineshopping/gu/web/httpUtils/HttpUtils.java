@@ -28,18 +28,11 @@ public class HttpUtils {
 	private static final int REPEAT_GOODS_FLAG = 0;
 	private static final int COUNT_VALUE = 1;
 
-	public static List<GoodsOrders> sessionInitialize(HttpSession session) {
-		List<GoodsOrders> list = null;
-		list = (List<GoodsOrders>) session
-				.getAttribute(RequestParamHandler.GOODS_ORDERS);
-		return list;
-	}
-
 	public static List<Bucket> getBucket(HttpSession session) {
 		List<Bucket> bucket = new ArrayList<Bucket>();
 		List<GoodsOrders> listGoodsOrders = null;
 		listGoodsOrders = (List<GoodsOrders>) session
-				.getAttribute(RequestParamHandler.GOODS_ORDERS);
+				.getAttribute(RequestParamHandler.BUCKET);
 		for (GoodsOrders goodsOrders : listGoodsOrders) {
 			bucket.add(new Bucket(goodsOrders.getGoodsFk().getGoodsId(),
 					goodsOrders.getGoodsFk().getName(), goodsOrders
@@ -50,15 +43,28 @@ public class HttpUtils {
 		}
 		return bucket;
 	}
+	
+	public static List<GoodsOrders> getBucketFromSession(HttpSession session) {
+		List<GoodsOrders> list = null;
+		list = (List<GoodsOrders>) session
+				.getAttribute(RequestParamHandler.BUCKET);
+		return list;
+	}
 
-	public static Bucket checkBucketOrEmpty(Bucket bucket){
+	public static List<GoodsOrders> getBucketFromSession(HttpSession session,
+			GoodsOrders goodsOrders) throws DaoException {
+		return addToBucket(HttpUtils.getBucketFromSession(session),
+				goodsOrders);
+	}
+	
+	public static Bucket getNewBucket(Bucket bucket){
 		if (bucket != null){
 			return new Bucket(bucket.getGoodsId(), bucket.getName(), bucket.getImagePath(), bucket.getPrice(), bucket.getDescription(), COUNT_VALUE);
 		}
 		else return new Bucket();
 		}
 
-	public static List<GoodsOrders> addNewGoodsToCart(List<GoodsOrders> list,
+	public static List<GoodsOrders> addToBucket(List<GoodsOrders> list,
 			GoodsOrders goodsOrders) throws DaoException {
 
 		int count = COUNT_VALUE;
@@ -67,8 +73,7 @@ public class HttpUtils {
 		if (Integer.valueOf(goodsOrders.getGoodsFk().getGoodsId()) != null
 				&& goodsOrders.getGoodsFk().getName() != null) {
 			for (GoodsOrders ob : list) {
-				if (ob.getGoodsFk()
-						           .getDescription()
+				if (ob.getGoodsFk().getDescription()
 						           .equals(goodsOrders.getGoodsFk()
 								   .getDescription())) {
 					ob.setCount(ob.getCount() + count);
@@ -82,21 +87,15 @@ public class HttpUtils {
 		return list;
 	}
 
-	public static List<GoodsOrders> setSession(HttpSession session,
-			GoodsOrders goodsOrders) throws DaoException {
-		return addNewGoodsToCart(HttpUtils.sessionInitialize(session),
-				goodsOrders);
-	}
-	
-	public static List<GoodsOrders> increaseQuantity(HttpSession session,
+	public static List<GoodsOrders> increaseToBucket(HttpSession session,
 			String goodsId) throws DaoException {
 		List<GoodsOrders> goodsOrders = (List<GoodsOrders>) session
-				.getAttribute(RequestParamHandler.GOODS_ORDERS);
+				.getAttribute(RequestParamHandler.BUCKET);
 		goodsOrders = addToCouner(goodsId, goodsOrders);
-		updateSession(session, goodsOrders);
+		updateBucketInSession(session, goodsOrders);
 		return goodsOrders;
 	}
-
+	
 	private static List<GoodsOrders> addToCouner(String goodsId,
 			List<GoodsOrders> goodsOrders) {
 		for (GoodsOrders ob : goodsOrders) {
@@ -106,27 +105,17 @@ public class HttpUtils {
 		}
 		return goodsOrders;
 	}
-
-	public static List<GoodsOrders> dicreaseQuantity(HttpSession session,
+	
+	public static List<GoodsOrders> decreaseFromBucket(HttpSession session,
 			String goodsId) throws DaoException {
 		List<GoodsOrders> goodsOrders = (List<GoodsOrders>) session
-				.getAttribute(RequestParamHandler.GOODS_ORDERS);
+				.getAttribute(RequestParamHandler.BUCKET);
 		goodsOrders = subtractFromCounter(goodsId, goodsOrders);
-		goodsOrders = removeEmptyElement(goodsOrders);
-		updateSession(session, goodsOrders);
+		goodsOrders = checkEmptyElement(goodsOrders);
+		updateBucketInSession(session, goodsOrders);
 		return goodsOrders;
 	}
-
-	private static List<GoodsOrders> removeEmptyElement(List<GoodsOrders> goodsOrders) {
-		Iterator<GoodsOrders> it = goodsOrders.iterator();
-		while (it.hasNext()) {
-			if (it.next().getCount() == 0) {
-				it.remove();
-			}
-		}
-		return goodsOrders;
-	}
-
+	
 	private static List<GoodsOrders> subtractFromCounter(String goodsId,
 			List<GoodsOrders> goodsOrders) {
 		for (GoodsOrders ob : goodsOrders) {
@@ -136,10 +125,51 @@ public class HttpUtils {
 		}
 		return goodsOrders;
 	}
+
+	private static List<GoodsOrders> checkEmptyElement(List<GoodsOrders> goodsOrders) {
+		Iterator<GoodsOrders> it = goodsOrders.iterator();
+		while (it.hasNext()) {
+			final int ZERO = 0;
+			if (it.next().getCount() == ZERO) {
+				it.remove();
+			}
+		}
+		return goodsOrders;
+	}
 	
-	public static void updateSession(HttpSession session, List<GoodsOrders> goodsOrders){
-		session.setAttribute(RequestParamHandler.GOODS_ORDERS, goodsOrders);
+	public static List<GoodsOrders> removeFromBucket(HttpSession session,
+			String description) {
+		List<GoodsOrders> goodsOrders = (List<GoodsOrders>) session
+				.getAttribute(RequestParamHandler.BUCKET);
+		Iterator<GoodsOrders> it = goodsOrders.iterator();
+		while (it.hasNext()) {
+			if (it.next().getGoodsFk().getDescription().equals(description)) {
+				it.remove();
+			}
+		}
+		return goodsOrders;
+	}
+	
+	public static void updateBucketInSession(HttpSession session, List<GoodsOrders> goodsOrders){
+		session.setAttribute(RequestParamHandler.BUCKET, goodsOrders);
 	}	
+	
+	public static List<GoodsOrders> cleanAndReturnBucket(
+			HttpSession session) throws DaoException {
+		List<GoodsOrders> list;
+		list = new ArrayList<GoodsOrders>();
+		session.setAttribute(RequestParamHandler.BUCKET, list);
+		cleanQuantityAndSum(session);
+		return list;
+	}
+	
+	public static boolean checkBucketExistOrEmpty(HttpSession session) {
+		if ((List<GoodsOrders>) session
+				.getAttribute(RequestParamHandler.BUCKET) != null) {
+			return true;
+		} else
+			return false;
+	}
 	
 	public static List<QuantityAndSum> getListQuantityAndSum(HttpSession session)
 			throws DaoException {
@@ -148,10 +178,10 @@ public class HttpUtils {
 		List<GoodsOrders> list = null;
 		int sumFinal = SUM_FINAL_VALUE;
 
-		if (listExistOrEmpty(session) == true) {
+		if (checkBucketExistOrEmpty(session) == true) {
 			sumFinal = getSum(session);
-			list = getListGoodsInCart(session);
-			quantityAndSum = addQuantityAndSum(session, list, sumFinal);
+			list = getBucketFromSession(session);
+			quantityAndSum = addAndGetQuantitySum(session, list, sumFinal);
 			setAttributeQuantityAndSum(session, quantityAndSum);
 			quantityAndSum = getAttributeQuantityAndSum(session, quantityAndSum);
 			setSumToSession(session, sumFinal);
@@ -159,19 +189,11 @@ public class HttpUtils {
 		return quantityAndSum;
 	}
 
-	public static boolean listExistOrEmpty(HttpSession session) {
-		if ((List<GoodsOrders>) session
-				.getAttribute(RequestParamHandler.GOODS_ORDERS) != null) {
-			return true;
-		} else
-			return false;
-	}
-
 	public static int getSum(HttpSession session) {
 		int sum = SUM_VALUE;
-		if (listExistOrEmpty(session) == true) {
+		if (checkBucketExistOrEmpty(session) == true) {
 			List<GoodsOrders> listGoodsOrders = (List<GoodsOrders>) session
-					.getAttribute(RequestParamHandler.GOODS_ORDERS);
+					.getAttribute(RequestParamHandler.BUCKET);
 			for (GoodsOrders ob : listGoodsOrders) {
 				sum = sum + ob.getGoodsFk().getPrice()
 						* ob.getCount();
@@ -180,14 +202,7 @@ public class HttpUtils {
 		return sum;
 	}
 
-	public static List<GoodsOrders> getListGoodsInCart(HttpSession session) {
-		List<GoodsOrders> list = null;
-		list = (List<GoodsOrders>) session
-				.getAttribute(RequestParamHandler.GOODS_ORDERS);
-		return list;
-	}
-
-	public static List<QuantityAndSum> addQuantityAndSum(HttpSession session,
+	public static List<QuantityAndSum> addAndGetQuantitySum(HttpSession session,
 			List<GoodsOrders> list, int sumFinal) {
 		ArrayList<QuantityAndSum> quantityAndSum = new ArrayList<QuantityAndSum>();
 		quantityAndSum.add(new QuantityAndSum(list.size(), sumFinal));
@@ -210,19 +225,13 @@ public class HttpUtils {
 		session.setAttribute(RequestParamHandler.TOTAL_COST, sum);
 	}
 
+	static void cleanQuantityAndSum(HttpSession session) {
+		QuantityAndSum quantityAndSum = new QuantityAndSum(0, 0);
+		session.setAttribute(RequestParamHandler.QUANTITY_SUM_WIDGET, quantityAndSum);
+	}
+	
 	public static boolean StringOrEmpty(String parameter) {
 		String param = parameter;
-		if (param == null) {
-			return false;
-		} else if (param.equals(RequestParamHandler.EMPTY)) {
-			return false;
-		} else
-			return true;
-	}
-
-	public static boolean CheckPrincipal() {
-		String param = SecurityContextHolder.getContext().getAuthentication()
-				.getPrincipal().toString();
 		if (param == null) {
 			return false;
 		} else if (param.equals(RequestParamHandler.EMPTY)) {
@@ -262,17 +271,15 @@ public class HttpUtils {
 		return usersId;
 	}
 
-	public static List<GoodsOrders> cleanAllFromSessionGoodsInOrders(
-			HttpSession session) throws DaoException {
-		List<GoodsOrders> list;
-		list = new ArrayList<GoodsOrders>();
-		session.setAttribute(RequestParamHandler.GOODS_ORDERS, list);
-		cleanQuantityAndSum(session);
-		return list;
+	public static boolean CheckPrincipal() {
+		String param = SecurityContextHolder.getContext().getAuthentication()
+				.getPrincipal().toString();
+		if (param == null) {
+			return false;
+		} else if (param.equals(RequestParamHandler.EMPTY)) {
+			return false;
+		} else
+			return true;
 	}
-
-	static void cleanQuantityAndSum(HttpSession session) {
-		QuantityAndSum quantityAndSum = new QuantityAndSum(0, 0);
-		session.setAttribute(RequestParamHandler.QUANTITY_SUM_WIDGET, quantityAndSum);
-	}
+	
 }

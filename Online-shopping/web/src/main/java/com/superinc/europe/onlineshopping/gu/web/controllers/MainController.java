@@ -72,13 +72,13 @@ public class MainController {
 			@RequestParam(value = RequestParamHandler.SELECTED_PAGE, defaultValue = RequestParamHandler.VALUE_STR_ONE) String selectedPage) {
 		try {
 			model.put(RequestParamHandler.NUMBER_PAGE_WIDGET, navigationService
-					.putListOfNumbersOfPages((String) priceLower,(String) priceHighter));
+					.getDataToPaginationWidget((String) priceLower,(String) priceHighter));
 			if (request.getParameter(RequestParamHandler.SELECTED_PAGE) == null) {
 				model.put(RequestParamHandler.GOODS, navigationService
-						.putListOfGoodsDefaultNumbers((String) priceLower,(String) priceHighter));
+						.obtainDefaultSelection((String) priceLower,(String) priceHighter));
 			} else {
 				model.put(RequestParamHandler.GOODS, navigationService
-						.putListOfGoodsUserNumbers((String) priceLower,(String) priceHighter, selectedPage));
+						.obtainUsersSelection((String) priceLower,(String) priceHighter, selectedPage));
 			}
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
@@ -139,7 +139,7 @@ public class MainController {
 		Goods goods = new Goods(Integer.parseInt(goodsId), name, imagePath, Integer.parseInt(price), description);
 		GoodsOrders goodsOrders = new GoodsOrders(new Orders(RequestParamHandler.VALUE_ONE), goods, RequestParamHandler.VALUE_ONE);
 		
-		session.setAttribute(RequestParamHandler.GOODS_ORDERS, HttpUtils.setSession(session, goodsOrders));
+		session.setAttribute(RequestParamHandler.BUCKET, HttpUtils.getBucketFromSession(session, goodsOrders));
 		try {
 		model.put(RequestParamHandler.BUCKET_WIDGET, HttpUtils.getBucket(session));
 		model.put(RequestParamHandler.QUANTITY_SUM_WIDGET, HttpUtils.getListQuantityAndSum(session));
@@ -154,7 +154,7 @@ public class MainController {
 	public String increaseQuantity(HttpSession session, ModelMap model, HttpServletRequest request,
 			@RequestParam(value = RequestParamHandler.GOODS_ID) String goodsId) {
 		
-		session.setAttribute(RequestParamHandler.GOODS_ORDERS, HttpUtils.increaseQuantity(session, goodsId));
+		session.setAttribute(RequestParamHandler.BUCKET, HttpUtils.increaseToBucket(session, goodsId));
 		try {
 		model.put(RequestParamHandler.BUCKET_WIDGET, HttpUtils.getBucket(session));
 		model.put(RequestParamHandler.QUANTITY_SUM_WIDGET, HttpUtils.getListQuantityAndSum(session));
@@ -169,7 +169,7 @@ public class MainController {
 	public String dicreaseQuantity(HttpSession session, ModelMap model, HttpServletRequest request,
 			@RequestParam(value = RequestParamHandler.GOODS_ID) String goodsId) {
 		
-		session.setAttribute(RequestParamHandler.GOODS_ORDERS, HttpUtils.dicreaseQuantity(session, goodsId));
+		session.setAttribute(RequestParamHandler.BUCKET, HttpUtils.decreaseFromBucket(session, goodsId));
 		try {
 		model.put(RequestParamHandler.BUCKET_WIDGET, HttpUtils.getBucket(session));
 		model.put(RequestParamHandler.QUANTITY_SUM_WIDGET, HttpUtils.getListQuantityAndSum(session));
@@ -194,13 +194,11 @@ public class MainController {
 		return RequestParamHandler.BUCKET_WIDGET;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = RequestHandler.DELETE_FROM_CART, method = RequestMethod.GET)
 	public String deleteFromCart(@RequestParam(value = RequestParamHandler.DELETE_BY_DESCRIPTION) String deleteByDescription,
 			ModelMap model, HttpSession session, HttpServletRequest request) {
-		List<GoodsOrders> goodsOrders = (List<GoodsOrders>) session.getAttribute(RequestParamHandler.GOODS_ORDERS);
 		try {
-			session.setAttribute(RequestParamHandler.GOODS_ORDERS, goodService.deleteFromCartGoodsInOrders(deleteByDescription, goodsOrders));
+			session.setAttribute(RequestParamHandler.BUCKET, HttpUtils.removeFromBucket(session, deleteByDescription));
 		model.put(RequestParamHandler.BUCKET_WIDGET, HttpUtils.getBucket(session));
 		model.put(RequestParamHandler.QUANTITY_SUM_WIDGET, HttpUtils.getListQuantityAndSum(session));
 		} catch (Exception e) {
@@ -224,10 +222,10 @@ public class MainController {
 								.getAttribute(RequestParamHandler.TOTAL_COST)));
 				goodsInOrdersService.insertGoodsInOrders(ordersService
 						.getLastInsertId(), (List<GoodsOrders>) session
-						.getAttribute(RequestParamHandler.GOODS_ORDERS));
+						.getAttribute(RequestParamHandler.BUCKET));
 
 				model.put(RequestParamHandler.BUCKET_WIDGET,
-						HttpUtils.cleanAllFromSessionGoodsInOrders(session));
+						HttpUtils.cleanAndReturnBucket(session));
 				model.put(RequestParamHandler.QUANTITY_SUM_WIDGET, request
 						.getAttribute(RequestParamHandler.QUANTITY_SUM_WIDGET));
 			}

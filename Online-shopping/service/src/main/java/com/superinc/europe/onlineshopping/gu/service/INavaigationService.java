@@ -13,21 +13,48 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 public interface INavaigationService {
 	
 	/**
-	 * Method get number in result
+	 * Method get data to pagination widget
+	 * @param priceLower
+	 * @param priceHighter
+	 * @throws DaoException
+	 */
+	List<PageNumber> getDataToPaginationWidget(String priveLower, String priceHighter) throws ServiceException;
+	
+	/**
+	 * Method Method get data to pagination widget
 	 * @param number
 	 * @throws DaoException
 	 */
-	List<PageNumber> getNumberInResult(int number)
+	List<PageNumber> getDataToPaginationWidget(int number)
 			throws ServiceException;
 
 	/**
-	 * Method get filtred posts
+	 * Method get filtered list of goods
 	 * @param i
 	 * @throws DaoException
 	 */
-	List<Goods> getFilterPosts(List<Goods> goodsInput, int i)
+	List<Goods> obtainRequiredSelection(List<Goods> goodsInput, int i)
 			throws ServiceException;
 
+	/**
+	 * Method obtain list of goods required numbers of page
+	 * @param priceLower
+	 * @param priceHighter
+	 * @throws DaoException
+	 */
+	List<Goods> obtainDefaultSelection(String priceLower, String priceHighter)
+			throws ServiceException;
+
+	/**
+	 * Method obtain list of goods selection numbers of page
+	 * @param priceLower
+	 * @param priceHighter
+	 * @throws DaoException
+	 */
+	List<Goods> obtainUsersSelection(String priceLower,
+			String priceHighter, String userNumberOfPage)
+			throws ServiceException;
+	
 	/**
 	 * Method get all product
 	 * @param priceLower
@@ -36,38 +63,13 @@ public interface INavaigationService {
 	 */
 	List<Goods> getAllProducts(String priveLower, String priceHighter) throws ServiceException;
 
+
 	/**
 	 * Method get number integer number products in the page
 	 * @param priceLower
 	 * @param priceHighter
 	 * @throws DaoException
 	 */
-	int mathOperation(String attribute, String attribute2) throws ServiceException;
-
-	/**
-	 * Method put to list numbers of page
-	 * @param priceLower
-	 * @param priceHighter
-	 * @throws DaoException
-	 */
-	List<PageNumber> putListOfNumbersOfPages(String priveLower, String priceHighter) throws ServiceException;
-
-	/**
-	 * Method put to list goods default numbers of page
-	 * @param priceLower
-	 * @param priceHighter
-	 * @throws DaoException
-	 */
-	List<Goods> putListOfGoodsDefaultNumbers(String priceLower, String priceHighter)
-			throws ServiceException;
-
-	/**
-	 * Method put to list goods users numbers of page
-	 * @param priceLower
-	 * @param priceHighter
-	 * @throws DaoException
-	 */
-	List<Goods> putListOfGoodsUserNumbers(String priceLower,
-			String priceHighter, String userNumberOfPage)
-			throws ServiceException;
+	int getNumbersOfPage(String priceLower, String priceHighter) throws ServiceException;
+	
 }

@@ -41,7 +41,7 @@ public class ServiceNavigationTest {
 	public void testGetNumberInResult() {
 		try {
 			logger.info("test begin get number of result");
-			navigationService.getNumberInResult(11);
+			navigationService.getDataToPaginationWidget(11);
 		} catch (Exception e) {
 			logger.error("Error get number of result " + e);
 		}
@@ -60,7 +60,7 @@ public class ServiceNavigationTest {
 			List<Goods> goodsFiltered = new ArrayList<Goods>();
 			goodsFiltered.add(goods);
 			logger.info("test begin");
-			List<Goods> list = navigationService.getFilterPosts(goodsFiltered, 3);
+			List<Goods> list = navigationService.obtainRequiredSelection(goodsFiltered, 3);
 			list.get(0);
 			} catch (Exception e) {
 			logger.error("Error test " + e);
@@ -74,7 +74,7 @@ public class ServiceNavigationTest {
 			List<Goods> goodsFiltered = new ArrayList<Goods>();
 			goodsFiltered.add(goods);
 			logger.info("test begin");
-			List<Goods> list = navigationService.getFilterPosts(goodsFiltered, 0);
+			List<Goods> list = navigationService.obtainRequiredSelection(goodsFiltered, 0);
 			list.get(0);
 			} catch (Exception e) {
 			logger.error("Error test " + e);
@@ -88,7 +88,7 @@ public class ServiceNavigationTest {
 			List<Goods> goodsFiltered = new ArrayList<Goods>();
 			goodsFiltered.add(goods);
 			logger.info("test begin");
-			List<Goods> list = navigationService.getFilterPosts(goodsFiltered, 1);
+			List<Goods> list = navigationService.obtainRequiredSelection(goodsFiltered, 1);
 			list.get(0);
 			} catch (Exception e) {
 			logger.error("Error test " + e);
@@ -119,7 +119,7 @@ public class ServiceNavigationTest {
 	public void mathOperation() {
 		try {
 			logger.info("get integer ");
-			navigationService.mathOperation("1", "99");
+			navigationService.getNumbersOfPage("1", "99");
 			} catch (Exception e) {
 			logger.error("Error get integer " + e);
 		}

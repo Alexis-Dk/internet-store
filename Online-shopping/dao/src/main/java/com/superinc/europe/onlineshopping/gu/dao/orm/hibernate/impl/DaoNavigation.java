@@ -35,7 +35,7 @@ public class DaoNavigation extends BaseDao<Object> implements IDaoNavigation<Obj
 	 * @param goodsInput
 	 * @throws DaoException
 	 */
-	public List<Goods> getFilterPosts(List<Goods> goodsInput, int i)
+	public List<Goods> obtainRequiredSelection(List<Goods> goodsInput, int i)
 			throws ClassNotFoundException, SQLException {
 		List<Goods> goods = goodsInput;
 		List<Goods> goodsFiltered = new ArrayList<Goods>();
@@ -53,7 +53,7 @@ public class DaoNavigation extends BaseDao<Object> implements IDaoNavigation<Obj
 	 * @param number
 	 * @throws DaoException
 	 */
-	public List<PageNumber> getNumberInResult(int number) {
+	public List<PageNumber> getDataToPaginationWidget(int number) {
 		int id = RESULT_ID_EQUALS_0;
 		String[] array = new String[number];
 		ArrayList<PageNumber> numberOfPage = new ArrayList<PageNumber>();

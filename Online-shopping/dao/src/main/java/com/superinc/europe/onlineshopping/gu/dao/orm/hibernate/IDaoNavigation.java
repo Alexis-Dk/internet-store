@@ -21,7 +21,7 @@ public interface IDaoNavigation<T> {
 	 * @param goodsInput
 	 * @throws DaoException
 	 */
-	List<PageNumber> getNumberInResult(int number)
+	List<PageNumber> getDataToPaginationWidget(int number)
 			throws ClassNotFoundException, SQLException, DaoException;
 
 	/**
@@ -29,7 +29,7 @@ public interface IDaoNavigation<T> {
 	 * @param number
 	 * @throws DaoException
 	 */
-	List<Goods> getFilterPosts(List<Goods> goodsInput, int i)
+	List<Goods> obtainRequiredSelection(List<Goods> goodsInput, int i)
 			throws ClassNotFoundException, SQLException, DaoException;
 	
 	/**

@@ -44,7 +44,7 @@ public class DaoNavigationTest {
 	public void testGetNumberInResult() {
 		try {
 			logger.info("test begin get number of result");
-			daoNavigation.getNumberInResult(11);
+			daoNavigation.getDataToPaginationWidget(11);
 		} catch (Exception e) {
 			logger.error("Error get number of result " + e);
 		}
@@ -63,7 +63,7 @@ public class DaoNavigationTest {
 			List<Goods> goodsFiltered = new ArrayList<Goods>();
 			goodsFiltered.add(goods);
 			logger.info("test begin");
-			List<Goods> list = daoNavigation.getFilterPosts(goodsFiltered, 3);
+			List<Goods> list = daoNavigation.obtainRequiredSelection(goodsFiltered, 3);
 			list.get(0);
 			} catch (Exception e) {
 			logger.error("Error test " + e);
@@ -77,7 +77,7 @@ public class DaoNavigationTest {
 			List<Goods> goodsFiltered = new ArrayList<Goods>();
 			goodsFiltered.add(goods);
 			logger.info("test begin");
-			List<Goods> list = daoNavigation.getFilterPosts(goodsFiltered, 0);
+			List<Goods> list = daoNavigation.obtainRequiredSelection(goodsFiltered, 0);
 			list.get(0);
 			} catch (Exception e) {
 			logger.error("Error test " + e);
@@ -91,7 +91,7 @@ public class DaoNavigationTest {
 			List<Goods> goodsFiltered = new ArrayList<Goods>();
 			goodsFiltered.add(goods);
 			logger.info("test begin");
-			List<Goods> list = daoNavigation.getFilterPosts(goodsFiltered, 1);
+			List<Goods> list = daoNavigation.obtainRequiredSelection(goodsFiltered, 1);
 			list.get(0);
 			} catch (Exception e) {
 			logger.error("Error test " + e);

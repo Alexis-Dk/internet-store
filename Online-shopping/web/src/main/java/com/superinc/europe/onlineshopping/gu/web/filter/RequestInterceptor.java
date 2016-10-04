@@ -28,7 +28,7 @@ public class RequestInterceptor implements HandlerInterceptor {
 			HttpServletResponse response, Object handler) throws Exception {
 		setPriceLower(request);
 		setPriceHighter(request);
-		setGoodsInCart(request);
+		initializeAllWdgets(request);
 		return true;
 	}
 	
@@ -52,9 +52,6 @@ public class RequestInterceptor implements HandlerInterceptor {
 		} else {
 			priceLower = (request.getParameter(RequestParamHandler.LOWER_PRICE));
 		}
-		if (priceLower.equals(RequestParamHandler.EMPTY)) {
-			priceLower = RequestParamHandler.EMPTY;
-		}
 		request.getSession().setAttribute(RequestParamHandler.LOWER_PRICE, priceLower);
 		request.setAttribute(RequestParamHandler.PRICE_LOWER, priceLower);
 	}
@@ -67,31 +64,28 @@ public class RequestInterceptor implements HandlerInterceptor {
 		} else {
 			priceHighter = (request.getParameter(RequestParamHandler.HIGHTER_PRICE));
 		}
-		if (priceHighter.equals(RequestParamHandler.EMPTY)) {
-			priceHighter = RequestParamHandler.EMPTY;
-		}
 		request.getSession().setAttribute(RequestParamHandler.HIGHTER_PRICE, priceHighter);
 		request.setAttribute(RequestParamHandler.PRICE_HIGHTER, priceHighter);
 	}
 	
-	public void setGoodsInCart(HttpServletRequest request){
+	public void initializeAllWdgets(HttpServletRequest request){
 		List<GoodsOrders> list = null;
-		if ((List<GoodsOrders>) request.getSession().getAttribute(RequestParamHandler.GOODS_ORDERS) == null) {
+		if ((List<GoodsOrders>) request.getSession().getAttribute(RequestParamHandler.BUCKET) == null) {
 			list = new ArrayList<GoodsOrders>();
 		} else {
-			list = (List<GoodsOrders>) request.getSession().getAttribute(RequestParamHandler.GOODS_ORDERS);
+			list = (List<GoodsOrders>) request.getSession().getAttribute(RequestParamHandler.BUCKET);
 		}
-		request.getSession().setAttribute(RequestParamHandler.GOODS_ORDERS, list);
+		request.getSession().setAttribute(RequestParamHandler.BUCKET, list);
 		request.setAttribute(RequestParamHandler.QUANTITY_SUM_WIDGET, getQuantityAndSum(list, request));
-		request.setAttribute(RequestParamHandler.GOODS_ORDERS, list);
+		request.setAttribute(RequestParamHandler.BUCKET, list);
 	}
 	
 	public List<QuantityAndSum> getQuantityAndSum(List<GoodsOrders> list, HttpServletRequest request){
 		int sumFinal = 0;
-		if (HttpUtils.listExistOrEmpty(request.getSession()) == true){
+		if (HttpUtils.checkBucketExistOrEmpty(request.getSession()) == true){
 			sumFinal = HttpUtils.getSum(request.getSession());
-			list  = HttpUtils.getListGoodsInCart(request.getSession());
-			return HttpUtils.addQuantityAndSum(request.getSession(), list, sumFinal);
+			list  = HttpUtils.getBucketFromSession(request.getSession());
+			return HttpUtils.addAndGetQuantitySum(request.getSession(), list, sumFinal);
 			}
 		else return null;
 	}

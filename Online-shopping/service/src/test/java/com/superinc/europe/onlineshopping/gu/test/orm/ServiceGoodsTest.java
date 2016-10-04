@@ -35,78 +35,58 @@ public class ServiceGoodsTest {
 	@Autowired
 	private IGoodsService<Goods> goodsService;
 	
-	@Test
-	public void addNewGoodsToCart() {
-		GoodsOrders goodsOrders1 = new GoodsOrders(new Orders(new Users(1),
-				"test", 0, 499), new Goods(1, "test", "tv/UE40J6200AU.jpg",
-				599, "UE40J6200US"), 11);
-		GoodsOrders goodsOrders2 = new GoodsOrders(new Orders(new Users(1),
-				"test", 0, 499), new Goods(1, "test", "tv/UE40J6200AU.jpg",
-				599, "UE40J6200US"), 11);
-		;
-		List<GoodsOrders> list = new ArrayList<GoodsOrders>();
-		list.add(goodsOrders1);
-		try {
-			logger.info("get add new goods to bucket ");
-			goodsService.addNewGoodsToCart(list, goodsOrders2);
-		} catch (Exception e) {
-			logger.error("Error add new goods to bucket " + e);
-		}
-	}
-	
-	@Test
-	public void addNewGoodsToCartDifferent() {
-		GoodsOrders goodsOrders1 = new GoodsOrders(new Orders(new Users(1),
-				"test", 0, 499), new Goods(1, "Samsung",
-				"tv/UE40J6200AUEU.jpg", 599, "UE40J6200USEU"), 11);
-		GoodsOrders goodsOrders2 = new GoodsOrders(new Orders(new Users(1),
-				"test", 0, 499), new Goods(2, "Lg", "tv/UE40J6200AU.jpg", 599,
-				"UE40J6200US"), 11);
-		;
-		List<GoodsOrders> list = new ArrayList<GoodsOrders>();
-		list.add(goodsOrders1);
-		try {
-			logger.info("get add new goods to bucket ");
-			goodsService.addNewGoodsToCart(list, goodsOrders2);
-		} catch (Exception e) {
-			logger.error("Error add new goods to bucket " + e);
-		}
-	}
+//	@Test
+//	public void addNewGoodsToCart() {
+//		GoodsOrders goodsOrders1 = new GoodsOrders(new Orders(new Users(1),
+//				"test", 0, 499), new Goods(1, "test", "tv/UE40J6200AU.jpg",
+//				599, "UE40J6200US"), 11);
+//		GoodsOrders goodsOrders2 = new GoodsOrders(new Orders(new Users(1),
+//				"test", 0, 499), new Goods(1, "test", "tv/UE40J6200AU.jpg",
+//				599, "UE40J6200US"), 11);
+//		
+//		List<GoodsOrders> list = new ArrayList<GoodsOrders>();
+//		list.add(goodsOrders1);
+//		try {
+//			logger.info("get add new goods to bucket ");
+//			goodsService.addNewGoodsToCart(list, goodsOrders2);
+//		} catch (Exception e) {
+//			logger.error("Error add new goods to bucket " + e);
+//		}
+//	}
+//	
+//	@Test
+//	public void addNewGoodsToCartDifferent() {
+//		GoodsOrders goodsOrders1 = new GoodsOrders(new Orders(new Users(1),
+//				"test", 0, 499), new Goods(1, "Samsung",
+//				"tv/UE40J6200AUEU.jpg", 599, "UE40J6200USEU"), 11);
+//		GoodsOrders goodsOrders2 = new GoodsOrders(new Orders(new Users(1),
+//				"test", 0, 499), new Goods(2, "Lg", "tv/UE40J6200AU.jpg", 599,
+//				"UE40J6200US"), 11);
+//		;
+//		List<GoodsOrders> list = new ArrayList<GoodsOrders>();
+//		list.add(goodsOrders1);
+//		try {
+//			logger.info("get add new goods to bucket ");
+//			goodsService.addNewGoodsToCart(list, goodsOrders2);
+//		} catch (Exception e) {
+//			logger.error("Error add new goods to bucket " + e);
+//		}
+//	}
 		
-	@Test
-	public void deleteGoodsFromCart() {
-		GoodsOrders goodsOrders1 = new GoodsOrders(new Orders(new Users(1),
-				"test", 0, 499), new Goods(1, "Samsung",
-				"tv/UE40J6200AUEU.jpg", 599, "UE40J6200USEU"), 11);
-		List<GoodsOrders> list = new ArrayList<GoodsOrders>();
-		list.add(goodsOrders1);
-		try {
-			logger.info("get add new goods to bucket ");
-			goodsService.deleteFromCartGoodsInOrders("UE40J6200USEU", list);
-		} catch (Exception e) {
-			logger.error("Error add new goods to bucket " + e);
-		}
-	}
-	
-	@Test
-	public void getAllProductsEmpty() {
-		try {
-			logger.info("get all products ");
-			goodsService.getAllProducts("", "");
-			} catch (Exception e) {
-			logger.error("Error get all products  " + e);
-		}
-	}
-	
-	@Test
-	public void getAllProducts() {
-		try {
-			logger.info("get all products ");
-			goodsService.getAllProducts("1", "999");
-			} catch (Exception e) {
-			logger.error("Error get all products  " + e);
-		}
-	}
+//	@Test
+//	public void deleteGoodsFromCart() {
+//		GoodsOrders goodsOrders1 = new GoodsOrders(new Orders(new Users(1),
+//				"test", 0, 499), new Goods(1, "Samsung",
+//				"tv/UE40J6200AUEU.jpg", 599, "UE40J6200USEU"), 11);
+//		List<GoodsOrders> list = new ArrayList<GoodsOrders>();
+//		list.add(goodsOrders1);
+//		try {
+//			logger.info("get add new goods to bucket ");
+//			goodsService.deleteFromCartGoodsInOrders("UE40J6200USEU", list);
+//		} catch (Exception e) {
+//			logger.error("Error add new goods to bucket " + e);
+//		}
+//	}
 	
 	@Test
 	public void addProduct() {

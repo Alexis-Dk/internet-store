@@ -16,31 +16,31 @@ import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
 @Scope("session")
 public interface IDaoGoods extends IBaseDao<Goods>{
 	
-	/**
-	 * Method add products to users cart 
-	 * @param list
-	 * @param addGoods_in_orders
-	 * @throws DaoException
-	 */
-	List<GoodsOrders> addNewGoodsToCart(List<GoodsOrders> list, GoodsOrders addGoods_in_orders)
-			throws DaoException;
+//	/**
+//	 * Method add products to users cart 
+//	 * @param list
+//	 * @param addGoods_in_orders
+//	 * @throws DaoException
+//	 */
+//	List<GoodsOrders> addNewGoodsToCart(List<GoodsOrders> list, GoodsOrders addGoods_in_orders)
+//			throws DaoException;
 
-	/**
-	 * Method delete product from users cart 
-	 * @param deleteByDescription
-	 * @param goodsInOrders
-	 * @throws DaoException
-	 */
-	List<GoodsOrders> deleteFromCartGoodsOrders(
-			String deleteByDescription, List<GoodsOrders> goodsInOrders) throws DaoException;
+//	/**
+//	 * Method delete product from users cart 
+//	 * @param deleteByDescription
+//	 * @param goodsInOrders
+//	 * @throws DaoException
+//	 */
+//	List<GoodsOrders> deleteFromCartGoodsOrders(
+//			String deleteByDescription, List<GoodsOrders> goodsInOrders) throws DaoException;
 
-	/**
-	 * Method sorts by criteria
-	 * @param criteria
-	 * @param priceHighter
-	 * @param priveLower
-	 */
-	List<Goods> sortedByCriteria(Criteria criteria, String priveLower, String priceHighter) throws DaoException;
+//	/**
+//	 * Method sorts by criteria
+//	 * @param criteria
+//	 * @param priceHighter
+//	 * @param priveLower
+//	 */
+//	List<Goods> sortedByCriteria(Criteria criteria, String priveLower, String priceHighter) throws DaoException;
 
 	/**
 	 * Method get current session

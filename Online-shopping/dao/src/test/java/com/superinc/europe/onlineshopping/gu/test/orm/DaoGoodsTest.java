@@ -46,81 +46,81 @@ public class DaoGoodsTest {
 		}
 	}
 	
-	@Test
-	public void sortedByCriteria() {
-		Session session = daoGoods.getBaseCurrentSession();
-		try {
-			logger.info("get  sort criteria ");
-			daoGoods.sortedByCriteria(
-					session.createCriteria(Goods.class, "goods"), "1", "1000");
-			} catch (Exception e) {
-			logger.error("Error  sort criteria " + e);
-		}
-	}
+//	@Test
+//	public void sortedByCriteria() {
+//		Session session = daoGoods.getBaseCurrentSession();
+//		try {
+//			logger.info("get  sort criteria ");
+//			daoGoods.sortedByCriteria(
+//					session.createCriteria(Goods.class, "goods"), "1", "1000");
+//			} catch (Exception e) {
+//			logger.error("Error  sort criteria " + e);
+//		}
+//	}
+//	
+//	@Test
+//	public void sortedByEmptyCriteria() {
+//		Session session = daoGoods.getBaseCurrentSession();
+//		try {
+//			logger.info("get  sort criterian ");
+//			daoGoods.sortedByCriteria(
+//					session.createCriteria(Goods.class, "goods"), "", "");
+//			} catch (Exception e) {
+//			logger.error("Error sort criteria " + e);
+//		}
+//	}
 	
-	@Test
-	public void sortedByEmptyCriteria() {
-		Session session = daoGoods.getBaseCurrentSession();
-		try {
-			logger.info("get  sort criterian ");
-			daoGoods.sortedByCriteria(
-					session.createCriteria(Goods.class, "goods"), "", "");
-			} catch (Exception e) {
-			logger.error("Error sort criteria " + e);
-		}
-	}
-	
-	@Test
-	public void addNewGoodsToCart() {
-		GoodsOrders goodsOrders1 = new GoodsOrders(new Orders(new Users(1),
-				"test", 0, 499), new Goods(1, "test", "tv/UE40J6200AU.jpg",
-				599, "UE40J6200US"), 11);
-		GoodsOrders goodsOrders2 = new GoodsOrders(new Orders(new Users(1),
-				"test", 0, 499), new Goods(1, "test", "tv/UE40J6200AU.jpg",
-				599, "UE40J6200US"), 11);
-		;
-		List<GoodsOrders> list = new ArrayList<GoodsOrders>();
-		list.add(goodsOrders1);
-		try {
-			logger.info("get add new goods to bucket ");
-			daoGoods.addNewGoodsToCart(list, goodsOrders2);
-		} catch (Exception e) {
-			logger.error("Error add new goods to bucket " + e);
-		}
-	}
-	
-	@Test
-	public void addNewGoodsToCartDifferent() {
-		GoodsOrders goodsOrders1 = new GoodsOrders(new Orders(new Users(1),
-				"test", 0, 499), new Goods(1, "Samsung",
-				"tv/UE40J6200AUEU.jpg", 599, "UE40J6200USEU"), 11);
-		GoodsOrders goodsOrders2 = new GoodsOrders(new Orders(new Users(1),
-				"test", 0, 499), new Goods(2, "Lg", "tv/UE40J6200AU.jpg", 599,
-				"UE40J6200US"), 11);
-		;
-		List<GoodsOrders> list = new ArrayList<GoodsOrders>();
-		list.add(goodsOrders1);
-		try {
-			logger.info("get add new goods to bucket ");
-			daoGoods.addNewGoodsToCart(list, goodsOrders2);
-		} catch (Exception e) {
-			logger.error("Error add new goods to bucket " + e);
-		}
-	}
+//	@Test
+//	public void addNewGoodsToCart() {
+//		GoodsOrders goodsOrders1 = new GoodsOrders(new Orders(new Users(1),
+//				"test", 0, 499), new Goods(1, "test", "tv/UE40J6200AU.jpg",
+//				599, "UE40J6200US"), 11);
+//		GoodsOrders goodsOrders2 = new GoodsOrders(new Orders(new Users(1),
+//				"test", 0, 499), new Goods(1, "test", "tv/UE40J6200AU.jpg",
+//				599, "UE40J6200US"), 11);
+//		;
+//		List<GoodsOrders> list = new ArrayList<GoodsOrders>();
+//		list.add(goodsOrders1);
+//		try {
+//			logger.info("get add new goods to bucket ");
+//			daoGoods.addNewGoodsToCart(list, goodsOrders2);
+//		} catch (Exception e) {
+//			logger.error("Error add new goods to bucket " + e);
+//		}
+//	}
+//	
+//	@Test
+//	public void addNewGoodsToCartDifferent() {
+//		GoodsOrders goodsOrders1 = new GoodsOrders(new Orders(new Users(1),
+//				"test", 0, 499), new Goods(1, "Samsung",
+//				"tv/UE40J6200AUEU.jpg", 599, "UE40J6200USEU"), 11);
+//		GoodsOrders goodsOrders2 = new GoodsOrders(new Orders(new Users(1),
+//				"test", 0, 499), new Goods(2, "Lg", "tv/UE40J6200AU.jpg", 599,
+//				"UE40J6200US"), 11);
+//		;
+//		List<GoodsOrders> list = new ArrayList<GoodsOrders>();
+//		list.add(goodsOrders1);
+//		try {
+//			logger.info("get add new goods to bucket ");
+//			daoGoods.addNewGoodsToCart(list, goodsOrders2);
+//		} catch (Exception e) {
+//			logger.error("Error add new goods to bucket " + e);
+//		}
+//	}
 		
-	@Test
-	public void deleteGoodsFromCart() {
-		GoodsOrders goodsOrders1 = new GoodsOrders(new Orders(new Users(1),
-				"test", 0, 499), new Goods(1, "Samsung",
-				"tv/UE40J6200AUEU.jpg", 599, "UE40J6200USEU"), 11);
-		List<GoodsOrders> list = new ArrayList<GoodsOrders>();
-		list.add(goodsOrders1);
-		try {
-			logger.info("get add new goods to bucket ");
-			daoGoods.deleteFromCartGoodsOrders("UE40J6200USEU", list);
-		} catch (Exception e) {
-			logger.error("Error add new goods to bucket " + e);
-		}
-	}
+//	@Test
+//	public void deleteGoodsFromCart() {
+//		GoodsOrders goodsOrders1 = new GoodsOrders(new Orders(new Users(1),
+//				"test", 0, 499), new Goods(1, "Samsung",
+//				"tv/UE40J6200AUEU.jpg", 599, "UE40J6200USEU"), 11);
+//		List<GoodsOrders> list = new ArrayList<GoodsOrders>();
+//		list.add(goodsOrders1);
+//		try {
+//			logger.info("get add new goods to bucket ");
+//			daoGoods.deleteFromCartGoodsOrders("UE40J6200USEU", list);
+//		} catch (Exception e) {
+//			logger.error("Error add new goods to bucket " + e);
+//		}
+//	}
 	
 }

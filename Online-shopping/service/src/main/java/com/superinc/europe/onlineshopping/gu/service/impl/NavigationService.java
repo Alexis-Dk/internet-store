@@ -33,31 +33,48 @@ public class NavigationService implements INavaigationService {
 	private IDaoNavigation<Object> daoNavigation;
 
 	/**
-	 * Method get number in result
+	 * Method get data to pagination widget
+	 * @param priceLower
+	 * @param priceHighter
+	 * @throws DaoException
+	 */
+	@Override
+	public List<PageNumber> getDataToPaginationWidget(String priceLower,
+			String priceHighter) throws ServiceException {
+		try {
+			return getDataToPaginationWidget(getNumbersOfPage(priceLower, priceHighter));
+		} catch (DaoException e) {
+			logger.error(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
+		}
+	}
+	
+	/**
+	 * Method get data to pagination widget
 	 * @param number
 	 * @throws DaoException
 	 */
 	@Override
-	public List<PageNumber> getNumberInResult(int number)
+	public List<PageNumber> getDataToPaginationWidget(int number)
 			throws ServiceException {
 		try {
-			return daoNavigation.getNumberInResult(number);
+			return daoNavigation.getDataToPaginationWidget(number);
 		} catch (Exception e) {
 			logger.error(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE + e);
 			throw new ServiceException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
 		}
 	}
-
+		
 	/**
-	 * Method get filtered posts
+	 * Method obtain list of goods required numbers of page
 	 * @param i
 	 * @throws DaoException
 	 */
 	@Override
-	public List<Goods> getFilterPosts(List<Goods> goodsInput, int i)
+	public List<Goods> obtainRequiredSelection(List<Goods> goodsInput, int i)
 			throws ServiceException {
 		try {
-			return daoNavigation.getFilterPosts(goodsInput, i);
+			return daoNavigation.obtainRequiredSelection(goodsInput, i);
 		} catch (Exception e) {
 			logger.error(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE + e);
 			throw new ServiceException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
@@ -65,23 +82,41 @@ public class NavigationService implements INavaigationService {
 	}
 	
 	/**
-	 * Method get number integer number products in the page
+	 * Method obtain list of goods default numbers of page
 	 * @param priceLower
 	 * @param priceHighter
-	 * @throws ServiceException 
 	 * @throws DaoException
 	 */
 	@Override
-	public int mathOperation(String priceLower, String priceHighter) throws ServiceException {
+	public List<Goods> obtainDefaultSelection(String priceLower,
+			String priceHighter) throws ServiceException {
 		try {
-			return (int) Math.ceil((double) getAllProducts(priceLower, priceHighter).size()
-					/ DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE);
-		} catch (Exception e) {
+			return obtainRequiredSelection(getAllProducts(priceLower, priceHighter), INT_ONE);
+		} catch (DaoException e) {
 			logger.error(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE + e);
 			throw new ServiceException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
 		}
 	}
 	
+	/**
+	 * Method obtain list of goods selection numbers of page
+	 * @param priceLower
+	 * @param priceHighter
+	 * @throws DaoException
+	 */
+	@Override
+	public List<Goods> obtainUsersSelection(String priceLower,
+			String priceHighter, String userNumberOfPage)
+			throws ServiceException {
+		try {
+			return obtainRequiredSelection(getAllProducts(priceLower, priceHighter),
+					Integer.parseInt(userNumberOfPage));
+		} catch (DaoException e) {
+			logger.error(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
+		}
+	}
+		
 	/**
 	 * Method get all product
 	 * @param priceLower
@@ -95,10 +130,7 @@ public class NavigationService implements INavaigationService {
 		List<Goods> products = null;
 		try {
 			products = (List<Goods>)daoNavigation.sortedByCriteria(
-					session.createCriteria(Goods.class, "goods"), priveLower, priceHighter);
-			for (Goods goods : products) {
-				System.out.println("qwerty123"+goods);
-			}
+				session.createCriteria(Goods.class, "goods"), priveLower, priceHighter);
 		} catch (Exception e) {
 			session.getTransaction().rollback();
 			logger.error(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE + e);
@@ -108,55 +140,21 @@ public class NavigationService implements INavaigationService {
 	}
 	
 	/**
-	 * Method put to list numbers of page
+	 * Method get number integer number products in the page
 	 * @param priceLower
 	 * @param priceHighter
+	 * @throws ServiceException 
 	 * @throws DaoException
 	 */
 	@Override
-	public List<PageNumber> putListOfNumbersOfPages(String priceLower,
-			String priceHighter) throws ServiceException {
+	public int getNumbersOfPage(String priceLower, String priceHighter) throws ServiceException {
 		try {
-			return getNumberInResult(mathOperation(priceLower, priceHighter));
-		} catch (DaoException e) {
+			return (int) Math.ceil((double) getAllProducts(priceLower, priceHighter).size()
+					/ DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE);
+		} catch (Exception e) {
 			logger.error(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE + e);
 			throw new ServiceException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
 		}
 	}
 	
-	/**
-	 * Method put to list goods default numbers of page
-	 * @param priceLower
-	 * @param priceHighter
-	 * @throws DaoException
-	 */
-	@Override
-	public List<Goods> putListOfGoodsDefaultNumbers(String priceLower,
-			String priceHighter) throws ServiceException {
-		try {
-			return getFilterPosts(getAllProducts(priceLower, priceHighter), INT_ONE);
-		} catch (DaoException e) {
-			logger.error(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE + e);
-			throw new ServiceException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
-		}
-	}
-	
-	/**
-	 * Method put to list goods users numbers of page
-	 * @param priceLower
-	 * @param priceHighter
-	 * @throws DaoException
-	 */
-	@Override
-	public List<Goods> putListOfGoodsUserNumbers(String priceLower,
-			String priceHighter, String userNumberOfPage)
-			throws ServiceException {
-		try {
-			return getFilterPosts(getAllProducts(priceLower, priceHighter),
-					Integer.parseInt(userNumberOfPage));
-		} catch (DaoException e) {
-			logger.error(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE + e);
-			throw new ServiceException(ExceptionMessages.ERROR_IN_NAVIGATION_SERVICE, e);
-		}
-	}
 }
