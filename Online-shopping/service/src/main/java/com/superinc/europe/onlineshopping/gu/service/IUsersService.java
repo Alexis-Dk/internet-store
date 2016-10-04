@@ -8,9 +8,10 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
+ * @param <T>
  */
 @Scope("session")
-public interface IUsersService<T> {
+public interface IUsersService<T> extends IBaseService<T> {
 
 	/**
 	 * Method insert Users to DB

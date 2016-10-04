@@ -29,7 +29,7 @@ public class DaoOrdersTest {
 	private static Logger logger = Logger.getLogger(DaoOrdersTest.class);
     
 	@Autowired
-	private IDaoOrders<Orders> daoOrders;
+	private IDaoOrders daoOrders;
 
 	@Autowired
 	private IDaoNavigation<Object> daoNavigation;

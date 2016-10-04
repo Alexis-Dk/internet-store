@@ -22,7 +22,68 @@ public class OrderService implements IOrdersService<Orders> {
 	private static Logger logger = Logger.getLogger(OrderService.class);
 	
 	@Autowired
-	private IDaoOrders<Object> daoOrders;
+	private IDaoOrders daoOrders;
+	
+	/**
+	 * Method set to Session
+	 * @param ob
+	 * @throws ServiceException
+	 */
+	@Override
+	public void add(Orders ob) throws ServiceException {
+		try {
+			daoOrders.add(ob);
+		} catch (DaoException e) {
+			logger.error(ExceptionMessages.ERROR_IN_ORDER_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_ORDER_SERVICE, e);
+		}
+	}
+	
+	/**
+	 * Method update Session
+	 * @param id
+	 * @throws ServiceException
+	 */
+	@Override
+	public void update(Orders ob) throws ServiceException {
+		try {
+			daoOrders.update(ob);
+		} catch (DaoException e) {
+			logger.error(ExceptionMessages.ERROR_IN_ORDER_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_ORDER_SERVICE, e);
+		}
+	}
+	
+	/**
+	 * Method get from Session
+	 * @param id
+	 * @throws ServiceException
+	 */
+	@Override
+	public void get(int id) throws ServiceException {
+		try {
+			daoOrders.get(id);
+		} catch (DaoException e) {
+			logger.error(ExceptionMessages.ERROR_IN_ORDER_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_ORDER_SERVICE, e);
+		}
+		
+	}
+
+	/**
+	 * Method delete from Session
+	 * @param id
+	 * @throws ServiceException
+	 */
+	@Override
+	public void delete(int id) throws ServiceException {
+		try {
+			daoOrders.delete(id);
+		} catch (DaoException e) {
+			logger.error(ExceptionMessages.ERROR_IN_ORDER_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_ORDER_SERVICE, e);
+		}
+	}
 	
 	/**
 	 * Inserts Order to DB
@@ -32,7 +93,6 @@ public class OrderService implements IOrdersService<Orders> {
 	@Override
 	public void insertOrder(Orders orders) throws ServiceException {
 		daoOrders.insertOrder(orders);
-		
 	}
 	
 	/**

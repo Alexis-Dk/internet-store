@@ -13,7 +13,7 @@ import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
  * Created by Alexey Druzik on 29.08.2016.
  */
 @Repository("daoOrders")
-public class DaoOrders extends BaseDao<Orders> implements IDaoOrders<Object> {
+public class DaoOrders extends BaseDao<Orders> implements IDaoOrders {
 
 	/**
 	 * Method insert Orsers to DB

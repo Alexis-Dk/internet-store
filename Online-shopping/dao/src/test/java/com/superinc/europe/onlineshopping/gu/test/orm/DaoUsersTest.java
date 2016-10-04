@@ -27,14 +27,14 @@ public class DaoUsersTest {
 	private static Logger logger = Logger.getLogger(DaoOrdersTest.class);
     
 	@Autowired
-	private IDaoUsers<Users> daoUsers;
+	private IDaoUsers daoUsers;
 
 	@Test
 	public void testInsertOrders() {
 		try {
 			logger.info("test insert users begin");
 			Users users = new Users(101, "root",  "root", "admin");
-			daoUsers.insertUser(users);;
+			daoUsers.insertUser(users);
 			} catch (Exception e) {
 			logger.error("Error test insert users " + e);
 		}

@@ -1,5 +1,6 @@
 package com.superinc.europe.onlineshopping.gu.test.orm;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -20,6 +21,7 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration(transactionManager = "txManager", defaultRollback = true)
 @Transactional
+@Ignore
 public class ServiceExceptionTest {
 
 	private static Logger logger = Logger.getLogger(ServiceOrdersTest.class);

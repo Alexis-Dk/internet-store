@@ -27,7 +27,7 @@ public class DaoGoodsOrdersTest {
 	private static Logger logger = Logger.getLogger(DaoGoodsOrdersTest.class);
     
 	@Autowired
-	private IDaoUsers<Users> daoUsers;
+	private IDaoUsers daoUsers;
 
 	@Test
 	public void testInsertGoodsOrders() {

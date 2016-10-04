@@ -9,7 +9,7 @@ import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
  * Created by Alexey Druzik on 29.08.2016.
  */
 @Scope("session")
-public interface IDaoOrders<T> {
+public interface IDaoOrders extends IBaseDao<Orders> {
 
 	/**
 	 * Method insert Orsers to DB

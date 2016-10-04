@@ -1,5 +1,6 @@
 package com.superinc.europe.onlineshopping.gu.test.orm;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import com.superinc.europe.onlineshopping.gu.service.IGoodsService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @TransactionConfiguration(transactionManager = "txManager", defaultRollback = true)
 @Transactional
+@Ignore
 public class ServiceGoodsTest {
 
 	private static Logger logger = Logger.getLogger(ServiceGoodsTest.class);

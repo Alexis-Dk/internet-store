@@ -1,6 +1,5 @@
 package com.superinc.europe.onlineshopping.gu.service;
 
-import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
 /**
@@ -9,10 +8,30 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 public interface IBaseService<T> {
 
 	/**
-	 * Method set to HibernateSession
+	 * Method set to Session
 	 * @param ob
-	 * @throws DaoException
+	 * @throws ServiceException
 	 */
 	public void add(T ob) throws ServiceException;
 
+	/**
+	 * Method update Session
+	 * @param ob
+	 * @throws ServiceException
+	 */
+	public void update(T ob)throws ServiceException;
+	
+	/**
+	 * Method get from Session
+	 * @param id
+	 * @throws ServiceException
+	 */
+    public void get(int id) throws ServiceException;
+
+	/**
+	 * Method delete from Session
+	 * @param id
+	 * @throws ServiceException
+	 */
+    public void delete(int id) throws ServiceException;
 }

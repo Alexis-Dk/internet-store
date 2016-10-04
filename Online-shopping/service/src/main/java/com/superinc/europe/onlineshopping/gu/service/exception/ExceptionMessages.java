@@ -12,5 +12,5 @@ public class ExceptionMessages {
 
 	public static final String ERROR_IN_USER_SERVICE = "Error in user service: ";
 
-	public static final String ERROR_IN_USERS_SERVICE = "Error in users service: ";
+	public static final String ERROR_IN_GOODS_SERVICE = "Error in users service: ";
 }

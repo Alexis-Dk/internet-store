@@ -14,7 +14,7 @@ import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
  * Created by Alexey Druzik on 29.08.2016.
  */
 @Repository("daoGoodsInOrders")
-public class DaoGoodsInOrders extends BaseDao<GoodsOrders> implements IDaoGoodsInOrders<Object> {
+public class DaoGoodsInOrders extends BaseDao<GoodsOrders> implements IDaoGoodsInOrders {
 
 	/**
 	 * Method insert goodsInOrders to DB 

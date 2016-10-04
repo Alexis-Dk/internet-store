@@ -10,7 +10,7 @@ import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
  * Created by Alexey Druzik on 07.09.2016.
  */
 @Repository("daoUsers")
-public class DaoUsers extends BaseDao<Users> implements IDaoUsers<Object>  {
+public class DaoUsers extends BaseDao<Users> implements IDaoUsers  {
 
 	/**
 	 * Method insert User to DB

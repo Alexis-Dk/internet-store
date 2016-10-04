@@ -19,13 +19,74 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
  */
 @Service
 @Transactional 
-public class GoodsInOrders implements IGoodsInOrdersService{
+public class GoodsInOrders implements IGoodsInOrdersService<GoodsOrders> {
 
 	private static Logger logger = Logger.getLogger(GoodsInOrders.class);
 	
 	@Autowired
-	private IDaoGoodsInOrders<Object> daoGoodsInOrders;
+	private IDaoGoodsInOrders daoGoodsInOrders;
 
+	/**
+	 * Method set to Session
+	 * @param ob
+	 * @throws ServiceException
+	 */
+	@Override
+	public void add(GoodsOrders ob) throws ServiceException {
+		try {
+			daoGoodsInOrders.add(ob);
+		} catch (DaoException e) {
+			logger.error(ExceptionMessages.ERROR_IN_GIO_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_GIO_SERVICE, e);
+		}
+	}
+	
+	/**
+	 * Method update Session
+	 * @param id
+	 * @throws ServiceException
+	 */
+	@Override
+	public void update(GoodsOrders ob) throws ServiceException {
+		try {
+			
+		} catch (DaoException e) {
+			logger.error(ExceptionMessages.ERROR_IN_GIO_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_GIO_SERVICE, e);
+		}
+	}
+	
+	/**
+	 * Method get from Session
+	 * @param id
+	 * @throws ServiceException
+	 */
+	@Override
+	public void get(int id) throws ServiceException {
+		try {
+			
+		} catch (DaoException e) {
+			logger.error(ExceptionMessages.ERROR_IN_GIO_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_GIO_SERVICE, e);
+		}
+		
+	}
+
+	/**
+	 * Method delete from Session
+	 * @param id
+	 * @throws ServiceException
+	 */
+	@Override
+	public void delete(int id) throws ServiceException {
+		try {
+			
+		} catch (DaoException e) {
+			logger.error(ExceptionMessages.ERROR_IN_GIO_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_GIO_SERVICE, e);
+		}
+	}
+	
 	/**
 	 * Method insert GoodsInOrders to DB
 	 * @param LastInsertId

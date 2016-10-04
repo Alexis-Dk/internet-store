@@ -32,6 +32,7 @@ import com.superinc.europe.onlineshopping.gu.web.utils.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestHandler;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpUtils;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.PdfGenerator;
+import com.superinc.europe.onlineshopping.gu.web.httpUtils.SendMailTLS;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamHandler;
 
 /**
@@ -48,7 +49,7 @@ public class MainController {
 	List<QuantityAndSum> quantitySum = null;
 	
 	@Autowired
-	private IGoodsService goodService;
+	private IGoodsService goodsService;
 
 	@Autowired
 	private IUsersService usersService;
@@ -72,12 +73,12 @@ public class MainController {
 			@RequestParam(value = RequestParamHandler.SELECTED_PAGE, defaultValue = RequestParamHandler.VALUE_STR_ONE) String selectedPage) {
 		try {
 			model.put(RequestParamHandler.NUMBER_PAGE_WIDGET, navigationService
-					.getDataToPaginationWidget((String) priceLower,(String) priceHighter));
+					.getDataToPaginationWidget(goodsService.getNumbersOfPage(priceLower, priceHighter)));
 			if (request.getParameter(RequestParamHandler.SELECTED_PAGE) == null) {
-				model.put(RequestParamHandler.GOODS, navigationService
+				model.put(RequestParamHandler.GOODS, goodsService
 						.obtainDefaultSelection((String) priceLower,(String) priceHighter));
 			} else {
-				model.put(RequestParamHandler.GOODS, navigationService
+				model.put(RequestParamHandler.GOODS, goodsService
 						.obtainUsersSelection((String) priceLower,(String) priceHighter, selectedPage));
 			}
 		} catch (Exception e) {
@@ -223,11 +224,11 @@ public class MainController {
 				goodsInOrdersService.insertGoodsInOrders(ordersService
 						.getLastInsertId(), (List<GoodsOrders>) session
 						.getAttribute(RequestParamHandler.BUCKET));
-
 				model.put(RequestParamHandler.BUCKET_WIDGET,
 						HttpUtils.cleanAndReturnBucket(session));
 				model.put(RequestParamHandler.QUANTITY_SUM_WIDGET, request
 						.getAttribute(RequestParamHandler.QUANTITY_SUM_WIDGET));
+				SendMailTLS.mainr("alexeydruzik@inbox.ru","alexdruz", "107615@tut.by", "Hallo", "World");
 			}
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);

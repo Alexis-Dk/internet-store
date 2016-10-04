@@ -10,9 +10,10 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
+ * @param <T>
  */
 @Scope("session")
-public interface IGoodsInOrdersService {
+public interface IGoodsInOrdersService<T> extends IBaseService<T> {
 
 	/**
 	 * Method insert GoodsInOrders to DB

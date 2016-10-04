@@ -20,9 +20,10 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
+ * @param <T>
  */
 @Named
-public class UserService implements UserDetailsService, IUsersService<Users>  {
+public class UserService<T> implements UserDetailsService, IUsersService<Users>  {
 
 	private static final String USERNAME = "username";
 
@@ -34,11 +35,72 @@ public class UserService implements UserDetailsService, IUsersService<Users>  {
 	private SessionFactory sessionFactory;
 	
 	@Autowired
-	private IDaoUsers<Object> daoUsers;
+	private IDaoUsers daoUsers;
 	
 	public UserService() {
 	}
 
+	/**
+	 * Method set to Session
+	 * @param ob
+	 * @throws ServiceException
+	 */
+	@Override
+	public void add(Users ob) throws ServiceException {
+		try {
+			daoUsers.add(ob);
+		} catch (DaoException e) {
+			logger.error(ExceptionMessages.ERROR_IN_USER_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_USER_SERVICE, e);
+		}
+	}
+	
+	/**
+	 * Method update Session
+	 * @param id
+	 * @throws ServiceException
+	 */
+	@Override
+	public void update(Users ob) throws ServiceException {
+		try {
+			daoUsers.update(ob);
+		} catch (DaoException e) {
+			logger.error(ExceptionMessages.ERROR_IN_USER_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_USER_SERVICE, e);
+		}
+	}
+	
+	/**
+	 * Method get from Session
+	 * @param id
+	 * @throws ServiceException
+	 */
+	@Override
+	public void get(int id) throws ServiceException {
+		try {
+			daoUsers.get(id);
+		} catch (DaoException e) {
+			logger.error(ExceptionMessages.ERROR_IN_USER_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_USER_SERVICE, e);
+		}
+		
+	}
+
+	/**
+	 * Method delete from Session
+	 * @param id
+	 * @throws ServiceException
+	 */
+	@Override
+	public void delete(int id) throws ServiceException {
+		try {
+			daoUsers.delete(id);
+		} catch (DaoException e) {
+			logger.error(ExceptionMessages.ERROR_IN_USER_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_USER_SERVICE, e);
+		}
+	}
+	
 	/**
 	 * Method load User by name
 	 * @param username
@@ -54,7 +116,6 @@ public class UserService implements UserDetailsService, IUsersService<Users>  {
 			result = (Users) query.uniqueResult();
 		} catch (DaoException e) {
 			logger.error(ExceptionMessages.ERROR_IN_USER_SERVICE + e);
-
 		}
 		return  result;
 	}
@@ -69,8 +130,8 @@ public class UserService implements UserDetailsService, IUsersService<Users>  {
 		try {
 			daoUsers.insertUser(users);
 		} catch (DaoException e) {
-			logger.error(ExceptionMessages.ERROR_IN_USERS_SERVICE + e);
-			throw new ServiceException(ExceptionMessages.ERROR_IN_USERS_SERVICE, e);
+			logger.error(ExceptionMessages.ERROR_IN_USER_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_USER_SERVICE, e);
 		}
 	}
 }
