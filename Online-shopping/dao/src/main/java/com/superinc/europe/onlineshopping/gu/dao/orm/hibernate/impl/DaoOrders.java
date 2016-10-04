@@ -22,9 +22,6 @@ public class DaoOrders extends BaseDao<Orders> implements IDaoOrders<Object> {
 	 */
 	@Override
 	public void insertOrder(Orders orders) throws DaoException {
-//		IDAOFactory factory = new DAOMaker();
-//		IDAOOrders<Orders> daoOrders = factory.getDAOOrders();
-//		daoOrders.insert(orders);
 		add(orders);
 	}
 
