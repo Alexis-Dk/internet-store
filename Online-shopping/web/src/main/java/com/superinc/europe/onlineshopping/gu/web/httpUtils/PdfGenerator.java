@@ -27,7 +27,7 @@ public class PdfGenerator extends HttpServlet {
 	HttpServletResponse response;
 
 	public static void getReport(HttpServletResponse response, List<Bucket> bucket, List<QuantityAndSum> quantitySum) throws ServletException, IOException {
-		String [] dataUsers = {"", "", ""};	
+		String [] dataUsers = {"", "", "", ""};	
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String line = auth.getPrincipal().toString();
 		String [] dataUsers2 = line.split(" "); 
@@ -37,6 +37,7 @@ public class PdfGenerator extends HttpServlet {
 			dataUsers[0] = "";
 			dataUsers[1] = "";
 			dataUsers[2] = "";
+			dataUsers[3] = "";
 		}
 		try {
             com.itextpdf.text.Document pdfDocument = new com.itextpdf.text.Document();
@@ -89,4 +90,5 @@ public class PdfGenerator extends HttpServlet {
         	throw new IOException(e.getMessage());
         }
 	}
+	
 }

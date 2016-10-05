@@ -19,17 +19,15 @@ import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
  */
 @Repository("daoGoods")
 public class DaoGoods extends BaseDao<Goods> implements IDaoGoods{
-	
-	
 
 	Logger log = Logger.getLogger(DaoGoods.class);
 	
 	private static final String LED_TV_CATEGORY = "category_id = 1";
-	private static final int ONE = 1;
-	private static final int DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE = 10;
 	private static final String EMPTY_FIELD = "";
 	private static final String PRICE_LESS = "price <= ";
 	private static final String PRICE_MORE = "price >= ";
+	private static final int ONE = 1;
+	private static final int DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE = 10;
 	
 	/**
 	 * Method sorted list by criteria

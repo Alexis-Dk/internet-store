@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -230,7 +231,7 @@ public class HttpUtils {
 		session.setAttribute(RequestParamHandler.QUANTITY_SUM_WIDGET, quantityAndSum);
 	}
 	
-	public static boolean StringOrEmpty(String parameter) {
+	public static boolean stringOrEmpty(String parameter) {
 		String param = parameter;
 		if (param == null) {
 			return false;
@@ -240,7 +241,7 @@ public class HttpUtils {
 			return true;
 	}
 
-	public static boolean IntegerOrEmpty(HttpSession session) {
+	public static boolean integerOrEmpty(HttpSession session) {
 		Integer i = (int) session.getAttribute(RequestParamHandler.TOTAL_COST);
 		if (i == null) {
 			return false;
@@ -248,7 +249,7 @@ public class HttpUtils {
 			return true;
 	}
 
-	public static String UsersId() {
+	public static String usersId() {
 		String userData = RequestParamHandler.EMPTY;
 		Object principal = SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
@@ -260,7 +261,7 @@ public class HttpUtils {
 		return userData;
 	}
 
-	public static int StringSplitter(String line) {
+	public static int stringSplitter(String line) {
 		int usersId = USERS_ID_VALUE;
 		String[] dataUsers = line.split(RequestParamHandler.EMPTY_FIELD);
 		if (dataUsers.length != 1) {
@@ -271,7 +272,7 @@ public class HttpUtils {
 		return usersId;
 	}
 
-	public static boolean CheckPrincipal() {
+	public static boolean checkPrincipal() {
 		String param = SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal().toString();
 		if (param == null) {
@@ -280,6 +281,22 @@ public class HttpUtils {
 			return false;
 		} else
 			return true;
+	}
+	
+	public static String getEmail(){
+		String [] dataUsers = {"", "", "", ""};	
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String line = auth.getPrincipal().toString();
+		String [] dataUsers2 = line.split(" "); 
+		if (dataUsers2.length!=1){
+			dataUsers = line.split(" ");}
+		else {
+			dataUsers[0] = "";
+			dataUsers[1] = "";
+			dataUsers[2] = "";
+			dataUsers[3] = "";
+		}
+		return dataUsers[3];
 	}
 	
 }

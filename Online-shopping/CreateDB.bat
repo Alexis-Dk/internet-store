@@ -23,10 +23,11 @@ CREATE TABLE `users` (
   `password` varchar(255) DEFAULT NULL,
   `role` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`users_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
-INSERT INTO `users` VALUES (1,'b','admin','a'),(2,'y','user','t'),(3,'admin','admin','admin'),(4,' user ','user','user ');
+INSERT INTO `users` VALUES (1,'b','admin','a','107615@tut.by'),(2,'y','user','t','107615@tut.by'),(3,'admin','admin','admin','107615@tut.by'),(4,' user ','user','user ','107615@tut.by');
 
 DROP TABLE IF EXISTS `goods`;
 

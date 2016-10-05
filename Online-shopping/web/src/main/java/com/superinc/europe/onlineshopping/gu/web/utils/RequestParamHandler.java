@@ -40,6 +40,7 @@ public class RequestParamHandler {
 	public static final String EMPTY_FIELD = " ";
 	public static final String VALUE_STR_ONE = "1";
 	public static final int VALUE_ONE = 1;
+	public static final String EMAIL = "email";
 	
     public void handler(){
     }

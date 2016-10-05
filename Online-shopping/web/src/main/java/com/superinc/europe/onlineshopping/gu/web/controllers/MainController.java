@@ -32,7 +32,7 @@ import com.superinc.europe.onlineshopping.gu.web.utils.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestHandler;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpUtils;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.PdfGenerator;
-import com.superinc.europe.onlineshopping.gu.web.httpUtils.SendMailTLS;
+import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpMailer;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamHandler;
 
 /**
@@ -115,10 +115,11 @@ public class MainController {
 	@RequestMapping(value = RequestHandler.GET_REGISTRATION, method = RequestMethod.GET)
 	public String getRegistrPage(ModelMap model,
 			@RequestParam(value = RequestParamHandler.USER_NAME) String username,
-			@RequestParam(value = RequestParamHandler.PASSWORD) String password) {
-		if (HttpUtils.StringOrEmpty(RequestParamHandler.USER_NAME)
-				&& HttpUtils.StringOrEmpty(RequestParamHandler.PASSWORD)){
-			Users users = new Users(username, password, RequestParamHandler.USER);
+			@RequestParam(value = RequestParamHandler.PASSWORD) String password,
+			@RequestParam(value = RequestParamHandler.EMAIL, defaultValue = RequestParamHandler.EMPTY) String email) {
+		if (HttpUtils.stringOrEmpty(RequestParamHandler.USER_NAME)
+				&& HttpUtils.stringOrEmpty(RequestParamHandler.PASSWORD)){
+			Users users = new Users(username, password, RequestParamHandler.USER, email);
 			try {
 			usersService.insertUser(users);
 			} catch (Exception e) {
@@ -216,9 +217,9 @@ public class MainController {
 		bucket = HttpUtils.getBucket(session);
 		quantitySum = HttpUtils.getListQuantityAndSum(session);
 		try {
-			if (HttpUtils.CheckPrincipal() && HttpUtils.IntegerOrEmpty(session)) {
+			if (HttpUtils.checkPrincipal() && HttpUtils.integerOrEmpty(session)) {
 				ordersService.insertOrder(new Orders(new Users(HttpUtils
-						.StringSplitter(HttpUtils.UsersId())),
+						.stringSplitter(HttpUtils.usersId())),
 						RequestParamHandler.PROCESSING, 0, (int) session
 								.getAttribute(RequestParamHandler.TOTAL_COST)));
 				goodsInOrdersService.insertGoodsInOrders(ordersService
@@ -228,7 +229,7 @@ public class MainController {
 						HttpUtils.cleanAndReturnBucket(session));
 				model.put(RequestParamHandler.QUANTITY_SUM_WIDGET, request
 						.getAttribute(RequestParamHandler.QUANTITY_SUM_WIDGET));
-				SendMailTLS.mainr("alexeydruzik@inbox.ru","alexdruz", "107615@tut.by", "Hallo", "World");
+				HttpMailer.sendLetter(HttpUtils.getEmail());
 			}
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);

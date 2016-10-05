@@ -34,6 +34,9 @@ public class Users implements UserDetails {
 	@Column(name="role")
 	private String role;
 	
+	@Column(name="email")
+	private String email;
+	
 	public Users() {
 	}
 
@@ -41,6 +44,14 @@ public class Users implements UserDetails {
 		this.usersId = usersId;
 	}
 	
+	public Users(String username, String password, String role,
+			String email) {
+		this.username = username;
+		this.password = password;
+		this.role = role;
+		this.email = email;
+	}
+
 	public Users (int usersId, String username, String password, String role) {
 		this.usersId = usersId;
 		this.username = username;
@@ -86,6 +97,14 @@ public class Users implements UserDetails {
 		this.role = role;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
     @Override
     public Set<GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
@@ -115,7 +134,7 @@ public class Users implements UserDetails {
 
 	@Override
 	public String toString() {
-		return "" + usersId + " " + username + " "+ password +"";
+		return "" + usersId + " " + username + " "+ password +" " + email + "";
 	}
 
 }
