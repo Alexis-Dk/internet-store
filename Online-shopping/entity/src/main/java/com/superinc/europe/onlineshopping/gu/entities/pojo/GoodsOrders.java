@@ -78,8 +78,8 @@ public class GoodsOrders implements Serializable{
 	@Override
 	public int hashCode() {
         int hash = 1;
-//        hash = hash * 31 + description.hashCode();
-//        hash = hash * 31 + goods_id;
+        hash = hash * 31 + goodsFk.hashCode();
+        hash = hash * 31 + count;
           hash = 31;
         return hash;
 	}
@@ -102,7 +102,7 @@ public class GoodsOrders implements Serializable{
 //		if (varA != other.varA)
 //			return false;
 //		if (varB != other.varB)
-//			return false;
+//			return false
 		return true;
 	}
 }

@@ -14,7 +14,7 @@ import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.entities.dto.Bucket;
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
-import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamHandler;
+import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamConstants;
 
 /**
  * Created by Alexey Druzik on 11.09.2016.
@@ -33,7 +33,7 @@ public class HttpUtils {
 		List<Bucket> bucket = new ArrayList<Bucket>();
 		List<GoodsOrders> listGoodsOrders = null;
 		listGoodsOrders = (List<GoodsOrders>) session
-				.getAttribute(RequestParamHandler.BUCKET);
+				.getAttribute(RequestParamConstants.BUCKET);
 		for (GoodsOrders goodsOrders : listGoodsOrders) {
 			bucket.add(new Bucket(goodsOrders.getGoodsFk().getGoodsId(),
 					goodsOrders.getGoodsFk().getName(), goodsOrders
@@ -48,7 +48,7 @@ public class HttpUtils {
 	public static List<GoodsOrders> getBucketFromSession(HttpSession session) {
 		List<GoodsOrders> list = null;
 		list = (List<GoodsOrders>) session
-				.getAttribute(RequestParamHandler.BUCKET);
+				.getAttribute(RequestParamConstants.BUCKET);
 		return list;
 	}
 
@@ -91,7 +91,7 @@ public class HttpUtils {
 	public static List<GoodsOrders> increaseToBucket(HttpSession session,
 			String goodsId) throws DaoException {
 		List<GoodsOrders> goodsOrders = (List<GoodsOrders>) session
-				.getAttribute(RequestParamHandler.BUCKET);
+				.getAttribute(RequestParamConstants.BUCKET);
 		goodsOrders = addToCouner(goodsId, goodsOrders);
 		updateBucketInSession(session, goodsOrders);
 		return goodsOrders;
@@ -110,7 +110,7 @@ public class HttpUtils {
 	public static List<GoodsOrders> decreaseFromBucket(HttpSession session,
 			String goodsId) throws DaoException {
 		List<GoodsOrders> goodsOrders = (List<GoodsOrders>) session
-				.getAttribute(RequestParamHandler.BUCKET);
+				.getAttribute(RequestParamConstants.BUCKET);
 		goodsOrders = subtractFromCounter(goodsId, goodsOrders);
 		goodsOrders = checkEmptyElement(goodsOrders);
 		updateBucketInSession(session, goodsOrders);
@@ -141,7 +141,7 @@ public class HttpUtils {
 	public static List<GoodsOrders> removeFromBucket(HttpSession session,
 			String description) {
 		List<GoodsOrders> goodsOrders = (List<GoodsOrders>) session
-				.getAttribute(RequestParamHandler.BUCKET);
+				.getAttribute(RequestParamConstants.BUCKET);
 		Iterator<GoodsOrders> it = goodsOrders.iterator();
 		while (it.hasNext()) {
 			if (it.next().getGoodsFk().getDescription().equals(description)) {
@@ -152,21 +152,21 @@ public class HttpUtils {
 	}
 	
 	public static void updateBucketInSession(HttpSession session, List<GoodsOrders> goodsOrders){
-		session.setAttribute(RequestParamHandler.BUCKET, goodsOrders);
+		session.setAttribute(RequestParamConstants.BUCKET, goodsOrders);
 	}	
 	
 	public static List<GoodsOrders> cleanAndReturnBucket(
 			HttpSession session) throws DaoException {
 		List<GoodsOrders> list;
 		list = new ArrayList<GoodsOrders>();
-		session.setAttribute(RequestParamHandler.BUCKET, list);
+		session.setAttribute(RequestParamConstants.BUCKET, list);
 		cleanQuantityAndSum(session);
 		return list;
 	}
 	
 	public static boolean checkBucketExistOrEmpty(HttpSession session) {
 		if ((List<GoodsOrders>) session
-				.getAttribute(RequestParamHandler.BUCKET) != null) {
+				.getAttribute(RequestParamConstants.BUCKET) != null) {
 			return true;
 		} else
 			return false;
@@ -194,7 +194,7 @@ public class HttpUtils {
 		int sum = SUM_VALUE;
 		if (checkBucketExistOrEmpty(session) == true) {
 			List<GoodsOrders> listGoodsOrders = (List<GoodsOrders>) session
-					.getAttribute(RequestParamHandler.BUCKET);
+					.getAttribute(RequestParamConstants.BUCKET);
 			for (GoodsOrders ob : listGoodsOrders) {
 				sum = sum + ob.getGoodsFk().getPrice()
 						* ob.getCount();
@@ -212,37 +212,37 @@ public class HttpUtils {
 
 	static void setAttributeQuantityAndSum(HttpSession session,
 			List<QuantityAndSum> quantityAndSum) {
-		session.setAttribute(RequestParamHandler.QUANTITY_SUM_WIDGET, quantityAndSum);
+		session.setAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET, quantityAndSum);
 	}
 
 	static List<QuantityAndSum> getAttributeQuantityAndSum(HttpSession session,
 			List<QuantityAndSum> quantityAndSum) {
 		quantityAndSum = (List<QuantityAndSum>) session
-				.getAttribute(RequestParamHandler.QUANTITY_SUM_WIDGET);
+				.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET);
 		return quantityAndSum;
 	}
 
 	static void setSumToSession(HttpSession session, int sum) {
-		session.setAttribute(RequestParamHandler.TOTAL_COST, sum);
+		session.setAttribute(RequestParamConstants.TOTAL_COST, sum);
 	}
 
 	static void cleanQuantityAndSum(HttpSession session) {
 		QuantityAndSum quantityAndSum = new QuantityAndSum(0, 0);
-		session.setAttribute(RequestParamHandler.QUANTITY_SUM_WIDGET, quantityAndSum);
+		session.setAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET, quantityAndSum);
 	}
 	
 	public static boolean stringOrEmpty(String parameter) {
 		String param = parameter;
 		if (param == null) {
 			return false;
-		} else if (param.equals(RequestParamHandler.EMPTY)) {
+		} else if (param.equals(RequestParamConstants.EMPTY)) {
 			return false;
 		} else
 			return true;
 	}
 
 	public static boolean integerOrEmpty(HttpSession session) {
-		Integer i = (int) session.getAttribute(RequestParamHandler.TOTAL_COST);
+		Integer i = (int) session.getAttribute(RequestParamConstants.TOTAL_COST);
 		if (i == null) {
 			return false;
 		} else
@@ -250,7 +250,7 @@ public class HttpUtils {
 	}
 
 	public static String usersId() {
-		String userData = RequestParamHandler.EMPTY;
+		String userData = RequestParamConstants.EMPTY;
 		Object principal = SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 		if (principal instanceof UserDetails) {
@@ -263,9 +263,9 @@ public class HttpUtils {
 
 	public static int stringSplitter(String line) {
 		int usersId = USERS_ID_VALUE;
-		String[] dataUsers = line.split(RequestParamHandler.EMPTY_FIELD);
+		String[] dataUsers = line.split(RequestParamConstants.EMPTY_FIELD);
 		if (dataUsers.length != 1) {
-			dataUsers = line.split(RequestParamHandler.EMPTY_FIELD);
+			dataUsers = line.split(RequestParamConstants.EMPTY_FIELD);
 			String userId = dataUsers[0];
 			usersId = Integer.parseInt(userId);
 		}
@@ -277,7 +277,7 @@ public class HttpUtils {
 				.getPrincipal().toString();
 		if (param == null) {
 			return false;
-		} else if (param.equals(RequestParamHandler.EMPTY)) {
+		} else if (param.equals(RequestParamConstants.EMPTY)) {
 			return false;
 		} else
 			return true;
