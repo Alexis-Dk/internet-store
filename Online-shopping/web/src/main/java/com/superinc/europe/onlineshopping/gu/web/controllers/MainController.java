@@ -229,13 +229,17 @@ public class MainController {
 						HttpUtils.cleanAndReturnBucket(session));
 				model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, request
 						.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
-				HttpMailer.sendLetter(HttpUtils.getEmail());
 			}
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
-		
+		try {
+			HttpMailer.sendLetter(HttpUtils.getEmail());
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
+			return RequestParamConstants.ADD_PURCHASE;
+		}
 		return RequestParamConstants.ADD_PURCHASE;
 	}
 	
