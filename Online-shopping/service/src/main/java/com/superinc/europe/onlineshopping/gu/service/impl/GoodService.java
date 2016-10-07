@@ -24,7 +24,9 @@ public class GoodService implements IGoodsService<Goods> {
 
 	private static Logger logger = Logger.getLogger(GoodService.class);
 	
-	private static final int INT_ONE = 1;
+	private static final int NUMBER_OF_START_PAGE = 1;
+	
+	private static final String GOODS = "goods";
 	
 	@Autowired
 	private IDaoGoods daoGoods;
@@ -100,12 +102,19 @@ public class GoodService implements IGoodsService<Goods> {
 	@Override
 	public List<Goods> obtainDefaultSelection(String priceLower,
 			String priceHighter) throws ServiceException {
+		Session session = daoGoods.getCurrentSession();
+		List<Goods> products = null;
 		try {
-			return obtainRequiredSelection(obtainSelection(priceLower, priceHighter), INT_ONE);
-		} catch (DaoException e) {
+			products = (List<Goods>) daoGoods.getProduct(
+					session.createCriteria(Goods.class, GOODS), priceLower,
+					priceHighter, NUMBER_OF_START_PAGE);
+		} catch (Exception e) {
+			session.getTransaction().rollback();
 			logger.error(ExceptionMessages.ERROR_IN_GOODS_SERVICE + e);
-			throw new ServiceException(ExceptionMessages.ERROR_IN_GOODS_SERVICE, e);
+			throw new ServiceException(
+					ExceptionMessages.ERROR_IN_GOODS_SERVICE, e);
 		}
+		return products;
 	}
 	
 	/**
@@ -116,65 +125,27 @@ public class GoodService implements IGoodsService<Goods> {
 	 */
 	@Override
 	public List<Goods> obtainUsersSelection(String priceLower,
-			String priceHighter, String userNumberOfPage)
-			throws ServiceException {
-		try {
-			return obtainRequiredSelection(obtainSelection(priceLower, priceHighter),
-					Integer.parseInt(userNumberOfPage));
-		} catch (DaoException e) {
-			logger.error(ExceptionMessages.ERROR_IN_GOODS_SERVICE + e);
-			throw new ServiceException(ExceptionMessages.ERROR_IN_GOODS_SERVICE, e);
-		}
-	}
-	
-	/**
-	 * Method obtain list of goods required numbers of page
-	 * @param i
-	 * @throws DaoException
-	 */
-	@Override
-	public List<Goods> obtainRequiredSelection(List<Goods> goodsInput, int i)
-			throws ServiceException {
-		try {
-			return daoGoods.obtainRequiredSelection(goodsInput, i);
-		} catch (Exception e) {
-			logger.error(ExceptionMessages.ERROR_IN_GOODS_SERVICE + e);
-			throw new ServiceException(ExceptionMessages.ERROR_IN_GOODS_SERVICE, e);
-		}
-	}
-	
-	/**
-	 * Method get all product
-	 * @param priceLower
-	 * @param priceHighter
-	 * @throws DaoException
-	 */
-	@Override
-	public List<Goods> obtainSelection(String priveLower, String priceHighter)
-			throws ServiceException {
-		Session session = daoGoods.getCurrentSession();
-		List<Goods> products = null;
-		try {
-			products = (List<Goods>)daoGoods.sortedByCriteria(
-				session.createCriteria(Goods.class, "goods"), priveLower, priceHighter);
-		} catch (Exception e) {
-			session.getTransaction().rollback();
-			logger.error(ExceptionMessages.ERROR_IN_GOODS_SERVICE + e);
-			throw new ServiceException(ExceptionMessages.ERROR_IN_GOODS_SERVICE, e);
-		}
-		return products;
+			String priceHighter, String userNumberOfPage)throws ServiceException{
+			Session session = daoGoods.getCurrentSession();
+			List<Goods> products = null;
+			try {
+				products = (List<Goods>)daoGoods.getProduct(session.createCriteria(Goods.class, GOODS), priceLower, priceHighter, Integer.parseInt(userNumberOfPage));
+			} catch (Exception e) {
+				session.getTransaction().rollback();
+				logger.error(ExceptionMessages.ERROR_IN_GOODS_SERVICE + e);
+				throw new ServiceException(ExceptionMessages.ERROR_IN_GOODS_SERVICE, e);
+			}
+			return products;
 	}
 	
 	/**
 	 * Method get number integer number products in the page
-	 * @param priceLower
-	 * @param priceHighter
 	 * @throws ServiceException 
 	 */
 	@Override
-	public int getNumbersOfPage(String priceLower, String priceHighter) throws ServiceException {
+	public int getQuantityOfPage() throws ServiceException {
 		try {
-			return  daoGoods.getNumbersOfPage(obtainSelection(priceLower, priceHighter));
+			return  daoGoods.getQuantityOfPage();
 		} catch (Exception e) {
 			logger.error(ExceptionMessages.ERROR_IN_GOODS_SERVICE + e);
 			throw new ServiceException(ExceptionMessages.ERROR_IN_GOODS_SERVICE, e);

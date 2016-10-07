@@ -1,8 +1,5 @@
 package com.superinc.europe.onlineshopping.gu.test.orm;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;

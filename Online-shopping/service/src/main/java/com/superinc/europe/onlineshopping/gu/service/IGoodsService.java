@@ -30,22 +30,6 @@ public interface IGoodsService<T> extends IBaseService<T> {
 	List<Goods> obtainUsersSelection(String priceLower,
 			String priceHighter, String userNumberOfPage)
 			throws ServiceException;
-	
-	/**
-	 * Method get filtered list of goods
-	 * @param i
-	 * @throws DaoException
-	 */
-	List<Goods> obtainRequiredSelection(List<Goods> goodsInput, int i)
-			throws ServiceException;
-	
-	/**
-	 * Method get all product
-	 * @param priceLower
-	 * @param priceHighter
-	 * @throws DaoException
-	 */
-	List<Goods> obtainSelection(String priveLower, String priceHighter) throws ServiceException;
 
 	/**
 	 * Method get number integer number products in the page
@@ -53,5 +37,5 @@ public interface IGoodsService<T> extends IBaseService<T> {
 	 * @param priceHighter
 	 * @throws DaoException
 	 */
-	int getNumbersOfPage(String priceLower, String priceHighter) throws ServiceException;
+	int getQuantityOfPage() throws ServiceException;
 }

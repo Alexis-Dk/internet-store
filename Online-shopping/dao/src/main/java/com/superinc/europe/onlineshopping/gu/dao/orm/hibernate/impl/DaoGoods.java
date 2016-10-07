@@ -1,6 +1,5 @@
 package com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -20,53 +19,14 @@ import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
 @Repository("daoGoods")
 public class DaoGoods extends BaseDao<Goods> implements IDaoGoods{
 
-	Logger log = Logger.getLogger(DaoGoods.class);
-	
+	private static final String GET_COUNT_ROW = "select count(*) from Goods where delete_status=0";
 	private static final String LED_TV_CATEGORY = "category_id = 1";
 	private static final String EMPTY_FIELD = "";
 	private static final String PRICE_LESS = "price <= ";
 	private static final String PRICE_MORE = "price >= ";
-	private static final int ONE = 1;
-	private static final int DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE = 10;
+	private static final int DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE = 12;
 	
-	/**
-	 * Method sorted list by criteria
-	 * @param criteria
-	 * @param priceHighter
-	 * @param priveLower
-	 * @throws DaoException
-	 */
-	@SuppressWarnings("unchecked")
-	public List<Goods> sortedByCriteria(Criteria criteria, 
-			String priveLower, String priceHighter){
-		criteria.add(Restrictions.sqlRestriction(LED_TV_CATEGORY));
-		if (!priveLower.equals(EMPTY_FIELD)) {
-			criteria.add(Restrictions.sqlRestriction(PRICE_MORE + priveLower));
-		}
-		if (!priceHighter.equals(EMPTY_FIELD)) {
-		criteria.add(Restrictions.sqlRestriction(PRICE_LESS + priceHighter));
-		}
-		return criteria.list();
-	}
-	
-	/**
-	 * Method get Filtered post
-	 * @param i
-	 * @param goodsInput
-	 * @throws DaoException
-	 */
-	public List<Goods> obtainRequiredSelection(List<Goods> goodsInput, int i)
-			throws DaoException{
-		List<Goods> goods = goodsInput;
-		List<Goods> goodsFiltered = new ArrayList<Goods>();
-		for (int j = 0; j < goods.size(); j++) {
-			if (j < i * DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE
-					&& j >= DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE * (i - ONE)) {
-				goodsFiltered.add(buildGoods(goods, j));
-			}
-		}
-		return goodsFiltered;
-	}
+	Logger log = Logger.getLogger(DaoGoods.class);
 	
 	/**
 	 * Method get current session
@@ -78,28 +38,25 @@ public class DaoGoods extends BaseDao<Goods> implements IDaoGoods{
 	}
 	
 	/**
-	 * Method return wrapper of goods
-	 * @param goods
-	 * @param j
+	 * Method get list products
+	 * @param criteria
+	 * @param priceLower
+	 * @param priceHighter
+	 * @param numberOfPage
+	 * @throws DaoException
 	 */
-	public Goods buildGoods(List<Goods> goods, int j){
-		return new Goods(goods.get(j).getGoodsId(), goods
-				.get(j).getCategoryFk(), goods.get(j).getName(), goods
-				.get(j).getImagePath(), goods.get(j).getPrice(), goods
-				.get(j).getOldprice(), goods.get(j).getDescription(),
-				goods.get(j).getCharacteristic1(), goods.get(j)
-						.getCharacteristic2(), goods.get(j)
-						.getCharacteristic3(), goods.get(j)
-						.getCharacteristic4(), goods.get(j)
-						.getCharacteristic5(), goods.get(j)
-						.getCharacteristic6(), goods.get(j)
-						.getCharacteristic7(), goods.get(j)
-						.getCharacteristic8(), goods.get(j)
-						.getCharacteristic9(), goods.get(j)
-						.getCharacteristic10(), goods.get(j)
-						.getCharacteristic11(), goods.get(j)
-						.getDeleteStatus(), goods.get(j)
-						.getStockStatus(), goods.get(j).getRating());
+	@SuppressWarnings("unchecked")
+	public List<Goods> getProduct(Criteria criteria, String priceLower, String priceHighter, int quantityOfPage){
+		criteria.add(Restrictions.sqlRestriction(LED_TV_CATEGORY));
+		criteria.setMaxResults(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE);
+		criteria.setFirstResult(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE*(quantityOfPage - 1));
+		if (!priceLower.equals(EMPTY_FIELD)) {
+			criteria.add(Restrictions.sqlRestriction(PRICE_MORE + priceLower));
+		}
+		if (!priceHighter.equals(EMPTY_FIELD)) {
+		criteria.add(Restrictions.sqlRestriction(PRICE_LESS + priceHighter));
+		}
+		return criteria.list();
 	}
 	
 	/**
@@ -110,13 +67,24 @@ public class DaoGoods extends BaseDao<Goods> implements IDaoGoods{
 	 * @throws DaoException
 	 */
 	@Override
-	public int getNumbersOfPage(List <Goods> ob) throws DaoException {
+	public int getQuantityOfPage() throws DaoException {
 		try {
-			return (int) Math.ceil((double) ob.size()
+			return (int) Math.ceil((double) getQuantityOfTableRow()
 					/ DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE);
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_DAO + e);
 			throw new DaoException(ExceptionMessages.ERROR_IN_DAO, e);
 		}
 	}
+	
+	public int getQuantityOfTableRow() throws DaoException {
+		Number number =(Number) (getCurrentSession().createQuery(GET_COUNT_ROW)).uniqueResult();
+		try {
+			return number.intValue();
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_DAO + e);
+			throw new DaoException(ExceptionMessages.ERROR_IN_DAO, e);
+		}
+	}
+	
 }

@@ -42,12 +42,12 @@ import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamConstants;
 @Scope("session")
 @SuppressWarnings("rawtypes")
 public class MainController {
-	
+
 	Logger log = Logger.getLogger(MainController.class);
-	
+
 	List<Bucket> bucket = null;
 	List<QuantityAndSum> quantitySum = null;
-	
+
 	@Autowired
 	private IGoodsService goodsService;
 
@@ -62,66 +62,72 @@ public class MainController {
 
 	@Autowired
 	private INavaigationService navigationService;
-    
+
 	@Autowired
 	private IDaoGoods daoGoods;
-	
+
 	@RequestMapping(value = RequestConstants.TV, method = RequestMethod.GET)
-	public String setTvPage(HttpServletRequest request, ModelMap model,
+	public String setTvPage(
+			HttpServletRequest request,
+			ModelMap model,
 			@RequestParam(value = RequestParamConstants.LOWER_PRICE, defaultValue = RequestParamConstants.EMPTY) String priceLower,
 			@RequestParam(value = RequestParamConstants.HIGHTER_PRICE, defaultValue = RequestParamConstants.EMPTY) String priceHighter,
 			@RequestParam(value = RequestParamConstants.SELECTED_PAGE, defaultValue = RequestParamConstants.VALUE_STR_ONE) String selectedPage) {
 		try {
-			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET, navigationService
-					.getDataToPaginationWidget(goodsService.getNumbersOfPage(priceLower, priceHighter)));
+			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
+					navigationService.getDataToPaginationWidget(goodsService.getQuantityOfPage()));
 			if (request.getParameter(RequestParamConstants.SELECTED_PAGE) == null) {
-				model.put(RequestParamConstants.GOODS, goodsService
-						.obtainDefaultSelection((String) priceLower,(String) priceHighter));
+				model.put(RequestParamConstants.GOODS, goodsService.obtainDefaultSelection((String) priceLower,
+								(String) priceHighter));
 			} else {
-				model.put(RequestParamConstants.GOODS, goodsService
-						.obtainUsersSelection((String) priceLower,(String) priceHighter, selectedPage));
+				model.put(RequestParamConstants.GOODS, goodsService.obtainUsersSelection((String) priceLower,
+								(String) priceHighter, selectedPage));
 			}
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
-		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
+				request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
 		return RequestParamConstants.TV;
 	}
-	
+
 	@RequestMapping(value = RequestConstants.HELLO, method = RequestMethod.GET)
 	public String setHelloPage(HttpServletRequest request, ModelMap model) {
 		try {
-		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, request
+					.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
 		return RequestParamConstants.HELLO_PAGE;
 	}
-	
+
 	@RequestMapping(value = RequestConstants.REGISTRATION, method = RequestMethod.GET)
 	public ModelAndView setRegistrPage() {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
-		modelAndView.setViewName(RequestParamConstants.REGISTRATION);
+			modelAndView.setViewName(RequestParamConstants.REGISTRATION);
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			modelAndView.setViewName(RequestParamConstants.ERROR_PAGE);
 		}
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = RequestConstants.GET_REGISTRATION, method = RequestMethod.GET)
-	public String getRegistrPage(ModelMap model,
+	public String getRegistrPage(
+			ModelMap model,
 			@RequestParam(value = RequestParamConstants.USER_NAME) String username,
 			@RequestParam(value = RequestParamConstants.PASSWORD) String password,
 			@RequestParam(value = RequestParamConstants.EMAIL, defaultValue = RequestParamConstants.EMPTY) String email) {
 		if (HttpUtils.stringOrEmpty(RequestParamConstants.USER_NAME)
-				&& HttpUtils.stringOrEmpty(RequestParamConstants.PASSWORD)){
-			Users users = new Users(username, password, RequestParamConstants.USER, email);
+				&& HttpUtils.stringOrEmpty(RequestParamConstants.PASSWORD)) {
+			Users users = new Users(username, password,
+					RequestParamConstants.USER, email);
 			try {
-			usersService.insertUser(users);
+				usersService.insertUser(users);
 			} catch (Exception e) {
 				log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 				return RequestParamConstants.ERROR_PAGE;
@@ -129,87 +135,111 @@ public class MainController {
 		}
 		return RequestParamConstants.GET_REGISTRATION;
 	}
-	
+
 	@RequestMapping(value = RequestConstants.ADD_NEW_GOODS_TO_CART, method = RequestMethod.GET)
-	public String addNewGoodsToCart(HttpSession session, ModelMap model, HttpServletRequest request,
+	public String addNewGoodsToCart(
+			HttpSession session,
+			ModelMap model,
+			HttpServletRequest request,
 			@RequestParam(value = RequestParamConstants.GOODS_ID) String goodsId,
 			@RequestParam(value = RequestParamConstants.NAME) String name,
 			@RequestParam(value = RequestParamConstants.DESCRIPTION) String description,
 			@RequestParam(value = RequestParamConstants.PRICE) String price,
 			@RequestParam(value = RequestParamConstants.IMAGE_PATH) String imagePath) {
-		
-		Goods goods = new Goods(Integer.parseInt(goodsId), name, imagePath, Integer.parseInt(price), description);
-		GoodsOrders goodsOrders = new GoodsOrders(new Orders(RequestParamConstants.VALUE_ONE), goods, RequestParamConstants.VALUE_ONE);
-		
-		session.setAttribute(RequestParamConstants.BUCKET, HttpUtils.getBucketFromSession(session, goodsOrders));
+
+		Goods goods = new Goods(Integer.parseInt(goodsId), name, imagePath,
+				Integer.parseInt(price), description);
+		GoodsOrders goodsOrders = new GoodsOrders(new Orders(
+				RequestParamConstants.VALUE_ONE), goods,
+				RequestParamConstants.VALUE_ONE);
+
+		session.setAttribute(RequestParamConstants.BUCKET,
+				HttpUtils.getBucketFromSession(session, goodsOrders));
 		try {
-		model.put(RequestParamConstants.BUCKET_WIDGET, HttpUtils.getBucket(session));
-		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, HttpUtils.getListQuantityAndSum(session));
+			model.put(RequestParamConstants.BUCKET_WIDGET,
+					HttpUtils.getBucket(session));
+			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
+					HttpUtils.getListQuantityAndSum(session));
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
 		return RequestParamConstants.BUCKET_WIDGET;
 	}
-	 
+
 	@RequestMapping(value = RequestParamConstants.INCREASE_QUANTITY, method = RequestMethod.GET)
-	public String increaseQuantity(HttpSession session, ModelMap model, HttpServletRequest request,
+	public String increaseQuantity(HttpSession session, ModelMap model,
+			HttpServletRequest request,
 			@RequestParam(value = RequestParamConstants.GOODS_ID) String goodsId) {
-		
-		session.setAttribute(RequestParamConstants.BUCKET, HttpUtils.increaseToBucket(session, goodsId));
+
+		session.setAttribute(RequestParamConstants.BUCKET,
+				HttpUtils.increaseToBucket(session, goodsId));
 		try {
-		model.put(RequestParamConstants.BUCKET_WIDGET, HttpUtils.getBucket(session));
-		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, HttpUtils.getListQuantityAndSum(session));
+			model.put(RequestParamConstants.BUCKET_WIDGET,
+					HttpUtils.getBucket(session));
+			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
+					HttpUtils.getListQuantityAndSum(session));
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
 		return RequestParamConstants.BUCKET_WIDGET;
 	}
-	
+
 	@RequestMapping(value = RequestParamConstants.DECREASE_QUANTITY, method = RequestMethod.GET)
-	public String dicreaseQuantity(HttpSession session, ModelMap model, HttpServletRequest request,
+	public String dicreaseQuantity(HttpSession session, ModelMap model,
+			HttpServletRequest request,
 			@RequestParam(value = RequestParamConstants.GOODS_ID) String goodsId) {
-		
-		session.setAttribute(RequestParamConstants.BUCKET, HttpUtils.decreaseFromBucket(session, goodsId));
+
+		session.setAttribute(RequestParamConstants.BUCKET,
+				HttpUtils.decreaseFromBucket(session, goodsId));
 		try {
-		model.put(RequestParamConstants.BUCKET_WIDGET, HttpUtils.getBucket(session));
-		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, HttpUtils.getListQuantityAndSum(session));
+			model.put(RequestParamConstants.BUCKET_WIDGET,
+					HttpUtils.getBucket(session));
+			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
+					HttpUtils.getListQuantityAndSum(session));
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
 		return RequestParamConstants.BUCKET_WIDGET;
 	}
-	
+
 	@RequestMapping(value = RequestConstants.VIEW_ITEMS_OF_CART, method = RequestMethod.GET)
-	public String viesItemsOfCart(ModelMap model, HttpServletRequest request, HttpSession session) {
+	public String viesItemsOfCart(ModelMap model, HttpServletRequest request,
+			HttpSession session) {
 		try {
 			List<Bucket> list = HttpUtils.getBucket(session);
 			System.out.println(list);
-		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
-		model.put(RequestParamConstants.BUCKET_WIDGET, HttpUtils.getBucket(session)); 
+			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, request
+					.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+			model.put(RequestParamConstants.BUCKET_WIDGET,
+					HttpUtils.getBucket(session));
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
 		return RequestParamConstants.BUCKET_WIDGET;
 	}
-	
+
 	@RequestMapping(value = RequestConstants.DELETE_FROM_CART, method = RequestMethod.GET)
-	public String deleteFromCart(@RequestParam(value = RequestParamConstants.DELETE_BY_DESCRIPTION) String deleteByDescription,
+	public String deleteFromCart(
+			@RequestParam(value = RequestParamConstants.DELETE_BY_DESCRIPTION) String deleteByDescription,
 			ModelMap model, HttpSession session, HttpServletRequest request) {
 		try {
-			session.setAttribute(RequestParamConstants.BUCKET, HttpUtils.removeFromBucket(session, deleteByDescription));
-		model.put(RequestParamConstants.BUCKET_WIDGET, HttpUtils.getBucket(session));
-		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, HttpUtils.getListQuantityAndSum(session));
+			session.setAttribute(RequestParamConstants.BUCKET,
+					HttpUtils.removeFromBucket(session, deleteByDescription));
+			model.put(RequestParamConstants.BUCKET_WIDGET,
+					HttpUtils.getBucket(session));
+			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
+					HttpUtils.getListQuantityAndSum(session));
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
 		return RequestParamConstants.BUCKET_WIDGET;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = RequestConstants.ADD_PURCHASE, method = RequestMethod.GET)
 	public String addPurchase(HttpServletRequest request, HttpSession session,
@@ -218,17 +248,22 @@ public class MainController {
 		quantitySum = HttpUtils.getListQuantityAndSum(session);
 		try {
 			if (HttpUtils.checkPrincipal() && HttpUtils.integerOrEmpty(session)) {
-				ordersService.insertOrder(new Orders(new Users(HttpUtils
-						.stringSplitter(HttpUtils.usersId())),
-						RequestParamConstants.PROCESSING, 0, (int) session
-								.getAttribute(RequestParamConstants.TOTAL_COST)));
+				ordersService
+						.insertOrder(new Orders(
+								new Users(HttpUtils.stringSplitter(HttpUtils
+										.usersId())),
+								RequestParamConstants.PROCESSING,
+								0,
+								(int) session
+										.getAttribute(RequestParamConstants.TOTAL_COST)));
 				goodsInOrdersService.insertGoodsInOrders(ordersService
 						.getLastInsertId(), (List<GoodsOrders>) session
 						.getAttribute(RequestParamConstants.BUCKET));
 				model.put(RequestParamConstants.BUCKET_WIDGET,
 						HttpUtils.cleanAndReturnBucket(session));
-				model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, request
-						.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+				model.put(
+						RequestParamConstants.QUANTITY_SUM_WIDGET,
+						request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
 			}
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
@@ -242,34 +277,39 @@ public class MainController {
 		}
 		return RequestParamConstants.ADD_PURCHASE;
 	}
-	
+
 	@RequestMapping(value = RequestConstants.GENERATE_REPORT, method = RequestMethod.GET)
-	public String generateReport(HttpServletRequest request, HttpSession session,
-			ModelMap model, HttpServletResponse response) {
-			try {
-				PdfGenerator.getReport(response, bucket, quantitySum);
-			} catch (Exception e) {
-				log.error(ExceptionMessages.ERROR_IN_PDF_GENERATOR + e);
-			}
+	public String generateReport(HttpServletRequest request,
+			HttpSession session, ModelMap model, HttpServletResponse response) {
+		try {
+			PdfGenerator.getReport(response, bucket, quantitySum);
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_PDF_GENERATOR + e);
+		}
 		return RequestParamConstants.ADD_PURCHASE;
 	}
-	
+
 	@RequestMapping(value = RequestConstants.CONTACT, method = RequestMethod.GET)
-	public String setContact(HttpServletRequest request, HttpSession session, ModelMap model) {
+	public String setContact(HttpServletRequest request, HttpSession session,
+			ModelMap model) {
 		try {
-		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, request
+					.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
 		return RequestParamConstants.CONTACT;
 	}
-	
+
 	@RequestMapping(value = RequestConstants.INDEX, method = RequestMethod.GET)
 	public ModelAndView senIndexPage(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
-			modelAndView.addObject(RequestParamConstants.QUANTITY_SUM_WIDGET, request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET)); 
+			modelAndView
+					.addObject(
+							RequestParamConstants.QUANTITY_SUM_WIDGET,
+							request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
 			modelAndView.setViewName(RequestParamConstants.INDEX);
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
@@ -277,12 +317,13 @@ public class MainController {
 		}
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = RequestConstants.ADMIN, method = RequestMethod.GET)
-	public ModelAndView setAdminPage(HttpServletRequest request, HttpSession session) {
+	public ModelAndView setAdminPage(HttpServletRequest request,
+			HttpSession session) {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
-		modelAndView.setViewName(RequestParamConstants.ADMIN_PAGE_ATTR);
+			modelAndView.setViewName(RequestParamConstants.ADMIN_PAGE_ATTR);
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			modelAndView.setViewName(RequestParamConstants.ERROR_PAGE);

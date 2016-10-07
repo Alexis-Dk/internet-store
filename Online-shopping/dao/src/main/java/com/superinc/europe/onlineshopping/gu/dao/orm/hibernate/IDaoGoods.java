@@ -1,6 +1,5 @@
 package com.superinc.europe.onlineshopping.gu.dao.orm.hibernate;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -13,21 +12,17 @@ import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
  * Created by Alexey Druzik on 29.08.2016.
  */
 public interface IDaoGoods extends IBaseDao<Goods>{
+	
+	/**
+	 * Method get list products
+	 * @param criteria
+	 * @param priceLower
+	 * @param priceHighter
+	 * @param numberOfPage
+	 * @throws DaoException
+	 */
+	List<Goods> getProduct(Criteria criteria, String priveLower, String priceHighter, int numberOfPage) throws DaoException;
 
-	/**
-	 * Method get current session
-	 * @throws DaoException
-	 */
-	List<Goods> sortedByCriteria(Criteria criteria, String priveLower, String priceHighter) throws DaoException;
-	
-	/**
-	 * Method get list numbers in result
-	 * @param number
-	 * @throws DaoException
-	 */
-	List<Goods> obtainRequiredSelection(List<Goods> goodsInput, int i)
-			throws ClassNotFoundException, SQLException, DaoException;
-	
 	/**
 	 * Method get current session
 	 * @throws DaoException
@@ -40,5 +35,5 @@ public interface IDaoGoods extends IBaseDao<Goods>{
 	 * @param priceHighter
 	 * @throws DaoException
 	 */
-	int getNumbersOfPage(List <Goods> ob) throws DaoException;
+	int getQuantityOfPage() throws DaoException;
 }
