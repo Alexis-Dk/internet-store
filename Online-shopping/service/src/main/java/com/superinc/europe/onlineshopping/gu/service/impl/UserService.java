@@ -1,5 +1,7 @@
 package com.superinc.europe.onlineshopping.gu.service.impl;
 
+import java.io.Serializable;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -15,6 +17,7 @@ import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoUsers;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
 import com.superinc.europe.onlineshopping.gu.service.IUsersService;
+import com.superinc.europe.onlineshopping.gu.service.exception.ErrorAddingPoductServiceException;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
@@ -46,13 +49,15 @@ public class UserService<T> implements UserDetailsService, IUsersService<Users> 
 	 * @throws ServiceException
 	 */
 	@Override
-	public void add(Users ob) throws ServiceException {
+	public Serializable add(Users ob) throws ErrorAddingPoductServiceException {
+		Serializable id = null; 
 		try {
-			daoUsers.add(ob);
+			id = daoUsers.add(ob);
 		} catch (DaoException e) {
 			logger.error(ExceptionMessages.ERROR_IN_USER_SERVICE + e);
-			throw new ServiceException(ExceptionMessages.ERROR_IN_USER_SERVICE, e);
+			throw new ErrorAddingPoductServiceException(ExceptionMessages.ERROR_IN_USER_SERVICE, e);
 		}
+		return id;
 	}
 	
 	/**

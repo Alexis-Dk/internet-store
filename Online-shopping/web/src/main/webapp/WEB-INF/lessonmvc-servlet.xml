@@ -26,6 +26,11 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
     
+    <bean id="multipartResolver" 
+			class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="5000000" />
+	</bean>
+    
 	<mvc:interceptors>
 		<bean class="org.springframework.orm.hibernate4.support.OpenSessionInViewInterceptor">
 			<property name="sessionFactory" ref="sessionFactory" />

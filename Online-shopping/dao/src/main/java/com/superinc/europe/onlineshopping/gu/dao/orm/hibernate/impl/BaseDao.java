@@ -34,9 +34,11 @@ public abstract class BaseDao<T> implements IBaseDao<T> {
      * add entity to DB
      * @param t
      */
-	public void add(T t) {
+	public Serializable add(T t) {
+		Serializable id = null;
 		Session session = getSession();
-		session.save(t);
+		id = session.save(t);
+		return id;
 	}
 
     /**

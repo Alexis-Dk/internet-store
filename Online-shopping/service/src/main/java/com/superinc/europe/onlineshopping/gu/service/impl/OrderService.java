@@ -1,5 +1,7 @@
 package com.superinc.europe.onlineshopping.gu.service.impl;
 
+import java.io.Serializable;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoOrders;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
 import com.superinc.europe.onlineshopping.gu.service.IOrdersService;
+import com.superinc.europe.onlineshopping.gu.service.exception.ErrorAddingPoductServiceException;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
@@ -30,13 +33,15 @@ public class OrderService implements IOrdersService<Orders> {
 	 * @throws ServiceException
 	 */
 	@Override
-	public void add(Orders ob) throws ServiceException {
+	public Serializable add(Orders ob) throws ErrorAddingPoductServiceException {
+		Serializable id = null; 
 		try {
-			daoOrders.add(ob);
+			id = daoOrders.add(ob);
 		} catch (DaoException e) {
 			logger.error(ExceptionMessages.ERROR_IN_ORDER_SERVICE + e);
-			throw new ServiceException(ExceptionMessages.ERROR_IN_ORDER_SERVICE, e);
+			throw new ErrorAddingPoductServiceException(ExceptionMessages.ERROR_IN_ORDER_SERVICE, e);
 		}
+		return id;
 	}
 	
 	/**

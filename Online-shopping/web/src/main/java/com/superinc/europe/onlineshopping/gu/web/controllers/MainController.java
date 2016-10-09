@@ -1,6 +1,12 @@
 package com.superinc.europe.onlineshopping.gu.web.controllers;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
+import org.apache.commons.io.FileUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,17 +14,23 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
 import com.superinc.europe.onlineshopping.gu.entities.dto.Bucket;
+import com.superinc.europe.onlineshopping.gu.entities.dto.ProductVO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Category;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
@@ -27,7 +39,10 @@ import com.superinc.europe.onlineshopping.gu.service.IGoodsInOrdersService;
 import com.superinc.europe.onlineshopping.gu.service.IGoodsService;
 import com.superinc.europe.onlineshopping.gu.service.INavaigationService;
 import com.superinc.europe.onlineshopping.gu.service.IOrdersService;
+import com.superinc.europe.onlineshopping.gu.service.IProductCategoryService;
 import com.superinc.europe.onlineshopping.gu.service.IUsersService;
+import com.superinc.europe.onlineshopping.gu.service.exception.ErrorAddingPoductServiceException;
+import com.superinc.europe.onlineshopping.gu.service.exception.ErrorGettingCategoryServiceException;
 import com.superinc.europe.onlineshopping.gu.web.utils.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestConstants;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpUtils;
@@ -66,6 +81,12 @@ public class MainController {
 	@Autowired
 	private IDaoGoods daoGoods;
 
+    @Autowired
+    private IProductCategoryService productCategoryService;
+    
+    @Autowired
+    private MessageSource messageSource;
+	
 	@RequestMapping(value = RequestConstants.TV, method = RequestMethod.GET)
 	public String setTvPage(
 			HttpServletRequest request,
@@ -330,4 +351,77 @@ public class MainController {
 		}
 		return modelAndView;
 	}
+	
+    /**
+     * 
+     * @param model
+     * @return
+     */
+    @RequestMapping(path = "/new", method = RequestMethod.GET)
+    public String saveNewProduct(Model model) {
+	ProductVO newProduct = new ProductVO();
+	List<Category> categoryList = null;
+	try {
+		categoryList = productCategoryService.getAllProductCategories();
+	} catch (ErrorGettingCategoryServiceException e) {
+		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+	}
+	model.addAttribute("categoryList", categoryList);
+	model.addAttribute("newProduct", newProduct);
+	return "admin";
+    }
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(path = "/new", method = RequestMethod.POST)
+    public String saveNewProduct(ProductVO newProduct, @RequestParam(value = "productImage", required = false) MultipartFile image, RedirectAttributes redirectAttributes, HttpServletRequest request, Locale locale) {
+		Goods product = new Goods();
+	try {
+		int id = (int)goodsService.getLastInsertId() + 1;
+		setProductFields(product, newProduct, id);
+		goodsService.add(product);
+	    if ((image != null) && !image.isEmpty()) {
+		validateImage(image);
+		String imageName = newProduct.getDescription() + "_"+Integer.toString(id) + ".jpg";
+		saveImage(imageName, image, request, newProduct);
+	    }
+	    redirectAttributes.addFlashAttribute("infoMessage", getMessageByKey("message.newproductadded", locale));
+	} catch (IOException e) {
+	    log.error("Error saving product image. ", e);
+	    redirectAttributes.addFlashAttribute("infoMessage", e.getMessage());
+	}
+	catch (ErrorAddingPoductServiceException e) {
+	    log.error("Error adding new product to DB", e);
+	    redirectAttributes.addFlashAttribute("infoMessage", getMessageByKey("message.error.addnewproduct ", locale));
+	}
+	return "redirect:index";
+    }
+	
+    private void setProductFields(Goods product, ProductVO newProduct, int id) {
+	product.setName(newProduct.getName());
+	product.setPrice(newProduct.getPrice());
+	product.setDescription(newProduct.getDescription());
+	int categoryId = newProduct.getProductCategoryId();
+	Category category = productCategoryService.getCategoryById(categoryId);
+	product.setCategoryFk(category);
+	product.setCharacteristic1(newProduct.getCharacteristic1());
+	product.setImage_path(newProduct.getProductCategoryId()+ "/"+newProduct.getDescription()+ "_"+Integer.toString(id) + ".jpg");
+    }
+	
+	private void saveImage(String filename, MultipartFile image,
+			HttpServletRequest request, ProductVO newProduct) throws IOException {
+		String imagePath = request.getServletContext().getRealPath("/") + "img/" + newProduct.getProductCategoryId() + "/" + filename;
+		File file = new File(imagePath);
+		FileUtils.writeByteArrayToFile(file, image.getBytes());
+	}
+
+	private void validateImage(MultipartFile image) throws IOException {
+		if (!image.getContentType().equals("image/jpeg")) {
+			throw new IOException("Only JPEG images accepted");
+		}
+	}
+
+	private String getMessageByKey(String key, Locale locale) {
+		return messageSource.getMessage(key, null, locale);
+	}
+
 }

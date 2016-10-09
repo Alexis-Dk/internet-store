@@ -1,5 +1,6 @@
 package com.superinc.europe.onlineshopping.gu.service.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -12,6 +13,7 @@ import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
 import com.superinc.europe.onlineshopping.gu.service.IGoodsService;
+import com.superinc.europe.onlineshopping.gu.service.exception.ErrorAddingPoductServiceException;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
@@ -37,13 +39,15 @@ public class GoodService implements IGoodsService<Goods> {
 	 * @throws ServiceException
 	 */
 	@Override
-	public void add(Goods ob) throws ServiceException {
+	public Serializable add(Goods ob) throws ErrorAddingPoductServiceException {
+		Serializable id = null; 
 		try {
-			daoGoods.add(ob);
+			id = daoGoods.add(ob);
 		} catch (DaoException e) {
 			logger.error(ExceptionMessages.ERROR_IN_GOODS_SERVICE + e);
-			throw new ServiceException(ExceptionMessages.ERROR_IN_GOODS_SERVICE, e);
+			throw new ErrorAddingPoductServiceException(ExceptionMessages.ERROR_IN_GOODS_SERVICE, e);
 		}
+		return id;
 	}
 	
 	/**
@@ -152,4 +156,18 @@ public class GoodService implements IGoodsService<Goods> {
 		}
 	}
 
+	/**
+	 * Method get last insert id
+	 * @throws ServiceException 
+	 */
+	@Override
+	public int getLastInsertId() throws ErrorAddingPoductServiceException {
+		try {
+			return  daoGoods.getLastInsertId();
+		} catch (Exception e) {
+			logger.error(ExceptionMessages.ERROR_IN_GOODS_SERVICE + e);
+			throw new ErrorAddingPoductServiceException(ExceptionMessages.ERROR_IN_GOODS_SERVICE, e);
+		}
+	}
+	
 }

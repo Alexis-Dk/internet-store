@@ -1,5 +1,6 @@
 package com.superinc.europe.onlineshopping.gu.service.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -11,6 +12,7 @@ import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoodsInOrders;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
 import com.superinc.europe.onlineshopping.gu.service.IGoodsInOrdersService;
+import com.superinc.europe.onlineshopping.gu.service.exception.ErrorAddingPoductServiceException;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
@@ -32,13 +34,15 @@ public class GoodsInOrders implements IGoodsInOrdersService<GoodsOrders> {
 	 * @throws ServiceException
 	 */
 	@Override
-	public void add(GoodsOrders ob) throws ServiceException {
+	public Serializable add(GoodsOrders ob) throws ErrorAddingPoductServiceException {
+		Serializable id = null; 
 		try {
-			daoGoodsInOrders.add(ob);
+			id = daoGoodsInOrders.add(ob);
 		} catch (DaoException e) {
 			logger.error(ExceptionMessages.ERROR_IN_GIO_SERVICE + e);
-			throw new ServiceException(ExceptionMessages.ERROR_IN_GIO_SERVICE, e);
+			throw new ErrorAddingPoductServiceException(ExceptionMessages.ERROR_IN_GIO_SERVICE, e);
 		}
+		return id;
 	}
 	
 	/**

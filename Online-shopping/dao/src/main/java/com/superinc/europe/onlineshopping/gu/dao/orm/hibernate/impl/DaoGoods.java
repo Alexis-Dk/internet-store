@@ -61,8 +61,6 @@ public class DaoGoods extends BaseDao<Goods> implements IDaoGoods{
 	
 	/**
 	 * Method get number integer number products in the page
-	 * @param priceLower
-	 * @param priceHighter
 	 * @throws ServiceException 
 	 * @throws DaoException
 	 */
@@ -77,10 +75,33 @@ public class DaoGoods extends BaseDao<Goods> implements IDaoGoods{
 		}
 	}
 	
+	/**
+	 * Method get last insert id
+	 * @throws ServiceException 
+	 * @throws DaoException
+	 */
+	@Override
 	public int getQuantityOfTableRow() throws DaoException {
 		Number number =(Number) (getCurrentSession().createQuery(GET_COUNT_ROW)).uniqueResult();
 		try {
 			return number.intValue();
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_DAO + e);
+			throw new DaoException(ExceptionMessages.ERROR_IN_DAO, e);
+		}
+	}
+	
+	/**
+	 * Method get last insert id
+	 * @throws ServiceException 
+	 * @throws DaoException
+	 */
+	@Override
+	public int getLastInsertId() throws DaoException {
+		Integer lastId = (Integer) getCurrentSession().createSQLQuery("SELECT MAX(goods_id) FROM Goods")
+			    .uniqueResult();  
+		try {
+			return lastId;
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_DAO + e);
 			throw new DaoException(ExceptionMessages.ERROR_IN_DAO, e);

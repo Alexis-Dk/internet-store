@@ -36,4 +36,18 @@ public interface IDaoGoods extends IBaseDao<Goods>{
 	 * @throws DaoException
 	 */
 	int getQuantityOfPage() throws DaoException;
+	
+	/**
+	 * Method get quantitu of row
+	 * @throws ServiceException 
+	 * @throws DaoException
+	 */
+	int getQuantityOfTableRow() throws DaoException;
+
+	/**
+	 * Method get last insert id
+	 * @throws ServiceException 
+	 * @throws DaoException
+	 */
+	int getLastInsertId() throws DaoException;
 }

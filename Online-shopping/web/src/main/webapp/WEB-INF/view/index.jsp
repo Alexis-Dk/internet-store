@@ -90,6 +90,14 @@ else {
  		<h3> This information is viewed only for users with admin role: <%=dataUsers[0]  %> <%=dataUsers[1]  %> <%=dataUsers[2]  %></h3>
 	</sec:authorize>
 
+		<div class="rigthPart">
+			<c:if test="${infoMessage ne null}">
+				<div class="alert alert-info" role="alert">
+					${infoMessage}	
+				</div>
+			</c:if>
+		</div>
+
     <div class="header-area">
         <div class="container">
             <div class="row">
@@ -176,7 +184,7 @@ else {
                          </sec:authorize>
                         <li><a href="contact"><locale:message code="label.contact"/></a></li>
                        	<sec:authorize access="hasRole('admin')">
-							<li><a href="admin">Admin page</a></li>
+							<li><a href="new">Admin page</a></li>
 	  					</sec:authorize>
                     </ul>
                 </div>  

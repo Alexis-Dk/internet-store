@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
+import com.superinc.europe.onlineshopping.gu.service.exception.ErrorAddingPoductServiceException;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
 /**
@@ -38,4 +39,10 @@ public interface IGoodsService<T> extends IBaseService<T> {
 	 * @throws DaoException
 	 */
 	int getQuantityOfPage() throws ServiceException;
+
+	/**
+	 * Method get last insert id
+	 * @throws ServiceException 
+	 */
+	int getLastInsertId() throws ErrorAddingPoductServiceException;
 }

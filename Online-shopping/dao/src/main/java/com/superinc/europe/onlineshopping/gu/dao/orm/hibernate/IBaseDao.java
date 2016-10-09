@@ -15,8 +15,9 @@ public interface IBaseDao<T> {
      * add entity to DB
      *
      * @param t
+     * @return 
      */
-    void add(T t);
+    Serializable add(T t);
     
     /**
      * update or save entity to DB

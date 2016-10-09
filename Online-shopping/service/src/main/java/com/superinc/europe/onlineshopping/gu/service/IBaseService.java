@@ -1,5 +1,8 @@
 package com.superinc.europe.onlineshopping.gu.service;
 
+import java.io.Serializable;
+
+import com.superinc.europe.onlineshopping.gu.service.exception.ErrorAddingPoductServiceException;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
 /**
@@ -12,7 +15,7 @@ public interface IBaseService<T> {
 	 * @param ob
 	 * @throws ServiceException
 	 */
-	public void add(T ob) throws ServiceException;
+	public Serializable add(T ob) throws ErrorAddingPoductServiceException;
 
 	/**
 	 * Method update Session

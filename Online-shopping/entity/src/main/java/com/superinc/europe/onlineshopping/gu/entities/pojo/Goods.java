@@ -98,6 +98,20 @@ public class Goods implements Serializable {
 		this.description = description;
 	}
 	
+	public Goods(String name, String imagePath, int price, String description) {
+		this.name = name;
+		this.imagePath = imagePath;
+		this.price = price;
+		this.description = description;
+	}
+	
+	public Goods(Category category, String name, String imagePath, int price, String description) {
+		this.name = name;
+		this.imagePath = imagePath;
+		this.price = price;
+		this.description = description;
+	}
+	
 	public Goods(int goodsId, Category categoryFk, String name,
 			String image_path, int price, int oldprice, String description,
 			String characteristic1, String characteristic2,
