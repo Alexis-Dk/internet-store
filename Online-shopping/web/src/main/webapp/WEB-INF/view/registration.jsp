@@ -3,6 +3,9 @@
 <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -147,7 +150,8 @@
             <div class="row">
                 <div class="col-md-4">
 
-					<form action="${context}/getRegistration" method="get">
+					<form:form action="${context}/getRegistration" method="post" id="personForm" name="person" modelAttribute="person">
+						<fieldset>
 						<div class="container-fluid">
 							<section class="container">
 								<div class="container-page">
@@ -155,8 +159,11 @@
 										<h3 class="dark-grey">Registration</h3>
 
 										<div class="form-group col-lg-8">
-											<label>Username</label> <input type="text" name="username"
-												class="form-control" id="" value="">
+											<label>Username</label>
+											<form:errors   path="name" cssStyle="color: red"/>
+											<form:input  id="name"  type="text" value="" path="name"
+												class="form-control"   />
+
 										</div>
 
 										<div class="form-group col-lg-8">
@@ -200,7 +207,8 @@
 								</div>
 							</section>
 						</div>
-					</form>
+						</fieldset>
+					</form:form>
 				</div>   
             </div>
         </div>

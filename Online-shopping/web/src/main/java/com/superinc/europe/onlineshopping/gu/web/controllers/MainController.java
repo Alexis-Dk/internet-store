@@ -11,6 +11,7 @@ import org.apache.commons.io.FileUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
 import com.superinc.europe.onlineshopping.gu.entities.dto.Bucket;
+import com.superinc.europe.onlineshopping.gu.entities.dto.Person;
 import com.superinc.europe.onlineshopping.gu.entities.dto.ProductVO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Category;
@@ -125,37 +128,37 @@ public class MainController {
 		return RequestParamConstants.HELLO_PAGE;
 	}
 
-	@RequestMapping(value = RequestConstants.REGISTRATION, method = RequestMethod.GET)
-	public ModelAndView setRegistrPage() {
-		ModelAndView modelAndView = new ModelAndView();
-		try {
-			modelAndView.setViewName(RequestParamConstants.REGISTRATION);
-		} catch (Exception e) {
-			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
-			modelAndView.setViewName(RequestParamConstants.ERROR_PAGE);
-		}
-		return modelAndView;
-	}
-
-	@RequestMapping(value = RequestConstants.GET_REGISTRATION, method = RequestMethod.GET)
-	public String getRegistrPage(
-			ModelMap model,
-			@RequestParam(value = RequestParamConstants.USER_NAME) String username,
-			@RequestParam(value = RequestParamConstants.PASSWORD) String password,
-			@RequestParam(value = RequestParamConstants.EMAIL, defaultValue = RequestParamConstants.EMPTY) String email) {
-		if (HttpUtils.stringOrEmpty(RequestParamConstants.USER_NAME)
-				&& HttpUtils.stringOrEmpty(RequestParamConstants.PASSWORD)) {
-			Users users = new Users(username, password,
-					RequestParamConstants.USER, email);
-			try {
-				usersService.insertUser(users);
-			} catch (Exception e) {
-				log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
-				return RequestParamConstants.ERROR_PAGE;
-			}
-		}
-		return RequestParamConstants.GET_REGISTRATION;
-	}
+//	@RequestMapping(value = RequestConstants.REGISTRATION, method = RequestMethod.GET)
+//	public ModelAndView setRegistrPage() {
+//		ModelAndView modelAndView = new ModelAndView();
+//		try {
+//			modelAndView.setViewName(RequestParamConstants.REGISTRATION);
+//		} catch (Exception e) {
+//			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
+//			modelAndView.setViewName(RequestParamConstants.ERROR_PAGE);
+//		}
+//		return modelAndView;
+//	}
+//
+//	@RequestMapping(value = RequestConstants.GET_REGISTRATION, method = RequestMethod.GET)
+//	public String getRegistrPage(
+//			ModelMap model,
+//			@RequestParam(value = RequestParamConstants.USER_NAME) String username,
+//			@RequestParam(value = RequestParamConstants.PASSWORD) String password,
+//			@RequestParam(value = RequestParamConstants.EMAIL, defaultValue = RequestParamConstants.EMPTY) String email) {
+//		if (HttpUtils.stringOrEmpty(RequestParamConstants.USER_NAME)
+//				&& HttpUtils.stringOrEmpty(RequestParamConstants.PASSWORD)) {
+//			Users users = new Users(username, password,
+//					RequestParamConstants.USER, email);
+//			try {
+//				usersService.insertUser(users);
+//			} catch (Exception e) {
+//				log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
+//				return RequestParamConstants.ERROR_PAGE;
+//			}
+//		}
+//		return RequestParamConstants.GET_REGISTRATION;
+//	}
 
 	@RequestMapping(value = RequestConstants.ADD_NEW_GOODS_TO_CART, method = RequestMethod.GET)
 	public String addNewGoodsToCart(
@@ -422,6 +425,28 @@ public class MainController {
 
 	private String getMessageByKey(String key, Locale locale) {
 		return messageSource.getMessage(key, null, locale);
+	}
+
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    public String getRegistration(ModelMap model, RedirectAttributes redirectAttr, Locale locale) {
+       Person person = new Person();
+       List <Person> list = new ArrayList<Person>();
+       list.add(person);
+       model.put("person", person);
+        return "registration";
+    }
+
+    @RequestMapping(value = "/getRegistration", method = RequestMethod.POST)
+    public String registration(ModelMap model, @Valid Person person,
+                               BindingResult br,  RedirectAttributes redirectAttr, Locale locale) {
+		if (!br.hasErrors()) {
+			if (person != null) {
+				System.out.println("tut " + person);
+				return "getRegistration";
+			}
+		}
+		System.out.println("vvv "+person);
+		return "registration";
 	}
 
 }
