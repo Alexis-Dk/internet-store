@@ -160,29 +160,34 @@
 
 										<div class="form-group col-lg-8">
 											<label>Username</label>
-											<form:errors   path="name" cssStyle="color: red"/>
-											<form:input  id="name"  type="text" value="" path="name"
+											<p>
+											<form:errors path="name" cssStyle="color: red"/>
+											<form:input id="name"  type="text" value="" path="name"
 												class="form-control"   />
-
 										</div>
 
 										<div class="form-group col-lg-8">
-											<label>Password</label> <input type="password"
-												name="password" class="form-control" id="" value="">
+											<label>Password</label>
+											<p>
+											<form:errors path="password" cssStyle="color: red"/>
+											<form:input id="password" type="password" value="" path="password"
+												class="form-control" />
 										</div>
 
 										<div class="form-group col-lg-8">
-											<label>Repeat Password</label> <input type="password"
-												name="passwordRepeat" class="form-control" id="" value="">
+											<label>Repeat Password</label>
+											<p>
+											<form:errors path="repeatPassword" cssStyle="color: red"/>
+											<form:input id="repeatPassword" type="password" value="" path="repeatPassword"
+												class="form-control" />
 										</div>
 
 										<div class="form-group col-lg-8">
-											<label>Email Address</label> <input type="text" name="email"
-												class="form-control" id="" value="">
-										</div>
-
-										<div class="form-group col-lg-8">
-											<label> </label> 
+											<label>Email Address</label>
+											<p>
+											<form:errors path="email" cssStyle="color: red"/>
+											<form:input id="email" type="text" name="email" value="" path="email"
+												class="form-control" />
 										</div>
 										
 									</div>
