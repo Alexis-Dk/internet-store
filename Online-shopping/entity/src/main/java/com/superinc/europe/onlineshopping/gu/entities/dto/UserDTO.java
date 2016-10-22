@@ -4,9 +4,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-
-
-public class Person {
+public class UserDTO {
 
 	@Pattern(regexp = "^[1-9a-zA-Z]{3,10}$", message="Login has to has between 3 and 10 symbols")
 //	@NotEmpty
@@ -21,10 +19,10 @@ public class Person {
 	@Pattern(regexp = "^[1-9a-zA-Z]{3,10}$", message="Password has to has between 3 and 10 symbols")
 	private String repeatPassword;
 	
-	public Person() {
+	public UserDTO() {
 	}
 
-	public Person(String name, String password, String email,
+	public UserDTO(String name, String password, String email,
 			String repeatPassword) {
 		this.name = name;
 		this.password = password;

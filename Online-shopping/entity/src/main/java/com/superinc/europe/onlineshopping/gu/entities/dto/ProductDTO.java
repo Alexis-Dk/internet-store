@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
 
-public class ProductVO implements Serializable {
+public class ProductDTO implements Serializable {
 
     private static final long serialVersionUID = -751155082317142262L;
     private String name;
@@ -17,11 +17,11 @@ public class ProductVO implements Serializable {
     private String description;
 	private String characteristic1;
 
-    public ProductVO() {
+    public ProductDTO() {
     }
 
 	//bad formatting, please add alignment
-    public ProductVO(Goods product) {
+    public ProductDTO(Goods product) {
 	this.id = product.getGoodsId();
 	this.name = product.getName();
 	this.price = product.getPrice();

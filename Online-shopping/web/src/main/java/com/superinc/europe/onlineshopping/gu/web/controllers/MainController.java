@@ -30,8 +30,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
 import com.superinc.europe.onlineshopping.gu.entities.dto.Bucket;
-import com.superinc.europe.onlineshopping.gu.entities.dto.Person;
-import com.superinc.europe.onlineshopping.gu.entities.dto.ProductVO;
+import com.superinc.europe.onlineshopping.gu.entities.dto.UserDTO;
+import com.superinc.europe.onlineshopping.gu.entities.dto.ProductDTO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Category;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
@@ -362,7 +362,7 @@ public class MainController {
      */
     @RequestMapping(path = "/new", method = RequestMethod.GET)
     public String saveNewProduct(Model model) {
-	ProductVO newProduct = new ProductVO();
+	ProductDTO newProduct = new ProductDTO();
 	List<Category> categoryList = null;
 	try {
 		categoryList = productCategoryService.getAllProductCategories();
@@ -376,7 +376,7 @@ public class MainController {
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(path = "/new", method = RequestMethod.POST)
-    public String saveNewProduct(ProductVO newProduct, @RequestParam(value = "productImage", required = false) MultipartFile image, RedirectAttributes redirectAttributes, HttpServletRequest request, Locale locale) {
+    public String saveNewProduct(ProductDTO newProduct, @RequestParam(value = "productImage", required = false) MultipartFile image, RedirectAttributes redirectAttributes, HttpServletRequest request, Locale locale) {
 		Goods product = new Goods();
 	try {
 		int id = (int)goodsService.getLastInsertId() + 1;
@@ -399,7 +399,7 @@ public class MainController {
 	return "redirect:index";
     }
 	
-    private void setProductFields(Goods product, ProductVO newProduct, int id) {
+    private void setProductFields(Goods product, ProductDTO newProduct, int id) {
 	product.setName(newProduct.getName());
 	product.setPrice(newProduct.getPrice());
 	product.setDescription(newProduct.getDescription());
@@ -411,7 +411,7 @@ public class MainController {
     }
 	
 	private void saveImage(String filename, MultipartFile image,
-			HttpServletRequest request, ProductVO newProduct) throws IOException {
+			HttpServletRequest request, ProductDTO newProduct) throws IOException {
 		String imagePath = request.getServletContext().getRealPath("/") + "img/" + newProduct.getProductCategoryId() + "/" + filename;
 		File file = new File(imagePath);
 		FileUtils.writeByteArrayToFile(file, image.getBytes());
@@ -427,26 +427,37 @@ public class MainController {
 		return messageSource.getMessage(key, null, locale);
 	}
 
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    @RequestMapping(value = RequestConstants.REGISTRATION, method = RequestMethod.GET)
     public String getRegistration(ModelMap model, RedirectAttributes redirectAttr, Locale locale) {
-       Person person = new Person();
-       List <Person> list = new ArrayList<Person>();
-       list.add(person);
-       model.put("person", person);
-        return "registration";
+       try {
+           UserDTO person = new UserDTO();
+           List <UserDTO> list = new ArrayList<UserDTO>();
+           list.add(person);
+           model.put(RequestParamConstants.PERSON, person);
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
+			return RequestParamConstants.ERROR_PAGE;
+		}
+        return RequestParamConstants.REGISTRATION;
     }
 
-    @RequestMapping(value = "/getRegistration", method = RequestMethod.POST)
-    public String registration(ModelMap model, @Valid Person person,
+    @RequestMapping(value = RequestConstants.GET_REGISTRATION, method = RequestMethod.POST)
+    public String registration(ModelMap model, @Valid UserDTO person,
                                BindingResult br,  RedirectAttributes redirectAttr, Locale locale) {
-		if (!br.hasErrors()) {
-			if (person != null) {
-				System.out.println("tut " + person);
-				return "getRegistration";
-			}
-		}
-		System.out.println("vvv "+person);
-		return "registration";
+        try {
+    		if (!br.hasErrors()) {
+    			if (person != null) {
+    				Users users = new Users(person.getName(), person.getPassword(),
+    						RequestParamConstants.USER, person.getEmail());
+    				usersService.insertUser(users);
+    				return RequestParamConstants.GET_REGISTRATION;
+    			}
+    		}
+    		} catch (Exception e) {
+    			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
+    			return RequestParamConstants.ERROR_PAGE;
+    		}
+		return RequestParamConstants.REGISTRATION;
 	}
 
 }
