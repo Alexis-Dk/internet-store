@@ -272,14 +272,10 @@ public class MainController {
 		quantitySum = HttpUtils.getListQuantityAndSum(session);
 		try {
 			if (HttpUtils.checkPrincipal() && HttpUtils.integerOrEmpty(session)) {
-				ordersService
-						.insertOrder(new Orders(
-								new Users(HttpUtils.stringSplitter(HttpUtils
-										.usersId())),
+				ordersService.insertOrder(new Orders(
+								new Users(HttpUtils.stringSplitter(HttpUtils.usersId())),
 								RequestParamConstants.PROCESSING,
-								0,
-								(int) session
-										.getAttribute(RequestParamConstants.TOTAL_COST)));
+								0, (int) session.getAttribute(RequestParamConstants.TOTAL_COST)));
 				goodsInOrdersService.insertGoodsInOrders(ordersService
 						.getLastInsertId(), (List<GoodsOrders>) session
 						.getAttribute(RequestParamConstants.BUCKET));
@@ -407,6 +403,12 @@ public class MainController {
 	Category category = productCategoryService.getCategoryById(categoryId);
 	product.setCategoryFk(category);
 	product.setCharacteristic1(newProduct.getCharacteristic1());
+	product.setCharacteristic2(newProduct.getCharacteristic2());
+	product.setCharacteristic3(newProduct.getCharacteristic3());
+	product.setCharacteristic4(newProduct.getCharacteristic4());
+	product.setCharacteristic5("");
+	product.setCharacteristic6(newProduct.getCharacteristic6());
+	product.setStockStatus(newProduct.getStockStatus());
 	product.setImage_path(newProduct.getProductCategoryId()+ "/"+newProduct.getDescription()+ "_"+Integer.toString(id) + ".jpg");
     }
 	
