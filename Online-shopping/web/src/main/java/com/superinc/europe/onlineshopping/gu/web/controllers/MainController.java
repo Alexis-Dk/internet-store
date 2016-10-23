@@ -413,10 +413,6 @@ public class MainController {
 		for (Category category : categoryList) {
 			departments.add(new DepartmentVO(category.getCategoryId(),  category.getCategoryname()));
 		}
-        
-//        departments.add(new DepartmentVO(1,  "Human Resource"));
-//        departments.add(new DepartmentVO(2,  "Finance"));
-//        departments.add(new DepartmentVO(3,  "Information Technology"));
         return departments;
     }
 	
@@ -467,17 +463,24 @@ public class MainController {
     private void setProductFields(Goods product, ProductDTO productDTO, int id) {
 	product.setName(productDTO.getName());
 	product.setPrice(productDTO.getPrice());
+	product.setOldprice(productDTO.getPrice());
 	product.setDescription(productDTO.getDescription());
-	int categoryId = productDTO.getProductCategoryId();
+	int categoryId = productDTO.getDepartment().getId();
 	Category category = productCategoryService.getCategoryById(categoryId);
 	product.setCategoryFk(category);
 	product.setCharacteristic1(productDTO.getCharacteristic1());
-	product.setImage_path(productDTO.getProductCategoryId()+ "/"+productDTO.getDescription()+ "_"+Integer.toString(id) + ".jpg");
+	product.setCharacteristic2(productDTO.getCharacteristic2());
+	product.setCharacteristic3(productDTO.getCharacteristic3());
+	product.setCharacteristic4(productDTO.getCharacteristic4());
+	product.setCharacteristic5("");
+	product.setCharacteristic6(productDTO.getCharacteristic6());
+	product.setStockStatus(productDTO.getStock_status());
+	product.setImage_path(productDTO.getDepartment().getId()+ "/"+productDTO.getDescription()+ "_"+Integer.toString(id) + ".jpg");
     }
 	
 	private void saveImage(String filename, MultipartFile image,
 			HttpServletRequest request, ProductDTO newProduct) throws IOException {
-		String imagePath = request.getServletContext().getRealPath("/") + "img/" + newProduct.getProductCategoryId() + "/" + filename;
+		String imagePath = request.getServletContext().getRealPath("/") + "img/" + newProduct.getDepartment().getId() + "/" + filename;
 		File file = new File(imagePath);
 		FileUtils.writeByteArrayToFile(file, image.getBytes());
 	}

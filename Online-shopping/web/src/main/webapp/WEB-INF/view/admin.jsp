@@ -164,7 +164,15 @@ else {
 <div id="addProductForm">
 	<sf:form class="form-horizontal" name="productDTO" modelAttribute="productDTO" action="${pageContext.request.contextPath}/new" method="POST" enctype="multipart/form-data" title="Add product form" >
 		<input type="hidden" name="command" value="saveproduct" />
-		<br><h3>Add product form</h3>
+		
+		<div class="form-group">
+			<div class="col-xs-3">
+			</div>
+			<div class="col-xs-5">
+    				<br><h3>Add product form</h3>
+			</div>
+    	</div>
+
     	<div class="form-group">
 			<div class="col-xs-3">
 	   			<label for="productNameData" class="control-label">Product Name:</label>
@@ -174,13 +182,14 @@ else {
 				<sf:input id="name"  type="text" value="" path="name" class="form-control"   />
 			</div>
     	</div>
+    	
     	<div class="form-group">
 			<div class="col-xs-3">
 	   			<label for="productPriceData" class="control-label">Product Price:</label>
 			</div>
 			<div class="col-xs-5">
 				<sf:errors path="price" cssStyle="color: red"/>
-				<sf:input id="productPriceData" path="price" class="form-control" type="text" name="price" />
+				<sf:input id="productPriceData" path="price" class="form-control" type="text" name="price" value="" />
 			</div>
     	</div>
     	
@@ -189,7 +198,6 @@ else {
 			<div class="col-xs-3">
 	   			<label for="productCategoryData" class="control-label">Category:</label>
 			</div>
-			
 			<div class="col-xs-5">
 				<table>
 					<tr>
@@ -199,41 +207,108 @@ else {
 				</table>
 			</div>
     	</div>
+    	
     	<div class="form-group">
 			<div class="col-xs-3">
 	   			<label for="productCountData" class="control-label">Product count:</label>
 			</div>
 			<div class="col-xs-5">
-				<sf:input id="productCountData" path="count" class="form-control" type="text" name="count" required="required" pattern="[0-9]+"/>
+				<sf:errors path="count" cssStyle="color: red"/>
+				<sf:input id="productCountData" path="count" class="form-control" type="text" name="count" value=""/>
 			</div>
     	</div>
+    	
     	<div class="form-group">
 			<div class="col-xs-3">
 	   			<label for="productDescriptData" class="control-label">Product description:</label>
 			</div>
 			<div class="col-xs-5">
+				<sf:errors path="description" cssStyle="color: red"/>
 				<sf:textarea id="productDescriptData" path="description" class="form-control" name="description" rows="1" cols="50"></sf:textarea> 
 			</div>
     	</div>
     	    	
     	<div class="form-group">
 			<div class="col-xs-3">
-	   			<label for="productCharacteristic1" class="control-label">Characteristic1:</label>
+	   			<label for="productCharacteristic1" class="control-label">Color:</label>
 			</div>
 			<div class="col-xs-5">
-				<sf:input id="productCharacteristic1" path="characteristic1" class="form-control" type="text" name="characteristic1" required="required" />
+				<sf:errors path="characteristic1" cssStyle="color: red"/>
+				<sf:input id="productCharacteristic1" path="characteristic1" class="form-control" type="text" name="characteristic1" />
 			</div>
     	</div>
     	
     	<div class="form-group">
-    		<label for="inputFile">Product image: </label>
-    		<input type="file" id="inputFile" name="productImage">
-    		<p class="help-block">Load an image for the product.</p>
- 		 </div>
+			<div class="col-xs-3">
+	   			<label for="productCharacteristic2" class="control-label">Socket:</label>
+			</div>
+			<div class="col-xs-5">
+				<sf:errors path="characteristic2" cssStyle="color: red"/>
+				<sf:input id="productCharacteristic2" path="characteristic2" class="form-control" type="text" name="characteristic2" />
+			</div>
+    	</div>
     	
-    	<button type="submit" class="btn btn-danger">
-    		<span class="glyphicon glyphicon-floppy-disk"></span> Save
-    	</button>  
+    	<div class="form-group">
+			<div class="col-xs-3">
+	   			<label for="productCharacteristic3" class="control-label">Smart:</label>
+			</div>
+			<div class="col-xs-5">
+				<sf:errors path="characteristic3" cssStyle="color: red"/>
+				<sf:input id="productCharacteristic3" path="characteristic3" class="form-control" type="text" name="characteristic3" />
+			</div>
+    	</div>
+    	
+    	<div class="form-group">
+			<div class="col-xs-3">
+	   			<label for="productCharacteristic4" class="control-label">Screen resolution:</label>
+			</div>
+			<div class="col-xs-5">
+				<sf:errors path="characteristic4" cssStyle="color: red"/>
+				<sf:input id="productCharacteristic4" path="characteristic4" class="form-control" type="text" name="characteristic4" />
+			</div>
+    	</div>
+    	
+    	<div class="form-group">
+			<div class="col-xs-3">
+	   			<label for="productCharacteristic6" class="control-label">Aspect ratio:</label>
+			</div>
+			<div class="col-xs-5">
+				<sf:errors path="characteristic6" cssStyle="color: red"/>
+				<sf:input id="productCharacteristic6" path="characteristic6" class="form-control" type="text" name="characteristic6" />
+			</div>
+    	</div>
+    	
+    	<div class="form-group">
+			<div class="col-xs-3">
+	   			<label for="productStockStatus" class="control-label">Stock availability:</label>
+			</div>
+			<div class="col-xs-5">
+				<sf:errors path="stock_status" cssStyle="color: red"/>
+				<sf:input id="productStockStatus" path="stock_status" class="form-control" type="text" name="stock_status" />
+			</div>
+    	</div>
+
+    	<div class="form-group">
+			<div class="col-xs-3">
+	   			<label for="inputFile">Product image: </label>
+			</div>
+			<div class="col-xs-5">
+				<input type="file" id="inputFile" name="productImage">
+    			<p class="help-block">Load an image for the product.</p>
+			</div>
+    	</div>
+    	
+    	<div class="form-group">
+			<div class="col-xs-3">
+			</div>
+			<div class="col-xs-5">
+				<button type="submit" class="btn btn-danger">
+    			<span class="glyphicon glyphicon-floppy-disk"></span> Save
+    			</button>  
+			</div>
+    	</div>
+    	
+
     </sf:form> 	
 </div>
 
