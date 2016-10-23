@@ -41,8 +41,8 @@ public class RequestParamConstants {
 	public static final String VALUE_STR_ONE = "1";
 	public static final int VALUE_ONE = 1;
 	public static final String EMAIL = "email";
-	public static final String PERSON = "person";
-	
+	public static final String USER_DTO = "userDTO";
+	public static final String PRODUCT_DTO = "productDTO";
     public void handler(){
     }
 }

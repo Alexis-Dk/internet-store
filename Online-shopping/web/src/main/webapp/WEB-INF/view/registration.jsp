@@ -150,7 +150,7 @@
             <div class="row">
                 <div class="col-md-4">
 
-					<form:form action="${context}/getRegistration" method="post" id="personForm" name="person" modelAttribute="person">
+					<form:form action="${context}/getRegistration" method="post" id="personForm" name="userDTO" modelAttribute="userDTO">
 						<fieldset>
 						<div class="container-fluid">
 							<section class="container">
