@@ -96,7 +96,7 @@ public class MainController {
 	private IDaoGoods daoGoods;
 
     @Autowired
-    private IProductCategoryService productCategoryService;
+    public IProductCategoryService productCategoryService;
     
     @Autowired
     private MessageSource messageSource;
@@ -385,6 +385,7 @@ public class MainController {
 	List<Category> categoryList = null;
 	try {
 		categoryList = productCategoryService.getAllProductCategories();
+		HttpUtils.setList(categoryList);
 	} catch (ErrorGettingCategoryServiceException e) {
 		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
 	}

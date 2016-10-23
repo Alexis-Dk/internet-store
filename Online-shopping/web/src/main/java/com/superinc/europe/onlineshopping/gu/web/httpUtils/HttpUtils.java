@@ -10,9 +10,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import sun.tools.tree.ThisExpression;
+
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.entities.dto.Bucket;
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Category;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamConstants;
 
@@ -28,6 +31,7 @@ public class HttpUtils {
 	private static final int SUM_FINAL_VALUE = 0;
 	private static final int REPEAT_GOODS_FLAG = 0;
 	private static final int COUNT_VALUE = 1;
+	public static List<Category> categoryList;
 
 	public static List<Bucket> getBucket(HttpSession session) {
 		List<Bucket> bucket = new ArrayList<Bucket>();
@@ -299,4 +303,11 @@ public class HttpUtils {
 		return dataUsers[3];
 	}
 	
+	public static void setList(List<Category> list){
+		categoryList = list;
+	}
+	
+	public static List<Category> getList(){
+		return categoryList;
+	}
 }
