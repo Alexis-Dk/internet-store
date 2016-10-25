@@ -17,7 +17,7 @@ import com.superinc.europe.onlineshopping.gu.dao.jndi.DAOMaker;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.IDAOFactory;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOGoodsInOrders;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoodsInOrders;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
@@ -43,7 +43,7 @@ public class DaoGoodsOrdersTest {
 		try {
 			logger.info("test insert goods, orders begin");
 			GoodsOrders goodsOrders1 = new GoodsOrders(new Orders(new Users(1),
-					"test", 0, 499), new Goods(1, "test", "tv/UE40J6200AU.jpg",
+					"test", 0, 499), new Product(1, "test", "tv/UE40J6200AU.jpg",
 					599, "UE40J6200US"), 11);
 			List<GoodsOrders> list = new ArrayList<GoodsOrders>();
 			list.add(goodsOrders1);
@@ -64,7 +64,7 @@ public class DaoGoodsOrdersTest {
 		try {
 			logger.info("test insert goods, orders begin");
 			GoodsOrders goodsOrders1 = new GoodsOrders(new Orders(new Users(1),
-					"test", 0, 499), new Goods(1, "test", "tv/UE40J6200AU.jpg",
+					"test", 0, 499), new Product(1, "test", "tv/UE40J6200AU.jpg",
 					599, "UE40J6200US"), 1);
 			List<GoodsOrders> list = new ArrayList<GoodsOrders>();
 			list.add(goodsOrders1);

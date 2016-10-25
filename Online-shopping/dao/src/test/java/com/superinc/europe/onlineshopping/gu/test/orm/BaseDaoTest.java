@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoNavigation;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 
 /**
  * Created by Alexey Druzik on 11.09.2016.
@@ -40,7 +40,7 @@ public class BaseDaoTest {
 	public void testAddGoods() {
 		try {
 			logger.info("test add goods begin");
-			Goods goods = new Goods(1, "test", "tv/UE40J6200AU.jpg", 599, "UE40J6200US");
+			Product goods = new Product(1, "test", "tv/UE40J6200AU.jpg", 599, "UE40J6200US");
 			daoGoods.add(goods);
 			} catch (Exception e) {
 			logger.error("Error test add goods " + e);
@@ -51,7 +51,7 @@ public class BaseDaoTest {
 	public void testUpdateGoods() {
 		try {
 			logger.info("test update goods begin");
-			Goods goods = new Goods(7, "test", "tv/UE40J6200AUBY.jpg", 599, "UE40J6200USBY");
+			Product goods = new Product(7, "test", "tv/UE40J6200AUBY.jpg", 599, "UE40J6200USBY");
 			daoGoods.update(goods);
 			} catch (Exception e) {
 			logger.error("Error test update goods " + e);
@@ -62,7 +62,7 @@ public class BaseDaoTest {
 	public void testGetGoods() {
 		try {
 			logger.info("test get goods begin");
-			Goods goods = daoGoods.get(3);
+			Product goods = daoGoods.get(3);
 			logger.info("test get this goods - " + goods);
 			} catch (Exception e) {
 			logger.error("Error test get goods " + e);
@@ -73,7 +73,7 @@ public class BaseDaoTest {
 	public void testLoadGoods() {
 		try {
 			logger.info("test load goods begin");
-			Goods goods = daoGoods.load(5);
+			Product goods = daoGoods.load(5);
 			logger.info("test load this goods - " + goods);
 			} catch (Exception e) {
 			logger.error("Error load get goods " + e);
@@ -84,7 +84,7 @@ public class BaseDaoTest {
 	public void testGetListGoods() {
 		try {
 			logger.info("test get list goods begin");
-			List<Goods> list = daoGoods.getList();
+			List<Product> list = daoGoods.getList();
 			logger.info("test  get list goods  - " + list);
 			} catch (Exception e) {
 			logger.error("Error get list goods  " + e);

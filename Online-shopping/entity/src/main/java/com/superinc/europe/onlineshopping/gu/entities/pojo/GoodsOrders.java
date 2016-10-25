@@ -27,9 +27,9 @@ public class GoodsOrders implements Serializable{
 	@JoinColumn(name="orders_id_FK", referencedColumnName = "orders_id")
     private Orders ordersFk; 
 
-	@ManyToOne(targetEntity=Goods.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity=Product.class, fetch = FetchType.LAZY)
 	@JoinColumn(name="goods_id_FK", referencedColumnName = "goods_id")
-    private Goods goodsFk; 
+    private Product goodsFk; 
     
     @Column(name="count")
     private int count = 1;
@@ -37,7 +37,7 @@ public class GoodsOrders implements Serializable{
 	public GoodsOrders() {
 	}
 	
-	public GoodsOrders(Orders ordersFk, Goods goodsFk, int count) {
+	public GoodsOrders(Orders ordersFk, Product goodsFk, int count) {
 		this.ordersFk = ordersFk;
 		this.goodsFk = goodsFk;
 		this.count = count;
@@ -67,11 +67,11 @@ public class GoodsOrders implements Serializable{
 		this.ordersFk = ordersFk;
 	}
 
-	public Goods getGoodsFk() {
+	public Product getGoodsFk() {
 		return goodsFk;
 	}
 
-	public void setGoodsFk(Goods goodsFk) {
+	public void setGoodsFk(Product goodsFk) {
 		this.goodsFk = goodsFk;
 	}
 

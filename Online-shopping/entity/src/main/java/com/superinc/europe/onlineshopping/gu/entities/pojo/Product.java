@@ -13,14 +13,14 @@ import javax.persistence.Table;
 
 @Entity 
 @Table(name="goods")
-public class Goods implements Serializable {
+public class Product implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "goods_id", unique = true, nullable = false, precision = 15, scale = 0)
-	private int goodsId;
+	private int productId;
 	
 	@ManyToOne(targetEntity=Category.class)
 	@JoinColumn(name="category_id_FK", referencedColumnName = "category_id")
@@ -83,43 +83,43 @@ public class Goods implements Serializable {
 	@Column(name="rating")
 	private int rating;
 	
-	public Goods() {
+	public Product() {
 	}
 
-	public Goods(int goodsId) {
-		this.goodsId = goodsId;
+	public Product(int productId) {
+		this.productId = productId;
 	}
 	
-	public Goods(int goodsId, String name, String imagePath, int price, String description) {
-		this.goodsId = goodsId;
+	public Product(int productId, String name, String imagePath, int price, String description) {
+		this.productId = productId;
 		this.name = name;
 		this.imagePath = imagePath;
 		this.price = price;
 		this.description = description;
 	}
 	
-	public Goods(String name, String imagePath, int price, String description) {
+	public Product(String name, String imagePath, int price, String description) {
 		this.name = name;
 		this.imagePath = imagePath;
 		this.price = price;
 		this.description = description;
 	}
 	
-	public Goods(Category category, String name, String imagePath, int price, String description) {
+	public Product(Category category, String name, String imagePath, int price, String description) {
 		this.name = name;
 		this.imagePath = imagePath;
 		this.price = price;
 		this.description = description;
 	}
 	
-	public Goods(int goodsId, Category categoryFk, String name,
+	public Product(int productId, Category categoryFk, String name,
 			String image_path, int price, int oldprice, String description,
 			String characteristic1, String characteristic2,
 			String characteristic3, String characteristic4,
 			String characteristic5, String characteristic6,int characteristic7, int characteristic8,
 			int characteristic9, int characteristic10, int characteristic11,
 			int deleteStatus, String stockStatus, int rating) {
-		this.goodsId = goodsId;
+		this.productId = productId;
 		this.categoryFk = categoryFk;
 		this.name = name;
 		this.imagePath = image_path;
@@ -142,7 +142,7 @@ public class Goods implements Serializable {
 		this.rating = rating;
 	}
 	
-	public Goods(Category categoryFk, String name,
+	public Product(Category categoryFk, String name,
 			String image_path, int price, int oldprice, String description,
 			String characteristic1, String characteristic2,
 			String characteristic3, String characteristic4,
@@ -171,12 +171,12 @@ public class Goods implements Serializable {
 		this.rating = rating;
 	}
 
-	public int getGoodsId() {
-		return goodsId;
+	public int getProductId() {
+		return productId;
 	}
 
-	public void setGoodsId(int goodsId) {
-		this.goodsId = goodsId;
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 
 	public Category getCategoryFk() {
@@ -344,7 +344,7 @@ public class Goods implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Goods [goodsId=" + goodsId + ", categoryFk=" + categoryFk
+		return "Product [productId=" + productId + ", categoryFk=" + categoryFk
 				+ ", name=" + name + ", imagePath=" + imagePath + ", price="
 				+ price + ", oldprice=" + oldprice + ", description="
 				+ description + ", characteristic1=" + characteristic1

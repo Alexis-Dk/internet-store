@@ -196,7 +196,7 @@
 &stockStatus=<c:out value="${good.stockStatus}"></c:out>
 &imagePath=<c:out value="${good.imagePath}"></c:out>
 &price=<c:out value="${good.price}"></c:out>
-&goodsId=<c:out value="${good.goodsId}"></c:out>">
+&goodsId=<c:out value="${good.productId}"></c:out>">
                         <img src="img/<c:out value="${good.imagePath}"></c:out>" alt=""></a>
                         </div>
 							<h2><a><c:out value="${good.name}"></c:out> <c:out value="${good.description}"></c:out></a></h2>
@@ -220,7 +220,7 @@
 &stockStatus=<c:out value="${good.stockStatus}"></c:out>
 &imagePath=<c:out value="${good.imagePath}"></c:out>
 &price=<c:out value="${good.price}"></c:out>
-&goodsId=<c:out value="${good.goodsId}"></c:out>">Add to cart</a>
+&goodsId=<c:out value="${good.productId}"></c:out>">Add to cart</a>
 								</div> 
                         </sec:authorize>                      
                     </div>

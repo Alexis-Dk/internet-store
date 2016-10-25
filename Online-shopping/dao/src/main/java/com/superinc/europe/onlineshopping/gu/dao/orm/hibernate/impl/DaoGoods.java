@@ -11,15 +11,15 @@ import org.springframework.stereotype.Repository;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
  */
 @Repository("daoGoods")
-public class DaoGoods extends BaseDao<Goods> implements IDaoGoods{
+public class DaoGoods extends BaseDao<Product> implements IDaoGoods{
 
-	private static final String GET_COUNT_ROW = "select count(*) from Goods where delete_status=0";
+	private static final String GET_COUNT_ROW = "select count(*) from Product where delete_status=0";
 	private static final String LED_TV_CATEGORY = "category_id = 1";
 	private static final String EMPTY_FIELD = "";
 	private static final String PRICE_LESS = "price <= ";
@@ -46,7 +46,7 @@ public class DaoGoods extends BaseDao<Goods> implements IDaoGoods{
 	 * @throws DaoException
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Goods> getProduct(Criteria criteria, String priceLower, String priceHighter, int quantityOfPage){
+	public List<Product> getProduct(Criteria criteria, String priceLower, String priceHighter, int quantityOfPage){
 		criteria.add(Restrictions.sqlRestriction(LED_TV_CATEGORY));
 		criteria.setMaxResults(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE);
 		criteria.setFirstResult(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE*(quantityOfPage - 1));
@@ -98,7 +98,7 @@ public class DaoGoods extends BaseDao<Goods> implements IDaoGoods{
 	 */
 	@Override
 	public int getLastInsertId() throws DaoException {
-		Integer lastId = (Integer) getCurrentSession().createSQLQuery("SELECT MAX(goods_id) FROM Goods")
+		Integer lastId = (Integer) getCurrentSession().createSQLQuery("SELECT MAX(goods_id) FROM Product")
 			    .uniqueResult();  
 		try {
 			return lastId;

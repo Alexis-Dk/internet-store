@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 import com.superinc.europe.onlineshopping.gu.service.IGoodsService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ErrorAddingPoductServiceException;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
@@ -22,7 +22,7 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
  */
 @Service
 @Transactional 
-public class GoodService implements IGoodsService<Goods> {
+public class GoodService implements IGoodsService<Product> {
 
 	private static Logger logger = Logger.getLogger(GoodService.class);
 	
@@ -39,7 +39,7 @@ public class GoodService implements IGoodsService<Goods> {
 	 * @throws ServiceException
 	 */
 	@Override
-	public Serializable add(Goods ob) throws ErrorAddingPoductServiceException {
+	public Serializable add(Product ob) throws ErrorAddingPoductServiceException {
 		Serializable id = null; 
 		try {
 			id = daoGoods.add(ob);
@@ -87,7 +87,7 @@ public class GoodService implements IGoodsService<Goods> {
 	 * @throws ServiceException
 	 */
 	@Override
-	public void update(Goods ob) throws ServiceException {
+	public void update(Product ob) throws ServiceException {
 		try {
 			daoGoods.update(ob);
 		} catch (DaoException e) {
@@ -104,13 +104,13 @@ public class GoodService implements IGoodsService<Goods> {
 	 * @throws DaoException
 	 */
 	@Override
-	public List<Goods> obtainDefaultSelection(String priceLower,
+	public List<Product> obtainDefaultSelection(String priceLower,
 			String priceHighter) throws ServiceException {
 		Session session = daoGoods.getCurrentSession();
-		List<Goods> products = null;
+		List<Product> products = null;
 		try {
-			products = (List<Goods>) daoGoods.getProduct(
-					session.createCriteria(Goods.class, GOODS), priceLower,
+			products = (List<Product>) daoGoods.getProduct(
+					session.createCriteria(Product.class, GOODS), priceLower,
 					priceHighter, NUMBER_OF_START_PAGE);
 		} catch (Exception e) {
 			session.getTransaction().rollback();
@@ -128,12 +128,12 @@ public class GoodService implements IGoodsService<Goods> {
 	 * @throws DaoException
 	 */
 	@Override
-	public List<Goods> obtainUsersSelection(String priceLower,
+	public List<Product> obtainUsersSelection(String priceLower,
 			String priceHighter, String userNumberOfPage)throws ServiceException{
 			Session session = daoGoods.getCurrentSession();
-			List<Goods> products = null;
+			List<Product> products = null;
 			try {
-				products = (List<Goods>)daoGoods.getProduct(session.createCriteria(Goods.class, GOODS), priceLower, priceHighter, Integer.parseInt(userNumberOfPage));
+				products = (List<Product>)daoGoods.getProduct(session.createCriteria(Product.class, GOODS), priceLower, priceHighter, Integer.parseInt(userNumberOfPage));
 			} catch (Exception e) {
 				session.getTransaction().rollback();
 				logger.error(ExceptionMessages.ERROR_IN_GOODS_SERVICE + e);

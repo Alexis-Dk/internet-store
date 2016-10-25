@@ -43,7 +43,7 @@ import com.superinc.europe.onlineshopping.gu.entities.dto.UserDTO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.ProductDTO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Category;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
@@ -190,7 +190,7 @@ public class MainController {
 			@RequestParam(value = RequestParamConstants.PRICE) String price,
 			@RequestParam(value = RequestParamConstants.IMAGE_PATH) String imagePath) {
 
-		Goods goods = new Goods(Integer.parseInt(goodsId), name, imagePath,
+		Product goods = new Product(Integer.parseInt(goodsId), name, imagePath,
 				Integer.parseInt(price), description);
 		GoodsOrders goodsOrders = new GoodsOrders(new Orders(
 				RequestParamConstants.VALUE_ONE), goods,
@@ -420,7 +420,7 @@ public class MainController {
 	@RequestMapping(path = "/new", method = RequestMethod.POST)
     public String saveNewProduct(@Valid ProductDTO productDTO, 
             BindingResult br, @RequestParam(value = "productImage", required = false) MultipartFile image, RedirectAttributes redirectAttributes, HttpServletRequest request, Locale locale, @ModelAttribute("productDTO1") ProductDTO productDTO1) {
-		Goods product = new Goods();
+		Product product = new Product();
 		
 		Set<ConstraintViolation<ProductDTO>> violations = validator.validate(productDTO);
 		
@@ -460,7 +460,7 @@ public class MainController {
 	return "admin";
     }
 	
-    private void setProductFields(Goods product, ProductDTO productDTO, int id) {
+    private void setProductFields(Product product, ProductDTO productDTO, int id) {
 	product.setName(productDTO.getName());
 	product.setPrice(productDTO.getPrice());
 	product.setOldprice(productDTO.getPrice());

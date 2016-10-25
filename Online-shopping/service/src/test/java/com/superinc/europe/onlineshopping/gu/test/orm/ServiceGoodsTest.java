@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.apache.log4j.Logger;
 
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 import com.superinc.europe.onlineshopping.gu.service.IGoodsService;
 
 /**
@@ -29,13 +29,13 @@ public class ServiceGoodsTest {
 	private static Logger logger = Logger.getLogger(ServiceGoodsTest.class);
     
 	@Autowired
-	private IGoodsService<Goods> goodsService;
+	private IGoodsService<Product> goodsService;
 	
 	@Test
 	public void addProduct() {
 		try {
 			logger.info("add product begin ");
-			Goods goods = new Goods (1, "Samsung","tv/UE40J6200AUEU.jpg", 599, "UE40J6200USEU");
+			Product goods = new Product (1, "Samsung","tv/UE40J6200AUEU.jpg", 599, "UE40J6200USEU");
 			goodsService.add(goods);
 			} catch (Exception e) {
 			logger.error("Error add product begin  " + e);

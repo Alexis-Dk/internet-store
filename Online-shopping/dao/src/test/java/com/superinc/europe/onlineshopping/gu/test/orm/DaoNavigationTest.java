@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoNavigation;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 
 
 /**
@@ -30,7 +30,7 @@ public class DaoNavigationTest {
 	private static Logger logger = Logger.getLogger(BaseDaoTest.class);
 
 	@Autowired
-	private IDaoNavigation<Goods> daoNavigation;
+	private IDaoNavigation<Product> daoNavigation;
 	
 	@Autowired
 	private IDaoGoods daoGoods;

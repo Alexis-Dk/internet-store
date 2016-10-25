@@ -39,7 +39,7 @@ public class HttpUtils {
 		listGoodsOrders = (List<GoodsOrders>) session
 				.getAttribute(RequestParamConstants.BUCKET);
 		for (GoodsOrders goodsOrders : listGoodsOrders) {
-			bucket.add(new Bucket(goodsOrders.getGoodsFk().getGoodsId(),
+			bucket.add(new Bucket(goodsOrders.getGoodsFk().getProductId(),
 					goodsOrders.getGoodsFk().getName(), goodsOrders
 							.getGoodsFk().getImagePath(), goodsOrders
 							.getGoodsFk().getPrice(), goodsOrders
@@ -75,7 +75,7 @@ public class HttpUtils {
 		int count = COUNT_VALUE;
 		int repeatGoodsFlag = REPEAT_GOODS_FLAG;
 
-		if (Integer.valueOf(goodsOrders.getGoodsFk().getGoodsId()) != null
+		if (Integer.valueOf(goodsOrders.getGoodsFk().getProductId()) != null
 				&& goodsOrders.getGoodsFk().getName() != null) {
 			for (GoodsOrders ob : list) {
 				if (ob.getGoodsFk().getDescription()
@@ -104,7 +104,7 @@ public class HttpUtils {
 	private static List<GoodsOrders> addToCouner(String goodsId,
 			List<GoodsOrders> goodsOrders) {
 		for (GoodsOrders ob : goodsOrders) {
-			if (ob.getGoodsFk().getGoodsId() == Integer.parseInt(goodsId)) {
+			if (ob.getGoodsFk().getProductId() == Integer.parseInt(goodsId)) {
 				ob.setCount(ob.getCount() + COUNT_VALUE);
 			}
 		}
@@ -124,7 +124,7 @@ public class HttpUtils {
 	private static List<GoodsOrders> subtractFromCounter(String goodsId,
 			List<GoodsOrders> goodsOrders) {
 		for (GoodsOrders ob : goodsOrders) {
-			if (ob.getGoodsFk().getGoodsId() == Integer.parseInt(goodsId)) {
+			if (ob.getGoodsFk().getProductId() == Integer.parseInt(goodsId)) {
 				ob.setCount(ob.getCount() - COUNT_VALUE);
 			}
 		}

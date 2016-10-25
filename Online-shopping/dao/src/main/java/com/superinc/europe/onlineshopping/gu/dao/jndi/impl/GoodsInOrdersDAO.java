@@ -28,7 +28,7 @@ public class GoodsInOrdersDAO implements IDAOGoodsInOrders<GoodsOrders> {
 			connection = ConnectionPool.getPool().getConnection();
 			statement = connection.prepareStatement(INSERT_INTO_GOODS_IN_ORDERS);
 			statement.setInt(1, ob.getOrdersFk().getOrdersId());
-			statement.setInt(2, ob.getGoodsFk().getGoodsId());
+			statement.setInt(2, ob.getGoodsFk().getProductId());
 			statement.setInt(3, ob.getCount());
 			statement.executeUpdate();
 		} catch (SQLException e) {

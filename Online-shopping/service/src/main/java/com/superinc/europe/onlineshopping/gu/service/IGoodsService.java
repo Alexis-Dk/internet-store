@@ -3,7 +3,7 @@ package com.superinc.europe.onlineshopping.gu.service;
 import java.util.List;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 import com.superinc.europe.onlineshopping.gu.service.exception.ErrorAddingPoductServiceException;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
@@ -19,7 +19,7 @@ public interface IGoodsService<T> extends IBaseService<T> {
 	 * @param priceHighter
 	 * @throws DaoException
 	 */
-	List<Goods> obtainDefaultSelection(String priceLower, String priceHighter)
+	List<Product> obtainDefaultSelection(String priceLower, String priceHighter)
 			throws ServiceException;
 
 	/**
@@ -28,7 +28,7 @@ public interface IGoodsService<T> extends IBaseService<T> {
 	 * @param priceHighter
 	 * @throws DaoException
 	 */
-	List<Goods> obtainUsersSelection(String priceLower,
+	List<Product> obtainUsersSelection(String priceLower,
 			String priceHighter, String userNumberOfPage)
 			throws ServiceException;
 

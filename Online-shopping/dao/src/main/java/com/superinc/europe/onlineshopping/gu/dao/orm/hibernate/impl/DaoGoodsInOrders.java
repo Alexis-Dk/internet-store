@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoodsInOrders;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Goods;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
 
@@ -31,8 +31,8 @@ public class DaoGoodsInOrders extends BaseDao<GoodsOrders> implements IDaoGoodsI
 			list = (List<GoodsOrders>) ob;
 			for (GoodsOrders goodsInOrders : list) {
 				GoodsOrders addedOrdersGoods = new GoodsOrders(new Orders(
-						lastInsertId), new Goods(goodsInOrders.getGoodsFk()
-						.getGoodsId()), goodsInOrders.getCount());
+						lastInsertId), new Product(goodsInOrders.getGoodsFk()
+						.getProductId()), goodsInOrders.getCount());
 				add(addedOrdersGoods);
 			}
 		}
