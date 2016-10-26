@@ -11,8 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.apache.log4j.Logger;
 
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoNavigation;
-import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoOrders;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
+import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoOrder;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
 
 /**
@@ -29,7 +29,7 @@ public class DaoOrdersTest {
 	private static Logger logger = Logger.getLogger(DaoOrdersTest.class);
     
 	@Autowired
-	private IDaoOrders daoOrders;
+	private IDaoOrder daoOrders;
 
 	@Autowired
 	private IDaoNavigation<Object> daoNavigation;
@@ -38,7 +38,7 @@ public class DaoOrdersTest {
 	public void testInsertOrders() {
 		try {
 			logger.info("test add orders begin");
-			Orders orders = new Orders(new Users(1), "test",  0, 499);
+			Order orders = new Order(new Users(1), "test",  0, 499);
 			daoOrders.insertOrder(orders);
 			} catch (Exception e) {
 			logger.error("Error test add orders " + e);

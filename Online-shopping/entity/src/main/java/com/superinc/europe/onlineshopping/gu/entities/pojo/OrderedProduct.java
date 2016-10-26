@@ -13,42 +13,42 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity 
-@Table(name="goodsinorders")
-public class GoodsOrders implements Serializable{
+@Table(name="ordered_product")
+public class OrderedProduct implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "goodsorders_id")
-	private int goodsOrdersId;
+	@Column(name = "ordered_product_id")
+	private int orderedProductId;
 
-	@ManyToOne(targetEntity=Orders.class, fetch = FetchType.LAZY)
-	@JoinColumn(name="orders_id_FK", referencedColumnName = "orders_id")
-    private Orders ordersFk; 
+	@ManyToOne(targetEntity=Order.class, fetch = FetchType.LAZY)
+	@JoinColumn(name="order_id_FK", referencedColumnName = "orders_id")
+    private Order orderFk; 
 
 	@ManyToOne(targetEntity=Product.class, fetch = FetchType.LAZY)
-	@JoinColumn(name="goods_id_FK", referencedColumnName = "goods_id")
-    private Product goodsFk; 
+	@JoinColumn(name="product_id_FK", referencedColumnName = "product_id")
+    private Product productFk; 
     
     @Column(name="count")
     private int count = 1;
 
-	public GoodsOrders() {
+	public OrderedProduct() {
 	}
 	
-	public GoodsOrders(Orders ordersFk, Product goodsFk, int count) {
-		this.ordersFk = ordersFk;
-		this.goodsFk = goodsFk;
+	public OrderedProduct(Order orderFk, Product productFk, int count) {
+		this.orderFk = orderFk;
+		this.productFk = productFk;
 		this.count = count;
 	}
 
-	public int getGoodsOrders() {
-		return goodsOrdersId;
+	public int getOrderedProduct() {
+		return orderedProductId;
 	}
 
-	public void setGoodsOrders(int goodsOrders) {
-		this.goodsOrdersId = goodsOrders;
+	public void setOrderedProduct(int orderedProduct) {
+		this.orderedProductId = orderedProduct;
 	}
 
 	public int getCount() {
@@ -59,26 +59,26 @@ public class GoodsOrders implements Serializable{
 		this.count = count;
 	}
 
-	public Orders getOrdersFk() {
-		return ordersFk;
+	public Order getOrderFk() {
+		return orderFk;
 	}
 
-	public void setOrdersFk(Orders ordersFk) {
-		this.ordersFk = ordersFk;
+	public void setOrderFk(Order orderFk) {
+		this.orderFk = orderFk;
 	}
 
-	public Product getGoodsFk() {
-		return goodsFk;
+	public Product getProductFk() {
+		return productFk;
 	}
 
-	public void setGoodsFk(Product goodsFk) {
-		this.goodsFk = goodsFk;
+	public void setProductFk(Product productFk) {
+		this.productFk = productFk;
 	}
 
 	@Override
 	public int hashCode() {
         int hash = 1;
-        hash = hash * 31 + goodsFk.hashCode();
+        hash = hash * 31 + productFk.hashCode();
         hash = hash * 31 + count;
           hash = 31;
         return hash;
@@ -86,8 +86,8 @@ public class GoodsOrders implements Serializable{
 
 	@Override
 	public String toString() {
-		return "GoodsOrders [goodsOrdersId=" + goodsOrdersId + ", ordersFk="
-				+ ordersFk + ", goodsFk=" + goodsFk + ", count=" + count + "]";
+		return "OrderedProduct [orderedProductId=" + orderedProductId + ", orderFk="
+				+ orderFk + ", productFk=" + productFk + ", count=" + count + "]";
 	}
 
 	@Override

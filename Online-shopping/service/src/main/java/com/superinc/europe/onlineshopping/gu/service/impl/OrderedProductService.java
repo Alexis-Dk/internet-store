@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
-import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoodsInOrders;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
-import com.superinc.europe.onlineshopping.gu.service.IGoodsInOrdersService;
+import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoOrderedProduct;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
+import com.superinc.europe.onlineshopping.gu.service.IOrderedProductService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ErrorAddingPoductServiceException;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
@@ -21,12 +21,12 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
  */
 @Service
 @Transactional 
-public class GoodsInOrders implements IGoodsInOrdersService<GoodsOrders> {
+public class OrderedProductService implements IOrderedProductService<OrderedProduct> {
 
-	private static Logger logger = Logger.getLogger(GoodsInOrders.class);
+	private static Logger logger = Logger.getLogger(OrderedProductService.class);
 	
 	@Autowired
-	private IDaoGoodsInOrders daoGoodsInOrders;
+	private IDaoOrderedProduct daoOrderedProduct;
 
 	/**
 	 * Method set to Session
@@ -34,13 +34,13 @@ public class GoodsInOrders implements IGoodsInOrdersService<GoodsOrders> {
 	 * @throws ServiceException
 	 */
 	@Override
-	public Serializable add(GoodsOrders ob) throws ErrorAddingPoductServiceException {
+	public Serializable add(OrderedProduct ob) throws ErrorAddingPoductServiceException {
 		Serializable id = null; 
 		try {
-			id = daoGoodsInOrders.add(ob);
+			id = daoOrderedProduct.add(ob);
 		} catch (DaoException e) {
-			logger.error(ExceptionMessages.ERROR_IN_GIO_SERVICE + e);
-			throw new ErrorAddingPoductServiceException(ExceptionMessages.ERROR_IN_GIO_SERVICE, e);
+			logger.error(ExceptionMessages.ERROR_IN_OP_SERVICE + e);
+			throw new ErrorAddingPoductServiceException(ExceptionMessages.ERROR_IN_OP_SERVICE, e);
 		}
 		return id;
 	}
@@ -51,12 +51,12 @@ public class GoodsInOrders implements IGoodsInOrdersService<GoodsOrders> {
 	 * @throws ServiceException
 	 */
 	@Override
-	public void update(GoodsOrders ob) throws ServiceException {
+	public void update(OrderedProduct ob) throws ServiceException {
 		try {
 			
 		} catch (DaoException e) {
-			logger.error(ExceptionMessages.ERROR_IN_GIO_SERVICE + e);
-			throw new ServiceException(ExceptionMessages.ERROR_IN_GIO_SERVICE, e);
+			logger.error(ExceptionMessages.ERROR_IN_OP_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_OP_SERVICE, e);
 		}
 	}
 	
@@ -70,8 +70,8 @@ public class GoodsInOrders implements IGoodsInOrdersService<GoodsOrders> {
 		try {
 			
 		} catch (DaoException e) {
-			logger.error(ExceptionMessages.ERROR_IN_GIO_SERVICE + e);
-			throw new ServiceException(ExceptionMessages.ERROR_IN_GIO_SERVICE, e);
+			logger.error(ExceptionMessages.ERROR_IN_OP_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_OP_SERVICE, e);
 		}
 		
 	}
@@ -86,8 +86,8 @@ public class GoodsInOrders implements IGoodsInOrdersService<GoodsOrders> {
 		try {
 			
 		} catch (DaoException e) {
-			logger.error(ExceptionMessages.ERROR_IN_GIO_SERVICE + e);
-			throw new ServiceException(ExceptionMessages.ERROR_IN_GIO_SERVICE, e);
+			logger.error(ExceptionMessages.ERROR_IN_OP_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_OP_SERVICE, e);
 		}
 	}
 	
@@ -98,13 +98,13 @@ public class GoodsInOrders implements IGoodsInOrdersService<GoodsOrders> {
 	 * @throws DaoException
 	 */
 	@Override
-	public void insertGoodsInOrders(int LastInsertId,
-			List<GoodsOrders> ob) throws ServiceException {
+	public void insertOrderedProduct(int LastInsertId,
+			List<OrderedProduct> ob) throws ServiceException {
 		try {
-			daoGoodsInOrders.insertGoodsInOrders(LastInsertId, ob);
+			daoOrderedProduct.insertOrderedProduct(LastInsertId, ob);
 		} catch (DaoException e) {
-			logger.error(ExceptionMessages.ERROR_IN_GIO_SERVICE + e);
-			throw new ServiceException(ExceptionMessages.ERROR_IN_GIO_SERVICE, e);
+			logger.error(ExceptionMessages.ERROR_IN_OP_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_OP_SERVICE, e);
 		}
 	}
 }

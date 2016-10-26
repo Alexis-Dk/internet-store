@@ -11,7 +11,7 @@ import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 /**
  * Created by Alexey Druzik on 29.08.2016.
  */
-public interface IDaoGoods extends IBaseDao<Product>{
+public interface IDaoProduct extends IBaseDao<Product>{
 	
 	/**
 	 * Method get list products

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.context.annotation.Scope;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
 /**
@@ -13,7 +13,7 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
  * @param <T>
  */
 @Scope("session")
-public interface IGoodsInOrdersService<T> extends IBaseService<T> {
+public interface IOrderedProductService<T> extends IBaseService<T> {
 
 	/**
 	 * Method insert GoodsInOrders to DB
@@ -21,5 +21,5 @@ public interface IGoodsInOrdersService<T> extends IBaseService<T> {
 	 * @param ob
 	 * @throws DaoException
 	 */
-	void insertGoodsInOrders(int LastInsertId, List<GoodsOrders> ob) throws ServiceException;
+	void insertOrderedProduct(int LastInsertId, List<OrderedProduct> ob) throws ServiceException;
 }

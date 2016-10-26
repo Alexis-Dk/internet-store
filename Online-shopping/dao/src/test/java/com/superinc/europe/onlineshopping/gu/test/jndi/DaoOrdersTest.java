@@ -13,8 +13,8 @@ import org.apache.log4j.Logger;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.DAOMaker;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.IDAOFactory;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOOrders;
-import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoOrders;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
+import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoOrder;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
 
 /**
@@ -31,7 +31,7 @@ public class DaoOrdersTest {
 	private static Logger logger = Logger.getLogger(DaoOrdersTest.class);
     
 	@Autowired
-	private IDaoOrders daoOrders;
+	private IDaoOrder daoOrders;
 
 	@Test
 	public void testInsertGoodsOrders() {
@@ -39,8 +39,8 @@ public class DaoOrdersTest {
 			logger.info("test insert goods, orders begin");
 
 			IDAOFactory factory = new DAOMaker();
-			IDAOOrders<Orders> dao = factory.getDAOOrders();
-			Orders orders = new Orders(new Users(1), "test",  0, 499);
+			IDAOOrders<Order> dao = factory.getDAOOrders();
+			Order orders = new Order(new Users(1), "test",  0, 499);
 			dao.insert(orders);
 			
 			} catch (Exception e) {

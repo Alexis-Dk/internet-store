@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity 
 @Table(name="orders")
-public class Orders implements Serializable{
+public class Order implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -34,14 +34,14 @@ public class Orders implements Serializable{
 	@Column(name="total_cost")
     private int totalCost;
     
-	public Orders() {
+	public Order() {
 	}
 
-	public Orders(int ordersId) {
+	public Order(int ordersId) {
 		this.ordersId = ordersId;
 	}
 	
-	public Orders(int ordersId, Users usersFk, String payment,
+	public Order(int ordersId, Users usersFk, String payment,
 			int deleteStatus, int totalCost) {
 		this.ordersId = ordersId;
 		this.usersFk = usersFk;
@@ -50,7 +50,7 @@ public class Orders implements Serializable{
 		this.totalCost = totalCost;
 	}
 	
-	public Orders(Users usersFk, String payment,
+	public Order(Users usersFk, String payment,
 			int deleteStatus, int totalCost) {
 		this.usersFk = usersFk;
 		this.payment = payment;

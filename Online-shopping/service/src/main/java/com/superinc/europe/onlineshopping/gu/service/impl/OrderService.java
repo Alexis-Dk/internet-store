@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
-import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoOrders;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
-import com.superinc.europe.onlineshopping.gu.service.IOrdersService;
+import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoOrder;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
+import com.superinc.europe.onlineshopping.gu.service.IOrderService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ErrorAddingPoductServiceException;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
@@ -20,12 +20,12 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
  */
 @Service
 @Transactional 
-public class OrderService implements IOrdersService<Orders> {
+public class OrderService implements IOrderService<Order> {
 
 	private static Logger logger = Logger.getLogger(OrderService.class);
 	
 	@Autowired
-	private IDaoOrders daoOrders;
+	private IDaoOrder daoOrders;
 	
 	/**
 	 * Method set to Session
@@ -33,7 +33,7 @@ public class OrderService implements IOrdersService<Orders> {
 	 * @throws ServiceException
 	 */
 	@Override
-	public Serializable add(Orders ob) throws ErrorAddingPoductServiceException {
+	public Serializable add(Order ob) throws ErrorAddingPoductServiceException {
 		Serializable id = null; 
 		try {
 			id = daoOrders.add(ob);
@@ -50,7 +50,7 @@ public class OrderService implements IOrdersService<Orders> {
 	 * @throws ServiceException
 	 */
 	@Override
-	public void update(Orders ob) throws ServiceException {
+	public void update(Order ob) throws ServiceException {
 		try {
 			daoOrders.update(ob);
 		} catch (DaoException e) {
@@ -96,7 +96,7 @@ public class OrderService implements IOrdersService<Orders> {
 	 * @throws DaoException
 	 */
 	@Override
-	public void insertOrder(Orders orders) throws ServiceException {
+	public void insertOrder(Order orders) throws ServiceException {
 		daoOrders.insertOrder(orders);
 	}
 	

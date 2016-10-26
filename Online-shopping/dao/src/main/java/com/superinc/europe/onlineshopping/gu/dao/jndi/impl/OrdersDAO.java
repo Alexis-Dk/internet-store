@@ -8,12 +8,12 @@ import java.sql.SQLException;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.db.ConnectionPool;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOOrders;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
  */
-public class OrdersDAO implements IDAOOrders<Orders> {
+public class OrdersDAO implements IDAOOrders<Order> {
 
 	private static final String INSERT_INTO_ORDERS = "INSERT INTO ORDERS (users_id, payment, delete_status, totalcost) VALUES (?, ?, ?, ?)";
 
@@ -21,7 +21,7 @@ public class OrdersDAO implements IDAOOrders<Orders> {
 	 * Method insert Orders to DB
 	 * @param ob
 	 */
-	public void insert(Orders ob) {
+	public void insert(Order ob) {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet set = null;

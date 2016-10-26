@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
-import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
+import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
-import com.superinc.europe.onlineshopping.gu.service.IGoodsService;
+import com.superinc.europe.onlineshopping.gu.service.IProductService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ErrorAddingPoductServiceException;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
@@ -22,16 +22,16 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
  */
 @Service
 @Transactional 
-public class GoodService implements IGoodsService<Product> {
+public class ProductService implements IProductService<Product> {
 
-	private static Logger logger = Logger.getLogger(GoodService.class);
+	private static Logger logger = Logger.getLogger(ProductService.class);
 	
 	private static final int NUMBER_OF_START_PAGE = 1;
 	
-	private static final String GOODS = "goods";
+	private static final String PRODUCT = "product";
 	
 	@Autowired
-	private IDaoGoods daoGoods;
+	private IDaoProduct daoProduct;
 
 	/**
 	 * Method set to Session
@@ -42,10 +42,10 @@ public class GoodService implements IGoodsService<Product> {
 	public Serializable add(Product ob) throws ErrorAddingPoductServiceException {
 		Serializable id = null; 
 		try {
-			id = daoGoods.add(ob);
+			id = daoProduct.add(ob);
 		} catch (DaoException e) {
-			logger.error(ExceptionMessages.ERROR_IN_GOODS_SERVICE + e);
-			throw new ErrorAddingPoductServiceException(ExceptionMessages.ERROR_IN_GOODS_SERVICE, e);
+			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+			throw new ErrorAddingPoductServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
 		}
 		return id;
 	}
@@ -58,10 +58,10 @@ public class GoodService implements IGoodsService<Product> {
 	@Override
 	public void get(int id) throws ServiceException {
 		try {
-			daoGoods.get(id);
+			daoProduct.get(id);
 		} catch (DaoException e) {
-			logger.error(ExceptionMessages.ERROR_IN_GOODS_SERVICE + e);
-			throw new ServiceException(ExceptionMessages.ERROR_IN_GOODS_SERVICE, e);
+			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
 		}
 		
 	}
@@ -74,10 +74,10 @@ public class GoodService implements IGoodsService<Product> {
 	@Override
 	public void delete(int id) throws ServiceException {
 		try {
-			daoGoods.delete(id);
+			daoProduct.delete(id);
 		} catch (DaoException e) {
-			logger.error(ExceptionMessages.ERROR_IN_GOODS_SERVICE + e);
-			throw new ServiceException(ExceptionMessages.ERROR_IN_GOODS_SERVICE, e);
+			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
 		}
 	}
 
@@ -89,10 +89,10 @@ public class GoodService implements IGoodsService<Product> {
 	@Override
 	public void update(Product ob) throws ServiceException {
 		try {
-			daoGoods.update(ob);
+			daoProduct.update(ob);
 		} catch (DaoException e) {
-			logger.error(ExceptionMessages.ERROR_IN_GOODS_SERVICE + e);
-			throw new ServiceException(ExceptionMessages.ERROR_IN_GOODS_SERVICE, e);
+			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
 		}
 	}
 
@@ -106,17 +106,17 @@ public class GoodService implements IGoodsService<Product> {
 	@Override
 	public List<Product> obtainDefaultSelection(String priceLower,
 			String priceHighter) throws ServiceException {
-		Session session = daoGoods.getCurrentSession();
+		Session session = daoProduct.getCurrentSession();
 		List<Product> products = null;
 		try {
-			products = (List<Product>) daoGoods.getProduct(
-					session.createCriteria(Product.class, GOODS), priceLower,
+			products = (List<Product>) daoProduct.getProduct(
+					session.createCriteria(Product.class, PRODUCT), priceLower,
 					priceHighter, NUMBER_OF_START_PAGE);
 		} catch (Exception e) {
 			session.getTransaction().rollback();
-			logger.error(ExceptionMessages.ERROR_IN_GOODS_SERVICE + e);
+			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
 			throw new ServiceException(
-					ExceptionMessages.ERROR_IN_GOODS_SERVICE, e);
+					ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
 		}
 		return products;
 	}
@@ -130,14 +130,14 @@ public class GoodService implements IGoodsService<Product> {
 	@Override
 	public List<Product> obtainUsersSelection(String priceLower,
 			String priceHighter, String userNumberOfPage)throws ServiceException{
-			Session session = daoGoods.getCurrentSession();
+			Session session = daoProduct.getCurrentSession();
 			List<Product> products = null;
 			try {
-				products = (List<Product>)daoGoods.getProduct(session.createCriteria(Product.class, GOODS), priceLower, priceHighter, Integer.parseInt(userNumberOfPage));
+				products = (List<Product>)daoProduct.getProduct(session.createCriteria(Product.class, PRODUCT), priceLower, priceHighter, Integer.parseInt(userNumberOfPage));
 			} catch (Exception e) {
 				session.getTransaction().rollback();
-				logger.error(ExceptionMessages.ERROR_IN_GOODS_SERVICE + e);
-				throw new ServiceException(ExceptionMessages.ERROR_IN_GOODS_SERVICE, e);
+				logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+				throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
 			}
 			return products;
 	}
@@ -149,10 +149,10 @@ public class GoodService implements IGoodsService<Product> {
 	@Override
 	public int getQuantityOfPage() throws ServiceException {
 		try {
-			return  daoGoods.getQuantityOfPage();
+			return  daoProduct.getQuantityOfPage();
 		} catch (Exception e) {
-			logger.error(ExceptionMessages.ERROR_IN_GOODS_SERVICE + e);
-			throw new ServiceException(ExceptionMessages.ERROR_IN_GOODS_SERVICE, e);
+			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
 		}
 	}
 
@@ -163,10 +163,10 @@ public class GoodService implements IGoodsService<Product> {
 	@Override
 	public int getLastInsertId() throws ErrorAddingPoductServiceException {
 		try {
-			return  daoGoods.getLastInsertId();
+			return  daoProduct.getLastInsertId();
 		} catch (Exception e) {
-			logger.error(ExceptionMessages.ERROR_IN_GOODS_SERVICE + e);
-			throw new ErrorAddingPoductServiceException(ExceptionMessages.ERROR_IN_GOODS_SERVICE, e);
+			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+			throw new ErrorAddingPoductServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
 		}
 	}
 	

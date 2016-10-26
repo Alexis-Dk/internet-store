@@ -6,23 +6,23 @@ import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.DAOMaker;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.IDAOFactory;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOOrders;
-import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoOrders;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
+import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoOrder;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
  */
 @Repository("daoOrders")
-public class DaoOrders extends BaseDao<Orders> implements IDaoOrders {
+public class DaoOrder extends BaseDao<Order> implements IDaoOrder {
 
 	/**
-	 * Method insert Orsers to DB
-	 * @param orders
+	 * Method insert Orser to DB
+	 * @param order
 	 * @throws DaoException
 	 */
 	@Override
-	public void insertOrder(Orders orders) throws DaoException {
-		add(orders);
+	public void insertOrder(Order order) throws DaoException {
+		add(order);
 	}
 
 	/**
@@ -32,7 +32,7 @@ public class DaoOrders extends BaseDao<Orders> implements IDaoOrders {
 	@Override
 	public int getLastInsertId() throws DaoException {
 		IDAOFactory factory = new DAOMaker();
-		IDAOOrders<Orders> daoOrders = factory.getDAOOrders();
+		IDAOOrders<Order> daoOrders = factory.getDAOOrders();
 		return daoOrders.getLastInsertId();
 	}
 }

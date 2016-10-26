@@ -11,7 +11,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import org.apache.log4j.Logger;
 
-import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
+import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
 import com.superinc.europe.onlineshopping.gu.service.INavaigationService;
 
 /**
@@ -32,7 +32,7 @@ public class ServiceNavigationTest {
 	private INavaigationService navigationService;
 	
 	@Autowired
-	private IDaoGoods daoGoods;
+	private IDaoProduct daoGoods;
 
 	@Test
 	public void testGetNumberInResult() {

@@ -16,10 +16,10 @@ import org.apache.log4j.Logger;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.DAOMaker;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.IDAOFactory;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOGoodsInOrders;
-import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoodsInOrders;
+import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoOrderedProduct;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
 
 /**
@@ -36,21 +36,21 @@ public class DaoGoodsOrdersTest {
 	private static Logger logger = Logger.getLogger(DaoGoodsOrdersTest.class);
     
 	@Autowired
-	private IDaoGoodsInOrders daoGoodsOrders;
+	private IDaoOrderedProduct daoGoodsOrders;
 
 	@Test
 	public void testInsertGoodsOrders() {
 		try {
 			logger.info("test insert goods, orders begin");
-			GoodsOrders goodsOrders1 = new GoodsOrders(new Orders(new Users(1),
+			OrderedProduct goodsOrders1 = new OrderedProduct(new Order(new Users(1),
 					"test", 0, 499), new Product(1, "test", "tv/UE40J6200AU.jpg",
 					599, "UE40J6200US"), 11);
-			List<GoodsOrders> list = new ArrayList<GoodsOrders>();
+			List<OrderedProduct> list = new ArrayList<OrderedProduct>();
 			list.add(goodsOrders1);
-			daoGoodsOrders.insertGoodsInOrders(0, list);
+			daoGoodsOrders.insertOrderedProduct(0, list);
 			
 			IDAOFactory factory = new DAOMaker();
-			IDAOGoodsInOrders<GoodsOrders> daoGoodsInOrders = factory
+			IDAOGoodsInOrders<OrderedProduct> daoGoodsInOrders = factory
 					.getDAOGoodsInOrders();
 			daoGoodsInOrders.insert(goodsOrders1);
 			
@@ -63,15 +63,15 @@ public class DaoGoodsOrdersTest {
 	public void testInsertGoodsOrdersEmpty() {
 		try {
 			logger.info("test insert goods, orders begin");
-			GoodsOrders goodsOrders1 = new GoodsOrders(new Orders(new Users(1),
+			OrderedProduct goodsOrders1 = new OrderedProduct(new Order(new Users(1),
 					"test", 0, 499), new Product(1, "test", "tv/UE40J6200AU.jpg",
 					599, "UE40J6200US"), 1);
-			List<GoodsOrders> list = new ArrayList<GoodsOrders>();
+			List<OrderedProduct> list = new ArrayList<OrderedProduct>();
 			list.add(goodsOrders1);
-			daoGoodsOrders.insertGoodsInOrders(1, list);
+			daoGoodsOrders.insertOrderedProduct(1, list);
 			
 			IDAOFactory factory = new DAOMaker();
-			IDAOGoodsInOrders<GoodsOrders> daoGoodsInOrders = factory
+			IDAOGoodsInOrders<OrderedProduct> daoGoodsInOrders = factory
 					.getDAOGoodsInOrders();
 			daoGoodsInOrders.insert(goodsOrders1);
 			

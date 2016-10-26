@@ -12,10 +12,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.apache.log4j.Logger;
 
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
-import com.superinc.europe.onlineshopping.gu.service.IGoodsInOrdersService;
+import com.superinc.europe.onlineshopping.gu.service.IOrderedProductService;
 
 /**
  * Created by Alexey Druzik on 11.09.2016.
@@ -32,7 +32,7 @@ public class ServiceGoodsOrdersTest {
 	private static Logger logger = Logger.getLogger(ServiceGoodsOrdersTest.class);
     
 	@Autowired
-	private IGoodsInOrdersService goodsOrdersService;
+	private IOrderedProductService goodsOrdersService;
 
 //	@Test
 //	public void testInsertGoodsOrders() {

@@ -11,7 +11,7 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
  * Created by Alexey Druzik on 29.08.2016.
  * @param <T>
  */
-public interface IGoodsService<T> extends IBaseService<T> {
+public interface IProductService<T> extends IBaseService<T> {
 	
 	/**
 	 * Method obtain list of goods required numbers of page

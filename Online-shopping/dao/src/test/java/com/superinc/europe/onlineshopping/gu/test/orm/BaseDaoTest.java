@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.apache.log4j.Logger;
 
-import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
+import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoNavigation;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 
@@ -31,7 +31,7 @@ public class BaseDaoTest {
 	private static Logger logger = Logger.getLogger(BaseDaoTest.class);
     
 	@Autowired
-	private IDaoGoods daoGoods;
+	private IDaoProduct daoGoods;
 
 	@Autowired
 	private IDaoNavigation<Object> daoNavigation;

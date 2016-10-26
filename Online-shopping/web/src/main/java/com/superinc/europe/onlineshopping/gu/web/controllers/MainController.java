@@ -36,7 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
+import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
 import com.superinc.europe.onlineshopping.gu.entities.dto.Bucket;
 import com.superinc.europe.onlineshopping.gu.entities.dto.DepartmentVO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.UserDTO;
@@ -44,13 +44,13 @@ import com.superinc.europe.onlineshopping.gu.entities.dto.ProductDTO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Category;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
-import com.superinc.europe.onlineshopping.gu.service.IGoodsInOrdersService;
-import com.superinc.europe.onlineshopping.gu.service.IGoodsService;
+import com.superinc.europe.onlineshopping.gu.service.IOrderedProductService;
+import com.superinc.europe.onlineshopping.gu.service.IProductService;
 import com.superinc.europe.onlineshopping.gu.service.INavaigationService;
-import com.superinc.europe.onlineshopping.gu.service.IOrdersService;
+import com.superinc.europe.onlineshopping.gu.service.IOrderService;
 import com.superinc.europe.onlineshopping.gu.service.IProductCategoryService;
 import com.superinc.europe.onlineshopping.gu.service.IUsersService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ErrorAddingPoductServiceException;
@@ -78,22 +78,22 @@ public class MainController {
 	List<QuantityAndSum> quantitySum = null;
 
 	@Autowired
-	private IGoodsService goodsService;
+	private IProductService goodsService;
 
 	@Autowired
 	private IUsersService usersService;
 
 	@Autowired
-	private IOrdersService ordersService;
+	private IOrderService ordersService;
 
 	@Autowired
-	private IGoodsInOrdersService goodsInOrdersService;
+	private IOrderedProductService goodsInOrdersService;
 
 	@Autowired
 	private INavaigationService navigationService;
 
 	@Autowired
-	private IDaoGoods daoGoods;
+	private IDaoProduct daoGoods;
 
     @Autowired
     public IProductCategoryService productCategoryService;
@@ -192,7 +192,7 @@ public class MainController {
 
 		Product goods = new Product(Integer.parseInt(goodsId), name, imagePath,
 				Integer.parseInt(price), description);
-		GoodsOrders goodsOrders = new GoodsOrders(new Orders(
+		OrderedProduct goodsOrders = new OrderedProduct(new Order(
 				RequestParamConstants.VALUE_ONE), goods,
 				RequestParamConstants.VALUE_ONE);
 
@@ -292,15 +292,15 @@ public class MainController {
 		try {
 			if (HttpUtils.checkPrincipal() && HttpUtils.integerOrEmpty(session)) {
 				ordersService
-						.insertOrder(new Orders(
+						.insertOrder(new Order(
 								new Users(HttpUtils.stringSplitter(HttpUtils
 										.usersId())),
 								RequestParamConstants.PROCESSING,
 								0,
 								(int) session
 										.getAttribute(RequestParamConstants.TOTAL_COST)));
-				goodsInOrdersService.insertGoodsInOrders(ordersService
-						.getLastInsertId(), (List<GoodsOrders>) session
+				goodsInOrdersService.insertOrderedProduct(ordersService
+						.getLastInsertId(), (List<OrderedProduct>) session
 						.getAttribute(RequestParamConstants.BUCKET));
 				model.put(RequestParamConstants.BUCKET_WIDGET,
 						HttpUtils.cleanAndReturnBucket(session));

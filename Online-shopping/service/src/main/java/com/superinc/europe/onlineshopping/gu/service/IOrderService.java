@@ -3,7 +3,7 @@ package com.superinc.europe.onlineshopping.gu.service;
 import org.springframework.context.annotation.Scope;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
 /**
@@ -11,14 +11,14 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
  * @param <T>
  */
 @Scope("session")
-public interface IOrdersService<T> extends IBaseService<T> {
+public interface IOrderService<T> extends IBaseService<T> {
 
 	/**
 	 * Method to insert Order to DB
-	 * @param orders
+	 * @param order
 	 * @throws DaoException
 	 */
-	void insertOrder(Orders orders) throws ServiceException;
+	void insertOrder(Order order) throws ServiceException;
 	
 	/**
 	 * Method get last insert Id

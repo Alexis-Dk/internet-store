@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.apache.log4j.Logger;
 
-import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
+import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
 
 /**
  * Created by Alexey Druzik on 11.09.2016.
@@ -26,7 +26,7 @@ public class DaoGoodsTest {
 	private static Logger logger = Logger.getLogger(DaoGoodsTest.class);
     
 	@Autowired
-	private IDaoGoods daoGoods;
+	private IDaoProduct daoGoods;
 
 	@Test
 	public void testGetBaseCurrentSession() {

@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.apache.log4j.Logger;
 
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
-import com.superinc.europe.onlineshopping.gu.service.IGoodsService;
+import com.superinc.europe.onlineshopping.gu.service.IProductService;
 
 /**
  * Created by Alexey Druzik on 11.09.2016.
@@ -29,7 +29,7 @@ public class ServiceGoodsTest {
 	private static Logger logger = Logger.getLogger(ServiceGoodsTest.class);
     
 	@Autowired
-	private IGoodsService<Product> goodsService;
+	private IProductService<Product> goodsService;
 	
 	@Test
 	public void addProduct() {

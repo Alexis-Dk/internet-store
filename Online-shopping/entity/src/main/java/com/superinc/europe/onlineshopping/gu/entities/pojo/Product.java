@@ -12,14 +12,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity 
-@Table(name="goods")
+@Table(name="product")
 public class Product implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "goods_id", unique = true, nullable = false, precision = 15, scale = 0)
+	@Column(name = "product_id", unique = true, nullable = false, precision = 15, scale = 0)
 	private int productId;
 	
 	@ManyToOne(targetEntity=Category.class)

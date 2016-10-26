@@ -10,7 +10,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpUtils;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamConstants;
 
@@ -69,18 +69,18 @@ public class RequestInterceptor implements HandlerInterceptor {
 	}
 	
 	public void initializeAllWdgets(HttpServletRequest request){
-		List<GoodsOrders> list = null;
-		if ((List<GoodsOrders>) request.getSession().getAttribute(RequestParamConstants.BUCKET) == null) {
-			list = new ArrayList<GoodsOrders>();
+		List<OrderedProduct> list = null;
+		if ((List<OrderedProduct>) request.getSession().getAttribute(RequestParamConstants.BUCKET) == null) {
+			list = new ArrayList<OrderedProduct>();
 		} else {
-			list = (List<GoodsOrders>) request.getSession().getAttribute(RequestParamConstants.BUCKET);
+			list = (List<OrderedProduct>) request.getSession().getAttribute(RequestParamConstants.BUCKET);
 		}
 		request.getSession().setAttribute(RequestParamConstants.BUCKET, list);
 		request.setAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET, getQuantityAndSum(list, request));
 		request.setAttribute(RequestParamConstants.BUCKET, list);
 	}
 	
-	public List<QuantityAndSum> getQuantityAndSum(List<GoodsOrders> list, HttpServletRequest request){
+	public List<QuantityAndSum> getQuantityAndSum(List<OrderedProduct> list, HttpServletRequest request){
 		int sumFinal = 0;
 		if (HttpUtils.checkBucketExistOrEmpty(request.getSession()) == true){
 			sumFinal = HttpUtils.getSum(request.getSession());

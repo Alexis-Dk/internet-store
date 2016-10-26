@@ -6,8 +6,8 @@ import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOUser;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.impl.GoodsInOrdersDAO;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.impl.OrdersDAO;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.impl.UserDAO;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.GoodsOrders;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Orders;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
 
 /**
@@ -19,11 +19,11 @@ public class DAOMaker implements IDAOFactory {
 		return new UserDAO();
 	}
 
-	public IDAOOrders<Orders> getDAOOrders() {
+	public IDAOOrders<Order> getDAOOrders() {
 		return new OrdersDAO();
 	}
 
-	public IDAOGoodsInOrders<GoodsOrders> getDAOGoodsInOrders() {
+	public IDAOGoodsInOrders<OrderedProduct> getDAOGoodsInOrders() {
 		return new GoodsInOrdersDAO();
 	}
 	

@@ -10,15 +10,16 @@ import org.springframework.stereotype.Repository;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.ExceptionMessages;
-import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoGoods;
+import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
  */
-@Repository("daoGoods")
-public class DaoGoods extends BaseDao<Product> implements IDaoGoods{
+@Repository("daoProduct")
+public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 
+	private static final String SELECT_MAX_PRODUCT_ID_FROM_PRODUCT = "SELECT MAX(product_id) FROM Product";
 	private static final String GET_COUNT_ROW = "select count(*) from Product where delete_status=0";
 	private static final String LED_TV_CATEGORY = "category_id = 1";
 	private static final String EMPTY_FIELD = "";
@@ -26,7 +27,7 @@ public class DaoGoods extends BaseDao<Product> implements IDaoGoods{
 	private static final String PRICE_MORE = "price >= ";
 	private static final int DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE = 12;
 	
-	Logger log = Logger.getLogger(DaoGoods.class);
+	Logger log = Logger.getLogger(DaoProduct.class);
 	
 	/**
 	 * Method get current session
@@ -98,7 +99,7 @@ public class DaoGoods extends BaseDao<Product> implements IDaoGoods{
 	 */
 	@Override
 	public int getLastInsertId() throws DaoException {
-		Integer lastId = (Integer) getCurrentSession().createSQLQuery("SELECT MAX(goods_id) FROM Product")
+		Integer lastId = (Integer) getCurrentSession().createSQLQuery(SELECT_MAX_PRODUCT_ID_FROM_PRODUCT)
 			    .uniqueResult();  
 		try {
 			return lastId;

@@ -53,7 +53,7 @@ public class ProductCategoryService implements IProductCategoryService {
 	    categories = productCategoryDao.getAllProductCategories();
 	} catch (DataAccessException e) {
 	    log.error("Error getting all product categories from database: ", e);
-	    throw new ErrorGettingCategoryServiceException(ExceptionMessages.ERROR_IN_GOODS_SERVICE, e);
+	    throw new ErrorGettingCategoryServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
 	}
 	log.info("Ending method getAllProductCategories()");
 	return categories;
