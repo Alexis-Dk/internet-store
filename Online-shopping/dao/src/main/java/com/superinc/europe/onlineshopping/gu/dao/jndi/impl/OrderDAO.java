@@ -7,15 +7,15 @@ import java.sql.SQLException;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.db.ConnectionPool;
-import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOOrders;
+import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOOrder;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
  */
-public class OrdersDAO implements IDAOOrders<Order> {
+public class OrderDAO implements IDAOOrder<Order> {
 
-	private static final String INSERT_INTO_ORDERS = "INSERT INTO ORDERS (users_id, payment, delete_status, totalcost) VALUES (?, ?, ?, ?)";
+	private static final String INSERT_INTO_ORDER = "INSERT INTO ORDER (users_id, payment, delete_status, totalcost) VALUES (?, ?, ?, ?)";
 
 	/**
 	 * Method insert Orders to DB
@@ -27,7 +27,7 @@ public class OrdersDAO implements IDAOOrders<Order> {
 		ResultSet set = null;
 		try {
 			connection = ConnectionPool.getPool().getConnection();
-			statement = connection.prepareStatement(INSERT_INTO_ORDERS);
+			statement = connection.prepareStatement(INSERT_INTO_ORDER);
 			statement.setInt(1, ob.getUsersFk().getId());
 			statement.setString(2, ob.getPayment());
 			statement.setInt(3, ob.getDeleteStatus());
@@ -51,7 +51,7 @@ public class OrdersDAO implements IDAOOrders<Order> {
 		try {
 			connection = ConnectionPool.getPool().getConnection();
 //			statement = connection.prepareStatement("SELECT LAST_INSERT_ID() FROM internetshop.orders");
-			statement = connection.prepareStatement("SELECT MAX(orders_id) FROM internetshop.orders");
+			statement = connection.prepareStatement("SELECT MAX(order_id) FROM internetshop.order");
 			
 			set = statement.executeQuery();
 			while (set.next()) {

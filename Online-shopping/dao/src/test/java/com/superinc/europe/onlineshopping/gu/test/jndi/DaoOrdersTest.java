@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 
 import com.superinc.europe.onlineshopping.gu.dao.jndi.DAOMaker;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.IDAOFactory;
-import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOOrders;
+import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOOrder;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoOrder;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
@@ -39,7 +39,7 @@ public class DaoOrdersTest {
 			logger.info("test insert goods, orders begin");
 
 			IDAOFactory factory = new DAOMaker();
-			IDAOOrders<Order> dao = factory.getDAOOrders();
+			IDAOOrder<Order> dao = factory.getDAOOrders();
 			Order orders = new Order(new Users(1), "test",  0, 499);
 			dao.insert(orders);
 			

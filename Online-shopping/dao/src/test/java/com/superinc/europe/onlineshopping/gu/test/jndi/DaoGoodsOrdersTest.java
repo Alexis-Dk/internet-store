@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
 
 import com.superinc.europe.onlineshopping.gu.dao.jndi.DAOMaker;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.IDAOFactory;
-import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOGoodsInOrders;
+import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOOrderedProduct;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoOrderedProduct;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
@@ -50,7 +50,7 @@ public class DaoGoodsOrdersTest {
 			daoGoodsOrders.insertOrderedProduct(0, list);
 			
 			IDAOFactory factory = new DAOMaker();
-			IDAOGoodsInOrders<OrderedProduct> daoGoodsInOrders = factory
+			IDAOOrderedProduct<OrderedProduct> daoGoodsInOrders = factory
 					.getDAOGoodsInOrders();
 			daoGoodsInOrders.insert(goodsOrders1);
 			
@@ -71,7 +71,7 @@ public class DaoGoodsOrdersTest {
 			daoGoodsOrders.insertOrderedProduct(1, list);
 			
 			IDAOFactory factory = new DAOMaker();
-			IDAOGoodsInOrders<OrderedProduct> daoGoodsInOrders = factory
+			IDAOOrderedProduct<OrderedProduct> daoGoodsInOrders = factory
 					.getDAOGoodsInOrders();
 			daoGoodsInOrders.insert(goodsOrders1);
 			

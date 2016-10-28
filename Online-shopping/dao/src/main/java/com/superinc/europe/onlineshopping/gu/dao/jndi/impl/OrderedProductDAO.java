@@ -7,17 +7,17 @@ import java.sql.SQLException;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.db.ConnectionPool;
-import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOGoodsInOrders;
+import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOOrderedProduct;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
  */
-public class GoodsInOrdersDAO implements IDAOGoodsInOrders<OrderedProduct> {
-	private static final String INSERT_INTO_GOODS_IN_ORDERS = "INSERT INTO goodsinorders (orders_id_FK, goods_id_FK, count) VALUES (?, ?, ?)";
+public class OrderedProductDAO implements IDAOOrderedProduct<OrderedProduct> {
+	private static final String INSERT_INTO_ORDERED_PRODUCT = "INSERT INTO ordered_produvt (order_id_FK, product_id_FK, count) VALUES (?, ?, ?)";
 
 	/**
-	 * Method insert Goods_in_orders to DB
+	 * Method insert OrderedProduct to DB
 	 * @param ob
 	 */
 	public void insert(OrderedProduct ob) {
@@ -26,8 +26,8 @@ public class GoodsInOrdersDAO implements IDAOGoodsInOrders<OrderedProduct> {
 		ResultSet set = null;
 		try {
 			connection = ConnectionPool.getPool().getConnection();
-			statement = connection.prepareStatement(INSERT_INTO_GOODS_IN_ORDERS);
-			statement.setInt(1, ob.getOrderFk().getOrdersId());
+			statement = connection.prepareStatement(INSERT_INTO_ORDERED_PRODUCT);
+			statement.setInt(1, ob.getOrderFk().getOrderId());
 			statement.setInt(2, ob.getProductFk().getProductId());
 			statement.setInt(3, ob.getCount());
 			statement.executeUpdate();

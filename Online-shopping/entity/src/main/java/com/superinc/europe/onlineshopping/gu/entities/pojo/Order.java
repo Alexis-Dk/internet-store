@@ -11,15 +11,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@SuppressWarnings("serial")
 @Entity 
-@Table(name="orders")
+@Table(name="`order`")
 public class Order implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "orders_id", unique = true, nullable = false, precision = 15, scale = 0)
-	private int ordersId;
+	@Column(name = "order_id", unique = true, nullable = false, precision = 15, scale = 0)
+	private int orderId;
 	
 	@ManyToOne(targetEntity=Users.class)
 	@JoinColumn(name="users_id_FK", referencedColumnName = "users_id")
@@ -37,13 +38,13 @@ public class Order implements Serializable{
 	public Order() {
 	}
 
-	public Order(int ordersId) {
-		this.ordersId = ordersId;
+	public Order(int orderId) {
+		this.orderId = orderId;
 	}
 	
-	public Order(int ordersId, Users usersFk, String payment,
+	public Order(int orderId, Users usersFk, String payment,
 			int deleteStatus, int totalCost) {
-		this.ordersId = ordersId;
+		this.orderId = orderId;
 		this.usersFk = usersFk;
 		this.payment = payment;
 		this.deleteStatus = deleteStatus;
@@ -58,12 +59,12 @@ public class Order implements Serializable{
 		this.totalCost = totalCost;
 	}
 
-	public int getOrdersId() {
-		return ordersId;
+	public int getOrderId() {
+		return orderId;
 	}
 
-	public void setOrdersId(int ordersId) {
-		this.ordersId = ordersId;
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
 	}
 
 	public Users getUsersFk() {
@@ -100,7 +101,7 @@ public class Order implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Orders [ordersId=" + ordersId + ", usersFk=" + usersFk
+		return "Order [orderId=" + orderId + ", usersFk=" + usersFk
 				+ ", payment=" + payment + ", deleteStatus=" + deleteStatus
 				+ ", totalCost=" + totalCost + "]";
 	}

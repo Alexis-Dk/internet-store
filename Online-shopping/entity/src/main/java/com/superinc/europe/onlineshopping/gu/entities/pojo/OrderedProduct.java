@@ -24,7 +24,7 @@ public class OrderedProduct implements Serializable{
 	private int orderedProductId;
 
 	@ManyToOne(targetEntity=Order.class, fetch = FetchType.LAZY)
-	@JoinColumn(name="order_id_FK", referencedColumnName = "orders_id")
+	@JoinColumn(name="order_id_FK", referencedColumnName = "order_id")
     private Order orderFk; 
 
 	@ManyToOne(targetEntity=Product.class, fetch = FetchType.LAZY)

@@ -17,7 +17,7 @@ import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
 public class DaoOrderedProduct extends BaseDao<OrderedProduct> implements IDaoOrderedProduct {
 
 	/**
-	 * Method insert goodsInOrders to DB 
+	 * Method insert orderedProduct to DB 
 	 * @param ob
 	 * @param lastInsertId
 	 * @throws DaoException

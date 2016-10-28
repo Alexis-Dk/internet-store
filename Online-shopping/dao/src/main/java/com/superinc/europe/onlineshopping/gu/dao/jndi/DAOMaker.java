@@ -1,10 +1,10 @@
 package com.superinc.europe.onlineshopping.gu.dao.jndi;
 
-import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOGoodsInOrders;
-import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOOrders;
+import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOOrderedProduct;
+import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOOrder;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOUser;
-import com.superinc.europe.onlineshopping.gu.dao.jndi.impl.GoodsInOrdersDAO;
-import com.superinc.europe.onlineshopping.gu.dao.jndi.impl.OrdersDAO;
+import com.superinc.europe.onlineshopping.gu.dao.jndi.impl.OrderedProductDAO;
+import com.superinc.europe.onlineshopping.gu.dao.jndi.impl.OrderDAO;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.impl.UserDAO;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
@@ -19,12 +19,12 @@ public class DAOMaker implements IDAOFactory {
 		return new UserDAO();
 	}
 
-	public IDAOOrders<Order> getDAOOrders() {
-		return new OrdersDAO();
+	public IDAOOrder<Order> getDAOOrders() {
+		return new OrderDAO();
 	}
 
-	public IDAOGoodsInOrders<OrderedProduct> getDAOGoodsInOrders() {
-		return new GoodsInOrdersDAO();
+	public IDAOOrderedProduct<OrderedProduct> getDAOGoodsInOrders() {
+		return new OrderedProductDAO();
 	}
 	
 }
