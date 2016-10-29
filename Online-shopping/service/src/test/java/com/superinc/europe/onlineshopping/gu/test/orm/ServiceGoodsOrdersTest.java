@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.User;
 import com.superinc.europe.onlineshopping.gu.service.IOrderedProductService;
 
 /**

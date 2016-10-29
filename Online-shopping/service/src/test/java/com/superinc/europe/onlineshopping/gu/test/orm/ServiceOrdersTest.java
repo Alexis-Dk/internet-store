@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.apache.log4j.Logger;
 
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.User;
 import com.superinc.europe.onlineshopping.gu.service.IOrderService;
 
 /**
@@ -36,7 +36,7 @@ public class ServiceOrdersTest {
 	public void testInsertOrders() {
 		try {
 			logger.info("test add orders begin");
-			Order orders = new Order(new Users(1), "test",  0, 499);
+			Order orders = new Order(new User(1), "test",  0, 499);
 			ordersService.insertOrder(orders);
 			} catch (Exception e) {
 			logger.error("Error test add orders " + e);

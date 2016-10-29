@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.apache.log4j.Logger;
 
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.User;
 import com.superinc.europe.onlineshopping.gu.service.IUsersService;
 import com.superinc.europe.onlineshopping.gu.service.impl.UserService;
 
@@ -30,13 +30,13 @@ public class ServiceUsersTest {
 	private static Logger logger = Logger.getLogger(ServiceOrdersTest.class);
     
 	@Autowired
-	private IUsersService<Users> usersService;
+	private IUsersService<User> usersService;
 
 	@Test
 	public void testInsertOrders() {
 		try {
 			logger.info("test insert users begin");
-			Users users = new Users(101, "root",  "root", "admin");
+			User users = new User(101, "root",  "root", "admin");
 			usersService.insertUser(users); 
 			} catch (Exception e) {
 			logger.error("Error test insert users " + e);

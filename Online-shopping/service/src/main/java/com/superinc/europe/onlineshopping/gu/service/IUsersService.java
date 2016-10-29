@@ -3,7 +3,7 @@ package com.superinc.europe.onlineshopping.gu.service;
 import org.springframework.context.annotation.Scope;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.User;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 
 /**
@@ -18,6 +18,6 @@ public interface IUsersService<T> extends IBaseService<T> {
 	 * @param users
 	 * @throws DaoException
 	 */
-	void insertUser(Users users) throws ServiceException;
+	void insertUser(User users) throws ServiceException;
 	
 }

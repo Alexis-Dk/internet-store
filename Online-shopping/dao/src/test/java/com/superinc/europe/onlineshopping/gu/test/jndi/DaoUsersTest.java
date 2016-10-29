@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.DAOMaker;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.IDAOFactory;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOUser;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.User;
 
 /**
  * Created by Alexey Druzik on 11.09.2016.
@@ -32,9 +32,9 @@ public class DaoUsersTest {
 		try {
 			logger.info("test insert goods, orders begin");
 			
-			Users users = new Users("user", "user", "user");
+			User users = new User("user", "user", "user");
 			IDAOFactory factory = new DAOMaker();
-			IDAOUser<Users> dao = factory.getDAOUser();
+			IDAOUser<User> dao = factory.getDAOUser();
 			dao.insert(users);
 			
 			} catch (Exception e) {

@@ -46,7 +46,7 @@ import com.superinc.europe.onlineshopping.gu.entities.pojo.Category;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.User;
 import com.superinc.europe.onlineshopping.gu.service.IOrderedProductService;
 import com.superinc.europe.onlineshopping.gu.service.IProductService;
 import com.superinc.europe.onlineshopping.gu.service.INavaigationService;
@@ -293,7 +293,7 @@ public class MainController {
 			if (HttpUtils.checkPrincipal() && HttpUtils.integerOrEmpty(session)) {
 				ordersService
 						.insertOrder(new Order(
-								new Users(HttpUtils.stringSplitter(HttpUtils
+								new User(HttpUtils.stringSplitter(HttpUtils
 										.usersId())),
 								RequestParamConstants.PROCESSING,
 								0,
@@ -515,7 +515,7 @@ public class MainController {
         try {
     		if (!br.hasErrors()) {
     			if (userDTO != null) {
-    				Users users = new Users(userDTO.getName(), userDTO.getPassword(),
+    				User users = new User(userDTO.getName(), userDTO.getPassword(),
     						RequestParamConstants.USER, userDTO.getEmail());
     				usersService.insertUser(users);
     				return RequestParamConstants.GET_REGISTRATION;

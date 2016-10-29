@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.apache.log4j.Logger;
 
-import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoUsers;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
+import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoUser;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.User;
 
 /**
  * Created by Alexey Druzik on 11.09.2016.
@@ -27,13 +27,13 @@ public class DaoGoodsOrdersTest {
 	private static Logger logger = Logger.getLogger(DaoGoodsOrdersTest.class);
     
 	@Autowired
-	private IDaoUsers daoUsers;
+	private IDaoUser daoUsers;
 
 	@Test
 	public void testInsertGoodsOrders() {
 		try {
 			logger.info("test insert goods, orders begin");
-			Users users = new Users("root", "root", "admin");
+			User users = new User("root", "root", "admin");
 			daoUsers.insertUser(users);
 			} catch (Exception e) {
 			logger.error("Error insert goods, orders  " + e);

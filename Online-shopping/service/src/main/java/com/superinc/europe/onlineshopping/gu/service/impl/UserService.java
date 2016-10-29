@@ -14,8 +14,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
-import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoUsers;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
+import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoUser;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.User;
 import com.superinc.europe.onlineshopping.gu.service.IUsersService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ErrorAddingPoductServiceException;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
@@ -26,11 +26,11 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
  * @param <T>
  */
 @Named
-public class UserService<T> implements UserDetailsService, IUsersService<Users>  {
+public class UserService<T> implements UserDetailsService, IUsersService<User>  {
 
 	private static final String USERNAME = "username";
 
-	private static final String HQL_QUERY = "from Users u where u.username=:username";
+	private static final String HQL_QUERY = "from User u where u.username=:username";
 
 	private static Logger logger = Logger.getLogger(UserService.class);
 	
@@ -38,7 +38,7 @@ public class UserService<T> implements UserDetailsService, IUsersService<Users> 
 	private SessionFactory sessionFactory;
 	
 	@Autowired
-	private IDaoUsers daoUsers;
+	private IDaoUser daoUsers;
 	
 	public UserService() {
 	}
@@ -49,7 +49,7 @@ public class UserService<T> implements UserDetailsService, IUsersService<Users> 
 	 * @throws ServiceException
 	 */
 	@Override
-	public Serializable add(Users ob) throws ErrorAddingPoductServiceException {
+	public Serializable add(User ob) throws ErrorAddingPoductServiceException {
 		Serializable id = null; 
 		try {
 			id = daoUsers.add(ob);
@@ -66,7 +66,7 @@ public class UserService<T> implements UserDetailsService, IUsersService<Users> 
 	 * @throws ServiceException
 	 */
 	@Override
-	public void update(Users ob) throws ServiceException {
+	public void update(User ob) throws ServiceException {
 		try {
 			daoUsers.update(ob);
 		} catch (DaoException e) {
@@ -114,11 +114,11 @@ public class UserService<T> implements UserDetailsService, IUsersService<Users> 
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String username) {
-		Users result = null;
+		User result = null;
 		try {
 			Query query = sessionFactory.getCurrentSession().createQuery(HQL_QUERY);
 			query.setParameter(USERNAME, username);
-			result = (Users) query.uniqueResult();
+			result = (User) query.uniqueResult();
 		} catch (DaoException e) {
 			logger.error(ExceptionMessages.ERROR_IN_USER_SERVICE + e);
 		}
@@ -131,7 +131,7 @@ public class UserService<T> implements UserDetailsService, IUsersService<Users> 
 	 * @throws DaoException
 	 */
 	@Override
-	public void insertUser(Users users) throws ServiceException {
+	public void insertUser(User users) throws ServiceException {
 		try {
 			daoUsers.insertUser(users);
 		} catch (DaoException e) {

@@ -20,7 +20,7 @@ import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoOrderedProduc
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.User;
 
 /**
  * Created by Alexey Druzik on 11.09.2016.
@@ -42,7 +42,7 @@ public class DaoGoodsOrdersTest {
 	public void testInsertGoodsOrders() {
 		try {
 			logger.info("test insert goods, orders begin");
-			OrderedProduct goodsOrders1 = new OrderedProduct(new Order(new Users(1),
+			OrderedProduct goodsOrders1 = new OrderedProduct(new Order(new User(1),
 					"test", 0, 499), new Product(1, "test", "tv/UE40J6200AU.jpg",
 					599, "UE40J6200US"), 11);
 			List<OrderedProduct> list = new ArrayList<OrderedProduct>();
@@ -63,7 +63,7 @@ public class DaoGoodsOrdersTest {
 	public void testInsertGoodsOrdersEmpty() {
 		try {
 			logger.info("test insert goods, orders begin");
-			OrderedProduct goodsOrders1 = new OrderedProduct(new Order(new Users(1),
+			OrderedProduct goodsOrders1 = new OrderedProduct(new Order(new User(1),
 					"test", 0, 499), new Product(1, "test", "tv/UE40J6200AU.jpg",
 					599, "UE40J6200US"), 1);
 			List<OrderedProduct> list = new ArrayList<OrderedProduct>();

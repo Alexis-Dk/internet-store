@@ -15,7 +15,7 @@ import com.superinc.europe.onlineshopping.gu.dao.jndi.IDAOFactory;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOOrder;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoOrder;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.User;
 
 /**
  * Created by Alexey Druzik on 11.09.2016.
@@ -40,7 +40,7 @@ public class DaoOrdersTest {
 
 			IDAOFactory factory = new DAOMaker();
 			IDAOOrder<Order> dao = factory.getDAOOrders();
-			Order orders = new Order(new Users(1), "test",  0, 499);
+			Order orders = new Order(new User(1), "test",  0, 499);
 			dao.insert(orders);
 			
 			} catch (Exception e) {

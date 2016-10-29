@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity 
-@Table(name="`order`")
+@Table(name="orders")
 public class Order implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -22,9 +22,9 @@ public class Order implements Serializable{
 	@Column(name = "order_id", unique = true, nullable = false, precision = 15, scale = 0)
 	private int orderId;
 	
-	@ManyToOne(targetEntity=Users.class)
-	@JoinColumn(name="users_id_FK", referencedColumnName = "users_id")
-	private Users usersFk;
+	@ManyToOne(targetEntity=User.class)
+	@JoinColumn(name="user_id_FK", referencedColumnName = "user_id")
+	private User usersFk;
 	
 	@Column(name="payment")
     private String payment; 
@@ -42,7 +42,7 @@ public class Order implements Serializable{
 		this.orderId = orderId;
 	}
 	
-	public Order(int orderId, Users usersFk, String payment,
+	public Order(int orderId, User usersFk, String payment,
 			int deleteStatus, int totalCost) {
 		this.orderId = orderId;
 		this.usersFk = usersFk;
@@ -51,7 +51,7 @@ public class Order implements Serializable{
 		this.totalCost = totalCost;
 	}
 	
-	public Order(Users usersFk, String payment,
+	public Order(User usersFk, String payment,
 			int deleteStatus, int totalCost) {
 		this.usersFk = usersFk;
 		this.payment = payment;
@@ -67,11 +67,11 @@ public class Order implements Serializable{
 		this.orderId = orderId;
 	}
 
-	public Users getUsersFk() {
+	public User getUsersFk() {
 		return usersFk;
 	}
 
-	public void setUsersFk(Users usersId) {
+	public void setUsersFk(User usersId) {
 		this.usersFk = usersId;
 	}
 

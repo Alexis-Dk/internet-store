@@ -19,7 +19,7 @@ import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 @Repository("daoProduct")
 public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 
-	private static final String SELECT_MAX_PRODUCT_ID_FROM_PRODUCT = "SELECT MAX(product_id) FROM Product";
+	private static final String SELECT_MAX_PRODUCT_ID_FROM_PRODUCTS = "SELECT MAX(product_id) FROM Products";
 	private static final String GET_COUNT_ROW = "select count(*) from Product where delete_status=0";
 	private static final String LED_TV_CATEGORY = "category_id = 1";
 	private static final String EMPTY_FIELD = "";
@@ -99,7 +99,7 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 	 */
 	@Override
 	public int getLastInsertId() throws DaoException {
-		Integer lastId = (Integer) getCurrentSession().createSQLQuery(SELECT_MAX_PRODUCT_ID_FROM_PRODUCT)
+		Integer lastId = (Integer) getCurrentSession().createSQLQuery(SELECT_MAX_PRODUCT_ID_FROM_PRODUCTS)
 			    .uniqueResult();  
 		try {
 			return lastId;

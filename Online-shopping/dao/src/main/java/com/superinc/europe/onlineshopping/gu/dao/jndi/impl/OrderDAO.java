@@ -15,7 +15,8 @@ import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
  */
 public class OrderDAO implements IDAOOrder<Order> {
 
-	private static final String INSERT_INTO_ORDER = "INSERT INTO ORDER (users_id, payment, delete_status, totalcost) VALUES (?, ?, ?, ?)";
+	private static final String SELECT_MAX_ORDER_ID = "SELECT MAX(order_id) FROM internetshop.orders";
+	private static final String INSERT_INTO_ORDERS = "INSERT INTO ORDERS (user_id, payment, delete_status, totalcost) VALUES (?, ?, ?, ?)";
 
 	/**
 	 * Method insert Orders to DB
@@ -27,7 +28,7 @@ public class OrderDAO implements IDAOOrder<Order> {
 		ResultSet set = null;
 		try {
 			connection = ConnectionPool.getPool().getConnection();
-			statement = connection.prepareStatement(INSERT_INTO_ORDER);
+			statement = connection.prepareStatement(INSERT_INTO_ORDERS);
 			statement.setInt(1, ob.getUsersFk().getId());
 			statement.setString(2, ob.getPayment());
 			statement.setInt(3, ob.getDeleteStatus());
@@ -51,7 +52,7 @@ public class OrderDAO implements IDAOOrder<Order> {
 		try {
 			connection = ConnectionPool.getPool().getConnection();
 //			statement = connection.prepareStatement("SELECT LAST_INSERT_ID() FROM internetshop.orders");
-			statement = connection.prepareStatement("SELECT MAX(order_id) FROM internetshop.order");
+			statement = connection.prepareStatement(SELECT_MAX_ORDER_ID);
 			
 			set = statement.executeQuery();
 			while (set.next()) {

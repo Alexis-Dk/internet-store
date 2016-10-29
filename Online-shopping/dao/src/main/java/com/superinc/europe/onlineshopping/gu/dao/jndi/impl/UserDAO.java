@@ -8,12 +8,12 @@ import java.sql.SQLException;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.db.ConnectionPool;
 import com.superinc.europe.onlineshopping.gu.dao.jndi.idao.IDAOUser;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Users;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.User;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
  */
-public class UserDAO implements IDAOUser<Users> {
+public class UserDAO implements IDAOUser<User> {
 
 	private static final String INSERT_INTO_USERS = "INSERT INTO USERS (password, role, username) VALUES (?, ?, ?)";
 
@@ -22,7 +22,7 @@ public class UserDAO implements IDAOUser<Users> {
 	 * @param ob
 	 */
 	@Override
-	public void insert(Users ob) {
+	public void insert(User ob) {
 			Connection connection = null;
 			PreparedStatement statement = null;
 			ResultSet set = null;

@@ -19,8 +19,8 @@ public class HttpMailer {
 	private static final String MAIL_SMTP_HOST = "mail.smtp.host";
 	private static final String MAIL_SMTP_STARTTLS_ENABLE = "mail.smtp.starttls.enable";
 	private static final String MAIL_SMTP_AUTH = "mail.smtp.auth";
-	public static final String SENDER = "alexeydruzik@inbox.ru";
-	public static final String PASSWORD = "alexdruz"; 
+	public static final String SENDER = "107615@tut.by";
+	public static final String PASSWORD = "107615"; 
 	public static final String CONTENT = "Confirmation an order";
 	public static final String SUBJECT = "Congratulation, you have bought a product";
 	

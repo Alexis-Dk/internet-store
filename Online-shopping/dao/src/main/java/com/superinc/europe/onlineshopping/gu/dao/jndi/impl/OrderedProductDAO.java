@@ -14,7 +14,7 @@ import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
  * Created by Alexey Druzik on 29.08.2016.
  */
 public class OrderedProductDAO implements IDAOOrderedProduct<OrderedProduct> {
-	private static final String INSERT_INTO_ORDERED_PRODUCT = "INSERT INTO ordered_produvt (order_id_FK, product_id_FK, count) VALUES (?, ?, ?)";
+	private static final String INSERT_INTO_ORDERED_PRODUCTS = "INSERT INTO ordered_products (order_id_FK, product_id_FK, count) VALUES (?, ?, ?)";
 
 	/**
 	 * Method insert OrderedProduct to DB
@@ -26,7 +26,7 @@ public class OrderedProductDAO implements IDAOOrderedProduct<OrderedProduct> {
 		ResultSet set = null;
 		try {
 			connection = ConnectionPool.getPool().getConnection();
-			statement = connection.prepareStatement(INSERT_INTO_ORDERED_PRODUCT);
+			statement = connection.prepareStatement(INSERT_INTO_ORDERED_PRODUCTS);
 			statement.setInt(1, ob.getOrderFk().getOrderId());
 			statement.setInt(2, ob.getProductFk().getProductId());
 			statement.setInt(3, ob.getCount());
