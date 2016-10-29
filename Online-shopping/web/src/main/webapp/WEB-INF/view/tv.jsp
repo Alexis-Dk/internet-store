@@ -180,47 +180,47 @@
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
-                <c:forEach items="${requestScope.goods}" var="good">
+                <c:forEach items="${requestScope.products}" var="product">
                 <div class="col-md-3 col-sm-6">
                     <div class="single-shop-product">
                         <div class="product-upper">
-                        <a href="hello?description=<c:out value="${good.description}"></c:out>
-&name=<c:out value="${good.name}"></c:out>
-&characteristic1=<c:out value="${good.characteristic1}"></c:out>
-&characteristic2=<c:out value="${good.characteristic2}"></c:out>
-&characteristic3=<c:out value="${good.characteristic3}"></c:out>
-&characteristic4=<c:out value="${good.characteristic4}"></c:out>
-&characteristic6=<c:out value="${good.characteristic6}"></c:out>
-&characteristic7=<c:out value="${good.characteristic7}"></c:out> 
-&rating=<c:out value="${good.rating}"></c:out>
-&stockStatus=<c:out value="${good.stockStatus}"></c:out>
-&imagePath=<c:out value="${good.imagePath}"></c:out>
-&price=<c:out value="${good.price}"></c:out>
-&goodsId=<c:out value="${good.productId}"></c:out>">
-                        <img src="img/<c:out value="${good.imagePath}"></c:out>" alt=""></a>
+                        <a href="hello?description=<c:out value="${product.description}"></c:out>
+&name=<c:out value="${product.name}"></c:out>
+&characteristic1=<c:out value="${product.characteristic1}"></c:out>
+&characteristic2=<c:out value="${product.characteristic2}"></c:out>
+&characteristic3=<c:out value="${product.characteristic3}"></c:out>
+&characteristic4=<c:out value="${product.characteristic4}"></c:out>
+&characteristic6=<c:out value="${product.characteristic6}"></c:out>
+&characteristic7=<c:out value="${product.characteristic7}"></c:out> 
+&rating=<c:out value="${product.rating}"></c:out>
+&stockStatus=<c:out value="${product.stockStatus}"></c:out>
+&imagePath=<c:out value="${product.imagePath}"></c:out>
+&price=<c:out value="${product.price}"></c:out>
+&productId=<c:out value="${product.productId}"></c:out>">
+                        <img src="img/<c:out value="${product.imagePath}"></c:out>" alt=""></a>
                         </div>
-							<h2><a><c:out value="${good.name}"></c:out> <c:out value="${good.description}"></c:out></a></h2>
+							<h2><a><c:out value="${product.name}"></c:out> <c:out value="${product.description}"></c:out></a></h2>
 						<div class="product-carousel-price">
-                            <ins>$<c:out value="${good.price}"></c:out></ins> <del>$<c:out value="${good.oldprice}"></c:out></del>
+                            <ins>$<c:out value="${product.price}"></c:out></ins> <del>$<c:out value="${product.oldprice}"></c:out></del>
                         </div>  
                         <sec:authorize access="isAuthenticated()">  
 	                        <div class="product-option-shop">
 									<a class="add_to_cart_button" data-quantity="1"
 										data-product_sku="" data-product_id="70" rel="nofollow"
-										href="${context}/addNewGoodsToCart?
-										description=<c:out value="${good.description}"></c:out>
-&name=<c:out value="${good.name}"></c:out>
-&characteristic1=<c:out value="${good.characteristic1}"></c:out>
-&characteristic2=<c:out value="${good.characteristic2}"></c:out>
-&characteristic3=<c:out value="${good.characteristic3}"></c:out>
-&characteristic4=<c:out value="${good.characteristic4}"></c:out>
-&characteristic6=<c:out value="${good.characteristic6}"></c:out>
-&characteristic7=<c:out value="${good.characteristic7}"></c:out>
-&rating=<c:out value="${good.rating}"></c:out>
-&stockStatus=<c:out value="${good.stockStatus}"></c:out>
-&imagePath=<c:out value="${good.imagePath}"></c:out>
-&price=<c:out value="${good.price}"></c:out>
-&goodsId=<c:out value="${good.productId}"></c:out>">Add to cart</a>
+										href="${context}/addNewProductToCart?
+										description=<c:out value="${product.description}"></c:out>
+&name=<c:out value="${product.name}"></c:out>
+&characteristic1=<c:out value="${product.characteristic1}"></c:out>
+&characteristic2=<c:out value="${product.characteristic2}"></c:out>
+&characteristic3=<c:out value="${product.characteristic3}"></c:out>
+&characteristic4=<c:out value="${product.characteristic4}"></c:out>
+&characteristic6=<c:out value="${product.characteristic6}"></c:out>
+&characteristic7=<c:out value="${product.characteristic7}"></c:out>
+&rating=<c:out value="${product.rating}"></c:out>
+&stockStatus=<c:out value="${product.stockStatus}"></c:out>
+&imagePath=<c:out value="${product.imagePath}"></c:out>
+&price=<c:out value="${product.price}"></c:out>
+&productId=<c:out value="${product.productId}"></c:out>">Add to cart</a>
 								</div> 
                         </sec:authorize>                      
                     </div>

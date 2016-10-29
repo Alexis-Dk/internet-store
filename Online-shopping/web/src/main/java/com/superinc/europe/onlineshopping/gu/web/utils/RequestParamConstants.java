@@ -5,7 +5,7 @@ package com.superinc.europe.onlineshopping.gu.web.utils;
  */
 public class RequestParamConstants {
 	public static final String NUMBER_PAGE_WIDGET = "numberOfPage";
-	public static final String GOODS = "goods";
+	public static final String PRODUCTS = "products";
 	public static final String PRICE_LOWER = "c1";
 	public static final String PRICE_HIGHTER = "c2";
 	public static final String SELECTED_PAGE = "number";
@@ -19,7 +19,7 @@ public class RequestParamConstants {
 	public static final String USER = "user";
 	public static final String GET_REGISTRATION = "getRegistration";
 	public static final String BUCKET = "GoodsInCart";
-	public static final String GOODS_ID = "goodsId";
+	public static final String PRODUCT_ID = "productId";
 	public static final String NAME = "name";
 	public static final String DESCRIPTION = "description";
 	public static final String PRICE = "price";

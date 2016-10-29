@@ -233,7 +233,7 @@
 							<div class="product-option-shop">
 								<a class="add_to_cart_button" data-quantity="1"
 									data-product_sku="" data-product_id="70" rel="nofollow"
-									href="${context}/addNewGoodsToCart?
+									href="${context}/addNewProductToCart?
 description=<%=request.getParameter("description")%>
 &name=<%=request.getParameter("name")%>
 &characteristic1=<%=request.getParameter("characteristic1")%>
@@ -246,7 +246,7 @@ description=<%=request.getParameter("description")%>
 &stockStatus=<%=request.getParameter("stockStatus")%>
 &imagePath=<%=request.getParameter("imagePath")%>
 &price=<%=request.getParameter("price")%>
-&goodsId=<%=request.getParameter("goodsId")%>">Add
+&productId=<%=request.getParameter("productId")%>">Add
 									to cart</a>
 							</div>
 						</sec:authorize>

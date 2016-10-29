@@ -6,7 +6,7 @@ public class RequestConstants {
 	public static final String HELLO = "/hello";
 	public static final String REGISTRATION = "/registration";
 	public static final String GET_REGISTRATION = "/getRegistration";
-	public static final String ADD_NEW_GOODS_TO_CART = "/addNewGoodsToCart";
+	public static final String ADD_NEW_PRODUCT_TO_CART = "/addNewProductToCart";
 	public static final String VIEW_ITEMS_OF_CART = "/ViewItemsOfCart";
 	public static final String DELETE_FROM_CART = "/deleteFromCart";
 	public static final String ADD_PURCHASE = "/addPurchase";

@@ -2,7 +2,7 @@ package com.superinc.europe.onlineshopping.gu.entities.dto;
 
 public class Bucket {
 
-	private int goodsId;
+	private int productId;
 	
 	private String name;
 	
@@ -17,9 +17,9 @@ public class Bucket {
 	public Bucket() {
 	}
 
-	public Bucket(int goodsId, String name, String imagePath, int price,
+	public Bucket(int productId, String name, String imagePath, int price,
 			String description, int quantity) {
-		this.goodsId = goodsId;
+		this.productId = productId;
 		this.name = name;
 		this.imagePath = imagePath;
 		this.price = price;
@@ -27,12 +27,12 @@ public class Bucket {
 		this.quantity = quantity;
 	}
 
-	public int getGoodsId() {
-		return goodsId;
+	public int getProductId() {
+		return productId;
 	}
 
-	public void setGoodsId(int goodsId) {
-		this.goodsId = goodsId;
+	public void setProductId(int goodsId) {
+		this.productId = goodsId;
 	}
 
 	public String getName() {
@@ -77,7 +77,7 @@ public class Bucket {
 
 	@Override
 	public String toString() {
-		return "Bucket [goodsId=" + goodsId + ", name=" + name + ", imagePath="
+		return "Bucket [productId=" + productId + ", name=" + name + ", imagePath="
 				+ imagePath + ", price=" + price + ", description="
 				+ description + ", quantity=" + quantity + "]";
 	}

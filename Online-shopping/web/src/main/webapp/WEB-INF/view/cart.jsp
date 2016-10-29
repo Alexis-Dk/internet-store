@@ -189,13 +189,13 @@
 
                                            <td class="product-quantity">
                                                 <div class="quantity buttons_added">
-                                                    <a href="decreaseQuantity?goodsId=<c:out value="${cart.goodsId}"></c:out>"><img width="19" height="19" alt="poster_1_up" class="shop_thumbnail" src="img/dicreaseButton.jpg"></a>
+                                                    <a href="decreaseQuantity?productId=<c:out value="${cart.productId}"></c:out>"><img width="19" height="19" alt="poster_1_up" class="shop_thumbnail" src="img/dicreaseButton.jpg"></a>
                                                     <span class="input-text qty text"> <c:out value="${cart.quantity}"></c:out> </span> 
-                                                    <a href="increaseQuantity?goodsId=<c:out value="${cart.goodsId}"></c:out>"><img width="19" height="19" alt="poster_1_up" class="shop_thumbnail" src="img/increaseButton.jpg"></a>
+                                                    <a href="increaseQuantity?productId=<c:out value="${cart.productId}"></c:out>"><img width="19" height="19" alt="poster_1_up" class="shop_thumbnail" src="img/increaseButton.jpg"></a>
                                                 </div>
                                             </td>  
                                             <td class="product-subtotal">
-                                                <span class="amount"><c:out value="${cart.goodsId}"></c:out></span> 
+                                                <span class="amount"><c:out value="${cart.productId}"></c:out></span> 
                                             </td>
                                         </tr>
                                         </c:forEach>

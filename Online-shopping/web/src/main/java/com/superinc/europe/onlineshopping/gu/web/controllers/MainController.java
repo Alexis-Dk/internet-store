@@ -120,10 +120,10 @@ public class MainController {
 			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
 					navigationService.getDataToPaginationWidget(goodsService.getQuantityOfPage()));
 			if (request.getParameter(RequestParamConstants.SELECTED_PAGE) == null) {
-				model.put(RequestParamConstants.GOODS, goodsService.obtainDefaultSelection((String) priceLower,
+				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainDefaultSelection((String) priceLower,
 								(String) priceHighter));
 			} else {
-				model.put(RequestParamConstants.GOODS, goodsService.obtainUsersSelection((String) priceLower,
+				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainUsersSelection((String) priceLower,
 								(String) priceHighter, selectedPage));
 			}
 		} catch (Exception e) {
@@ -179,21 +179,21 @@ public class MainController {
 //		return RequestParamConstants.GET_REGISTRATION;
 //	}
 
-	@RequestMapping(value = RequestConstants.ADD_NEW_GOODS_TO_CART, method = RequestMethod.GET)
+	@RequestMapping(value = RequestConstants.ADD_NEW_PRODUCT_TO_CART, method = RequestMethod.GET)
 	public String addNewGoodsToCart(
 			HttpSession session,
 			ModelMap model,
 			HttpServletRequest request,
-			@RequestParam(value = RequestParamConstants.GOODS_ID) String goodsId,
+			@RequestParam(value = RequestParamConstants.PRODUCT_ID) String productId,
 			@RequestParam(value = RequestParamConstants.NAME) String name,
 			@RequestParam(value = RequestParamConstants.DESCRIPTION) String description,
 			@RequestParam(value = RequestParamConstants.PRICE) String price,
 			@RequestParam(value = RequestParamConstants.IMAGE_PATH) String imagePath) {
 
-		Product goods = new Product(Integer.parseInt(goodsId), name, imagePath,
+		Product product = new Product(Integer.parseInt(productId), name, imagePath,
 				Integer.parseInt(price), description);
 		OrderedProduct goodsOrders = new OrderedProduct(new Order(
-				RequestParamConstants.VALUE_ONE), goods,
+				RequestParamConstants.VALUE_ONE), product,
 				RequestParamConstants.VALUE_ONE);
 
 		session.setAttribute(RequestParamConstants.BUCKET,
@@ -213,10 +213,10 @@ public class MainController {
 	@RequestMapping(value = RequestParamConstants.INCREASE_QUANTITY, method = RequestMethod.GET)
 	public String increaseQuantity(HttpSession session, ModelMap model,
 			HttpServletRequest request,
-			@RequestParam(value = RequestParamConstants.GOODS_ID) String goodsId) {
+			@RequestParam(value = RequestParamConstants.PRODUCT_ID) String productId) {
 
 		session.setAttribute(RequestParamConstants.BUCKET,
-				HttpUtils.increaseToBucket(session, goodsId));
+				HttpUtils.increaseToBucket(session, productId));
 		try {
 			model.put(RequestParamConstants.BUCKET_WIDGET,
 					HttpUtils.getBucket(session));
@@ -232,10 +232,10 @@ public class MainController {
 	@RequestMapping(value = RequestParamConstants.DECREASE_QUANTITY, method = RequestMethod.GET)
 	public String dicreaseQuantity(HttpSession session, ModelMap model,
 			HttpServletRequest request,
-			@RequestParam(value = RequestParamConstants.GOODS_ID) String goodsId) {
+			@RequestParam(value = RequestParamConstants.PRODUCT_ID) String productId) {
 
 		session.setAttribute(RequestParamConstants.BUCKET,
-				HttpUtils.decreaseFromBucket(session, goodsId));
+				HttpUtils.decreaseFromBucket(session, productId));
 		try {
 			model.put(RequestParamConstants.BUCKET_WIDGET,
 					HttpUtils.getBucket(session));

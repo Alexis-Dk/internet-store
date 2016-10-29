@@ -64,7 +64,7 @@ public class HttpUtils {
 	
 	public static Bucket getNewBucket(Bucket bucket){
 		if (bucket != null){
-			return new Bucket(bucket.getGoodsId(), bucket.getName(), bucket.getImagePath(), bucket.getPrice(), bucket.getDescription(), COUNT_VALUE);
+			return new Bucket(bucket.getProductId(), bucket.getName(), bucket.getImagePath(), bucket.getPrice(), bucket.getDescription(), COUNT_VALUE);
 		}
 		else return new Bucket();
 		}
