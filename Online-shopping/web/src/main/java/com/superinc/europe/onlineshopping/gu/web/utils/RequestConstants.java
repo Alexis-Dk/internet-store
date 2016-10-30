@@ -3,7 +3,7 @@ package com.superinc.europe.onlineshopping.gu.web.utils;
 public class RequestConstants {
 
 	public static final String TV = "/tv";
-	public static final String HELLO = "/hello";
+	public static final String SINGLE_PRODUCT = "/singleProduct";
 	public static final String REGISTRATION = "/registration";
 	public static final String GET_REGISTRATION = "/getRegistration";
 	public static final String ADD_NEW_PRODUCT_TO_CART = "/addNewProductToCart";

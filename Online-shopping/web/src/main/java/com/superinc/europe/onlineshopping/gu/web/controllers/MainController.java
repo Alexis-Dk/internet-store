@@ -106,7 +106,7 @@ public class MainController {
 		return RequestParamConstants.TV;
 	}
 
-	@RequestMapping(value = RequestConstants.HELLO, method = RequestMethod.GET)
+	@RequestMapping(value = RequestConstants.SINGLE_PRODUCT, method = RequestMethod.GET)
 	public String setHelloPage(HttpServletRequest request, ModelMap model) {
 		try {
 			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, request
@@ -115,7 +115,7 @@ public class MainController {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
-		return RequestParamConstants.HELLO_PAGE;
+		return RequestParamConstants.SINGLE_PRODUCT_PAGE;
 	}
 
 //	@RequestMapping(value = RequestConstants.REGISTRATION, method = RequestMethod.GET)

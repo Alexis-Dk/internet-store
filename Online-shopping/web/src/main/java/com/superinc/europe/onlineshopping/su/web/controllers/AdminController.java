@@ -114,11 +114,6 @@ public class AdminController {
 		return modelAndView;
 	}
 	
-    /**
-     * 
-     * @param model
-     * @return
-     */
     @RequestMapping(path = "/new", method = RequestMethod.GET)
     public String saveNewProduct(ModelMap model) {
 	ProductDTO productDTO = new ProductDTO();

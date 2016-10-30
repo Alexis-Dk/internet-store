@@ -184,7 +184,7 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="single-shop-product">
                         <div class="product-upper">
-                        <a href="hello?description=<c:out value="${product.description}"></c:out>
+                        <a href="singleProduct?description=<c:out value="${product.description}"></c:out>
 &name=<c:out value="${product.name}"></c:out>
 &characteristic1=<c:out value="${product.characteristic1}"></c:out>
 &characteristic2=<c:out value="${product.characteristic2}"></c:out>
