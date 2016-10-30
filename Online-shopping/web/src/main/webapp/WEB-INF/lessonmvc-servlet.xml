@@ -17,7 +17,7 @@
 	<mvc:resources mapping="/js/**" location="/js/" />
 	<mvc:resources mapping="/img/**" location="/img/" />
 	<mvc:annotation-driven />
-    <context:component-scan base-package="com.superinc.europe.onlineshopping.gu" />
+    <context:component-scan base-package="com.superinc.europe.onlineshopping.gu, com.superinc.europe.onlineshopping.su" />
     
     <bean id="viewResolver"	class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass"

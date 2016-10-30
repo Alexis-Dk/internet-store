@@ -1,4 +1,4 @@
-package com.superinc.europe.onlineshopping.gu.web.utils;
+package com.superinc.europe.onlineshopping.su.web.utils;
 
 import java.beans.PropertyEditorSupport;
 import java.util.ArrayList;
