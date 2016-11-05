@@ -179,7 +179,7 @@ else {
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="index"><locale:message code="label.home"/></a></li>
                         <c:forEach items="${requestScope.productCategory}" var="category">
-			            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="tv?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+			            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
 			            </c:forEach>
                         <sec:authorize access="isAuthenticated()">
                          	<li><a href="ViewItemsOfCart"><locale:message code="label.cart"/></a></li>
@@ -375,7 +375,7 @@ else {
                         <h2 class="footer-wid-title"><locale:message code="label.categories"/></h2>
                         <ul>
                          	<c:forEach items="${requestScope.productCategory}" var="category">
-			                    <li><a href="tv?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+			                    <li><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
                             </c:forEach>
                         </ul>                        
                     </div>

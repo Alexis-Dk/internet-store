@@ -137,7 +137,9 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="index"><locale:message code="label.home"/></a></li>
-                        <li class="active"><a href="tv"><locale:message code="label.tv"/></a></li>
+                          	<c:forEach items="${requestScope.productCategory}" var="category">
+			                    <li><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+                            </c:forEach>
                             <sec:authorize access="isAuthenticated()">
                          		<li><a href="ViewItemsOfCart"><locale:message code="label.cart"/></a></li>
                          	</sec:authorize>
@@ -290,7 +292,9 @@ description=<%=request.getParameter("description")%>
                     <div class="footer-menu">
                         <h2 class="footer-wid-title"><locale:message code="label.categories"/></h2>
                         <ul>
-                            <li><a href="tv">LED TV</a></li>
+                          	<c:forEach items="${requestScope.productCategory}" var="category">
+			                    <li><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+                            </c:forEach>
                         </ul>                        
                     </div>
                 </div>

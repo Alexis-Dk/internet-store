@@ -11,7 +11,7 @@ public class RequestParamConstants {
 	public static final String SELECTED_PAGE = "number";
 	public static final String ERROR_PAGE = "errorPage";
 	public static final String QUANTITY_SUM_WIDGET = "quantitiAndSum";
-	public static final String TV = "tv";
+	public static final String PRODUCT = "product";
 	public static final String SINGLE_PRODUCT_PAGE = "singleProduct";
 	public static final String REGISTRATION = "registration";
 	public static final String USER_NAME = "username";

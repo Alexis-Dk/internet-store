@@ -120,7 +120,9 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="index">Home</a></li>
-                        <li><a href="tv">TV</a></li>
+                           	<c:forEach items="${requestScope.productCategory}" var="category">
+			                    <li><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+                            </c:forEach>
                             <sec:authorize access="isAuthenticated()">
                          		<li><a href="ViewItemsOfCart">Cart</a></li>
                          	</sec:authorize>
@@ -251,7 +253,9 @@
                     <div class="footer-menu">
                         <h2 class="footer-wid-title">Categories</h2>
                         <ul>
-                            <li><a href="tv">LED TV</a></li>
+                           	<c:forEach items="${requestScope.productCategory}" var="category">
+			                    <li><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+                            </c:forEach>
                         </ul>                        
                     </div>
                 </div>

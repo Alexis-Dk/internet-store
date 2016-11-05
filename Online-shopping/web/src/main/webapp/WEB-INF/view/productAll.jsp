@@ -144,7 +144,7 @@
                         <li><a href="index"><locale:message code="label.home"/></a></li>
                         
 			                <c:forEach items="${requestScope.productCategory}" var="category">
-			                    <li class="<c:out value="${category.selectedItem}"></c:out>"><a href="tv?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+			                    <li class="<c:out value="${category.selectedItem}"></c:out>"><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
 			                </c:forEach>
              
                            	<sec:authorize access="isAuthenticated()">
@@ -163,7 +163,7 @@
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
                         <h2><locale:message code="label.shop"/></h2>
-                        	<form class="form-inline" action="${context}/tv" method="get">
+                        	<form class="form-inline" action="${context}/product" method="get">
 							  <div class="form-group">
 							    <label for="priceLower"><locale:message code="label.priceLow"/></label>
 							    <input type="text" class="form-control" id="priceLower" placeholder="from" name="priceLower" value="<%= request.getSession().getAttribute("priceLower") %>">
@@ -295,7 +295,7 @@
                         <h2 class="footer-wid-title"><locale:message code="label.categories"/></h2>
                         <ul>
                           	<c:forEach items="${requestScope.productCategory}" var="category">
-			                    <li><a href="tv?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+			                    <li><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
                             </c:forEach>
                         </ul>                        
                     </div>
