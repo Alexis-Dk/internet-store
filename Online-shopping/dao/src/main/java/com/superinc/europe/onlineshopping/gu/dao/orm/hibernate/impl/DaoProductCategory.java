@@ -68,7 +68,7 @@ public class DaoProductCategory extends BaseDao<Category> implements IProductCat
     	List<Category> results = query.list();
     	String firstCategory = null;
     	for (Category category : results) {
-			firstCategory = category.getCategoryName();
+			firstCategory = Integer.toString(category.getCategoryId());
 		}
 		return firstCategory;
 	}

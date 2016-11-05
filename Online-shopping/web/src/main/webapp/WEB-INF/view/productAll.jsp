@@ -294,7 +294,9 @@
                     <div class="footer-menu">
                         <h2 class="footer-wid-title"><locale:message code="label.categories"/></h2>
                         <ul>
-                            <li><a href="tv">LED TV</a></li>
+                          	<c:forEach items="${requestScope.productCategory}" var="category">
+			                    <li><a href="tv?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+                            </c:forEach>
                         </ul>                        
                     </div>
                 </div>

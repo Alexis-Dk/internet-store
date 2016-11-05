@@ -80,8 +80,7 @@ public class ProductCategoryService implements IProductCategoryService {
 	log.info("Starting method getAllProductCategories()");
 	List<CategoryDTO> categories = new ArrayList<>();
 	try {
-		String categoryName = getFirstLine();
-	    categories = productCategoryDao.getAllProductCategories(categoryName);
+	    categories = productCategoryDao.getNoActiveProductCategories();
 	} catch (DataAccessException e) {
 	    log.error("Error getting all product categories from database: ", e);
 	    throw new ErrorGettingCategoryServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
