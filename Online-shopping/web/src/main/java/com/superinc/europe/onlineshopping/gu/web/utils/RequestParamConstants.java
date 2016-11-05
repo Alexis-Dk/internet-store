@@ -45,6 +45,7 @@ public class RequestParamConstants {
 	public static final String PRODUCT_DTO = "productDTO";
 	public static final String PRODUCT_CATEGORY_WIDGET = "productCategory";
 	public static final String CATEGORY = "category";
+	public static final String CATEGORY_ID = "categoryId";
     public void handler(){
     }
 }

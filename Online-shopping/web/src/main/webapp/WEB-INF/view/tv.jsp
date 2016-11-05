@@ -172,6 +172,7 @@
 							    <label for="priceHighter"><locale:message code="label.priceHight"/></label>
 					<!--		  	 Latest jQuery form server   <input type="text" class="form-control" id="priceHighter" name="priceHighter" placeholder="to" value="<%= request.getSession().getAttribute("priceHighter") %>">  -->
 							 	<input type="text" class="form-control" id="priceHighter" name="priceHighter" placeholder="to" value="<%= request.getSession().getAttribute("priceHighter") %>">  
+							  <input type="hidden" class="form-control" id="category" name="category" placeholder="to" value="<%= request.getSession().getAttribute("categoryId") %>"> 
 							  </div>
 							  <button type="submit" class="btn btn-default"><locale:message code="label.find"/></button>
 							</form>
@@ -246,7 +247,7 @@
                         </li>
 							<c:forEach items="${requestScope.numberOfPage}" var="number">
 							<li><a href='' 
-							 onclick=" this.href='?number=${number.numberOfPageId}&priceLower='+document.getElementById('priceLower').value+'&priceHighter='+document.getElementById('priceHighter').value" id="add-product-save-link">${number.numberOfPageId}</a>
+							 onclick=" this.href='?number=${number.numberOfPageId}&priceLower='+document.getElementById('priceLower').value+'&priceHighter='+document.getElementById('priceHighter').value+'&category='+document.getElementById('category').value" id="add-product-save-link">${number.numberOfPageId}</a>
 							 </li>
 							 </c:forEach>
                         <li>

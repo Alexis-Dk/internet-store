@@ -90,6 +90,7 @@ public class MainController {
 			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
 					navigationService.getDataToPaginationWidget(goodsService.getQuantityOfPage()));
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
+			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, category);
 			if (request.getParameter(RequestParamConstants.SELECTED_PAGE) == null) {
 				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainDefaultSelection((String) priceLower,
 								(String) priceHighter, (String) category));
