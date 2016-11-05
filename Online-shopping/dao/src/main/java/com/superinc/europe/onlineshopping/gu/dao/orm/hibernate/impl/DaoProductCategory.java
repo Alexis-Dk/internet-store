@@ -35,11 +35,11 @@ public class DaoProductCategory extends BaseDao<Category> implements IProductCat
     }
     
     @Override
-    public List<CategoryDTO> getAllProductCategories(String categoryName) {
+    public List<CategoryDTO> getAllProductCategories(String categoryId) {
     	List<Category> results = getAllProductCategories();
     	List<CategoryDTO> list = new ArrayList<CategoryDTO>();
     	for (Category ob : results) {
-    		if (ob.getCategoryName().equals(categoryName)){
+    		if (ob.getCategoryId() == Integer.parseInt(categoryId)){
 			list.add(new CategoryDTO(ob.getCategoryName(), ACTIVE_STATUS, ob.getCategoryId()));
     		}
     		else

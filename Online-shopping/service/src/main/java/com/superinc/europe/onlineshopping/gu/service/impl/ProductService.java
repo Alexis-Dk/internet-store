@@ -160,7 +160,7 @@ public class ProductService implements IProductService<Product> {
 		try {
 			products = (List<Product>) daoProduct.getAllProduct(
 					session.createCriteria(Product.class, PRODUCT), priceLower,
-					priceHighter, NUMBER_OF_START_PAGE);
+					priceHighter, Integer.parseInt(userNumberOfPage));
 		} catch (Exception e) {
 			session.getTransaction().rollback();
 			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);

@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
 import com.superinc.europe.onlineshopping.gu.entities.dto.Bucket;
+import com.superinc.europe.onlineshopping.gu.entities.dto.CategoryDTO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.UserDTO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
@@ -90,6 +91,8 @@ public class MainController {
 			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
 					navigationService.getDataToPaginationWidget(goodsService.getQuantityOfPage()));
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
+			List<CategoryDTO> l = productCategoryService.getAllProductCategories(category);
+			System.out.println(l);
 			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, category);
 			if (request.getParameter(RequestParamConstants.SELECTED_PAGE) == null) {
 				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainDefaultSelection((String) priceLower,
@@ -116,21 +119,15 @@ public class MainController {
 			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
 					navigationService.getDataToPaginationWidget(goodsService.getQuantityOfPage()));
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getDefaultProductCategories());
-			
-//			if (request.getParameter(RequestParamConstants.SELECTED_PAGE) == null) {
-//				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainFullSelection((String) priceLower,
-//								(String) priceHighter));
-//			} else {
-				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainFullSelection((String) priceLower,
+			model.put(RequestParamConstants.PRODUCTS, goodsService.obtainFullSelection((String) priceLower,
 								(String) priceHighter, selectedPage));
-//			}
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
 		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
 				request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
-		return RequestParamConstants.TV;
+		return RequestParamConstants.PRODUCT_ALL;
 	}
 	
 	@RequestMapping(value = RequestConstants.SINGLE_PRODUCT, method = RequestMethod.GET)
