@@ -17,21 +17,34 @@ public interface IProductService<T> extends IBaseService<T> {
 	 * Method obtain list of goods required numbers of page
 	 * @param priceLower
 	 * @param priceHighter
+	 * @param category
 	 * @throws DaoException
 	 */
-	List<Product> obtainDefaultSelection(String priceLower, String priceHighter)
+	List<Product> obtainDefaultSelection(String priceLower, String priceHighter, String category)
 			throws ServiceException;
 
 	/**
 	 * Method obtain list of goods selection numbers of page
 	 * @param priceLower
 	 * @param priceHighter
+	 * @param category
 	 * @throws DaoException
 	 */
 	List<Product> obtainUsersSelection(String priceLower,
-			String priceHighter, String userNumberOfPage)
+			String priceHighter, String userNumberOfPage, String category)
 			throws ServiceException;
 
+	/**
+	 * Method obtain list of goods selection numbers of page
+	 * @param priceLower
+	 * @param priceHighter
+	 * @param category
+	 * @throws DaoException
+	 */
+	List<Product> obtainFullSelection(String priceLower,
+			String priceHighter, String userNumberOfPage)
+			throws ServiceException;
+	
 	/**
 	 * Method get number integer number products in the page
 	 * @param priceLower
@@ -45,4 +58,5 @@ public interface IProductService<T> extends IBaseService<T> {
 	 * @throws ServiceException 
 	 */
 	int getLastInsertId() throws ErrorAddingPoductServiceException;
+
 }

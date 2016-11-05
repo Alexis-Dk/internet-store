@@ -6,17 +6,18 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import sun.tools.tree.ThisExpression;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.entities.dto.Bucket;
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Category;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
+import com.superinc.europe.onlineshopping.gu.service.IProductCategoryService;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamConstants;
 
 /**
@@ -33,6 +34,12 @@ public class HttpUtils {
 	private static final int COUNT_VALUE = 1;
 	public static List<Category> categoryList;
 
+
+	Logger log = Logger.getLogger(HttpUtils.class);
+
+    @Autowired
+    public static IProductCategoryService productCategoryService;
+	
 	public static List<Bucket> getBucket(HttpSession session) {
 		List<Bucket> bucket = new ArrayList<Bucket>();
 		List<OrderedProduct> listGoodsOrders = null;
@@ -310,4 +317,5 @@ public class HttpUtils {
 	public static List<Category> getList(){
 		return categoryList;
 	}
+	
 }

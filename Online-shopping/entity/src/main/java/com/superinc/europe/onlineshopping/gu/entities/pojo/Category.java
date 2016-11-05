@@ -21,14 +21,14 @@ public class Category implements Serializable {
 	public int categoryId;
 	
 	@Column()
-	private String categoryname;
+	private String categoryName;
 
 	public Category() {
 	}
 
 	public Category(int categoryId, String categoryname) {
 		this.categoryId = categoryId;
-		this.categoryname = categoryname;
+		this.categoryName = categoryname;
 	}
 
 	public int getCategoryId() {
@@ -39,18 +39,18 @@ public class Category implements Serializable {
 		this.categoryId = categoryId;
 	}
 
-	public String getCategoryname() {
-		return categoryname;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public void setCategoryname(String categoryname) {
-		this.categoryname = categoryname;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	@Override
 	public String toString() {
-		return "Category [categoryId=" + categoryId + ", categoryname="
-				+ categoryname + "]";
+		return "Category [categoryId=" + categoryId + ", categoryName="
+				+ categoryName + "]";
 	}
 
 }

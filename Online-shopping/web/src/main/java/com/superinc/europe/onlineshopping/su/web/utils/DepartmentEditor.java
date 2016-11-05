@@ -31,7 +31,7 @@ public class DepartmentEditor extends PropertyEditorSupport {
 		DepartmentVO d = null;
 	for (Category category : categoryList) {
 		if (Integer.parseInt(id)==category.getCategoryId()){
-			d =  new DepartmentVO(category.getCategoryId(),  category.getCategoryname());
+			d =  new DepartmentVO(category.getCategoryId(),  category.getCategoryName());
 			break;
 		}
 		else{

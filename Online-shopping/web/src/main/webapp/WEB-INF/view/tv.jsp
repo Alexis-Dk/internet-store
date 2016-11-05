@@ -70,6 +70,7 @@
  
 </head>
 <body> 
+
     <div class="header-area">
         <div class="container">
             <div class="row">
@@ -114,7 +115,7 @@
                         <h1><a href="index">e<span><locale:message code="label.electronics"/></span></a></h1>
                     </div>
                 </div>
-                       <div class="col-sm-6">
+                <div class="col-sm-6">
                        <c:forEach items="${requestScope.quantitiAndSum}" var="quantitiAndSum">
                 			<sec:authorize access="isAuthenticated()"> 
 	                    		<div class="shopping-item">
@@ -141,7 +142,11 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="index"><locale:message code="label.home"/></a></li>
-                        <li class="active"><a href="tv"><locale:message code="label.tv"/>${label.tv}</a></li>
+                        
+			                <c:forEach items="${requestScope.productCategory}" var="category">
+			                    <li class="<c:out value="${category.selectedItem}"></c:out>"><a href="tv?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+			                </c:forEach>
+             
                            	<sec:authorize access="isAuthenticated()">
                          		<li><a href="ViewItemsOfCart"><locale:message code="label.cart"/></a></li>
                          	</sec:authorize>
@@ -158,7 +163,7 @@
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
                         <h2><locale:message code="label.shop"/></h2>
-							<form class="form-inline" action="${context}/tv" method="get">
+                        	<form class="form-inline" action="${context}/tv" method="get">
 							  <div class="form-group">
 							    <label for="priceLower"><locale:message code="label.priceLow"/></label>
 							    <input type="text" class="form-control" id="priceLower" placeholder="from" name="priceLower" value="<%= request.getSession().getAttribute("priceLower") %>">

@@ -101,17 +101,18 @@ public class ProductService implements IProductService<Product> {
 	 * Method obtain list of goods default numbers of page
 	 * @param priceLower
 	 * @param priceHighter
+	 * @param category
 	 * @throws DaoException
 	 */
 	@Override
 	public List<Product> obtainDefaultSelection(String priceLower,
-			String priceHighter) throws ServiceException {
+			String priceHighter, String category) throws ServiceException {
 		Session session = daoProduct.getCurrentSession();
 		List<Product> products = null;
 		try {
 			products = (List<Product>) daoProduct.getProduct(
 					session.createCriteria(Product.class, PRODUCT), priceLower,
-					priceHighter, NUMBER_OF_START_PAGE);
+					priceHighter, NUMBER_OF_START_PAGE, category);
 		} catch (Exception e) {
 			session.getTransaction().rollback();
 			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
@@ -125,21 +126,48 @@ public class ProductService implements IProductService<Product> {
 	 * Method obtain list of goods selection numbers of page
 	 * @param priceLower
 	 * @param priceHighter
+	 * @param category
 	 * @throws DaoException
 	 */
 	@Override
 	public List<Product> obtainUsersSelection(String priceLower,
-			String priceHighter, String userNumberOfPage)throws ServiceException{
+			String priceHighter, String userNumberOfPage, String category)throws ServiceException{
 			Session session = daoProduct.getCurrentSession();
 			List<Product> products = null;
 			try {
-				products = (List<Product>)daoProduct.getProduct(session.createCriteria(Product.class, PRODUCT), priceLower, priceHighter, Integer.parseInt(userNumberOfPage));
+			products = (List<Product>) daoProduct.getProduct(
+					session.createCriteria(Product.class, PRODUCT), priceLower,
+					priceHighter, Integer.parseInt(userNumberOfPage), category);
 			} catch (Exception e) {
 				session.getTransaction().rollback();
 				logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
 				throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
 			}
 			return products;
+	}
+	
+	/**
+	 * Method obtain list of goods default numbers of page
+	 * @param priceLower
+	 * @param priceHighter
+	 * @throws DaoException
+	 */
+	@Override
+	public List<Product> obtainFullSelection(String priceLower,
+			String priceHighter, String userNumberOfPage) throws ServiceException {
+		Session session = daoProduct.getCurrentSession();
+		List<Product> products = null;
+		try {
+			products = (List<Product>) daoProduct.getAllProduct(
+					session.createCriteria(Product.class, PRODUCT), priceLower,
+					priceHighter, NUMBER_OF_START_PAGE);
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+			throw new ServiceException(
+					ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
+		}
+		return products;
 	}
 	
 	/**

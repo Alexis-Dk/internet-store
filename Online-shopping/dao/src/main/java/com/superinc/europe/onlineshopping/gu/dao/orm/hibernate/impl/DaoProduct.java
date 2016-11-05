@@ -21,7 +21,7 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 
 	private static final String SELECT_MAX_PRODUCT_ID_FROM_PRODUCTS = "SELECT MAX(product_id) FROM Products";
 	private static final String GET_COUNT_ROW = "select count(*) from Product where delete_status=0";
-	private static final String LED_TV_CATEGORY = "category_id = 1";
+	private static final String CATEGORY_ID = "category_id = ";
 	private static final String EMPTY_FIELD = "";
 	private static final String PRICE_LESS = "price <= ";
 	private static final String PRICE_MORE = "price >= ";
@@ -44,11 +44,35 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 	 * @param priceLower
 	 * @param priceHighter
 	 * @param numberOfPage
+	 * @param category
 	 * @throws DaoException
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Product> getProduct(Criteria criteria, String priceLower, String priceHighter, int quantityOfPage){
-		criteria.add(Restrictions.sqlRestriction(LED_TV_CATEGORY));
+	public List<Product> getProduct(Criteria criteria, String priceLower,
+			String priceHighter, int quantityOfPage, String category) {
+		criteria.add(Restrictions.sqlRestriction(CATEGORY_ID + category));
+		criteria.setMaxResults(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE);
+		criteria.setFirstResult(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE*(quantityOfPage - 1));
+		if (!priceLower.equals(EMPTY_FIELD)) {
+			criteria.add(Restrictions.sqlRestriction(PRICE_MORE + priceLower));
+		}
+		if (!priceHighter.equals(EMPTY_FIELD)) {
+		criteria.add(Restrictions.sqlRestriction(PRICE_LESS + priceHighter));
+		}
+		return criteria.list();
+	}
+	
+	/**
+	 * Method get list products
+	 * @param criteria
+	 * @param priceLower
+	 * @param priceHighter
+	 * @param numberOfPage
+	 * @throws DaoException
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Product> getAllProduct(Criteria criteria, String priceLower,
+			String priceHighter, int quantityOfPage) {
 		criteria.setMaxResults(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE);
 		criteria.setFirstResult(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE*(quantityOfPage - 1));
 		if (!priceLower.equals(EMPTY_FIELD)) {

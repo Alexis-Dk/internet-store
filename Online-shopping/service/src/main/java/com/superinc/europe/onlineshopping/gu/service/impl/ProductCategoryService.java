@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IProductCategoryDao;
+import com.superinc.europe.onlineshopping.gu.entities.dto.CategoryDTO;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Category;
 import com.superinc.europe.onlineshopping.gu.service.IProductCategoryService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ErrorGettingCategoryServiceException;
@@ -44,7 +45,7 @@ public class ProductCategoryService implements IProductCategoryService {
 	}
 	return category;
     }
-
+    
     @Override
     public List<Category> getAllProductCategories() throws ErrorGettingCategoryServiceException {
 	log.info("Starting method getAllProductCategories()");
@@ -59,4 +60,62 @@ public class ProductCategoryService implements IProductCategoryService {
 	return categories;
 
     }
+
+    @Override
+    public List<CategoryDTO> getAllProductCategories(String categoryName) throws ErrorGettingCategoryServiceException {
+	log.info("Starting method getAllProductCategories()");
+	List<CategoryDTO> categories = new ArrayList<>();
+	try {
+	    categories = productCategoryDao.getAllProductCategories(categoryName);
+	} catch (DataAccessException e) {
+	    log.error("Error getting all product categories from database: ", e);
+	    throw new ErrorGettingCategoryServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
+	}
+	log.info("Ending method getAllProductCategories()");
+	return categories;
+    }
+    
+    @Override
+    public List<CategoryDTO> getDefaultProductCategories() throws ErrorGettingCategoryServiceException {
+	log.info("Starting method getAllProductCategories()");
+	List<CategoryDTO> categories = new ArrayList<>();
+	try {
+		String categoryName = getFirstLine();
+	    categories = productCategoryDao.getAllProductCategories(categoryName);
+	} catch (DataAccessException e) {
+	    log.error("Error getting all product categories from database: ", e);
+	    throw new ErrorGettingCategoryServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
+	}
+	log.info("Ending method getAllProductCategories()");
+	return categories;
+    }
+    
+    @Override
+	public List<CategoryDTO> getNoActiveProductCategories()
+			throws ErrorGettingCategoryServiceException {
+    	log.info("Starting method getNoActiveProductCategories()");
+    	List<CategoryDTO> categories = new ArrayList<>();
+    	try {
+    	    categories = productCategoryDao.getNoActiveProductCategories();
+    	} catch (DataAccessException e) {
+    	    log.error("Error getting no active off all product categories from database: ", e);
+    	    throw new ErrorGettingCategoryServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
+    	}
+    	log.info("Ending method getNoActiveProductCategories()");
+    	return categories;
+	}
+    
+	@Override
+	public String getFirstLine() throws ErrorGettingCategoryServiceException {
+		String firstLine;
+		try {
+			firstLine = productCategoryDao.getFitstLine();
+		} catch (DataAccessException e) {
+		    log.error("Error getting first line ", e);
+		    throw new ErrorGettingCategoryServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
+		}
+		log.info("Ending method getFirstLine()");
+		return firstLine;
+	}
+
 }

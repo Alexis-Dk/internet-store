@@ -43,6 +43,8 @@ public class RequestParamConstants {
 	public static final String EMAIL = "email";
 	public static final String USER_DTO = "userDTO";
 	public static final String PRODUCT_DTO = "productDTO";
+	public static final String PRODUCT_CATEGORY_WIDGET = "productCategory";
+	public static final String CATEGORY = "category";
     public void handler(){
     }
 }

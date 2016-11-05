@@ -146,7 +146,7 @@ public class AdminController {
         ArrayList<DepartmentVO> departments = new ArrayList<DepartmentVO>();
         departments.add(new DepartmentVO(-1,  "Select Department"));
 		for (Category category : categoryList) {
-			departments.add(new DepartmentVO(category.getCategoryId(),  category.getCategoryname()));
+			departments.add(new DepartmentVO(category.getCategoryId(),  category.getCategoryName()));
 		}
         return departments;
     }

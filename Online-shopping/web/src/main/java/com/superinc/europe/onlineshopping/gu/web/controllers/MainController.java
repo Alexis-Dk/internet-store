@@ -80,22 +80,22 @@ public class MainController {
     @Autowired
     private MessageSource messageSource;
     
-	@RequestMapping(value = RequestConstants.TV, method = RequestMethod.GET)
-	public String setTvPage(
-			HttpServletRequest request,
-			ModelMap model,
+	@RequestMapping(value = RequestConstants.TV, method = RequestMethod.GET, params=RequestParamConstants.CATEGORY)
+	public String setProductPage(HttpServletRequest request, ModelMap model,
 			@RequestParam(value = RequestParamConstants.LOWER_PRICE, defaultValue = RequestParamConstants.EMPTY) String priceLower,
 			@RequestParam(value = RequestParamConstants.HIGHTER_PRICE, defaultValue = RequestParamConstants.EMPTY) String priceHighter,
+			@RequestParam(value = RequestParamConstants.CATEGORY) String category,
 			@RequestParam(value = RequestParamConstants.SELECTED_PAGE, defaultValue = RequestParamConstants.VALUE_STR_ONE) String selectedPage) {
 		try {
 			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
 					navigationService.getDataToPaginationWidget(goodsService.getQuantityOfPage()));
+			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
 			if (request.getParameter(RequestParamConstants.SELECTED_PAGE) == null) {
 				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainDefaultSelection((String) priceLower,
-								(String) priceHighter));
+								(String) priceHighter, (String) category));
 			} else {
 				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainUsersSelection((String) priceLower,
-								(String) priceHighter, selectedPage));
+								(String) priceHighter, selectedPage, (String) category));
 			}
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
@@ -106,6 +106,32 @@ public class MainController {
 		return RequestParamConstants.TV;
 	}
 
+	@RequestMapping(value = RequestConstants.TV, method = RequestMethod.GET)
+	public String setProductPage(HttpServletRequest request, ModelMap model,
+			@RequestParam(value = RequestParamConstants.LOWER_PRICE, defaultValue = RequestParamConstants.EMPTY) String priceLower,
+			@RequestParam(value = RequestParamConstants.HIGHTER_PRICE, defaultValue = RequestParamConstants.EMPTY) String priceHighter,
+			@RequestParam(value = RequestParamConstants.SELECTED_PAGE, defaultValue = RequestParamConstants.VALUE_STR_ONE) String selectedPage) {
+		try {
+			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
+					navigationService.getDataToPaginationWidget(goodsService.getQuantityOfPage()));
+			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getDefaultProductCategories());
+			
+//			if (request.getParameter(RequestParamConstants.SELECTED_PAGE) == null) {
+//				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainFullSelection((String) priceLower,
+//								(String) priceHighter));
+//			} else {
+				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainFullSelection((String) priceLower,
+								(String) priceHighter, selectedPage));
+//			}
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
+			return RequestParamConstants.ERROR_PAGE;
+		}
+		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
+				request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+		return RequestParamConstants.TV;
+	}
+	
 	@RequestMapping(value = RequestConstants.SINGLE_PRODUCT, method = RequestMethod.GET)
 	public String setHelloPage(HttpServletRequest request, ModelMap model) {
 		try {
@@ -309,6 +335,7 @@ public class MainController {
 		try {
 			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, request
 					.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getNoActiveProductCategories());
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
@@ -320,11 +347,11 @@ public class MainController {
 	public ModelAndView senIndexPage(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
-			modelAndView
-					.addObject(
-							RequestParamConstants.QUANTITY_SUM_WIDGET,
+			modelAndView.addObject(RequestParamConstants.QUANTITY_SUM_WIDGET,
 							request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
-			modelAndView.setViewName(RequestParamConstants.INDEX);
+			modelAndView.addObject(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getNoActiveProductCategories());
+			
+			modelAndView.setViewName(RequestParamConstants.INDEX);		
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			modelAndView.setViewName(RequestParamConstants.ERROR_PAGE);

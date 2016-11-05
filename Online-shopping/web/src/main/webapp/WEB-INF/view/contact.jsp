@@ -159,7 +159,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="index"><locale:message code="label.home"/></a></li>
-                        <li><a href="tv"><locale:message code="label.tv"/></a></li> 
+	                        <c:forEach items="${requestScope.productCategory}" var="category">
+				                <li class="<c:out value="${category.selectedItem}"></c:out>"><a href="tv?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+				            </c:forEach>
                             <sec:authorize access="isAuthenticated()">
                          		<li><a href="ViewItemsOfCart"><locale:message code="label.cart"/></a></li>
                          	</sec:authorize>

@@ -19,10 +19,24 @@ public interface IDaoProduct extends IBaseDao<Product>{
 	 * @param priceLower
 	 * @param priceHighter
 	 * @param numberOfPage
+	 * @param category
 	 * @throws DaoException
 	 */
-	List<Product> getProduct(Criteria criteria, String priveLower, String priceHighter, int numberOfPage) throws DaoException;
+	List<Product> getProduct(Criteria criteria, String priveLower,
+			String priceHighter, int numberOfPage, String category)
+			throws DaoException;
 
+	/**
+	 * Method get list products
+	 * @param criteria
+	 * @param priceLower
+	 * @param priceHighter
+	 * @param numberOfPage
+	 * @throws DaoException
+	 */
+	List<Product> getAllProduct(Criteria createCriteria, String priceLower,
+			String priceHighter, int numberOfStartPage);
+	
 	/**
 	 * Method get current session
 	 * @throws DaoException
@@ -50,4 +64,5 @@ public interface IDaoProduct extends IBaseDao<Product>{
 	 * @throws DaoException
 	 */
 	int getLastInsertId() throws DaoException;
+
 }
