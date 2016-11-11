@@ -13,6 +13,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>eElectronics - HTML eCommerce Template</title>
     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
     <script>
     function setParam(name, value) {
         var l = window.location;
@@ -48,6 +51,7 @@
 </script>
     
     <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:4col-sm-60,200,300,700,600' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
@@ -67,6 +71,34 @@
     <script type="text/javascript">
 
    </script>
+ 
+   <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1375px;}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #F5F5F5;
+      height: 100%;
+      width: 400px;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 300px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;}
+    }
+  </style>
  
 </head>
 <body> 
@@ -184,6 +216,16 @@
 
 	<div class="single-product-area">
         <div class="zigzag-bottom"></div>
+        <div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav">
+      <h4>John's Blog</h4>
+      <h5>John's Blog</h5>
+      <h6>John's Blog</h6>
+    </div>
+    <div class="col-sm-9">
+
+
         <div class="container">
             <div class="row">
                 <c:forEach items="${requestScope.products}" var="product">
@@ -263,6 +305,10 @@
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
+
 
     <div class="footer-top-area">
         <div class="zigzag-bottom"></div>
