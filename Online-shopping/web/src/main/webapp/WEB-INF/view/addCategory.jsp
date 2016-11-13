@@ -1,11 +1,11 @@
-<%@ page import="org.springframework.security.core.Authentication"%>
-<%@ page import="org.springframework.security.core.context.SecurityContextHolder"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.superinc.europe.onlineshopping.gu.entities.dto.*" %>
+<%@ page import="javax.servlet.http.HttpServletRequest.*" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -36,29 +36,10 @@
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]   response.sendRedirect("login.jsp"); %>   -->
+    <![endif]-->
   </head>
-  <body>
-  
-
-
-<%!String [] dataUsers = {"", "", ""};	%>
-<%Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-String line = auth.getPrincipal().toString(); //get logged in username 
-String [] dataUsers2 = line.split(" "); 
-if (dataUsers2.length!=1){
-	dataUsers = line.split(" ");}
-else {
-	dataUsers[0] = "";
-	dataUsers[1] = "";
-	dataUsers[2] = "";
-}
-%>
-    <sec:authorize access="hasRole('admin')">
-   		<sec:authentication property="principal"/>
- 		<h3> This information is viewed only for users with admin role: <%=dataUsers[0]  %> <%=dataUsers[1]  %> <%=dataUsers[2]  %></h3>
-	</sec:authorize>
-
+   <body>
+   
     <div class="header-area">
         <div class="container">
             <div class="row">
@@ -70,24 +51,16 @@ else {
 	                          	    <li><a href="${context}/login.jsp"><i class="fa fa-heart"></i> Login</a></li>
                              </sec:authorize>
 	  						 <sec:authorize access="isAuthenticated()">  
+		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> My Cart</a></li>
 		                            <li><a href="logout"><i class="fa fa-user"></i> Log out</a></li>
-         					 </sec:authorize>		                    
+         					 </sec:authorize>	
                         </ul>
                     </div>
                 </div>
-                
+
                 <div class="col-md-4">
                     <div class="header-right">
                         <ul class="list-unstyled list-inline">
-                            <li class="dropdown dropdown-small">
-                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">currency :</span><span class="value">USD </span><b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">USD</a></li>
-                                    <li><a href="#">INR</a></li>
-                                    <li><a href="#">GBP</a></li>
-                                </ul>
-                            </li>
-
                             <li class="dropdown dropdown-small">
                                 <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">language :</span><span class="value">English </span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
@@ -111,7 +84,7 @@ else {
                         <h1><a href="index">e<span>Electronics</span></a></h1>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                	<div class="col-sm-6">
                        <c:forEach items="${requestScope.quantitiAndSum}" var="quantitiAndSum">
                 			<sec:authorize access="isAuthenticated()"> 
 	                    		<div class="shopping-item">
@@ -119,7 +92,7 @@ else {
 	                  		     </div>
                     		</sec:authorize>
                     	</c:forEach> 
-                </div>
+                    </div>
             </div>
         </div>
     </div> <!-- End site branding area -->
@@ -141,55 +114,44 @@ else {
                            	<c:forEach items="${requestScope.productCategory}" var="category">
 			                    <li><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
                             </c:forEach>
-                        <sec:authorize access="isAuthenticated()">
-                         	<li><a href="ViewItemsOfCart">Cart</a></li>
-                         </sec:authorize>
+                    		<sec:authorize access="isAuthenticated()">
+                         		<li><a href="ViewItemsOfCart">Cart</a></li>
+                         	</sec:authorize>
                         <li><a href="contact">Contact</a></li>
-                       	<sec:authorize access="hasRole('admin')">
-							<li class="active"><a href="admin">Admin page</a></li>
-	  					</sec:authorize>
-	  					<sec:authorize access="hasRole('admin')">
-							<li><a href="addCategory">Add category</a></li>
-	  					</sec:authorize>
+                        <li class="active"><a href="addCategory">Add category</a></li>
                     </ul>
                 </div>  
             </div>
         </div>
     </div> <!-- End mainmenu area -->
-        
-    <div class="maincontent-area">
-
-	<div id="addProductForm">
-		<sf:form class="form-horizontal" name="productDTO" modelAttribute="productDTO" action="${pageContext.request.contextPath}/new" method="POST" enctype="multipart/form-data" title="Add product form" >
-			<input type="hidden" name="command" value="saveproduct" />
+    
+    <div class="product-big-title-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-bit-title text-center">
+                        <h2>Shopping Cart</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- End Page title area -->
+    
+    
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+               <div class="col-md-4">
+                    <div class="single-sidebar">
+                    </div>   
+                </div> 
+                <sec:authorize access="isAuthenticated()">   
+					
+					
+						<div id="addProductForm"><input type="hidden" name="command" value="saveproduct" />
 			
-			<div class="form-group">
-				<div class="col-xs-3">
-				</div>
-				<div class="col-xs-5">
-	    			<br><h3>Add product form</h3>
-				</div>
-	    	</div>
 	
-	    	<div class="form-group">
-				<div class="col-xs-3">
-		   			<label for="productNameData" class="control-label">Product Name:</label>
-				</div>
-				<div class="col-xs-5">
-					<sf:errors path="name" cssStyle="color: red"/>
-					<sf:input id="name"  type="text" value="" path="name" class="form-control"   />
-				</div>
-	    	</div>
-	    	
-	    	<div class="form-group">
-				<div class="col-xs-3">
-		   			<label for="productPriceData" class="control-label">Product Price:</label>
-				</div>
-				<div class="col-xs-5">
-					<sf:errors path="price" cssStyle="color: red"/>
-					<sf:input id="productPriceData" path="price" class="form-control" type="text" name="price" value="" />
-				</div>
-	    	</div>
 	    	
 	    	<!-- Product Category -->
 	    	<div class="form-group">
@@ -197,133 +159,36 @@ else {
 		   			<label for="productCategoryData" class="control-label">Category:</label>
 				</div>
 				<div class="col-xs-5">
-					<table>
-						<tr>
-							<td><sf:select path="department" items="${allDepartments}" itemValue="id" itemLabel="name" /></td>
-							<td><font color="red">  <sf:errors path="department" cssClass="error" />  </font></td>
-						</tr>
-					</table>
-				</div>
-	    	</div>
-	    	
-	    	<div class="form-group">
-				<div class="col-xs-3">
-		   			<label for="productCountData" class="control-label">Product count:</label>
-				</div>
-				<div class="col-xs-5">
-					<sf:errors path="count" cssStyle="color: red"/>
-					<sf:input id="productCountData" path="count" class="form-control" type="text" name="count" value=""/>
-				</div>
-	    	</div>
-	    	
-	    	<div class="form-group">
-				<div class="col-xs-3">
-		   			<label for="productDescriptData" class="control-label">Product description:</label>
-				</div>
-				<div class="col-xs-5">
-					<sf:errors path="description" cssStyle="color: red"/>
-					<sf:textarea id="productDescriptData" path="description" class="form-control" name="description" rows="1" cols="50"></sf:textarea> 
-				</div>
+								<table border="1">
+									<c:forEach items="${requestScope.categoryList}" var="post">
+										<tr>
+											<td>${post.categoryId}</td>
+											<td><c:out value="${post.categoryName}"></c:out></td>
+											<td><a href="delete?id=${post.categoryId}"><img
+													src="delete.png" /></a></td>
+										</tr>
+									</c:forEach>
+									<form action="/httpDemo/add" method="post">
+										<tr>
+											<td colspan="2"><input name="txt" type="text"></td>
+											<td colspan="2"><input type="submit"></td>
+										</tr>
+									</form>
+								</table>
+							</div>
 	    	</div>
 	    	    	
-	    	<div class="form-group">
-				<div class="col-xs-3">
-		   			<label for="productCharacteristic1" class="control-label">Color:</label>
-				</div>
-				<div class="col-xs-5">
-					<sf:errors path="characteristic1" cssStyle="color: red"/>
-					<sf:input id="productCharacteristic1" path="characteristic1" class="form-control" type="text" name="characteristic1" />
-				</div>
-	    	</div>
-	    	
-	    	<div class="form-group">
-				<div class="col-xs-3">
-		   			<label for="productCharacteristic2" class="control-label">Socket:</label>
-				</div>
-				<div class="col-xs-5">
-					<sf:errors path="characteristic2" cssStyle="color: red"/>
-					<sf:input id="productCharacteristic2" path="characteristic2" class="form-control" type="text" name="characteristic2" />
-				</div>
-	    	</div>
-	    	
-	    	<div class="form-group">
-				<div class="col-xs-3">
-		   			<label for="productCharacteristic3" class="control-label">Smart:</label>
-				</div>
-				<div class="col-xs-5">
-					<sf:errors path="characteristic3" cssStyle="color: red"/>
-					<sf:input id="productCharacteristic3" path="characteristic3" class="form-control" type="text" name="characteristic3" />
-				</div>
-	    	</div>
-	    	
-	    	<div class="form-group">
-				<div class="col-xs-3">
-		   			<label for="productCharacteristic4" class="control-label">Screen resolution:</label>
-				</div>
-				<div class="col-xs-5">
-					<sf:errors path="characteristic4" cssStyle="color: red"/>
-					<sf:input id="productCharacteristic4" path="characteristic4" class="form-control" type="text" name="characteristic4" />
-				</div>
-	    	</div>
-	    	
-	    	<div class="form-group">
-				<div class="col-xs-3">
-		   			<label for="productCharacteristic6" class="control-label">Aspect ratio:</label>
-				</div>
-				<div class="col-xs-5">
-					<sf:errors path="characteristic6" cssStyle="color: red"/>
-					<sf:input id="productCharacteristic6" path="characteristic6" class="form-control" type="text" name="characteristic6" />
-				</div>
-	    	</div>
-	    	
-	    	<div class="form-group">
-				<div class="col-xs-3">
-		   			<label for="productStockStatus" class="control-label">Stock availability:</label>
-				</div>
-				<div class="col-xs-5">
-					<sf:errors path="stock_status" cssStyle="color: red"/>
-					<sf:input id="productStockStatus" path="stock_status" class="form-control" type="text" name="stock_status" />
-				</div>
-	    	</div>
 	
-	    	<div class="form-group">
-				<div class="col-xs-3">
-		   			<label for="inputFile">Product image: </label>
-				</div>
-				<div class="col-xs-5">
-					<input type="file" id="inputFile" name="productImage">
-	    			<p class="help-block">Load an image for the product.</p>
-				</div>
-	    	</div>
-	    	
-	    	<div class="form-group">
-				<div class="col-xs-3">
-				</div>
-				<div class="col-xs-5">
-					<button type="submit" class="btn btn-danger">
-	    			<span class="glyphicon glyphicon-floppy-disk"></span> Save
-	    			</button>  
-				</div>
-	    	</div>
-	    	
-	
-	    </sf:form> 	
+	    
 	</div>
+					
+					
+					
+                </sec:authorize>
+            </div>
+        </div>
+    </div>
 
-
-
-
-
-    </div> <!-- End main content area -->
-    
-    <div class="brands-area">
-
-    </div> <!-- End brands area -->
-    
-    <div class="product-widget-area">
-
-    </div> <!-- End product widget area -->
-    
     <div class="footer-top-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
@@ -332,7 +197,6 @@ else {
                     <div class="footer-about-us">
                         <h2>e<span>Electronics</span></h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis magni at?</p>
-
                     </div>
                 </div>
                 
@@ -345,9 +209,10 @@ else {
 	                          	    <li><a href="${context}/login.jsp"><i class="fa fa-heart"></i> Login</a></li>
                              </sec:authorize>
 	  						 <sec:authorize access="isAuthenticated()">  
+		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> My Cart</a></li>
 		                            <li><a href="logout"><i class="fa fa-user"></i> Log out</a></li>
          					 </sec:authorize>	
-                        </ul>                        
+                        </ul>                              
                     </div>
                 </div>
                 
@@ -362,7 +227,8 @@ else {
                     </div>
                 </div>
                 
-
+                <div class="col-md-3 col-sm-6">
+                </div>
             </div>
         </div>
     </div> <!-- End footer top area -->
@@ -372,7 +238,7 @@ else {
             <div class="row">
                 <div class="col-md-8">
                     <div class="copyright">
-                        <p>&copy; 2015 eElectronics. All Rights Reserved. Coded with <i class="fa fa-heart"></i> by <a href="http://wpexpand.com" target="_blank">Alexey Druzik</a></p>
+                        <p>&copy; 2015 eElectronics. All Rights Reserved. Coded with <i class="fa fa-heart"></i> by <a href="http://leshaminskiy.by" target="_blank">Alexey Druzik</a></p>
                     </div>
                 </div>
                 

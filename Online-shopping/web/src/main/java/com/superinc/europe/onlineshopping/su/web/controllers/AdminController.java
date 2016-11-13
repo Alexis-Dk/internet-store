@@ -229,5 +229,18 @@ public class AdminController {
 	private String getMessageByKey(String key, Locale locale) {
 		return messageSource.getMessage(key, null, locale);
 	}
+	
+	@RequestMapping(value = "addCategory", method = RequestMethod.GET)
+	public String setHelloPage(HttpServletRequest request, ModelMap model) {
+		List<Category> categoryList = null;
+		try {
+			categoryList = productCategoryService.getAllProductCategories();
+			HttpUtils.setList(categoryList);
+		} catch (ErrorGettingCategoryServiceException e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+		}
+		model.addAttribute("categoryList", categoryList);
+		return "addCategory";
+	}
 
 }
