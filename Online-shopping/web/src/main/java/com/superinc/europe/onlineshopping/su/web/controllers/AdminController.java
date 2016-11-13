@@ -231,7 +231,22 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "addCategory", method = RequestMethod.GET)
-	public String setHelloPage(HttpServletRequest request, ModelMap model) {
+	public String addCategory(HttpServletRequest request, ModelMap model) {
+		List<Category> categoryList = null;
+		try {
+			categoryList = productCategoryService.getAllProductCategories();
+			HttpUtils.setList(categoryList);
+		} catch (ErrorGettingCategoryServiceException e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+		}
+		model.addAttribute("categoryList", categoryList);
+		return "addCategory";
+	}
+	
+	@RequestMapping(value = "addCategory", method = RequestMethod.POST)
+	public String addNewCategory(HttpServletRequest request, ModelMap model,
+			@RequestParam(value = "txt", defaultValue = RequestParamConstants.EMPTY) String categoryName
+) {
 		List<Category> categoryList = null;
 		try {
 			categoryList = productCategoryService.getAllProductCategories();

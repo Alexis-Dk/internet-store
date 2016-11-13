@@ -165,12 +165,12 @@
 											<td>${post.categoryId}</td>
 											<td><c:out value="${post.categoryName}"></c:out></td>
 											<td><a href="delete?id=${post.categoryId}"><img
-													src="delete.png" /></a></td>
+													src="img/dicreaseButton.jpg" /></a></td>
 										</tr>
 									</c:forEach>
-									<form action="/httpDemo/add" method="post">
+									<form action="addCategory" method="post">
 										<tr>
-											<td colspan="2"><input name="txt" type="text"></td>
+											<td colspan="2"><input name="categoryName" type="text"></td>
 											<td colspan="2"><input type="submit"></td>
 										</tr>
 									</form>
