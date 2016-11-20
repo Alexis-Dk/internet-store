@@ -245,8 +245,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "addCategory", method = RequestMethod.POST)
 	public String addNewCategory(HttpServletRequest request, ModelMap model,
-			@RequestParam(value = "txt", defaultValue = RequestParamConstants.EMPTY) String categoryName
-) {
+			@RequestParam(value = RequestParamConstants.CATEGORY_NAME, defaultValue = RequestParamConstants.EMPTY) String categoryName) {
 		List<Category> categoryList = null;
 		try {
 			categoryList = productCategoryService.getAllProductCategories();

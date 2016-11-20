@@ -47,6 +47,7 @@ public class RequestParamConstants {
 	public static final String CATEGORY = "category";
 	public static final String CATEGORY_ID = "categoryId";
 	public static final String PRODUCT_ALL = "productAll";
+	public static final String CATEGORY_NAME = "categoryName";
     public void handler(){
     }
 }
