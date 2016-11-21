@@ -25,5 +25,18 @@ public class CategoryCharacteristic implements Serializable{
 	private int categoryCharacteristicId;
 	
 	@Column(name="categoryCharacteristic_name")
-    private String categoryCharacteristicName; 
+    private String categoryCharacteristicName;
+
+	public CategoryCharacteristic(String categoryCharacteristicName) {
+		this.categoryCharacteristicName = categoryCharacteristicName;
+	}
+
+	public String getCategoryCharacteristicName() {
+		return categoryCharacteristicName;
+	}
+
+	public void setCategoryCharacteristicName(String categoryCharacteristicName) {
+		this.categoryCharacteristicName = categoryCharacteristicName;
+	} 
+	
 }

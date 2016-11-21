@@ -48,6 +48,11 @@ import com.superinc.europe.onlineshopping.gu.service.IProductCategoryService;
 import com.superinc.europe.onlineshopping.gu.service.IUsersService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ErrorAddingPoductServiceException;
 import com.superinc.europe.onlineshopping.gu.service.exception.ErrorGettingCategoryServiceException;
+import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
+import com.superinc.europe.onlineshopping.su.entities.pojo.CategoryCharacteristic;
+import com.superinc.europe.onlineshopping.su.entities.pojo.Characteristic;
+import com.superinc.europe.onlineshopping.su.service.ICategoryCharacteristicService;
+import com.superinc.europe.onlineshopping.su.service.ICharacteristicService;
 import com.superinc.europe.onlineshopping.su.web.utils.DepartmentEditor;
 import com.superinc.europe.onlineshopping.gu.web.utils.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestConstants;
@@ -91,6 +96,9 @@ public class AdminController {
     
     @Autowired
     private MessageSource messageSource;
+    
+    @Autowired
+    private ICategoryCharacteristicService iCategoryCharacteristicService;
     
 	private Validator validator;
 	
@@ -250,6 +258,11 @@ public class AdminController {
 		try {
 			categoryList = productCategoryService.getAllProductCategories();
 			HttpUtils.setList(categoryList);
+			try {
+				iCategoryCharacteristicService.insertCategoryCharacteristic(new CategoryCharacteristic(categoryName));
+			} catch (ServiceException e) {
+				e.printStackTrace();
+			}
 		} catch (ErrorGettingCategoryServiceException e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
 		}
