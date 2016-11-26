@@ -30,4 +30,6 @@ public class Characteristic implements Serializable {
 	
 	@Column(name="characteristicName")
     private String characteristicName; 
+	
+	
 }

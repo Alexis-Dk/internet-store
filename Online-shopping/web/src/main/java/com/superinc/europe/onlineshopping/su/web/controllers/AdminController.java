@@ -256,13 +256,32 @@ public class AdminController {
 			@RequestParam(value = RequestParamConstants.CATEGORY_NAME, defaultValue = RequestParamConstants.EMPTY) String categoryName) {
 		List<Category> categoryList = null;
 		try {
-			categoryList = productCategoryService.getAllProductCategories();
-			HttpUtils.setList(categoryList);
 			try {
-				iCategoryCharacteristicService.insertCategoryCharacteristic(new CategoryCharacteristic(categoryName));
+				iCategoryCharacteristicService.addNewCategory(categoryName);
 			} catch (ServiceException e) {
 				e.printStackTrace();
 			}
+			categoryList = productCategoryService.getAllProductCategories();
+			HttpUtils.setList(categoryList);
+		} catch (ErrorGettingCategoryServiceException e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+		}
+		model.addAttribute("categoryList", categoryList);
+		return "addCategory";
+	}
+	
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String deleteCategory(HttpServletRequest request, ModelMap model, String name, String id) {
+		List<Category> categoryList = null;
+		try {
+			iCategoryCharacteristicService.delete(name);
+		} catch (ServiceException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			categoryList = productCategoryService.getAllProductCategories();
+			HttpUtils.setList(categoryList);
 		} catch (ErrorGettingCategoryServiceException e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
 		}

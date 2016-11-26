@@ -15,7 +15,8 @@ import com.superinc.europe.onlineshopping.gu.entities.pojo.Category;
 
 @Entity 
 @Table(name="category_characteristic")
-public class CategoryCharacteristic implements Serializable{
+public
+class CategoryCharacteristic implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -27,16 +28,44 @@ public class CategoryCharacteristic implements Serializable{
 	@Column(name="categoryCharacteristic_name")
     private String categoryCharacteristicName;
 
+	public CategoryCharacteristic(int categoryCharacteristicId,
+			String categoryCharacteristicName) {
+		this.categoryCharacteristicId = categoryCharacteristicId;
+		this.categoryCharacteristicName = categoryCharacteristicName;
+	}
+
 	public CategoryCharacteristic(String categoryCharacteristicName) {
 		this.categoryCharacteristicName = categoryCharacteristicName;
 	}
 
+	public CategoryCharacteristic(int categoryCharacteristicId) {
+		this.categoryCharacteristicId = categoryCharacteristicId;
+	}
+	
+	public CategoryCharacteristic() {
+	}
+	
 	public String getCategoryCharacteristicName() {
 		return categoryCharacteristicName;
 	}
 
 	public void setCategoryCharacteristicName(String categoryCharacteristicName) {
 		this.categoryCharacteristicName = categoryCharacteristicName;
+	}
+
+	public int getCategoryCharacteristicId() {
+		return categoryCharacteristicId;
+	}
+
+	public void setCategoryCharacteristicId(int categoryCharacteristicId) {
+		this.categoryCharacteristicId = categoryCharacteristicId;
+	}
+
+	@Override
+	public String toString() {
+		return "CategoryCharacteristic [categoryCharacteristicId="
+				+ categoryCharacteristicId + ", categoryCharacteristicName="
+				+ categoryCharacteristicName + "]";
 	} 
 	
 }

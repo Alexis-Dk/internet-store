@@ -6,6 +6,7 @@ package com.superinc.europe.onlineshopping.su.service.impl;
 import java.io.Serializable;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +31,7 @@ public class CharacteristicService implements ICharacteristicService {
 
     @Autowired
     private IDaoCharacteristic iDaoCharacteristic;
-
+    
 	/**
 	 * Method set to Session
 	 * @param ob

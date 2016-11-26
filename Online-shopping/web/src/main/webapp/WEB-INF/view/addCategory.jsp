@@ -164,7 +164,7 @@
 										<tr>
 											<td>${post.categoryId}</td>
 											<td><c:out value="${post.categoryName}"></c:out></td>
-											<td><a href="delete?id=${post.categoryId}"><img
+											<td><a href="delete?id=${post.categoryId}&name=${post.categoryName}"><img
 													src="img/dicreaseButton.jpg" /></a></td>
 										</tr>
 									</c:forEach>
