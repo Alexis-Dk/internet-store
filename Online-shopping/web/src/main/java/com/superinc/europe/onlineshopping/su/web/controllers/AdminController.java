@@ -274,7 +274,7 @@ public class AdminController {
 	public String deleteCategory(HttpServletRequest request, ModelMap model, String name, String id) {
 		List<Category> categoryList = null;
 		try {
-			iCategoryCharacteristicService.delete(name);
+			iCategoryCharacteristicService.deleteCategory(name, id);
 		} catch (ServiceException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

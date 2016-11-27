@@ -1,6 +1,9 @@
 package com.superinc.europe.onlineshopping.su.dao.orm.hibernate;
 
 import java.io.Serializable;
+import java.util.List;
+
+import org.hibernate.Criteria;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IBaseDao;
@@ -17,5 +20,13 @@ public interface IDaoCategoryCharacteristic extends IBaseDao<CategoryCharacteris
 	 * @throws DaoException
 	 */
 	public Serializable insertCategoryCharacteristic(CategoryCharacteristic ob) throws DaoException;
+
+	/**
+	 * Method delete from Session
+	 * @param criteria
+	 * @param name
+	 * @throws ServiceException
+	 */
+	List<CategoryCharacteristic> deleteCategoryCharacteristic(Criteria criteria, String name) throws DaoException;
 
 }

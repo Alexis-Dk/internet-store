@@ -2,6 +2,7 @@ package com.superinc.europe.onlineshopping.su.service;
 
 import java.io.Serializable;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
@@ -29,7 +30,9 @@ public interface ICategoryCharacteristicService {
 	/**
 	 * Method delete from Session
 	 * @param ob
+	 * @param id
 	 * @throws ServiceException
 	 */
-	void delete(String ob) throws ServiceException;
+	void deleteCategory(String ob, String id) throws ServiceException;
+	
 }
