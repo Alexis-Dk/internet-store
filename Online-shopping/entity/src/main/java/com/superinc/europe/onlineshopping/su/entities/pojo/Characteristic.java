@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import com.superinc.europe.onlineshopping.gu.entities.pojo.User;
 
 @Entity 
@@ -25,6 +28,7 @@ public class Characteristic implements Serializable {
 	private int characteristicId;
 	
 	@ManyToOne(targetEntity=CategoryCharacteristic.class)
+	@Cascade(CascadeType.DELETE)
 	@JoinColumn(name="categoryCharacteristic_id_FK", referencedColumnName = "categoryCharacteristic_id")
 	private User categoryCharacteristicFk;
 	
