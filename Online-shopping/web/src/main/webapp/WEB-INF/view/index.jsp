@@ -178,11 +178,16 @@ else {
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="index"><locale:message code="label.home"/></a></li>
-                        	<sec:authorize access="isAuthenticated()">
+                            <sec:authorize access="hasRole('admin')">
+		                        <c:forEach items="${requestScope.productCategory}" var="category">
+					            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="categoryCharacteristic?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+					            </c:forEach>
+			           		</sec:authorize>
+                        	<sec:authorize access="isAnonymous() or hasRole('user')">
 		                        <c:forEach items="${requestScope.productCategory}" var="category">
 					            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
 					            </c:forEach>
-			           		 </sec:authorize>
+			           		</sec:authorize>
                         <sec:authorize access="isAuthenticated()">
                          	<li><a href="ViewItemsOfCart"><locale:message code="label.cart"/></a></li>
                          </sec:authorize>

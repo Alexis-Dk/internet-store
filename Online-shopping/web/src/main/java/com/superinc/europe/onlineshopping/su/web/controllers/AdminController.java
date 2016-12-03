@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -296,4 +297,32 @@ public class AdminController {
 		return "addCategory";
 	}
 
+	@PreAuthorize("hasAnyRole('admin')")
+	@RequestMapping(value = RequestConstants.CATEGORY_CHARACTERISTIC, method = RequestMethod.GET, params=RequestParamConstants.CATEGORY)
+	public String addCategoryCharacteristic(HttpServletRequest request, ModelMap model,
+			@RequestParam(value = RequestParamConstants.LOWER_PRICE, defaultValue = RequestParamConstants.EMPTY) String priceLower,
+			@RequestParam(value = RequestParamConstants.HIGHTER_PRICE, defaultValue = RequestParamConstants.EMPTY) String priceHighter,
+			@RequestParam(value = RequestParamConstants.CATEGORY) String category,
+			@RequestParam(value = RequestParamConstants.SELECTED_PAGE, defaultValue = RequestParamConstants.VALUE_STR_ONE) String selectedPage) {
+		try {
+			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
+					navigationService.getDataToPaginationWidget(goodsService.getQuantityOfPage()));
+			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
+			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, category);
+			if (request.getParameter(RequestParamConstants.SELECTED_PAGE) == null) {
+				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainDefaultSelection((String) priceLower,
+								(String) priceHighter, (String) category));
+			} else {
+				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainUsersSelection((String) priceLower,
+								(String) priceHighter, selectedPage, (String) category));
+			}
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
+			return RequestParamConstants.ERROR_PAGE;
+		}
+		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
+				request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+		return RequestParamConstants.CATEGORY_CHARACTERISTIC;
+	}
+	
 }

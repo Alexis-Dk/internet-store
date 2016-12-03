@@ -112,34 +112,6 @@ public class MainController {
 		return RequestParamConstants.PRODUCT;
 	}
 
-  @PreAuthorize("hasAnyRole('user')")
-	@RequestMapping(value = RequestConstants.PRODUCT, method = RequestMethod.GET, params=RequestParamConstants.CATEGORY)
-	public String setProductPage2(HttpServletRequest request, ModelMap model,
-			@RequestParam(value = RequestParamConstants.LOWER_PRICE, defaultValue = RequestParamConstants.EMPTY) String priceLower,
-			@RequestParam(value = RequestParamConstants.HIGHTER_PRICE, defaultValue = RequestParamConstants.EMPTY) String priceHighter,
-			@RequestParam(value = RequestParamConstants.CATEGORY) String category,
-			@RequestParam(value = RequestParamConstants.SELECTED_PAGE, defaultValue = RequestParamConstants.VALUE_STR_ONE) String selectedPage) {
-		try {
-			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
-					navigationService.getDataToPaginationWidget(goodsService.getQuantityOfPage()));
-			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
-			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, category);
-			if (request.getParameter(RequestParamConstants.SELECTED_PAGE) == null) {
-				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainDefaultSelection((String) priceLower,
-								(String) priceHighter, (String) category));
-			} else {
-				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainUsersSelection((String) priceLower,
-								(String) priceHighter, selectedPage, (String) category));
-			}
-		} catch (Exception e) {
-			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
-			return RequestParamConstants.ERROR_PAGE;
-		}
-		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
-				request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
-		return RequestParamConstants.PRODUCT;
-	}
-    
 	@RequestMapping(value = RequestConstants.PRODUCT, method = RequestMethod.GET)
 	public String setProductPage(HttpServletRequest request, ModelMap model,
 			@RequestParam(value = RequestParamConstants.LOWER_PRICE, defaultValue = RequestParamConstants.EMPTY) String priceLower,

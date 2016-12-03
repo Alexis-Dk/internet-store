@@ -14,4 +14,5 @@ public class RequestConstants {
 	public static final String INDEX = "/index";
 	public static final String ADMIN = "/admin";
 	public static final String GENERATE_REPORT = "/getReport";
+	public static final String CATEGORY_CHARACTERISTIC = "/categoryCharacteristic";
 }

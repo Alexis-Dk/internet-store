@@ -175,9 +175,11 @@
                     <ul class="nav navbar-nav">
                         <li><a href="index"><locale:message code="label.home"/></a></li>
                         
-			                <c:forEach items="${requestScope.productCategory}" var="category">
-			                    <li class="<c:out value="${category.selectedItem}"></c:out>"><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
-			                </c:forEach>
+                            <sec:authorize access="hasRole('admin')">
+		                        <c:forEach items="${requestScope.productCategory}" var="category">
+					            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="categoryCharacteristic?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+					            </c:forEach>
+			           		</sec:authorize>
              
                            	<sec:authorize access="isAuthenticated()">
                          		<li><a href="ViewItemsOfCart"><locale:message code="label.cart"/></a></li>
@@ -215,99 +217,8 @@
     </div>
 
 	<div class="single-product-area">
-        <div class="zigzag-bottom"></div>
-        <div class="container-fluid">
-  <div class="row content">
-    <div class="col-sm-3 sidenav">
-      <h4>John's Blog</h4>
-      <h5>John's Blog</h5>
-      <h6>John's Blog</h6>
+
     </div>
-    <div class="col-sm-9">
-
-
-        <div class="container">
-            <div class="row">
-                <c:forEach items="${requestScope.products}" var="product">
-                <div class="col-md-3 col-sm-6">
-                    <div class="single-shop-product">
-                        <div class="product-upper">
-                        <a href="singleProduct?description=<c:out value="${product.description}"></c:out>
-&name=<c:out value="${product.name}"></c:out>
-&characteristic1=<c:out value="${product.characteristic1}"></c:out>
-&characteristic2=<c:out value="${product.characteristic2}"></c:out>
-&characteristic3=<c:out value="${product.characteristic3}"></c:out>
-&characteristic4=<c:out value="${product.characteristic4}"></c:out>
-&characteristic6=<c:out value="${product.characteristic6}"></c:out>
-&characteristic7=<c:out value="${product.characteristic7}"></c:out> 
-&rating=<c:out value="${product.rating}"></c:out>
-&stockStatus=<c:out value="${product.stockStatus}"></c:out>
-&imagePath=<c:out value="${product.imagePath}"></c:out>
-&price=<c:out value="${product.price}"></c:out>
-&productId=<c:out value="${product.productId}"></c:out>">
-                        <img src="img/<c:out value="${product.imagePath}"></c:out>" alt=""></a>
-                        </div>
-							<h2><a><c:out value="${product.name}"></c:out> <c:out value="${product.description}"></c:out></a></h2>
-						<div class="product-carousel-price">
-                            <ins>$<c:out value="${product.price}"></c:out></ins> <del>$<c:out value="${product.oldprice}"></c:out></del>
-                        </div>  
-                        <sec:authorize access="isAuthenticated()">  
-	                        <div class="product-option-shop">
-									<a class="add_to_cart_button" data-quantity="1"
-										data-product_sku="" data-product_id="70" rel="nofollow"
-										href="${context}/addNewProductToCart?
-										description=<c:out value="${product.description}"></c:out>
-&name=<c:out value="${product.name}"></c:out>
-&characteristic1=<c:out value="${product.characteristic1}"></c:out>
-&characteristic2=<c:out value="${product.characteristic2}"></c:out>
-&characteristic3=<c:out value="${product.characteristic3}"></c:out>
-&characteristic4=<c:out value="${product.characteristic4}"></c:out>
-&characteristic6=<c:out value="${product.characteristic6}"></c:out>
-&characteristic7=<c:out value="${product.characteristic7}"></c:out>
-&rating=<c:out value="${product.rating}"></c:out>
-&stockStatus=<c:out value="${product.stockStatus}"></c:out>
-&imagePath=<c:out value="${product.imagePath}"></c:out>
-&price=<c:out value="${product.price}"></c:out>
-&productId=<c:out value="${product.productId}"></c:out>">Add to cart</a>
-								</div> 
-                        </sec:authorize>                      
-                    </div>
-                </div>
-                </c:forEach>  
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="product-pagination text-center">
-                        <nav>
-                          <ul class="pagination">
-                            <li>
-                              <a href='' 
-							 onclick=" this.href='?number=1&priceLower='+document.getElementById('priceLower').value+'&priceHighter='+document.getElementById('priceHighter').value" id="add-product-save-link" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-							<c:forEach items="${requestScope.numberOfPage}" var="number">
-							<li><a href='' 
-							 onclick=" this.href='?number=${number.numberOfPageId}&priceLower='+document.getElementById('priceLower').value+'&priceHighter='+document.getElementById('priceHighter').value+'&category='+document.getElementById('category').value" id="add-product-save-link">${number.numberOfPageId}</a>
-							 </li>
-							 </c:forEach>
-                        <li>
-                          <a href='' 
-							 onclick=" this.href='?number=2&priceLower='+document.getElementById('priceLower').value+'&priceHighter='+document.getElementById('priceHighter').value" id="add-product-save-link" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>                        
-        </div>
-    </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 
 
     <div class="footer-top-area">
