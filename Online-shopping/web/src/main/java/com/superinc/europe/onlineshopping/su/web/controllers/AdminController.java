@@ -20,6 +20,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -112,6 +114,11 @@ public class AdminController {
 	@RequestMapping(value = RequestConstants.ADMIN, method = RequestMethod.GET)
 	public ModelAndView setAdminPage(HttpServletRequest request,
 			HttpSession session) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		authentication.getPrincipal();
+		System.out.println("efrrgvrtgtgtgtgt");
+		System.out.println(authentication.getPrincipal());
+		System.out.println("efrrgvrtgtgtgtgt");
 		ModelAndView modelAndView = new ModelAndView();
 		try {
 			modelAndView.setViewName(RequestParamConstants.ADMIN_PAGE_ATTR);

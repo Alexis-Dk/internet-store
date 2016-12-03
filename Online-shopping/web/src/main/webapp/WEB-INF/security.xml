@@ -30,4 +30,5 @@
 	<bean id="roleVoter" class="org.springframework.security.access.vote.RoleVoter">
 		<property name="rolePrefix" value="" />
 	</bean>
+
 </beans>
