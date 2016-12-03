@@ -66,6 +66,8 @@
     <link rel="stylesheet" href="<c:url value="/css/owl.carousel.css" />" rel="stylesheet">
     <link rel="stylesheet" href="<c:url value="/css/styleMain.css" />" rel="stylesheet"> 
     <link rel="stylesheet" href="<c:url value="/css/responsive.css" />" rel="stylesheet"> 
+    <link rel="stylesheet" href="<c:url value="/css/castomStoreStyle.css" />" rel="stylesheet"> 
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     
     <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
     <script type="text/javascript">
@@ -98,6 +100,17 @@
       }
       .row.content {height: auto;}
     }
+    
+      .block2 { 
+    width: 700px; 
+    padding: 5px; 
+    border: solid 1px black; 
+    top: 90px; 
+    right: 70px;
+	left: 170px;
+
+
+   }
   </style>
  
 </head>
@@ -217,11 +230,28 @@
     </div>
 
 	<div class="single-product-area">
+		<div class="container">
+			<div class="block2">
+				<h4>String category characteristics 1</h4>
+				<table class="table" border="1">
+					<tr>
+						<td>vfvfvfv</td>
+						<td>hhhhh</td>
+						<td><a href="delete?id=gggg&name=hhh"><img src="img/dicreaseButton.jpg" /></a></td>
+					</tr>
+					<form action="addCategory" method="post">
+						<tr>
+							<td colspan="2"><input name="categoryName" type="text"></td>
+							<td colspan="2"><input type="submit"></td>
+						</tr>
+					</form>
 
-    </div>
+				</table>
+			</div>
+		</div>
+	</div>
 
-
-    <div class="footer-top-area">
+	<div class="footer-top-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">

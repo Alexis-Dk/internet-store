@@ -1,0 +1,10 @@
+.block1 { 
+    width: 600px;
+        background: #fc0; 
+    padding: 5px; 
+    border: solid 1px black; 
+    float: left; 
+    position: relative; 
+    top: 40px; 
+    left: -70px; 
+   }
