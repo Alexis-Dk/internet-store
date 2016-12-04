@@ -105,7 +105,7 @@
     width: 700px; 
     padding: 5px; 
     border: solid 1px black; 
-    top: 90px; 
+    top: 30px; 
     right: 70px;
 	left: 170px;
 
@@ -187,16 +187,20 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="index"><locale:message code="label.home"/></a></li>
-                        
                             <sec:authorize access="hasRole('admin')">
 		                        <c:forEach items="${requestScope.productCategory}" var="category">
 					            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="categoryCharacteristic?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
 					            </c:forEach>
 			           		</sec:authorize>
-             
-                           	<sec:authorize access="isAuthenticated()">
-                         		<li><a href="ViewItemsOfCart"><locale:message code="label.cart"/></a></li>
-                         	</sec:authorize>
+                         	<sec:authorize access="hasRole('admin')">
+							<li><a href="new">Admin page</a></li>
+	  					</sec:authorize>
+	  					<sec:authorize access="hasRole('admin')">
+							<li><a href="addCategory">Add category</a></li>
+	  					</sec:authorize>
+	  					<sec:authorize access="isAuthenticated()">
+                         	<li><a href="ViewItemsOfCart"><locale:message code="label.cart"/></a></li>
+                        </sec:authorize>
                         <li><a href="contact"><locale:message code="label.contact"/></a></li>
                     </ul>
                 </div>  
@@ -245,12 +249,138 @@
 							<td colspan="2"><input type="submit"></td>
 						</tr>
 					</form>
-
 				</table>
 			</div>
+			
+			<br>
+			<div class="block2">
+				<h4>String category characteristics 2</h4>
+				<table class="table" border="1">
+					<tr>
+						<td>vfvfvfv</td>
+						<td>hhhhh</td>
+						<td><a href="delete?id=gggg&name=hhh"><img src="img/dicreaseButton.jpg" /></a></td>
+					</tr>
+					<form action="addCategory" method="post">
+						<tr>
+							<td colspan="2"><input name="categoryName" type="text"></td>
+							<td colspan="2"><input type="submit"></td>
+						</tr>
+					</form>
+				</table>
+			</div>
+			
+			<br>
+			<div class="block2">
+				<h4>String category characteristics 3</h4>
+				<table class="table" border="1">
+					<tr>
+						<td>vfvfvfv</td>
+						<td>hhhhh</td>
+						<td><a href="delete?id=gggg&name=hhh"><img src="img/dicreaseButton.jpg" /></a></td>
+					</tr>
+					<form action="addCategory" method="post">
+						<tr>
+							<td colspan="2"><input name="categoryName" type="text"></td>
+							<td colspan="2"><input type="submit"></td>
+						</tr>
+					</form>
+				</table>
+			</div>
+			
+			<br>
+			<div class="block2">
+				<h4>String category characteristics 4</h4>
+				<table class="table" border="1">
+					<tr>
+						<td>vfvfvfv</td>
+						<td>hhhhh</td>
+						<td><a href="delete?id=gggg&name=hhh"><img src="img/dicreaseButton.jpg" /></a></td>
+					</tr>
+					<form action="addCategory" method="post">
+						<tr>
+							<td colspan="2"><input name="categoryName" type="text"></td>
+							<td colspan="2"><input type="submit"></td>
+						</tr>
+					</form>
+				</table>
+			</div>
+			
+			<br>
+			<div class="block2">
+				<h4>String category characteristics 4</h4>
+				<table class="table" border="1">
+					<tr>
+						<td>vfvfvfv</td>
+						<td>hhhhh</td>
+						<td><a href="delete?id=gggg&name=hhh"><img src="img/dicreaseButton.jpg" /></a></td>
+					</tr>
+					<form action="addCategory" method="post">
+						<tr>
+							<td colspan="2"><input name="categoryName" type="text"></td>
+							<td colspan="2"><input type="submit"></td>
+						</tr>
+					</form>
+				</table>
+			</div>
+			
+			<br>
+			<div class="block2">
+				<h4>String category characteristics 5</h4>
+				<table class="table" border="1">
+					<tr>
+						<td>vfvfvfv</td>
+						<td>hhhhh</td>
+						<td><a href="delete?id=gggg&name=hhh"><img src="img/dicreaseButton.jpg" /></a></td>
+					</tr>
+					<form action="addCategory" method="post">
+						<tr>
+							<td colspan="2"><input name="categoryName" type="text"></td>
+							<td colspan="2"><input type="submit"></td>
+						</tr>
+					</form>
+				</table>
+			</div>
+			
+			<br>
+			<div class="block2">
+				<h4>String category characteristics 6</h4>
+				<table class="table" border="1">
+					<tr>
+						<td>vfvfvfv</td>
+						<td>hhhhh</td>
+						<td><a href="delete?id=gggg&name=hhh"><img src="img/dicreaseButton.jpg" /></a></td>
+					</tr>
+					<form action="addCategory" method="post">
+						<tr>
+							<td colspan="2"><input name="categoryName" type="text"></td>
+							<td colspan="2"><input type="submit"></td>
+						</tr>
+					</form>
+				</table>
+			</div>
+			
+			<br>
+			<div class="block2">
+				<h4>String category characteristics 7</h4>
+				<table class="table" border="1">
+					<tr>
+						<td>vfvfvfv</td>
+						<td>hhhhh</td>
+						<td><a href="delete?id=gggg&name=hhh"><img src="img/dicreaseButton.jpg" /></a></td>
+					</tr>
+					<form action="addCategory" method="post">
+						<tr>
+							<td colspan="2"><input name="categoryName" type="text"></td>
+							<td colspan="2"><input type="submit"></td>
+						</tr>
+					</form>
+				</table>
+			</div>
+			
 		</div>
 	</div>
-
+	
 	<div class="footer-top-area">
         <div class="zigzag-bottom"></div>
         <div class="container">

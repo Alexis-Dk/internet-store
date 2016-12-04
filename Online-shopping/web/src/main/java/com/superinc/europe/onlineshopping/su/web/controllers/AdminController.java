@@ -123,6 +123,7 @@ public class AdminController {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
 			modelAndView.setViewName(RequestParamConstants.ADMIN_PAGE_ATTR);
+			modelAndView.addObject(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getNoActiveProductCategories());
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			modelAndView.setViewName(RequestParamConstants.ERROR_PAGE);
@@ -143,6 +144,12 @@ public class AdminController {
 	model.addAttribute("categoryList", categoryList);
 //	model.addAttribute("newProduct", productDTO);
 	model.put(RequestParamConstants.PRODUCT_DTO, productDTO);
+	try {
+		model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getNoActiveProductCategories());
+	} catch (ErrorGettingCategoryServiceException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	return "admin";
     }
     
@@ -252,6 +259,7 @@ public class AdminController {
 		try {
 			categoryList = productCategoryService.getAllProductCategories();
 			HttpUtils.setList(categoryList);
+			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getNoActiveProductCategories());
 		} catch (ErrorGettingCategoryServiceException e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
 		}
@@ -266,6 +274,7 @@ public class AdminController {
 		try {
 			try {
 				iCategoryCharacteristicService.addNewCategory(categoryName);
+				model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getNoActiveProductCategories());
 			} catch (ServiceException e) {
 				e.printStackTrace();
 			}

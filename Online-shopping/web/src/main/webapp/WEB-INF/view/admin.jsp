@@ -141,16 +141,16 @@ else {
                            	<c:forEach items="${requestScope.productCategory}" var="category">
 			                    <li><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
                             </c:forEach>
-                        <sec:authorize access="isAuthenticated()">
-                         	<li><a href="ViewItemsOfCart">Cart</a></li>
-                         </sec:authorize>
-                        <li><a href="contact">Contact</a></li>
                        	<sec:authorize access="hasRole('admin')">
 							<li class="active"><a href="admin">Admin page</a></li>
 	  					</sec:authorize>
 	  					<sec:authorize access="hasRole('admin')">
 							<li><a href="addCategory">Add category</a></li>
 	  					</sec:authorize>
+	  					<sec:authorize access="isAuthenticated()">
+                        	<li><a href="ViewItemsOfCart">Cart</a></li>
+                        </sec:authorize>
+                        <li><a href="contact">Contact</a></li>
                     </ul>
                 </div>  
             </div>
