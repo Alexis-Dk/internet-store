@@ -334,4 +334,21 @@ public class AdminController {
 		return RequestParamConstants.CATEGORY_CHARACTERISTIC;
 	}
 	
+	@PreAuthorize("hasAnyRole('admin')")
+	@RequestMapping(value = RequestConstants.CATEGORY_CHARACTERISTIC_NEW, method = RequestMethod.GET, params=RequestParamConstants.CATEGORY)
+	public String addhCategoryCharacteristicNew(HttpServletRequest request, ModelMap model,
+			@RequestParam(value = RequestParamConstants.CATEGORY) String category) {
+		try {
+			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
+			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, category);
+			System.out.println(productCategoryService.getCategoryById(Integer.parseInt(category)));
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
+			return RequestParamConstants.ERROR_PAGE;
+		}
+		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
+				request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+		return RequestParamConstants.CATEGORY_CHARACTERISTIC;
+	}
+	
 }
