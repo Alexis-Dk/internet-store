@@ -337,10 +337,14 @@ public class AdminController {
 	@PreAuthorize("hasAnyRole('admin')")
 	@RequestMapping(value = RequestConstants.CATEGORY_CHARACTERISTIC_NEW, method = RequestMethod.GET, params=RequestParamConstants.CATEGORY)
 	public String addhCategoryCharacteristicNew(HttpServletRequest request, ModelMap model,
+			@RequestParam(value = "categoryCharName") String categoryCharName,
+			@RequestParam(value = "numberCharCategory") String numberCharCategory,
 			@RequestParam(value = RequestParamConstants.CATEGORY) String category) {
 		try {
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
 			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, category);
+			System.out.println(categoryCharName);
+			System.out.println(numberCharCategory);
 			System.out.println(productCategoryService.getCategoryById(Integer.parseInt(category)));
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);

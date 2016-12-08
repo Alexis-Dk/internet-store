@@ -243,28 +243,26 @@
 						<td><a href="delete?id=gggg&name=hhh"><img
 								src="img/dicreaseButton.jpg" /> </a></td>
 					</tr>
-
-					
-					<form class="form-inline" action="categoryCharacteristicNew" method="get">
-					<tr>	
-						<td ><input name="categoryCharName" type="text" ></td>
-						<td >
-						
-							  <div class="form-group">
-							  </div>
-							  <div class="form-group">
-					<!--		  	 Latest jQuery form server   <input type="text" class="form-control" id="priceHighter" name="priceHighter" placeholder="to" value="<%= request.getSession().getAttribute("priceHighter") %>">  -->
-							  <input type="hidden" class="form-control" id="category" name="category" placeholder="to" value="<%= request.getSession().getAttribute("categoryId") %>"> 
-							  </div>
-							  <button type="submit" class="btn btn-default"><locale:message code="label.find"/></button>
-							
-						
-						</td>
-					</tr>
-
-						</form>
-					
-					
+					<form class="form-inline" action="categoryCharacteristicNew"
+						method="get">
+						<input name="numberCharCategory" value="1" type="hidden">
+						<tr>
+							<td><input name="categoryCharName" type="text"></td>
+							<td>
+								<div class="form-group"></div>
+								<div class="form-group">
+								
+									<!--		  	 Latest jQuery form server   <input type="text" class="form-control" id="priceHighter" name="priceHighter" placeholder="to" value="<%=request.getSession().getAttribute("priceHighter")%>">  -->
+									<input type="hidden" class="form-control" id="category"
+										name="category" placeholder="to"
+										value="<%=request.getSession().getAttribute("categoryId")%>">
+								</div>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
+						</tr>
+					</form>
 				</table>
 			</div>
 			
