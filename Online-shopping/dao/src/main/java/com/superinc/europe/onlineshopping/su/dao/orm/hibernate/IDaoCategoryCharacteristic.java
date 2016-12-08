@@ -29,4 +29,11 @@ public interface IDaoCategoryCharacteristic extends IBaseDao<CategoryCharacteris
 	 */
 	List<CategoryCharacteristic> deleteCategoryCharacteristic(Criteria criteria, String name) throws DaoException;
 
+	/**
+	 * Method return id of category characteristic
+	 * @param categoryCharacteristicName
+	 * @throws DaoException
+	 */
+	public int getCategoryCharacteristicName(Criteria createCriteria, String categoryCharacteristicName);
+
 }

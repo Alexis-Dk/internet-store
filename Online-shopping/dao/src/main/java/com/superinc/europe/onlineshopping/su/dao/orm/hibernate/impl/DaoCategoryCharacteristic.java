@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.impl.BaseDao;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 import com.superinc.europe.onlineshopping.su.dao.orm.hibernate.IDaoCategoryCharacteristic;
 import com.superinc.europe.onlineshopping.su.entities.pojo.CategoryCharacteristic;
 
@@ -58,6 +59,20 @@ public class DaoCategoryCharacteristic extends BaseDao<CategoryCharacteristic> i
 		criteria.add(Restrictions.le("categoryCharacteristicName", name + UNDERSCORE + NUMBER_CATEGORY_CHARACTERISTIC));
 		criteria.add(Restrictions.like("categoryCharacteristicName", PERCENT_SIGN + name + PERCENT_SIGN));
 		return (List<CategoryCharacteristic>) criteria.list();
+	}
+	
+	/**
+	 * Method return id of category characteristic
+	 * @param categoryCharacteristicName
+	 * @throws DaoException
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public int getCategoryCharacteristicName(Criteria criteria, String categoryCharacteristicName) {
+		criteria.add(Restrictions.like("categoryCharacteristicName", PERCENT_SIGN + categoryCharacteristicName + PERCENT_SIGN));
+		List<CategoryCharacteristic> list = criteria.list();
+		CategoryCharacteristic categoryCharacteristic = list.get(0);
+		return categoryCharacteristic.getCategoryCharacteristicId();
 	}
 	
 }

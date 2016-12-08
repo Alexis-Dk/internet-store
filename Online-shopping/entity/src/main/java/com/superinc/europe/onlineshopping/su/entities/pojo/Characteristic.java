@@ -30,10 +30,39 @@ public class Characteristic implements Serializable {
 	@ManyToOne(targetEntity=CategoryCharacteristic.class)
 	@Cascade(CascadeType.DELETE)
 	@JoinColumn(name="categoryCharacteristic_id_FK", referencedColumnName = "categoryCharacteristic_id")
-	private User categoryCharacteristicFk;
+	private CategoryCharacteristic categoryCharacteristicFk;
 	
 	@Column(name="characteristicName")
-    private String characteristicName; 
+    private String characteristicName;
+
+	public Characteristic(String characteristicName, CategoryCharacteristic categoryCharacteristicFk) {
+		this.categoryCharacteristicFk = categoryCharacteristicFk;
+		this.characteristicName = characteristicName;
+	}
+
+	public int getCharacteristicId() {
+		return characteristicId;
+	}
+
+	public void setCharacteristicId(int characteristicId) {
+		this.characteristicId = characteristicId;
+	}
+
+	public CategoryCharacteristic getCategoryCharacteristicFk() {
+		return categoryCharacteristicFk;
+	}
+
+	public void setCategoryCharacteristicFk(CategoryCharacteristic categoryCharacteristicFk) {
+		this.categoryCharacteristicFk = categoryCharacteristicFk;
+	}
+
+	public String getCharacteristicName() {
+		return characteristicName;
+	}
+
+	public void setCharacteristicName(String characteristicName) {
+		this.characteristicName = characteristicName;
+	} 
 	
 	
 }

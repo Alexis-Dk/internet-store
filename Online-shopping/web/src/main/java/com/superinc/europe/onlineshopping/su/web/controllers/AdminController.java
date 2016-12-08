@@ -103,6 +103,9 @@ public class AdminController {
     @Autowired
     private ICategoryCharacteristicService iCategoryCharacteristicService;
     
+    @Autowired
+    private ICharacteristicService characteristicService;
+    
 	private Validator validator;
 	
 	public AdminController()
@@ -345,7 +348,10 @@ public class AdminController {
 			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, category);
 			System.out.println(categoryCharName);
 			System.out.println(numberCharCategory);
-			System.out.println(productCategoryService.getCategoryById(Integer.parseInt(category)));
+			System.out.println(productCategoryService.getCategoryById(Integer.parseInt(category)).getCategoryName());
+			System.out.println(iCategoryCharacteristicService.getCategoryCharacteristicName(productCategoryService.getCategoryById(Integer.parseInt(category)).getCategoryName()+"_"+numberCharCategory));
+			characteristicService.insertCharacteristic(new Characteristic(categoryCharName, new CategoryCharacteristic(iCategoryCharacteristicService.getCategoryCharacteristicName(productCategoryService.getCategoryById(Integer.parseInt(category)).getCategoryName()+"_"+numberCharCategory))));
+			System.out.println("hhh");
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;

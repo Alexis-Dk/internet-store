@@ -2,12 +2,7 @@ package com.superinc.europe.onlineshopping.su.service;
 
 import java.io.Serializable;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Category;
-import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 import com.superinc.europe.onlineshopping.su.entities.pojo.CategoryCharacteristic;
 
@@ -34,5 +29,12 @@ public interface ICategoryCharacteristicService {
 	 * @throws ServiceException
 	 */
 	void deleteCategory(String ob, String id) throws ServiceException;
+
+	/**
+	 * Method return id of category characteristic
+	 * @param categoryCharacteristicName
+	 * @throws DaoException
+	 */
+	int getCategoryCharacteristicName(String categoryCharacteristicName) throws ServiceException;
 	
 }

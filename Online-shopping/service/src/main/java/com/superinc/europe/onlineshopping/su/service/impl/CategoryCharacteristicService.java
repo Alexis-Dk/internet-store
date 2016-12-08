@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IProductCategoryDao;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Category;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 import com.superinc.europe.onlineshopping.su.dao.orm.hibernate.IDaoCategoryCharacteristic;
@@ -99,6 +100,27 @@ public class CategoryCharacteristicService implements ICategoryCharacteristicSer
 			log.error(ExceptionMessages.ERROR_IN_ORDER_SERVICE + e);
 			throw new ServiceException(ExceptionMessages.ERROR_IN_ORDER_SERVICE, e);
 		}
+	}
+	
+	/**
+	 * Method return id of category characteristic
+	 * @param categoryCharacteristicName
+	 * @throws DaoException
+	 */
+	@Override
+	public int getCategoryCharacteristicName(String categoryCharacteristicName) throws ServiceException {
+		Session session = categoryCharacteristicDao.getBaseCurrentSession();
+		int id;
+		try {
+			id = categoryCharacteristicDao.getCategoryCharacteristicName(
+					session.createCriteria(CategoryCharacteristic.class, "CategoryCharacteristic"), categoryCharacteristicName);
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			log.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+			throw new ServiceException(
+					ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
+		}
+		return id;
 	}
 
 }
