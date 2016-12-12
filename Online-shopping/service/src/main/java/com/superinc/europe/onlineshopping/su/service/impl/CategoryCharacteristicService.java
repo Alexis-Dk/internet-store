@@ -16,6 +16,7 @@ import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IProductCategoryDao;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Category;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
+import com.superinc.europe.onlineshopping.gu.service.IProductCategoryService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 import com.superinc.europe.onlineshopping.su.dao.orm.hibernate.IDaoCategoryCharacteristic;
@@ -33,12 +34,17 @@ public class CategoryCharacteristicService implements ICategoryCharacteristicSer
 	
 //    private static final String PERCENT_SIGN = "%";
 
-	private static final String UNDERSCORE = "_";
+	private static final String UNDERLINE = "_";
+
+	private static final String UNDERSCORE = UNDERLINE;
 
     private static final int NUMBER_CATEGORY_CHARACTERISTIC = 7;
     
 	private static Logger log = Logger.getLogger(CategoryCharacteristicService.class);
     
+    @Autowired
+    public IProductCategoryService productCategoryService;
+	
     @Autowired
     private IDaoCategoryCharacteristic categoryCharacteristicDao;
 
@@ -108,7 +114,7 @@ public class CategoryCharacteristicService implements ICategoryCharacteristicSer
 	 * @throws DaoException
 	 */
 	@Override
-	public int getCategoryCharacteristicName(String categoryCharacteristicName) throws ServiceException {
+	public int getCategoryCharacteristicId(String categoryCharacteristicName) throws ServiceException {
 		Session session = categoryCharacteristicDao.getBaseCurrentSession();
 		int id;
 		try {
@@ -123,4 +129,23 @@ public class CategoryCharacteristicService implements ICategoryCharacteristicSer
 		return id;
 	}
 
+	/**
+	 * Method return id of category characteristic
+	 * @param categoryCharacteristicName
+	 * @throws DaoException
+	 */
+	@Override
+	public int getCategoryCharacteristicId(String category, String numberCharCategory) throws ServiceException {
+		Session session = categoryCharacteristicDao.getBaseCurrentSession();
+		int id;
+		try {
+			id = getCategoryCharacteristicId(productCategoryService.getCategoryById(Integer.parseInt(category)).getCategoryName()+UNDERLINE+numberCharCategory);	
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			log.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
+		}
+		return id;
+	}
+	
 }

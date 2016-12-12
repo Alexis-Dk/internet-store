@@ -39,6 +39,13 @@ public class Characteristic implements Serializable {
 		this.categoryCharacteristicFk = categoryCharacteristicFk;
 		this.characteristicName = characteristicName;
 	}
+	
+	public Characteristic(CategoryCharacteristic categoryCharacteristicFk) {
+		this.categoryCharacteristicFk = categoryCharacteristicFk;
+	}
+	
+	public Characteristic() {
+	}
 
 	public int getCharacteristicId() {
 		return characteristicId;
@@ -62,7 +69,13 @@ public class Characteristic implements Serializable {
 
 	public void setCharacteristicName(String characteristicName) {
 		this.characteristicName = characteristicName;
+	}
+
+	@Override
+	public String toString() {
+		return "Characteristic [characteristicId=" + characteristicId
+				+ ", categoryCharacteristicFk=" + categoryCharacteristicFk
+				+ ", characteristicName=" + characteristicName + "]";
 	} 
-	
 	
 }

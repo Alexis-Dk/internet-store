@@ -1,6 +1,10 @@
 package com.superinc.europe.onlineshopping.su.dao.orm.hibernate;
 
 import java.io.Serializable;
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IBaseDao;
@@ -17,5 +21,12 @@ public interface IDaoCharacteristic extends IBaseDao<Characteristic>{
 	 * @throws DaoException
 	 */
 	public Serializable insertCharacteristic(Characteristic ob) throws DaoException;
+	
+	/**
+	 * Method return list of characteristic
+	 * @param characteristicId
+	 * @throws DaoException
+	 */
+	public List<Characteristic> getCharacteristics(Criteria criteria, int characteristicId) throws DaoException;
 	
 }

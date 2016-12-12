@@ -1,6 +1,7 @@
 package com.superinc.europe.onlineshopping.su.service;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
@@ -14,5 +15,12 @@ public interface ICharacteristicService {
 	 * @throws DaoException
 	 */
 	public Serializable insertCharacteristic(Characteristic ob) throws ServiceException;
+
+	/**
+	 * Method return id of category characteristic
+	 * @param categoryCharacteristicName
+	 * @throws DaoException
+	 */
+	List<Characteristic> getCharacteristics(int characteristicsId) throws ServiceException;
     
 }

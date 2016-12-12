@@ -35,6 +35,9 @@ public interface ICategoryCharacteristicService {
 	 * @param categoryCharacteristicName
 	 * @throws DaoException
 	 */
-	int getCategoryCharacteristicName(String categoryCharacteristicName) throws ServiceException;
+	int getCategoryCharacteristicId(String categoryCharacteristicName) throws ServiceException;
+
+	int getCategoryCharacteristicId(String category, String numberCharCategory)
+			throws ServiceException;
 	
 }

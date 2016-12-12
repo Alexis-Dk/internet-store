@@ -4,6 +4,7 @@
 package com.superinc.europe.onlineshopping.su.service.impl;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -46,6 +47,27 @@ public class CharacteristicService implements ICharacteristicService {
 			throw new DaoException(ExceptionMessages.ERROR_IN_SERVICE, e);
 		}
 		return id;
+	}
+	
+	/**
+	 * Method return id of category characteristic
+	 * @param categoryCharacteristicName
+	 * @throws DaoException
+	 */
+	@Override
+	public List<Characteristic> getCharacteristics(int characteristicsId) throws ServiceException {
+		Session session = iDaoCharacteristic.getBaseCurrentSession();
+		List<Characteristic> list = null;
+		try {
+			list = iDaoCharacteristic.getCharacteristics(
+			session.createCriteria(Characteristic.class, "Characteristic"), characteristicsId);
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			log.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+			throw new ServiceException(
+					ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
+		}
+		return list;
 	}
 
 }

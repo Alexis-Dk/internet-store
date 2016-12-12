@@ -238,11 +238,14 @@
 			<div class="block2">
 				<h4>String category characteristics 1</h4>
 				<table class="table" border="1">
-					<tr>
-						<td width="500">Category characteristics:</td>
-						<td><a href="delete?id=gggg&name=hhh"><img
-								src="img/dicreaseButton.jpg" /> </a></td>
-					</tr>
+					<c:forEach items="${requestScope.characteristics1}"
+						var="characteristic">
+						<tr>
+							<td width="500">${characteristic.characteristicName}</td>
+							<td><a href="delete?id=gggg&name=hhh"><img
+									src="img/dicreaseButton.jpg" /> </a></td>
+						</tr>
+					</c:forEach>
 					<form class="form-inline" action="categoryCharacteristicNew"
 						method="get">
 						<input name="numberCharCategory" value="1" type="hidden">
@@ -251,7 +254,7 @@
 							<td>
 								<div class="form-group"></div>
 								<div class="form-group">
-								
+
 									<!--		  	 Latest jQuery form server   <input type="text" class="form-control" id="priceHighter" name="priceHighter" placeholder="to" value="<%=request.getSession().getAttribute("priceHighter")%>">  -->
 									<input type="hidden" class="form-control" id="category"
 										name="category" placeholder="to"
@@ -265,136 +268,214 @@
 					</form>
 				</table>
 			</div>
-			
-			<br>
+
 			<div class="block2">
 				<h4>String category characteristics 2</h4>
 				<table class="table" border="1">
-					<tr>
-						<td>vfvfvfv</td>
-						<td>hhhhh</td>
-						<td><a href="delete?id=gggg&name=hhh"><img src="img/dicreaseButton.jpg" /></a></td>
-					</tr>
-					<form action="addCategory" method="post">
+					<c:forEach items="${requestScope.characteristics2}"
+						var="characteristic">
 						<tr>
-							<td colspan="2"><input name="categoryName" type="text"></td>
-							<td colspan="2"><input type="submit"></td>
+							<td width="500">${characteristic.characteristicName}</td>
+							<td><a href="delete?id=gggg&name=hhh"><img
+									src="img/dicreaseButton.jpg" /> </a></td>
+						</tr>
+					</c:forEach>
+					<form class="form-inline" action="categoryCharacteristicNew"
+						method="get">
+						<input name="numberCharCategory" value="2" type="hidden">
+						<tr>
+							<td><input name="categoryCharName" type="text"></td>
+							<td>
+								<div class="form-group"></div>
+								<div class="form-group">
+
+									<!--		  	 Latest jQuery form server   <input type="text" class="form-control" id="priceHighter" name="priceHighter" placeholder="to" value="<%=request.getSession().getAttribute("priceHighter")%>">  -->
+									<input type="hidden" class="form-control" id="category"
+										name="category" placeholder="to"
+										value="<%=request.getSession().getAttribute("categoryId")%>">
+								</div>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
 						</tr>
 					</form>
 				</table>
 			</div>
-			
-			<br>
+
 			<div class="block2">
 				<h4>String category characteristics 3</h4>
 				<table class="table" border="1">
-					<tr>
-						<td>vfvfvfv</td>
-						<td>hhhhh</td>
-						<td><a href="delete?id=gggg&name=hhh"><img src="img/dicreaseButton.jpg" /></a></td>
-					</tr>
-					<form action="addCategory" method="post">
+					<c:forEach items="${requestScope.characteristics3}"
+						var="characteristic">
 						<tr>
-							<td colspan="2"><input name="categoryName" type="text"></td>
-							<td colspan="2"><input type="submit"></td>
+							<td width="500">${characteristic.characteristicName}</td>
+							<td><a href="delete?id=gggg&name=hhh"><img
+									src="img/dicreaseButton.jpg" /> </a></td>
+						</tr>
+					</c:forEach>
+					<form class="form-inline" action="categoryCharacteristicNew"
+						method="get">
+						<input name="numberCharCategory" value="3" type="hidden">
+						<tr>
+							<td><input name="categoryCharName" type="text"></td>
+							<td>
+								<div class="form-group"></div>
+								<div class="form-group">
+
+									<!--		  	 Latest jQuery form server   <input type="text" class="form-control" id="priceHighter" name="priceHighter" placeholder="to" value="<%=request.getSession().getAttribute("priceHighter")%>">  -->
+									<input type="hidden" class="form-control" id="category"
+										name="category" placeholder="to"
+										value="<%=request.getSession().getAttribute("categoryId")%>">
+								</div>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
 						</tr>
 					</form>
 				</table>
 			</div>
-			
-			<br>
+
 			<div class="block2">
 				<h4>String category characteristics 4</h4>
 				<table class="table" border="1">
-					<tr>
-						<td>vfvfvfv</td>
-						<td>hhhhh</td>
-						<td><a href="delete?id=gggg&name=hhh"><img src="img/dicreaseButton.jpg" /></a></td>
-					</tr>
-					<form action="addCategory" method="post">
+					<c:forEach items="${requestScope.characteristics4}"
+						var="characteristic">
 						<tr>
-							<td colspan="2"><input name="categoryName" type="text"></td>
-							<td colspan="2"><input type="submit"></td>
+							<td width="500">${characteristic.characteristicName}</td>
+							<td><a href="delete?id=gggg&name=hhh"><img
+									src="img/dicreaseButton.jpg" /> </a></td>
+						</tr>
+					</c:forEach>
+					<form class="form-inline" action="categoryCharacteristicNew"
+						method="get">
+						<input name="numberCharCategory" value="4" type="hidden">
+						<tr>
+							<td><input name="categoryCharName" type="text"></td>
+							<td>
+								<div class="form-group"></div>
+								<div class="form-group">
+
+									<!--		  	 Latest jQuery form server   <input type="text" class="form-control" id="priceHighter" name="priceHighter" placeholder="to" value="<%=request.getSession().getAttribute("priceHighter")%>">  -->
+									<input type="hidden" class="form-control" id="category"
+										name="category" placeholder="to"
+										value="<%=request.getSession().getAttribute("categoryId")%>">
+								</div>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
 						</tr>
 					</form>
 				</table>
 			</div>
-			
-			<br>
-			<div class="block2">
-				<h4>String category characteristics 4</h4>
-				<table class="table" border="1">
-					<tr>
-						<td>vfvfvfv</td>
-						<td>hhhhh</td>
-						<td><a href="delete?id=gggg&name=hhh"><img src="img/dicreaseButton.jpg" /></a></td>
-					</tr>
-					<form action="addCategory" method="post">
-						<tr>
-							<td colspan="2"><input name="categoryName" type="text"></td>
-							<td colspan="2"><input type="submit"></td>
-						</tr>
-					</form>
-				</table>
-			</div>
-			
-			<br>
+
 			<div class="block2">
 				<h4>String category characteristics 5</h4>
 				<table class="table" border="1">
-					<tr>
-						<td>vfvfvfv</td>
-						<td>hhhhh</td>
-						<td><a href="delete?id=gggg&name=hhh"><img src="img/dicreaseButton.jpg" /></a></td>
-					</tr>
-					<form action="addCategory" method="post">
+					<c:forEach items="${requestScope.characteristics5}"
+						var="characteristic">
 						<tr>
-							<td colspan="2"><input name="categoryName" type="text"></td>
-							<td colspan="2"><input type="submit"></td>
+							<td width="500">${characteristic.characteristicName}</td>
+							<td><a href="delete?id=gggg&name=hhh"><img
+									src="img/dicreaseButton.jpg" /> </a></td>
+						</tr>
+					</c:forEach>
+					<form class="form-inline" action="categoryCharacteristicNew"
+						method="get">
+						<input name="numberCharCategory" value="5" type="hidden">
+						<tr>
+							<td><input name="categoryCharName" type="text"></td>
+							<td>
+								<div class="form-group"></div>
+								<div class="form-group">
+
+									<!--		  	 Latest jQuery form server   <input type="text" class="form-control" id="priceHighter" name="priceHighter" placeholder="to" value="<%=request.getSession().getAttribute("priceHighter")%>">  -->
+									<input type="hidden" class="form-control" id="category"
+										name="category" placeholder="to"
+										value="<%=request.getSession().getAttribute("categoryId")%>">
+								</div>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
 						</tr>
 					</form>
 				</table>
 			</div>
-			
-			<br>
+
 			<div class="block2">
 				<h4>String category characteristics 6</h4>
 				<table class="table" border="1">
-					<tr>
-						<td>vfvfvfv</td>
-						<td>hhhhh</td>
-						<td><a href="delete?id=gggg&name=hhh"><img src="img/dicreaseButton.jpg" /></a></td>
-					</tr>
-					<form action="addCategory" method="post">
+					<c:forEach items="${requestScope.characteristics6}"
+						var="characteristic">
 						<tr>
-							<td colspan="2"><input name="categoryName" type="text"></td>
-							<td colspan="2"><input type="submit"></td>
+							<td width="500">${characteristic.characteristicName}</td>
+							<td><a href="delete?id=gggg&name=hhh"><img
+									src="img/dicreaseButton.jpg" /> </a></td>
+						</tr>
+					</c:forEach>
+					<form class="form-inline" action="categoryCharacteristicNew"
+						method="get">
+						<input name="numberCharCategory" value="6" type="hidden">
+						<tr>
+							<td><input name="categoryCharName" type="text"></td>
+							<td>
+								<div class="form-group"></div>
+								<div class="form-group">
+
+									<!--		  	 Latest jQuery form server   <input type="text" class="form-control" id="priceHighter" name="priceHighter" placeholder="to" value="<%=request.getSession().getAttribute("priceHighter")%>">  -->
+									<input type="hidden" class="form-control" id="category"
+										name="category" placeholder="to"
+										value="<%=request.getSession().getAttribute("categoryId")%>">
+								</div>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
 						</tr>
 					</form>
 				</table>
 			</div>
-			
-			<br>
+
 			<div class="block2">
 				<h4>String category characteristics 7</h4>
 				<table class="table" border="1">
-					<tr>
-						<td>vfvfvfv</td>
-						<td>hhhhh</td>
-						<td><a href="delete?id=gggg&name=hhh"><img src="img/dicreaseButton.jpg" /></a></td>
-					</tr>
-					<form action="addCategory" method="post">
+					<c:forEach items="${requestScope.characteristics7}"
+						var="characteristic">
 						<tr>
-							<td colspan="2"><input name="categoryName" type="text"></td>
-							<td colspan="2"><input type="submit"></td>
+							<td width="500">${characteristic.characteristicName}</td>
+							<td><a href="delete?id=gggg&name=hhh"><img
+									src="img/dicreaseButton.jpg" /> </a></td>
+						</tr>
+					</c:forEach>
+					<form class="form-inline" action="categoryCharacteristicNew"
+						method="get">
+						<input name="numberCharCategory" value="7" type="hidden">
+						<tr>
+							<td><input name="categoryCharName" type="text"></td>
+							<td>
+								<div class="form-group"></div>
+								<div class="form-group">
+
+									<!--		  	 Latest jQuery form server   <input type="text" class="form-control" id="priceHighter" name="priceHighter" placeholder="to" value="<%=request.getSession().getAttribute("priceHighter")%>">  -->
+									<input type="hidden" class="form-control" id="category"
+										name="category" placeholder="to"
+										value="<%=request.getSession().getAttribute("categoryId")%>">
+								</div>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
 						</tr>
 					</form>
 				</table>
 			</div>
-			
+
 		</div>
 	</div>
-	
+
 	<div class="footer-top-area">
         <div class="zigzag-bottom"></div>
         <div class="container">
