@@ -353,12 +353,7 @@ public class AdminController {
 		try {
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
 			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, category);
-//			System.out.println(categoryCharName);
-//			System.out.println(numberCharCategory);
-//			System.out.println(productCategoryService.getCategoryById(Integer.parseInt(category)).getCategoryName());
-//			System.out.println(iCategoryCharacteristicService.getCategoryCharacteristicId(productCategoryService.getCategoryById(Integer.parseInt(category)).getCategoryName()+"_"+numberCharCategory));
 			characteristicService.insertCharacteristic(new Characteristic(categoryCharName, new CategoryCharacteristic(iCategoryCharacteristicService.getCategoryCharacteristicId(category, numberCharCategory))));
-//			System.out.println(characteristicService.getCharacteristics(8));
 			model.put("characteristics1", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "1")));
 			model.put("characteristics2", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "2")));
 			model.put("characteristics3", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "3")));
@@ -366,7 +361,6 @@ public class AdminController {
 			model.put("characteristics5", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "5")));
 			model.put("characteristics6", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "6")));
 			model.put("characteristics7", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "7")));
-//			System.out.println("hhh");
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
