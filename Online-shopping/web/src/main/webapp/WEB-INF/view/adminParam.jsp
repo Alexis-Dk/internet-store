@@ -192,6 +192,11 @@
 					            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="categoryCharacteristic?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
 					            </c:forEach>
 			           		</sec:authorize>
+                        	<sec:authorize access="isAnonymous() or hasRole('user')">
+		                        <c:forEach items="${requestScope.productCategory}" var="category">
+					            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+					            </c:forEach>
+			           		</sec:authorize>
                          	<sec:authorize access="hasRole('admin')">
 							<li><a href="new">Admin page</a></li>
 	  					</sec:authorize>
@@ -242,7 +247,7 @@
 						var="characteristic">
 						<tr>
 							<td width="500">${characteristic.characteristicName}</td>
-							<td><a href="delete?id=gggg&name=hhh"><img
+							<td><a href="deleteCharacteristic?id=1&name=${characteristic.characteristicName}&category=<%=request.getParameter("category")%>"><img
 									src="img/dicreaseButton.jpg" /> </a></td>
 						</tr>
 					</c:forEach>
@@ -276,7 +281,7 @@
 						var="characteristic">
 						<tr>
 							<td width="500">${characteristic.characteristicName}</td>
-							<td><a href="delete?id=gggg&name=hhh"><img
+							<td><a href="deleteCharacteristic?id=2&name=${characteristic.characteristicName}&category=<%=request.getParameter("category")%>"><img
 									src="img/dicreaseButton.jpg" /> </a></td>
 						</tr>
 					</c:forEach>
@@ -310,7 +315,7 @@
 						var="characteristic">
 						<tr>
 							<td width="500">${characteristic.characteristicName}</td>
-							<td><a href="delete?id=gggg&name=hhh"><img
+							<td><a href="deleteCharacteristic?id=3&name=${characteristic.characteristicName}&category=<%=request.getParameter("category")%>"><img
 									src="img/dicreaseButton.jpg" /> </a></td>
 						</tr>
 					</c:forEach>
@@ -344,7 +349,7 @@
 						var="characteristic">
 						<tr>
 							<td width="500">${characteristic.characteristicName}</td>
-							<td><a href="delete?id=gggg&name=hhh"><img
+							<td><a href="deleteCharacteristic?id=4&name=${characteristic.characteristicName}&category=<%=request.getParameter("category")%>"><img
 									src="img/dicreaseButton.jpg" /> </a></td>
 						</tr>
 					</c:forEach>
@@ -378,7 +383,7 @@
 						var="characteristic">
 						<tr>
 							<td width="500">${characteristic.characteristicName}</td>
-							<td><a href="delete?id=gggg&name=hhh"><img
+							<td><a href="deleteCharacteristic?id=5&name=${characteristic.characteristicName}&category=<%=request.getParameter("category")%>"><img
 									src="img/dicreaseButton.jpg" /> </a></td>
 						</tr>
 					</c:forEach>
@@ -412,7 +417,7 @@
 						var="characteristic">
 						<tr>
 							<td width="500">${characteristic.characteristicName}</td>
-							<td><a href="delete?id=gggg&name=hhh"><img
+							<td><a href="deleteCharacteristic?id=6&name=${characteristic.characteristicName}&category=<%=request.getParameter("category")%>"><img
 									src="img/dicreaseButton.jpg" /> </a></td>
 						</tr>
 					</c:forEach>
@@ -446,7 +451,7 @@
 						var="characteristic">
 						<tr>
 							<td width="500">${characteristic.characteristicName}</td>
-							<td><a href="delete?id=gggg&name=hhh"><img
+							<td><a href="deleteCharacteristic?id=7&name=${characteristic.characteristicName}&category=<%=request.getParameter("category")%>"><img
 									src="img/dicreaseButton.jpg" /> </a></td>
 						</tr>
 					</c:forEach>

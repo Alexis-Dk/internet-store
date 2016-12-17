@@ -16,6 +16,7 @@ import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 import com.superinc.europe.onlineshopping.su.dao.orm.hibernate.IDaoCharacteristic;
+import com.superinc.europe.onlineshopping.su.entities.pojo.CategoryCharacteristic;
 import com.superinc.europe.onlineshopping.su.entities.pojo.Characteristic;
 import com.superinc.europe.onlineshopping.su.service.ICharacteristicService;
 
@@ -68,6 +69,27 @@ public class CharacteristicService implements ICharacteristicService {
 					ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
 		}
 		return list;
+	}
+	
+	/**
+	 * Method delete from Session
+	 * @param ob
+	 * @throws ServiceException
+	 */
+	@Override
+	public void deleteCharacteristic(String ob, String id) throws ServiceException {
+			Session session = iDaoCharacteristic.getBaseCurrentSession();
+			List<Characteristic> characteristic = null;
+			try {
+			characteristic = iDaoCharacteristic.deleteCharacteristic(session.createCriteria(
+					Characteristic.class, "characteristic"), ob);
+					for (Characteristic characteristicOb : characteristic) {
+						iDaoCharacteristic.delete(characteristicOb.getCharacteristicId());
+					}
+		} catch (DaoException e) {
+			log.error(ExceptionMessages.ERROR_IN_ORDER_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_ORDER_SERVICE, e);
+		}
 	}
 
 }

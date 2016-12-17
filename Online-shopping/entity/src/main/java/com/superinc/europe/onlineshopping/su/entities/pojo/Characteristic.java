@@ -28,7 +28,7 @@ public class Characteristic implements Serializable {
 	private int characteristicId;
 	
 	@ManyToOne(targetEntity=CategoryCharacteristic.class)
-	@Cascade(CascadeType.DELETE)
+	//@Cascade(CascadeType.ALL)
 	@JoinColumn(name="categoryCharacteristic_id_FK", referencedColumnName = "categoryCharacteristic_id")
 	private CategoryCharacteristic categoryCharacteristicFk;
 	

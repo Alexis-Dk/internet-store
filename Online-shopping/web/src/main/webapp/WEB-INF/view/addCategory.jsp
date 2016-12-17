@@ -120,7 +120,7 @@
 							<li><a href="new">Admin page</a></li>
 	  					</sec:authorize>
 	  					<sec:authorize access="hasRole('admin')">
-							<li><a href="addCategory">Add category</a></li>
+							<li class="active"><a href="addCategory">Add category</a></li>
 	  					</sec:authorize>
 	  					<sec:authorize access="isAuthenticated()">
                          	<li><a href="ViewItemsOfCart">Cart</a></li>

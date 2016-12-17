@@ -22,5 +22,12 @@ public interface ICharacteristicService {
 	 * @throws DaoException
 	 */
 	List<Characteristic> getCharacteristics(int characteristicsId) throws ServiceException;
+
+	/**
+	 * Method delete from Session
+	 * @param ob
+	 * @throws ServiceException
+	 */
+	void deleteCharacteristic(String ob, String id) throws ServiceException;
     
 }

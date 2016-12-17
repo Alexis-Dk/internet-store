@@ -38,6 +38,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
 import com.superinc.europe.onlineshopping.gu.entities.dto.Bucket;
+import com.superinc.europe.onlineshopping.gu.entities.dto.CategoryDTO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.DepartmentVO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.ProductDTO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
@@ -145,13 +146,37 @@ public class AdminController {
 		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
 	}
 	model.addAttribute("categoryList", categoryList);
-//	model.addAttribute("newProduct", productDTO);
 	model.put(RequestParamConstants.PRODUCT_DTO, productDTO);
 	try {
 		model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getNoActiveProductCategories());
 	} catch (ErrorGettingCategoryServiceException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+	}
+	return "adminCustom";
+    }
+    
+    @RequestMapping(path = "/neww", method = RequestMethod.GET)
+    public String saveNewProduct2(ModelMap model, String categoryId) {
+	ProductDTO productDTO = new ProductDTO();
+	List<Category> categoryList = null;
+	try {
+		categoryList = productCategoryService.getAllProductCategories();
+		HttpUtils.setList(categoryList);
+	} catch (ErrorGettingCategoryServiceException e) {
+		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+	}
+	model.addAttribute("categoryList", categoryList);
+	model.put(RequestParamConstants.PRODUCT_DTO, productDTO);
+	try {
+		List<CategoryDTO> list = productCategoryService.getAllProductCategories(categoryId);
+		for (CategoryDTO categoryDTO : list) {
+			if(categoryDTO.getSelectedItem().equals("active")){
+				categoryDTO.setSelectedItem("selected");
+			}
+		}
+		model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, list);
+	} catch (ErrorGettingCategoryServiceException e) {
+		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
 	}
 	return "admin";
     }
@@ -179,12 +204,10 @@ public class AdminController {
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(path = "/new", method = RequestMethod.POST)
-    public String saveNewProduct(@Valid ProductDTO productDTO, 
+    public String saveNewProduct(@Valid ProductDTO productDTO,
             BindingResult br, @RequestParam(value = "productImage", required = false) MultipartFile image, RedirectAttributes redirectAttributes, HttpServletRequest request, Locale locale, @ModelAttribute("productDTO1") ProductDTO productDTO1) {
 		Product product = new Product();
-		
 		Set<ConstraintViolation<ProductDTO>> violations = validator.validate(productDTO);
-		
 		for (ConstraintViolation<ProductDTO> violation : violations) 
 		{
             String propertyPath = violation.getPropertyPath().toString();
@@ -193,9 +216,13 @@ public class AdminController {
 //            This allows Spring to display them in view via a FieldError
 //            br.addError(new FieldError("productDTO", propertyPath, "Invalid "+ propertyPath + "(" + message + ")"));
         }
-		
+		try {
+			request.setAttribute(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getNoActiveProductCategories());
+			//redirectAttributes.addAttribute(attributeValue);
+		} catch (ErrorGettingCategoryServiceException e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+		}		
 	try {
-		
 		if (!br.hasErrors()) {
 			if (productDTO != null) {
 				int id = (int)goodsService.getLastInsertId() + 1;
@@ -295,9 +322,8 @@ public class AdminController {
 		List<Category> categoryList = null;
 		try {
 			iCategoryCharacteristicService.deleteCategory(name, id);
-		} catch (ServiceException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		} catch (ServiceException e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
 		}
 		try {
 			categoryList = productCategoryService.getAllProductCategories();
@@ -305,10 +331,41 @@ public class AdminController {
 		} catch (ErrorGettingCategoryServiceException e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
 		}
+		try {
+			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getNoActiveProductCategories());
+		} catch (ErrorGettingCategoryServiceException e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+		}
 		model.addAttribute("categoryList", categoryList);
 		return "addCategory";
 	}
 
+	@RequestMapping(value = "deleteCharacteristic", method = RequestMethod.GET)
+	public String deleteCharacteristic(HttpServletRequest request, ModelMap model, String name, String id, String category) {
+		try {
+			characteristicService.deleteCharacteristic(name, id);
+		} catch (ServiceException e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+		}
+		try {
+			model.addAttribute("characteristics1", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "1")));
+			model.addAttribute("characteristics2", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "2")));
+			model.addAttribute("characteristics3", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "3")));
+			model.addAttribute("characteristics4", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "4")));
+			model.addAttribute("characteristics5", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "5")));
+			model.addAttribute("characteristics6", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "6")));
+			model.addAttribute("characteristics7", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "7")));
+		} catch (ServiceException e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+		}
+		try {
+			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
+		} catch (ErrorGettingCategoryServiceException e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+		}
+		return RequestParamConstants.CATEGORY_CHARACTERISTIC;
+	}
+	
 	@PreAuthorize("hasAnyRole('admin')")
 	@RequestMapping(value = RequestConstants.CATEGORY_CHARACTERISTIC, method = RequestMethod.GET, params=RequestParamConstants.CATEGORY)
 	public String addCategoryCharacteristic(HttpServletRequest request, ModelMap model,

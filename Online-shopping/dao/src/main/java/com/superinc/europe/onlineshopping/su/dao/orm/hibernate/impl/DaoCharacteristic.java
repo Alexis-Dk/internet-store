@@ -12,6 +12,7 @@ import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.impl.BaseDao;
 import com.superinc.europe.onlineshopping.su.dao.orm.hibernate.IDaoCharacteristic;
+import com.superinc.europe.onlineshopping.su.entities.pojo.CategoryCharacteristic;
 import com.superinc.europe.onlineshopping.su.entities.pojo.Characteristic;
 
 /**
@@ -20,6 +21,12 @@ import com.superinc.europe.onlineshopping.su.entities.pojo.Characteristic;
 @Repository("daoCharacteristic")
 public class DaoCharacteristic extends BaseDao<Characteristic> implements IDaoCharacteristic{
 
+    private static final String PERCENT_SIGN = "%";
+
+	private static final String UNDERSCORE = "_";
+
+    private static final int NUMBER_CATEGORY_CHARACTERISTIC = 7;
+	
 	Logger log = Logger.getLogger(DaoCharacteristic.class);
 	
 	/**
@@ -56,6 +63,21 @@ public class DaoCharacteristic extends BaseDao<Characteristic> implements IDaoCh
 			throw new DaoException(ExceptionMessages.ERROR_IN_DAO, e);
 		}
 		return list;
+	}
+	
+	/**
+	 * Method delete from Session
+	 * @param criteria
+	 * @param name
+	 * @throws ServiceException
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Characteristic> deleteCharacteristic(
+			Criteria criteria, String name) throws DaoException {
+		criteria.add(Restrictions.le("characteristicName", name));
+		criteria.add(Restrictions.like("characteristicName", PERCENT_SIGN + name + PERCENT_SIGN));
+		return (List<Characteristic>) criteria.list();
 	}
 	
 }
