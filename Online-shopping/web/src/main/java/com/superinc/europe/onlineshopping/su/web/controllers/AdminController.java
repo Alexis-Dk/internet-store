@@ -156,7 +156,7 @@ public class AdminController {
     }
     
     @RequestMapping(path = "/neww", method = RequestMethod.GET)
-    public String saveNewProduct2(ModelMap model, String categoryId) {
+    public String saveNewProduct2(ModelMap model, String categoryId, HttpServletRequest request) {
 	ProductDTO productDTO = new ProductDTO();
 	List<Category> categoryList = null;
 	try {
@@ -172,6 +172,8 @@ public class AdminController {
 		for (CategoryDTO categoryDTO : list) {
 			if(categoryDTO.getSelectedItem().equals("active")){
 				categoryDTO.setSelectedItem("selected");
+				//request.setAttribute("categoryListMy", categoryDTO.getSelectedItem());
+				HttpUtils.setCategory(new Category(categoryDTO.getCategoryId(), categoryDTO.getCategoryName()));
 			}
 		}
 		model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, list);
@@ -187,7 +189,7 @@ public class AdminController {
     }
 	
 	@ModelAttribute("allDepartments")
-    public List<DepartmentVO> populateDepartments() {
+    public List<DepartmentVO> populateDepartments(HttpServletRequest request) {
 		List<Category> categoryList = null;
 		try {
 			categoryList = productCategoryService.getAllProductCategories();
@@ -195,11 +197,17 @@ public class AdminController {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
 		}
         ArrayList<DepartmentVO> departments = new ArrayList<DepartmentVO>();
-        departments.add(new DepartmentVO(-1,  "Select Department"));
-		for (Category category : categoryList) {
-			departments.add(new DepartmentVO(category.getCategoryId(),  category.getCategoryName()));
-		}
-        return departments;
+//        departments.add(new DepartmentVO(-1,  "Select Department"));
+//		for (Category category : categoryList) {
+//			departments.add(new DepartmentVO(category.getCategoryId(),  category.getCategoryName()));
+//		}
+        Category category = HttpUtils.getCatrgory();
+        if (category!=null){
+		    departments.add(new DepartmentVO(category.categoryId,  category.getCategoryName()));
+        }
+        else
+        	departments.add(new DepartmentVO(-1,  ""));
+		return departments;
     }
 	
 	@SuppressWarnings("unchecked")

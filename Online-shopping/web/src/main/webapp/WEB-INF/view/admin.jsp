@@ -165,8 +165,6 @@ else {
         </div>
     </div> <!-- End mainmenu area -->
         
-        
-        
     <div class="maincontent-area">
 		<div id="addProductForm">
 
@@ -236,7 +234,10 @@ else {
 					<div class="col-xs-5">
 						<sf:errors path="price" cssStyle="color: red" />
 						<sf:input id="productPriceData" path="price" class="form-control"
-							type="text" name="price" value="" />
+							type="text" name="price"         
+							value="" />
+							
+							
 					</div>
 				</div>
 

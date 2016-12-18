@@ -26,18 +26,23 @@ public class DepartmentEditor extends PropertyEditorSupport {
     @Override
     public void setAsText(String id) {
     	
-		List<Category> categoryList = getCategoryList();
+//		List<Category> categoryList = getCategoryList();
 
 		DepartmentVO d = null;
-	for (Category category : categoryList) {
-		if (Integer.parseInt(id)==category.getCategoryId()){
-			d =  new DepartmentVO(category.getCategoryId(),  category.getCategoryName());
-			break;
+//	for (Category category : categoryList) {
+//		if (Integer.parseInt(id)==category.getCategoryId()){
+//			d =  new DepartmentVO(category.getCategoryId(),  category.getCategoryName());
+//			break;
+//		}
+		Category categor = HttpUtils.getCatrgory();
+		if (Integer.parseInt(id)==categor.getCategoryId()){
+			d =  new DepartmentVO(categor.getCategoryId(),  categor.getCategoryName());
+//			break;
 		}
 		else{
 			d = null;
 		}
-	}
+//	}
 	this.setValue(d);
 
 //	DepartmentVO d;

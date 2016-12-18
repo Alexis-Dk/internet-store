@@ -33,6 +33,7 @@ public class HttpUtils {
 	private static final int REPEAT_GOODS_FLAG = 0;
 	private static final int COUNT_VALUE = 1;
 	public static List<Category> categoryList;
+	public static Category category;
 
 
 	Logger log = Logger.getLogger(HttpUtils.class);
@@ -308,6 +309,14 @@ public class HttpUtils {
 			dataUsers[3] = "";
 		}
 		return dataUsers[3];
+	}
+
+	public static void setCategory(Category ob) {
+		category = ob;
+	}
+	
+	public static Category getCatrgory(){
+		return category;
 	}
 	
 	public static void setList(List<Category> list){
