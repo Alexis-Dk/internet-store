@@ -17,9 +17,9 @@ import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpUtils;
 
 @Controller
 @Scope("session")
-public class DepartmentEditor extends PropertyEditorSupport {
+public class DepartmentEditorC extends PropertyEditorSupport {
 	
-	Logger log = Logger.getLogger(DepartmentEditor.class);
+	Logger log = Logger.getLogger(DepartmentEditorC.class);
 
     @Autowired
     private IProductCategoryService productCategoryService;
@@ -32,23 +32,24 @@ public class DepartmentEditor extends PropertyEditorSupport {
 		DepartmentVO d = null;
 
 		Category categor = HttpUtils.getCatrgory();
-		if (Integer.parseInt(id)==categor.getCategoryId()){
-			d =  new DepartmentVO(categor.getCategoryId(),  categor.getCategoryName());
-//			break;
-		}
-		else{
-			d = null;
-		}
-		this.setValue(d);
-		
-//		Characteristic1VO	c = null;
-//		if (Integer.parseInt(id)==70){
-//			c =  new Characteristic1VO(70,  "Samsung");
-//			this.setValue(c);
+//		if (Integer.parseInt(id)==categor.getCategoryId()){
+//			d =  new DepartmentVO(categor.getCategoryId(),  categor.getCategoryName());
+////			break;
 //		}
 //		else{
-//			this.setValue(c);
+//			d = null;
 //		}
+//		this.setValue(d);
+		
+		Characteristic1VO	c = null;
+		if (Integer.parseInt(id)==70){
+			c =  new Characteristic1VO(70,  "Samsung");
+			this.setValue(c);
+		}
+		else{
+			c = null;
+			this.setValue(c);
+		}
 //	}
 	
 

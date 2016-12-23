@@ -249,8 +249,8 @@ else {
 					<div class="col-xs-5">
 						<table>
 							<tr>
-								<td><sf:select path="department" items="${allDepartments}"
-										itemValue="id" itemLabel="name" /></td>
+							<%----%>	<td><sf:select path="department" items="${allDepartments}"
+										itemValue="id" itemLabel="name" /></td> 
 								<td><font color="red"> <sf:errors path="department"
 											cssClass="error" />
 								</font></td>
@@ -288,9 +288,11 @@ else {
 						<label for="productCharacteristic1" class="control-label">Color:</label>
 					</div>
 					<div class="col-xs-5">
+						<sf:select path="characteristic1" items="${characteristic1}"
+										itemValue="id" itemLabel="name" />
 						<sf:errors path="characteristic1" cssStyle="color: red" />
-						<sf:input id="productCharacteristic1" path="characteristic1"
-							class="form-control" type="text" name="characteristic1" />
+						<%--<sf:input id="productCharacteristic1" path="characteristic1"
+							class="form-control" type="text" name="characteristic1" /> --%>
 					</div>
 				</div>
 

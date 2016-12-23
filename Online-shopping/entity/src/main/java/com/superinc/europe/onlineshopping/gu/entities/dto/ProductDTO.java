@@ -31,8 +31,11 @@ public class ProductDTO implements Serializable {
     @Pattern(regexp = "^[1-9a-zA-Z]{3,50}$", message="Description has to has between 3 and 50 symbols")
     private String description;
     
-    @Pattern(regexp = "^[1-9a-zA-Z]{3,50}$", message="Color has to has between 3 and 50 symbols")
-	private String characteristic1;
+//    @Pattern(regexp = "^[1-9a-zA-Z]{3,50}$", message="Color has to has between 3 and 50 symbols")
+//	private String characteristic1;
+    
+    @NotNull
+    private Characteristic1VO characteristic1;
 	
     @Pattern(regexp = "^[1-9a-zA-Z]{3,50}$", message="Socket has to has between 3 and 50 symbols")
 	private String characteristic2;
@@ -53,7 +56,7 @@ public class ProductDTO implements Serializable {
     }
 
 	public ProductDTO(String name, int price, int count,
-			String description, String characteristic1, String characteristic2,
+			String description, Characteristic1VO characteristic1, String characteristic2,
 			String characteristic3, String characteristic4,
 			String characteristic6, String stock_status) {
 		this.name = name;
@@ -108,11 +111,11 @@ public class ProductDTO implements Serializable {
 		this.description = description;
 	}
 
-	public String getCharacteristic1() {
+	public Characteristic1VO getCharacteristic1() {
 		return characteristic1;
 	}
 
-	public void setCharacteristic1(String characteristic1) {
+	public void setCharacteristic1(Characteristic1VO characteristic1) {
 		this.characteristic1 = characteristic1;
 	}
 

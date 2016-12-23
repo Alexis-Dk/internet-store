@@ -9,6 +9,8 @@ import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
@@ -20,7 +22,10 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -39,6 +44,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
 import com.superinc.europe.onlineshopping.gu.entities.dto.Bucket;
 import com.superinc.europe.onlineshopping.gu.entities.dto.CategoryDTO;
+import com.superinc.europe.onlineshopping.gu.entities.dto.Characteristic1VO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.DepartmentVO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.ProductDTO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
@@ -58,6 +64,7 @@ import com.superinc.europe.onlineshopping.su.entities.pojo.Characteristic;
 import com.superinc.europe.onlineshopping.su.service.ICategoryCharacteristicService;
 import com.superinc.europe.onlineshopping.su.service.ICharacteristicService;
 import com.superinc.europe.onlineshopping.su.web.utils.DepartmentEditor;
+import com.superinc.europe.onlineshopping.su.web.utils.DepartmentEditorC;
 import com.superinc.europe.onlineshopping.gu.web.utils.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestConstants;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpUtils;
@@ -180,13 +187,43 @@ public class AdminController {
 	} catch (ErrorGettingCategoryServiceException e) {
 		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
 	}
+	return "redirect:/neww3";
+    }
+    
+    @RequestMapping(path = "/neww3", method = RequestMethod.GET)
+    public String saveNewProduct3(ModelMap model, String categoryId) {
+	ProductDTO productDTO = new ProductDTO();
+	List<Category> categoryList = null;
+	try {
+		categoryList = productCategoryService.getAllProductCategories();
+		HttpUtils.setList(categoryList);
+	} catch (ErrorGettingCategoryServiceException e) {
+		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+	}
+	model.addAttribute("categoryList", categoryList);
+	model.put(RequestParamConstants.PRODUCT_DTO, productDTO);
+	Category category = HttpUtils.getCatrgory();
+	try {
+		List<CategoryDTO> list = productCategoryService.getAllProductCategories(Integer.toString(category.getCategoryId()));
+		for (CategoryDTO categoryDTO : list) {
+			if(categoryDTO.getSelectedItem().equals("active")){
+				categoryDTO.setSelectedItem("selected");
+				//request.setAttribute("categoryListMy", categoryDTO.getSelectedItem());
+				//HttpUtils.setCategory(new Category(categoryDTO.getCategoryId(), categoryDTO.getCategoryName()));
+			}
+		}
+		model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, list);
+	} catch (ErrorGettingCategoryServiceException e) {
+		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+	}
 	return "admin";
     }
     
 	@InitBinder
     public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Characteristic1VO.class, new DepartmentEditorC());
         binder.registerCustomEditor(DepartmentVO.class, new DepartmentEditor());
-    }
+	}
 	
 	@ModelAttribute("allDepartments")
     public List<DepartmentVO> populateDepartments(HttpServletRequest request) {
@@ -209,6 +246,51 @@ public class AdminController {
         	departments.add(new DepartmentVO(-1,  ""));
 		return departments;
     }
+	
+//	@ModelAttribute("characteristic1")
+//	public List<DepartmentVO> populateCharacteristic1(HttpServletRequest request) {
+//		List<Characteristic> characteristicList = null;
+//		Category category = HttpUtils.getCatrgory();
+//		try {
+//			characteristicList = characteristicService
+//					.getCharacteristics(iCategoryCharacteristicService
+//							.getCategoryCharacteristicId(Integer.toString(category.categoryId), "1"));
+//		} catch (Exception e) {
+//			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+//		}
+//		ArrayList<DepartmentVO> characteristic1 = new ArrayList<DepartmentVO>();
+//		characteristic1.add(new DepartmentVO(-1, "Select Characteristic1"));
+//		if (characteristicList != null) {
+//			for (Characteristic ob : characteristicList) {
+//				characteristic1.add(new DepartmentVO(ob.getCharacteristicId(),
+//						ob.getCharacteristicName()));
+//			}
+//		}
+//		return characteristic1;
+//	}
+	
+	@ModelAttribute("characteristic1")
+	public List<Characteristic1VO> populateCharacteristic1(HttpServletRequest request) {
+		List<Characteristic> characteristicList = null;
+		Category category = HttpUtils.getCatrgory();
+		List<Characteristic1VO> characteristic1 = null;
+		try {
+			characteristicList = characteristicService
+					.getCharacteristics(iCategoryCharacteristicService
+							.getCategoryCharacteristicId(Integer.toString(category.categoryId), "1"));
+		characteristic1 = new ArrayList<Characteristic1VO>();
+		characteristic1.add(new Characteristic1VO(-1, "Select Characteristic1"));
+		if (characteristicList != null) {
+			for (Characteristic ob : characteristicList) {
+				characteristic1.add(new Characteristic1VO(ob.getCharacteristicId(),
+						ob.getCharacteristicName()));
+			}
+		}
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+		}
+		return characteristic1;
+	}
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(path = "/new", method = RequestMethod.POST)
@@ -253,6 +335,22 @@ public class AdminController {
 	    log.error("Error adding new product to DB", e);
 	    redirectAttributes.addFlashAttribute("infoMessage", getMessageByKey("message.error.addnewproduct ", locale));
 	}
+	
+	Category category = HttpUtils.getCatrgory();
+	try {
+		List<CategoryDTO> list = productCategoryService.getAllProductCategories(Integer.toString(category.getCategoryId()));
+		for (CategoryDTO categoryDTO : list) {
+			if(categoryDTO.getSelectedItem().equals("active")){
+				categoryDTO.setSelectedItem("selected");
+				//request.setAttribute("categoryListMy", categoryDTO.getSelectedItem());
+				//HttpUtils.setCategory(new Category(categoryDTO.getCategoryId(), categoryDTO.getCategoryName()));
+			}
+		}
+		request.setAttribute(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, list);
+	} catch (ErrorGettingCategoryServiceException e) {
+		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+	}
+	
 	return "admin";
     }
 	
@@ -264,7 +362,8 @@ public class AdminController {
 	int categoryId = productDTO.getDepartment().getId();
 	Category category = productCategoryService.getCategoryById(categoryId);
 	product.setCategoryFk(category);
-	product.setCharacteristic1(productDTO.getCharacteristic1());
+//	product.setCharacteristic1(productDTO.getCharacteristic1());
+	product.setCharacteristic1(productDTO.getCharacteristic1().getName());
 	product.setCharacteristic2(productDTO.getCharacteristic2());
 	product.setCharacteristic3(productDTO.getCharacteristic3());
 	product.setCharacteristic4(productDTO.getCharacteristic4());
