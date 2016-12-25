@@ -19,6 +19,7 @@ import com.superinc.europe.onlineshopping.gu.entities.pojo.Category;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
 import com.superinc.europe.onlineshopping.gu.service.IProductCategoryService;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamConstants;
+import com.superinc.europe.onlineshopping.su.entities.pojo.Characteristic;
 
 /**
  * Created by Alexey Druzik on 11.09.2016.
@@ -33,6 +34,13 @@ public class HttpUtils {
 	private static final int REPEAT_GOODS_FLAG = 0;
 	private static final int COUNT_VALUE = 1;
 	public static List<Category> categoryList;
+	public static List<Characteristic> characteristicOneList;
+	public static List<Characteristic> characteristicTwoList;
+	public static List<Characteristic> characteristicThreeList;
+	public static List<Characteristic> characteristicFourList;
+	public static List<Characteristic> characteristicFiveList;
+	public static List<Characteristic> characteristicSixList;
+	public static List<Characteristic> characteristicSevenList;
 	public static Category category;
 
 
@@ -325,6 +333,62 @@ public class HttpUtils {
 	
 	public static List<Category> getList(){
 		return categoryList;
+	}
+
+	public static void setCharacteristicOneList(List<Characteristic> ob) {
+		characteristicOneList = ob;
+	}
+	
+	public static List<Characteristic> getCharacteristicOneList(){
+		return characteristicOneList;
+	}
+	
+	public static void setCharacteristicTwoList(List<Characteristic> ob) {
+		characteristicTwoList = ob;
+	}
+	
+	public static List<Characteristic> getCharacteristicTwoList(){
+		return characteristicTwoList;
+	}
+	
+	public static void setCharacteristicThreeList(List<Characteristic> ob) {
+		characteristicThreeList = ob;
+	}
+	
+	public static List<Characteristic> getCharacteristicThreeList(){
+		return characteristicThreeList;
+	}
+	
+	public static void setCharacteristicFourList(List<Characteristic> ob) {
+		characteristicFourList = ob;
+	}
+	
+	public static List<Characteristic> getCharacteristicFourList(){
+		return characteristicFourList;
+	}
+	
+	public static void setCharacteristicFiveList(List<Characteristic> ob) {
+		characteristicFiveList = ob;
+	}
+	
+	public static List<Characteristic> getCharacteristicFiveList(){
+		return characteristicFiveList;
+	}
+	
+	public static void setCharacteristicSixList(List<Characteristic> ob) {
+		characteristicSixList = ob;
+	}
+	
+	public static List<Characteristic> getCharacteristicSixList(){
+		return characteristicSixList;
+	}
+	
+	public static void setCharacteristicSevenList(List<Characteristic> ob) {
+		characteristicSevenList = ob;
+	}
+	
+	public static List<Characteristic> getCharacteristicSevenList(){
+		return characteristicSevenList;
 	}
 	
 }

@@ -15,9 +15,6 @@ public class ProductDTO implements Serializable {
 
     private static final long serialVersionUID = -751155082317142262L;
     
-	@Pattern(regexp = "^[1-9a-zA-Z]{3,10}$", message="Login has to has between 3 and 10 symbols")
-    private String name;
-	
     @Range(min=1, max=1000, message="Price has to has between 1 and 1000")
 //    @Pattern(regexp = "^[1-9]{3,10}$", message="Login has to has between 3 and 10 symbols")
     private int price;
@@ -35,31 +32,42 @@ public class ProductDTO implements Serializable {
 //	private String characteristic1;
     
     @NotNull
-    private Characteristic1VO characteristic1;
+    private CharacteristicOneVO characteristic1;
 	
-    @Pattern(regexp = "^[1-9a-zA-Z]{3,50}$", message="Socket has to has between 3 and 50 symbols")
-	private String characteristic2;
+//    @Pattern(regexp = "^[1-9a-zA-Z]{3,50}$", message="Socket has to has between 3 and 50 symbols")
+//	private String characteristic2;
 	
-    @Pattern(regexp = "^[1-9a-zA-Z]{3,50}$", message="Smart has to has between 3 and 50 symbols")
-	private String characteristic3;
+    @NotNull
+    private CharacteristicTwoVO characteristic2;
+    
+//    @Pattern(regexp = "^[1-9a-zA-Z]{3,50}$", message="Smart has to has between 3 and 50 symbols")
+    @NotNull
+    private CharacteristicThreeVO characteristic3;
 	
-    @Pattern(regexp = "^[1-9a-zA-Z]{3,50}$", message="Screen resolution has to has between 3 and 50 symbols")
-	private String characteristic4;
+//    @Pattern(regexp = "^[1-9a-zA-Z]{3,50}$", message="Screen resolution has to has between 3 and 50 symbols")
+    @NotNull
+    private CharacteristicFourVO characteristic4;
 	
-    @Pattern(regexp = "^[1-9a-zA-Z]{3,50}$", message="Aspect ratio has to has between 3 and 50 symbols")
-	private String characteristic6;
+//  @Pattern(regexp = "^[1-9a-zA-Z\\w]{3,50}$", message="Stock availability has to has between 3 and 50 symbols")
+  @NotNull
+  private CharacteristicFiveVO characteristic5;
+    
+//    @Pattern(regexp = "^[1-9a-zA-Z]{3,50}$", message="Aspect ratio has to has between 3 and 50 symbols")
+    @NotNull
+    private CharacteristicSixVO characteristic6;
 	
-    @Pattern(regexp = "^[1-9a-zA-Z\\w]{3,50}$", message="Stock availability has to has between 3 and 50 symbols")
-	private String stock_status;
-	
+//	@Pattern(regexp = "^[1-9a-zA-Z]{3,10}$", message="Login has to has between 3 and 10 symbols")
+    @NotNull
+    private CharacteristicSevenVO characteristic7;
+    
     public ProductDTO() {
     }
 
-	public ProductDTO(String name, int price, int count,
-			String description, Characteristic1VO characteristic1, String characteristic2,
-			String characteristic3, String characteristic4,
-			String characteristic6, String stock_status) {
-		this.name = name;
+	public ProductDTO(CharacteristicSevenVO characteristic7, int price, int count,
+			String description, CharacteristicOneVO characteristic1, CharacteristicTwoVO characteristic2,
+			CharacteristicThreeVO characteristic3, CharacteristicFourVO characteristic4,
+			CharacteristicSixVO characteristic6, CharacteristicFiveVO characteristic5) {
+		this.characteristic7 = characteristic7;
 		this.price = price;
 		this.count = count;
 		this.description = description;
@@ -68,16 +76,10 @@ public class ProductDTO implements Serializable {
 		this.characteristic3 = characteristic3;
 		this.characteristic4 = characteristic4;
 		this.characteristic6 = characteristic6;
-		this.stock_status = stock_status;
+		this.characteristic5 = characteristic5;
 	}
 
-	public String getName() {
-		return name;
-	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public int getPrice() {
 		return price;
@@ -111,52 +113,68 @@ public class ProductDTO implements Serializable {
 		this.description = description;
 	}
 
-	public Characteristic1VO getCharacteristic1() {
+	public CharacteristicOneVO getCharacteristic1() {
 		return characteristic1;
 	}
 
-	public void setCharacteristic1(Characteristic1VO characteristic1) {
+	public void setCharacteristic1(CharacteristicOneVO characteristic1) {
 		this.characteristic1 = characteristic1;
 	}
 
-	public String getCharacteristic2() {
+	public CharacteristicTwoVO getCharacteristic2() {
 		return characteristic2;
 	}
 
-	public void setCharacteristic2(String characteristic2) {
+	public void setCharacteristic2(CharacteristicTwoVO characteristic2) {
 		this.characteristic2 = characteristic2;
 	}
 
-	public String getCharacteristic3() {
+	public CharacteristicThreeVO getCharacteristic3() {
 		return characteristic3;
 	}
 
-	public void setCharacteristic3(String characteristic3) {
+	public void setCharacteristic3(CharacteristicThreeVO characteristic3) {
 		this.characteristic3 = characteristic3;
 	}
 
-	public String getCharacteristic4() {
+	public CharacteristicFourVO getCharacteristic4() {
 		return characteristic4;
 	}
 
-	public void setCharacteristic4(String characteristic4) {
+	public void setCharacteristic4(CharacteristicFourVO characteristic4) {
 		this.characteristic4 = characteristic4;
 	}
 
-	public String getCharacteristic6() {
+	public CharacteristicSixVO getCharacteristic6() {
 		return characteristic6;
 	}
 
-	public void setCharacteristic6(String characteristic6) {
+	public void setCharacteristic6(CharacteristicSixVO characteristic6) {
 		this.characteristic6 = characteristic6;
 	}
 
-	public String getStock_status() {
-		return stock_status;
+	public CharacteristicSevenVO getCharacteristic7() {
+		return characteristic7;
 	}
 
-	public void setStock_status(String stock_status) {
-		this.stock_status = stock_status;
+	public void setCharacteristic7(CharacteristicSevenVO characteristic7) {
+		this.characteristic7 = characteristic7;
+	}
+	
+	public CharacteristicSevenVO getName() {
+		return characteristic7;
+	}
+
+	public void setName(CharacteristicSevenVO name) {
+		this.characteristic7 = name;
+	}
+	
+	public CharacteristicFiveVO getCharacteristic5() {
+		return characteristic5;
+	}
+
+	public void setCharacteristic5(CharacteristicFiveVO characteristic5) {
+		this.characteristic5 = characteristic5;
 	}
 
 	public static long getSerialversionuid() {
@@ -165,13 +183,13 @@ public class ProductDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ProductDTO [name=" + name + ", price=" + price
-				+ ", department=" + department + ", count=" + count
+		return "ProductDTO [characteristic7=" + characteristic7 + ", price="
+				+ price + ", department=" + department + ", count=" + count
 				+ ", description=" + description + ", characteristic1="
 				+ characteristic1 + ", characteristic2=" + characteristic2
 				+ ", characteristic3=" + characteristic3 + ", characteristic4="
 				+ characteristic4 + ", characteristic6=" + characteristic6
-				+ ", stock_status=" + stock_status + "]";
+				+ ", characteristic5=" + characteristic5 + "]";
 	}
 
 }

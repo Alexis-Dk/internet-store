@@ -44,7 +44,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
 import com.superinc.europe.onlineshopping.gu.entities.dto.Bucket;
 import com.superinc.europe.onlineshopping.gu.entities.dto.CategoryDTO;
-import com.superinc.europe.onlineshopping.gu.entities.dto.Characteristic1VO;
+import com.superinc.europe.onlineshopping.gu.entities.dto.CharacteristicFiveVO;
+import com.superinc.europe.onlineshopping.gu.entities.dto.CharacteristicFourVO;
+import com.superinc.europe.onlineshopping.gu.entities.dto.CharacteristicOneVO;
+import com.superinc.europe.onlineshopping.gu.entities.dto.CharacteristicSevenVO;
+import com.superinc.europe.onlineshopping.gu.entities.dto.CharacteristicSixVO;
+import com.superinc.europe.onlineshopping.gu.entities.dto.CharacteristicThreeVO;
+import com.superinc.europe.onlineshopping.gu.entities.dto.CharacteristicTwoVO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.DepartmentVO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.ProductDTO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
@@ -63,8 +69,14 @@ import com.superinc.europe.onlineshopping.su.entities.pojo.CategoryCharacteristi
 import com.superinc.europe.onlineshopping.su.entities.pojo.Characteristic;
 import com.superinc.europe.onlineshopping.su.service.ICategoryCharacteristicService;
 import com.superinc.europe.onlineshopping.su.service.ICharacteristicService;
+import com.superinc.europe.onlineshopping.su.web.utils.CharacteristicFiveEditor;
+import com.superinc.europe.onlineshopping.su.web.utils.CharacteristicFourEditor;
+import com.superinc.europe.onlineshopping.su.web.utils.CharacteristicSevenEditor;
+import com.superinc.europe.onlineshopping.su.web.utils.CharacteristicSixEditor;
+import com.superinc.europe.onlineshopping.su.web.utils.CharacteristicThreeEditor;
+import com.superinc.europe.onlineshopping.su.web.utils.CharacteristicTwoEditor;
 import com.superinc.europe.onlineshopping.su.web.utils.DepartmentEditor;
-import com.superinc.europe.onlineshopping.su.web.utils.DepartmentEditorC;
+import com.superinc.europe.onlineshopping.su.web.utils.CharacteristicOneEditor;
 import com.superinc.europe.onlineshopping.gu.web.utils.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestConstants;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpUtils;
@@ -169,7 +181,36 @@ public class AdminController {
 	try {
 		categoryList = productCategoryService.getAllProductCategories();
 		HttpUtils.setList(categoryList);
+		HttpUtils.setCharacteristicOneList(characteristicService.
+				getCharacteristics(iCategoryCharacteristicService
+						.getCategoryCharacteristicId(categoryId, "1")));
+		
+		HttpUtils.setCharacteristicTwoList(characteristicService.
+				getCharacteristics(iCategoryCharacteristicService
+						.getCategoryCharacteristicId(categoryId, "2")));
+		
+		HttpUtils.setCharacteristicThreeList(characteristicService.
+				getCharacteristics(iCategoryCharacteristicService
+						.getCategoryCharacteristicId(categoryId, "3")));
+
+		HttpUtils.setCharacteristicFourList(characteristicService.
+				getCharacteristics(iCategoryCharacteristicService
+						.getCategoryCharacteristicId(categoryId, "4")));
+		
+		HttpUtils.setCharacteristicFiveList(characteristicService.
+				getCharacteristics(iCategoryCharacteristicService
+						.getCategoryCharacteristicId(categoryId, "5")));
+		
+		HttpUtils.setCharacteristicSixList(characteristicService.
+				getCharacteristics(iCategoryCharacteristicService
+						.getCategoryCharacteristicId(categoryId, "6")));
+		
+		HttpUtils.setCharacteristicSevenList(characteristicService.
+				getCharacteristics(iCategoryCharacteristicService
+						.getCategoryCharacteristicId(categoryId, "7")));
 	} catch (ErrorGettingCategoryServiceException e) {
+		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+	} catch (ServiceException e) {
 		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
 	}
 	model.addAttribute("categoryList", categoryList);
@@ -221,7 +262,13 @@ public class AdminController {
     
 	@InitBinder
     public void initBinder(WebDataBinder binder) {
-        binder.registerCustomEditor(Characteristic1VO.class, new DepartmentEditorC());
+        binder.registerCustomEditor(CharacteristicOneVO.class, new CharacteristicOneEditor());
+        binder.registerCustomEditor(CharacteristicTwoVO.class, new CharacteristicTwoEditor());
+        binder.registerCustomEditor(CharacteristicThreeVO.class, new CharacteristicThreeEditor());
+        binder.registerCustomEditor(CharacteristicFourVO.class, new CharacteristicFourEditor());
+        binder.registerCustomEditor(CharacteristicFiveVO.class, new CharacteristicFiveEditor());
+        binder.registerCustomEditor(CharacteristicSixVO.class, new CharacteristicSixEditor());
+        binder.registerCustomEditor(CharacteristicSevenVO.class, new CharacteristicSevenEditor());
         binder.registerCustomEditor(DepartmentVO.class, new DepartmentEditor());
 	}
 	
@@ -270,19 +317,19 @@ public class AdminController {
 //	}
 	
 	@ModelAttribute("characteristic1")
-	public List<Characteristic1VO> populateCharacteristic1(HttpServletRequest request) {
+	public List<CharacteristicOneVO> populateCharacteristic1(HttpServletRequest request) {
 		List<Characteristic> characteristicList = null;
 		Category category = HttpUtils.getCatrgory();
-		List<Characteristic1VO> characteristic1 = null;
+		List<CharacteristicOneVO> characteristic1 = null;
 		try {
 			characteristicList = characteristicService
 					.getCharacteristics(iCategoryCharacteristicService
 							.getCategoryCharacteristicId(Integer.toString(category.categoryId), "1"));
-		characteristic1 = new ArrayList<Characteristic1VO>();
-		characteristic1.add(new Characteristic1VO(-1, "Select Characteristic1"));
+		characteristic1 = new ArrayList<CharacteristicOneVO>();
+		characteristic1.add(new CharacteristicOneVO(-1, "Select Characteristic One"));
 		if (characteristicList != null) {
 			for (Characteristic ob : characteristicList) {
-				characteristic1.add(new Characteristic1VO(ob.getCharacteristicId(),
+				characteristic1.add(new CharacteristicOneVO(ob.getCharacteristicId(),
 						ob.getCharacteristicName()));
 			}
 		}
@@ -290,6 +337,144 @@ public class AdminController {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
 		}
 		return characteristic1;
+	}
+	
+	@ModelAttribute("characteristic2")
+	public List<CharacteristicTwoVO> populateCharacteristic2(HttpServletRequest request) {
+		List<Characteristic> characteristicList = null;
+		Category category = HttpUtils.getCatrgory();
+		List<CharacteristicTwoVO> characteristic2 = null;
+		try {
+			characteristicList = characteristicService
+					.getCharacteristics(iCategoryCharacteristicService
+							.getCategoryCharacteristicId(Integer.toString(category.categoryId), "2"));
+		characteristic2 = new ArrayList<CharacteristicTwoVO>();
+		characteristic2.add(new CharacteristicTwoVO(-1, "Select Characteristic Two"));
+		if (characteristicList != null) {
+			for (Characteristic ob : characteristicList) {
+				characteristic2.add(new CharacteristicTwoVO(ob.getCharacteristicId(),
+						ob.getCharacteristicName()));
+			}
+		}
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+		}
+		return characteristic2;
+	}
+	
+	@ModelAttribute("characteristic3")
+	public List<CharacteristicThreeVO> populateCharacteristic3(HttpServletRequest request) {
+		List<Characteristic> characteristicList = null;
+		Category category = HttpUtils.getCatrgory();
+		List<CharacteristicThreeVO> characteristic3 = null;
+		try {
+			characteristicList = characteristicService
+					.getCharacteristics(iCategoryCharacteristicService
+							.getCategoryCharacteristicId(Integer.toString(category.categoryId), "3"));
+		characteristic3 = new ArrayList<CharacteristicThreeVO>();
+		characteristic3.add(new CharacteristicThreeVO(-1, "Select Characteristic Three"));
+		if (characteristicList != null) {
+			for (Characteristic ob : characteristicList) {
+				characteristic3.add(new CharacteristicThreeVO(ob.getCharacteristicId(),
+						ob.getCharacteristicName()));
+			}
+		}
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+		}
+		return characteristic3;
+	}
+	
+	@ModelAttribute("characteristic4")
+	public List<CharacteristicFourVO> populateCharacteristic4(HttpServletRequest request) {
+		List<Characteristic> characteristicList = null;
+		Category category = HttpUtils.getCatrgory();
+		List<CharacteristicFourVO> characteristic4 = null;
+		try {
+			characteristicList = characteristicService
+					.getCharacteristics(iCategoryCharacteristicService
+							.getCategoryCharacteristicId(Integer.toString(category.categoryId), "4"));
+		characteristic4 = new ArrayList<CharacteristicFourVO>();
+		characteristic4.add(new CharacteristicFourVO(-1, "Select Characteristic Four"));
+		if (characteristicList != null) {
+			for (Characteristic ob : characteristicList) {
+				characteristic4.add(new CharacteristicFourVO(ob.getCharacteristicId(),
+						ob.getCharacteristicName()));
+			}
+		}
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+		}
+		return characteristic4;
+	}
+	
+	@ModelAttribute("characteristic5")
+	public List<CharacteristicFiveVO> populateCharacteristic5(HttpServletRequest request) {
+		List<Characteristic> characteristicList = null;
+		Category category = HttpUtils.getCatrgory();
+		List<CharacteristicFiveVO> characteristic5 = null;
+		try {
+			characteristicList = characteristicService
+					.getCharacteristics(iCategoryCharacteristicService
+							.getCategoryCharacteristicId(Integer.toString(category.categoryId), "5"));
+		characteristic5 = new ArrayList<CharacteristicFiveVO>();
+		characteristic5.add(new CharacteristicFiveVO(-1, "Select Characteristic Five"));
+		if (characteristicList != null) {
+			for (Characteristic ob : characteristicList) {
+				characteristic5.add(new CharacteristicFiveVO(ob.getCharacteristicId(),
+						ob.getCharacteristicName()));
+			}
+		}
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+		}
+		return characteristic5;
+	}
+	
+	@ModelAttribute("characteristic6")
+	public List<CharacteristicSixVO> populateCharacteristic6(HttpServletRequest request) {
+		List<Characteristic> characteristicList = null;
+		Category category = HttpUtils.getCatrgory();
+		List<CharacteristicSixVO> characteristic6 = null;
+		try {
+			characteristicList = characteristicService
+					.getCharacteristics(iCategoryCharacteristicService
+							.getCategoryCharacteristicId(Integer.toString(category.categoryId), "6"));
+		characteristic6 = new ArrayList<CharacteristicSixVO>();
+		characteristic6.add(new CharacteristicSixVO(-1, "Select Characteristic Six"));
+		if (characteristicList != null) {
+			for (Characteristic ob : characteristicList) {
+				characteristic6.add(new CharacteristicSixVO(ob.getCharacteristicId(),
+						ob.getCharacteristicName()));
+			}
+		}
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+		}
+		return characteristic6;
+	}
+	
+	@ModelAttribute("characteristic7")
+	public List<CharacteristicSevenVO> populateCharacteristic7(HttpServletRequest request) {
+		List<Characteristic> characteristicList = null;
+		Category category = HttpUtils.getCatrgory();
+		List<CharacteristicSevenVO> characteristic7 = null;
+		try {
+			characteristicList = characteristicService
+					.getCharacteristics(iCategoryCharacteristicService
+							.getCategoryCharacteristicId(Integer.toString(category.categoryId), "7"));
+		characteristic7 = new ArrayList<CharacteristicSevenVO>();
+		characteristic7.add(new CharacteristicSevenVO(-1, "Select Characteristic Seven"));
+		if (characteristicList != null) {
+			for (Characteristic ob : characteristicList) {
+				characteristic7.add(new CharacteristicSevenVO(ob.getCharacteristicId(),
+						ob.getCharacteristicName()));
+			}
+		}
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+		}
+		return characteristic7;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -355,7 +540,7 @@ public class AdminController {
     }
 	
     private void setProductFields(Product product, ProductDTO productDTO, int id) {
-	product.setName(productDTO.getName());
+	product.setName(productDTO.getName().getName());
 	product.setPrice(productDTO.getPrice());
 	product.setOldprice(productDTO.getPrice());
 	product.setDescription(productDTO.getDescription());
@@ -364,12 +549,13 @@ public class AdminController {
 	product.setCategoryFk(category);
 //	product.setCharacteristic1(productDTO.getCharacteristic1());
 	product.setCharacteristic1(productDTO.getCharacteristic1().getName());
-	product.setCharacteristic2(productDTO.getCharacteristic2());
-	product.setCharacteristic3(productDTO.getCharacteristic3());
-	product.setCharacteristic4(productDTO.getCharacteristic4());
+//	product.setCharacteristic1(productDTO.getCharacteristic2());
+	product.setCharacteristic2(productDTO.getCharacteristic2().getName());
+	product.setCharacteristic3(productDTO.getCharacteristic3().getName());
+	product.setCharacteristic4(productDTO.getCharacteristic4().getName());
 	product.setCharacteristic5("");
-	product.setCharacteristic6(productDTO.getCharacteristic6());
-	product.setStockStatus(productDTO.getStock_status());
+	product.setCharacteristic6(productDTO.getCharacteristic6().getName());
+	product.setStockStatus(productDTO.getCharacteristic5().getName());
 	product.setImage_path(productDTO.getDepartment().getId()+ "/"+productDTO.getDescription()+ "_"+Integer.toString(id) + ".jpg");
     }
 	

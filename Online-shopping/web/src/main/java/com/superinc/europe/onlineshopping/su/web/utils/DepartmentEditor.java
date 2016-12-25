@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.superinc.europe.onlineshopping.gu.entities.dto.Characteristic1VO;
+import com.superinc.europe.onlineshopping.gu.entities.dto.CharacteristicOneVO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.DepartmentVO;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Category;
 import com.superinc.europe.onlineshopping.gu.service.IProductCategoryService;

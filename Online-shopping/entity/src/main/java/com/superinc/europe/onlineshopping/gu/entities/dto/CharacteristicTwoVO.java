@@ -2,13 +2,13 @@ package com.superinc.europe.onlineshopping.gu.entities.dto;
 
 import java.io.Serializable;
 
-public class Characteristic1VO implements Serializable {
+public class CharacteristicTwoVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name;
 
-	public Characteristic1VO(Integer id, String name) {
+	public CharacteristicTwoVO(Integer id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -32,7 +32,7 @@ public class Characteristic1VO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Characteristic1VO [id=" + id + ", name=" + name + "]";
+		return "Characteristic2VO [id=" + id + ", name=" + name + "]";
 	}
 
 }

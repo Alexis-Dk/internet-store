@@ -220,29 +220,16 @@ else {
 					</div>
 					<div class="col-xs-5">
 							
-						<sf:errors path="name" cssStyle="color: red" />
-						<sf:input id="name" type="text" value="" path="name"
-							class="form-control" />
-					</div>
-				</div>
-
-				<div class="form-group">
-					<div class="col-xs-3">
-						<label for="productPriceData" class="control-label">Product
-							Price:</label>
-					</div>
-					<div class="col-xs-5">
-						<sf:errors path="price" cssStyle="color: red" />
-						<sf:input id="productPriceData" path="price" class="form-control"
-							type="text" name="price"         
-							value="" />
-							
-							
+							<sf:errors path="characteristic1" cssStyle="color: red" />
+						<sf:select path="characteristic1" items="${characteristic1}"
+										itemValue="id" itemLabel="name" />
+					<%--<sf:input id="name" type="text" value="" path="name"
+							class="form-control" /> --%>
 					</div>
 				</div>
 
 				<!-- Product Category -->
-				<div class="form-group">
+				<div class="form-group" hidden="true">
 					<div class="col-xs-3">
 						<label for="productCategoryData" class="control-label">Category:</label>
 					</div>
@@ -256,18 +243,6 @@ else {
 								</font></td>
 							</tr>
 						</table>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<div class="col-xs-3">
-						<label for="productCountData" class="control-label">Product
-							count:</label>
-					</div>
-					<div class="col-xs-5">
-						<sf:errors path="count" cssStyle="color: red" />
-						<sf:input id="productCountData" path="count" class="form-control"
-							type="text" name="count" value="" />
 					</div>
 				</div>
 
@@ -288,9 +263,9 @@ else {
 						<label for="productCharacteristic1" class="control-label">Color:</label>
 					</div>
 					<div class="col-xs-5">
-						<sf:select path="characteristic1" items="${characteristic1}"
+						<sf:select path="characteristic2" items="${characteristic2}"
 										itemValue="id" itemLabel="name" />
-						<sf:errors path="characteristic1" cssStyle="color: red" />
+						<sf:errors path="characteristic2" cssStyle="color: red" />
 						<%--<sf:input id="productCharacteristic1" path="characteristic1"
 							class="form-control" type="text" name="characteristic1" /> --%>
 					</div>
@@ -301,9 +276,11 @@ else {
 						<label for="productCharacteristic2" class="control-label">Socket:</label>
 					</div>
 					<div class="col-xs-5">
-						<sf:errors path="characteristic2" cssStyle="color: red" />
-						<sf:input id="productCharacteristic2" path="characteristic2"
-							class="form-control" type="text" name="characteristic2" />
+					<sf:select path="characteristic3" items="${characteristic3}"
+										itemValue="id" itemLabel="name" />
+						<sf:errors path="characteristic3" cssStyle="color: red" />
+						<%--<sf:input id="productCharacteristic2" path="characteristic2"
+							class="form-control" type="text" name="characteristic2" /> --%>
 					</div>
 				</div>
 
@@ -312,9 +289,11 @@ else {
 						<label for="productCharacteristic3" class="control-label">Smart:</label>
 					</div>
 					<div class="col-xs-5">
-						<sf:errors path="characteristic3" cssStyle="color: red" />
-						<sf:input id="productCharacteristic3" path="characteristic3"
-							class="form-control" type="text" name="characteristic3" />
+					<sf:select path="characteristic4" items="${characteristic4}"
+										itemValue="id" itemLabel="name" />
+						<sf:errors path="characteristic4" cssStyle="color: red" />
+						<%--<sf:input id="productCharacteristic3" path="characteristic3"
+							class="form-control" type="text" name="characteristic3" /> --%>
 					</div>
 				</div>
 
@@ -324,9 +303,11 @@ else {
 							resolution:</label>
 					</div>
 					<div class="col-xs-5">
-						<sf:errors path="characteristic4" cssStyle="color: red" />
-						<sf:input id="productCharacteristic4" path="characteristic4"
-							class="form-control" type="text" name="characteristic4" />
+						<sf:errors path="characteristic5" cssStyle="color: red" />
+						<sf:select path="characteristic5" items="${characteristic5}"
+										itemValue="id" itemLabel="name" />
+					<%--	<sf:input id="productCharacteristic4" path="characteristic4"
+							class="form-control" type="text" name="characteristic4" /> --%>
 					</div>
 				</div>
 
@@ -337,8 +318,10 @@ else {
 					</div>
 					<div class="col-xs-5">
 						<sf:errors path="characteristic6" cssStyle="color: red" />
-						<sf:input id="productCharacteristic6" path="characteristic6"
-							class="form-control" type="text" name="characteristic6" />
+						<sf:select path="characteristic6" items="${characteristic6}"
+										itemValue="id" itemLabel="name" />
+						<%--<sf:input id="productCharacteristic6" path="characteristic6"
+							class="form-control" type="text" name="characteristic6" /> --%>
 					</div>
 				</div>
 
@@ -348,9 +331,36 @@ else {
 							availability:</label>
 					</div>
 					<div class="col-xs-5">
-						<sf:errors path="stock_status" cssStyle="color: red" />
-						<sf:input id="productStockStatus" path="stock_status"
-							class="form-control" type="text" name="stock_status" />
+						<sf:errors path="characteristic7" cssStyle="color: red" />
+						<sf:select path="characteristic7" items="${characteristic7}"
+										itemValue="id" itemLabel="name" />
+						<%--<sf:input id="productStockStatus" path="stock_status"
+							class="form-control" type="text" name="stock_status" /> --%>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-xs-3">
+						<label for="productPriceData" class="control-label">Product
+							Price:</label>
+					</div>
+					<div class="col-xs-5">
+						<sf:errors path="price" cssStyle="color: red" />
+						<sf:input id="productPriceData" path="price" class="form-control"
+							type="text" name="price"         
+							value="" />
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="col-xs-3">
+						<label for="productCountData" class="control-label">Product
+							count:</label>
+					</div>
+					<div class="col-xs-5">
+						<sf:errors path="count" cssStyle="color: red" />
+						<sf:input id="productCountData" path="count" class="form-control"
+							type="text" name="count" value="" />
 					</div>
 				</div>
 
