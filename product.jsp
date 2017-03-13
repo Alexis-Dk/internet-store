@@ -212,19 +212,19 @@
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
                         <h2><locale:message code="label.shop"/></h2>
-                    <!--    -->	<form class="form-inline" action="${context}/product" method="get" hidden="true">
+                        	<form class="form-inline" action="${context}/product" method="get">
 							  <div class="form-group">
 							    <label for="priceLower"><locale:message code="label.priceLow"/></label>
 							    <input type="text" class="form-control" id="priceLower" placeholder="from" name="priceLower" value="<%= request.getSession().getAttribute("priceLower") %>">
 							  </div>
 							  <div class="form-group">
 							    <label for="priceHighter"><locale:message code="label.priceHight"/></label>
-							  	 Latest jQuery form server   <input type="text" class="form-control" id="priceHighter" name="priceHighter" placeholder="to" value="<%= request.getSession().getAttribute("priceHighter") %>"> 
+					<!--		  	 Latest jQuery form server   <input type="text" class="form-control" id="priceHighter" name="priceHighter" placeholder="to" value="<%= request.getSession().getAttribute("priceHighter") %>">  -->
 							 	<input type="text" class="form-control" id="priceHighter" name="priceHighter" placeholder="to" value="<%= request.getSession().getAttribute("priceHighter") %>">  
 							  <input type="hidden" class="form-control" id="category" name="category" placeholder="to" value="<%= request.getSession().getAttribute("categoryId") %>"> 
-							  </div> 
+							  </div>
 							  <button type="submit" class="btn btn-default"><locale:message code="label.find"/></button>                      
-							</form> 
+							</form>
                     </div>
                 </div>
             </div>
@@ -232,7 +232,7 @@
     </div>
 
 	<div class="single-product-area">
-       <div class="zigzag-bottom"></div>
+       
         <div class="container-fluid" >
           <div ng-controller="AppCtrl"  style="height:48px;" ng-cloak >
 
@@ -243,6 +243,32 @@
                   md-whiteframe="4">
 
                     <md-content layout-padding ng-controller="LeftCtrl">    
+                      <form method="get"  action="input5.php" class="form-horizontal">
+                        <div layout="column">
+                          <div layout="row" layout-align="center">
+                           <md-input-container >
+                             <label for="testInput" >Price lower</label>
+                             <input type="text" id="testInput" ng-model="data" md-autofocus="" name="priceLower">
+                           </md-input-container>
+                           <md-input-container >
+                             <label for="testInput" >Price highter</label>
+                             <input type="text" id="testInput" ng-model="data" md-autofocus="" name="priceHighter">
+                           </md-input-container>
+                         </div>
+                         <div layout="row" layout-align="center">
+                            <md-input-container >
+                               <label for="testInput" >Price lower</label>
+                               <input type="text" id="testInput" ng-model="data" md-autofocus="">
+                             </md-input-container>
+                             <md-input-container >
+                               <label for="testInput" >Price highter</label>
+                               <input type="text" id="testInput" ng-model="data" md-autofocus="" ng-value="name">
+                             </md-input-container>
+                           </div>
+                         </div>
+                         <input type="hidden" class="form-control" id="category"
+                         name="category" placeholder="to"
+                         value="<">
                          <div ng-controller="NewAppCtrl as ctrl" class="md-padding checkboxdemoSyncing" ng-cloak style="min-height:100px">
                           <div layout="row" layout-wrap>
                             <div flex="100" flex-gt-sm="150" layout="column">
@@ -251,34 +277,6 @@
                                 In IE, we cannot apply flex directly to <fieldset>
                                 @see https://github.com/philipwalton/flexbugs#9-some-html-elements-cant-be-flex-containers
                               -->
-                        <form method="get"  action="product?" class="form-horizontal">
-                        <div layout="column">
-                        <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Price</font></H5> </legend>        
-                          <div layout="row" layout-align="center">
-                           <md-input-container >
-                             <label for="testInput1" >Min</label>
-                             <input type="text" id="testInput1" ng-model="customUserParam.priceMin" md-autofocus="" name="priceLower" ><!-- name="priceLower" -->
-                           </md-input-container>
-                           <md-input-container >
-                             <label for="testInput2" >Max</label>
-                             <input type="text" id="testInput2" ng-model="customUserParam.priceMax" md-autofocus="" name="priceHighter">
-                           </md-input-container>
-                         </div>
-                                                 <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Quantity</font></H5> </legend>
-                         <div layout="row" layout-align="center">
-                            <md-input-container >
-                               <label for="testInput" >Min</label>
-                               <input type="text" id="testInput" ng-model="data" md-autofocus="">
-                             </md-input-container>
-                             <md-input-container >
-                               <label for="testInput" >Max</label>
-                               <input type="text" id="testInput" ng-model="data" md-autofocus="" ng-value="name">
-                             </md-input-container>
-                           </div>
-                         </div>
-                         <!--  --><input type="hidden" class="form-control" id="category"
-                         name="category" placeholder="to"
-                         value="<%= request.getSession().getAttribute("categoryId") %>">
                               <fieldset class="standard" >
                                 <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Characteristic1</font></H5> </legend>
                                 <div layout="row" layout-wrap flex>
@@ -334,7 +332,7 @@
 					              </md-switch>
 					            </div>
 								
-                               <!-- <input type="hidden" class="form-control" id="category" name="characteristic1" value="{{x}}"> --> 
+                                <input type="hidden" class="form-control" id="category" name="characteristic1" value="{{x}}">
                               </div>
                             </div>
                           </div>
@@ -355,9 +353,9 @@
                     </md-content>
                   </md-sidenav>
 
-					<div style="background-color: #00000;" height=30px><!-- #4BC19E -->
+					<div style="background-color: #4BC19E;" height=30px><!-- #4BC19E -->
                         <md-button class="md-icon-button md-primary" aria-label="Settings" ng-click="toggleLeft()"
-                          class="md-primary" hide-gt-md>
+                          class="md-primary" hide-gt-md>dfdfdfd
                           <md-icon md-svg-icon="img/icons/ic_search_black_24px.svg"></md-icon>
                         </md-button>
 					</div>

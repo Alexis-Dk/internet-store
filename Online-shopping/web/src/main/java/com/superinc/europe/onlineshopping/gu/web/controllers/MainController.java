@@ -27,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
 import com.superinc.europe.onlineshopping.gu.entities.dto.Bucket;
 import com.superinc.europe.onlineshopping.gu.entities.dto.CategoryDTO;
+import com.superinc.europe.onlineshopping.gu.entities.dto.CustomUserParamDTO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.UserDTO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
@@ -92,6 +93,14 @@ public class MainController {
 			@RequestParam(value = RequestParamConstants.CATEGORY) String category,
 			@RequestParam(value = RequestParamConstants.SELECTED_PAGE, defaultValue = RequestParamConstants.VALUE_STR_ONE) String selectedPage) {
 		try {
+			CustomUserParamDTO customUserParam = (CustomUserParamDTO) request.getSession().getAttribute("customUserParam");
+			if (customUserParam != null) {
+				customUserParam.setPriceMin(priceLower);
+				customUserParam.setPriceMax(priceHighter);
+			} else {
+				CustomUserParamDTO defaultUserParam = new CustomUserParamDTO();
+				request.getSession().setAttribute("customUserParam", defaultUserParam);
+			}
 			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
 					navigationService.getDataToPaginationWidget(goodsService.getQuantityOfPage()));
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
@@ -407,6 +416,18 @@ public class MainController {
     			return RequestParamConstants.ERROR_PAGE;
     		}
 		return RequestParamConstants.REGISTRATION;
+	}
+    
+	@RequestMapping(value = "rest", method = RequestMethod.GET)
+	public String setRest(HttpServletRequest request, HttpSession session,
+			ModelMap model) {
+		try {
+
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
+			return RequestParamConstants.ERROR_PAGE;
+		}
+		return "rest";
 	}
 
 }

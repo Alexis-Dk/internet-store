@@ -37,7 +37,30 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]   response.sendRedirect("login.jsp"); %>   -->
-    
+                  <meta http-equiv="Cache-Control" content="no-cache">
+              <meta http-equiv=Content-Type content="text/html;charset=UTF-8">
+              <title>Payments system</title>
+              <link rel="stylesheet" href="resources/styles/bootstrap.css">
+              <link rel="stylesheet" href="resources/styles/style.css">
+              <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+              <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+              <link href='http://fonts.googleapis.com/css?family=Titillium+Web:4col-sm-60,200,300,700,600' rel='stylesheet' type='text/css'>
+              <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
+              <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
+
+              <!-- Bootstrap -->
+              <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+              <!-- Font Awesome -->
+              <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+              <!-- Custom CSS -->
+              <link rel="stylesheet" href="<c:url value="/css/owl.carousel.css" />" rel="stylesheet">
+              <link rel="stylesheet" href="<c:url value="/css/styleMain.css" />" rel="stylesheet"> 
+              <link rel="stylesheet" href="<c:url value="/css/responsive.css" />" rel="stylesheet"> 
+
+              <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+              <script src="js/payments.js"> </script>
   </head>
   <body>
   

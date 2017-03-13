@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.entities.dto.Bucket;
+import com.superinc.europe.onlineshopping.gu.entities.dto.CustomUserParamDTO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Category;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
@@ -42,7 +43,7 @@ public class HttpUtils {
 	public static List<Characteristic> characteristicSixList;
 	public static List<Characteristic> characteristicSevenList;
 	public static Category category;
-
+	private static CustomUserParamDTO customUserParam;
 
 	Logger log = Logger.getLogger(HttpUtils.class);
 
@@ -389,6 +390,14 @@ public class HttpUtils {
 	
 	public static List<Characteristic> getCharacteristicSevenList(){
 		return characteristicSevenList;
+	}
+	
+	public static CustomUserParamDTO getCustomUserParam() {
+		return customUserParam;
+	}
+
+	public static void setCustomUserParam(CustomUserParamDTO customUserParam) {
+		HttpUtils.customUserParam = customUserParam;
 	}
 	
 }

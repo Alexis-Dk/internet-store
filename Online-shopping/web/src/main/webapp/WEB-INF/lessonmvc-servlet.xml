@@ -13,7 +13,19 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd ">
 		
 	<!-- <security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled" /> -->
-		
+	<!-- Configure to plugin JSON as request and response in method handler
+<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+    <property name="messageConverters">
+        <list>
+            <ref bean="jsonMessageConverter"/>
+        </list>
+    </property>
+</bean> -->
+  
+<!-- Configure bean to convert JSON to POJO and vice versa
+<bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+</bean>	 -->
+
 	<import resource="classpath*:beansDao.xml" />
 	<import resource="classpath*:beansService.xml" />
     <mvc:resources mapping="/resources/**" location="resources"/>
@@ -40,5 +52,7 @@
 			<property name="sessionFactory" ref="sessionFactory" />
 		</bean>
 	</mvc:interceptors>
+
+
 
 </beans>
