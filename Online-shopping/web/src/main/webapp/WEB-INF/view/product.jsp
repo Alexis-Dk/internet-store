@@ -305,9 +305,9 @@
                                 <fieldset class="standard" >
                                   <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Characteristic2</font></H5> </legend>
                                   <div layout="row" layout-wrap flex>
-                                    <div flex="50" ng-repeat="item in items">
-                                      <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
-                                        {{ item }} <span ng-if="exists(item)">selected</span>
+                                    <div flex="50" ng-repeat="item in items2">
+                                      <md-checkbox ng-checked="exists2(item, selected2)" ng-click="toggle2(item, selected2)">
+                                        {{ item }} <span ng-if="exists2(item)">selected</span>
                                       </md-checkbox>
                         <!--               <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
                                         {{ item }} <span ng-if="exists(item)">selected</span>

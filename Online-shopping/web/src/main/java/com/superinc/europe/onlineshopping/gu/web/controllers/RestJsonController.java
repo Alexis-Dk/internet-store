@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
+import org.mortbay.jetty.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Scope;
@@ -52,12 +54,14 @@ import com.superinc.europe.onlineshopping.gu.service.INavaigationService;
 import com.superinc.europe.onlineshopping.gu.service.IOrderService;
 import com.superinc.europe.onlineshopping.gu.service.IProductCategoryService;
 import com.superinc.europe.onlineshopping.gu.service.IUsersService;
+import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 import com.superinc.europe.onlineshopping.gu.web.utils.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestConstants;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpUtils;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.PdfGenerator;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpMailer;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamConstants;
+import com.superinc.europe.onlineshopping.su.entities.pojo.Characteristic;
 import com.superinc.europe.onlineshopping.su.service.ICategoryCharacteristicService;
 import com.superinc.europe.onlineshopping.su.service.ICharacteristicService;
 
@@ -145,6 +149,47 @@ public class RestJsonController {
     	CustomUserParamDTO customUserParam = (CustomUserParamDTO) attr.getRequest().getSession().getAttribute("customUserParam");
     //CustomUserParamDTO customUserParam = HttpUtils.getCustomUserParam();
     return customUserParam;
+  }
+    
+    @RequestMapping(value="/characteristic2", method = RequestMethod.GET)
+    public Account getCharacteristic2(@RequestParam (required = false) String type) {
+  	Account st = new Account();
+  	st.setBalance(777);
+  	st.setId((long) 9);
+  	String items = "";
+  	st.setState(AccountState.LOCKED);
+  	st.setType(AccountType.PERSONAL);
+  	st.setUser(new com.superinc.europe.onlineshopping.gu.entities.dto.User());
+  	ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+  	String category = (String) attr.getRequest().getSession().getAttribute("categoryId");
+  	try {
+  		System.out.println(category);
+		List<Characteristic> list = characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "2"));
+		
+		for (Characteristic characteristic : list) {
+			items += characteristic.getCharacteristicName() + " ";
+		}
+	} catch (ServiceException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+  	items = items.substring(0, items.length() - 1);
+  	st.setTitle(items);
+    return st;
+    	//return "BBK";
+  }
+    
+    @RequestMapping(value="/selectedCharacteristic2", method = RequestMethod.GET)
+    public Account getSelectedCharacteristic2(@RequestParam (required = false) String type) {
+  	Account st = new Account();
+  	st.setBalance(777);
+  	st.setId((long) 9);
+  	st.setTitle("Spring Gwt");
+  	st.setState(AccountState.LOCKED);
+  	st.setType(AccountType.PERSONAL);
+  	st.setUser(new com.superinc.europe.onlineshopping.gu.entities.dto.User());
+    return st;
+    	//return "BBK";
   }
     
 }
