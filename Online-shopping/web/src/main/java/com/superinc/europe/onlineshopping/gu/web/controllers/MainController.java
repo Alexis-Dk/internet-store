@@ -91,12 +91,24 @@ public class MainController {
 			@RequestParam(value = RequestParamConstants.LOWER_PRICE, defaultValue = RequestParamConstants.EMPTY) String priceLower,
 			@RequestParam(value = RequestParamConstants.HIGHTER_PRICE, defaultValue = RequestParamConstants.EMPTY) String priceHighter,
 			@RequestParam(value = RequestParamConstants.CATEGORY) String category,
-			@RequestParam(value = RequestParamConstants.SELECTED_PAGE, defaultValue = RequestParamConstants.VALUE_STR_ONE) String selectedPage) {
+			@RequestParam(value = RequestParamConstants.SELECTED_PAGE, defaultValue = RequestParamConstants.VALUE_STR_ONE) String selectedPage,
+			@RequestParam(value = "selectedCharacteristic2", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic2,
+			@RequestParam(value = "selectedCharacteristic3", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic3,
+			@RequestParam(value = "selectedCharacteristic4", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic4,
+			@RequestParam(value = "selectedCharacteristic5", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic5,
+			@RequestParam(value = "selectedCharacteristic6", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic6,
+			@RequestParam(value = "selectedCharacteristic7", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic7) {
 		try {
 			CustomUserParamDTO customUserParam = (CustomUserParamDTO) request.getSession().getAttribute("customUserParam");
 			if (customUserParam != null) {
 				customUserParam.setPriceMin(priceLower);
 				customUserParam.setPriceMax(priceHighter);
+				customUserParam.setSelectedCharacteristics2(selectedValueConverter(selectedCharacteristic2));
+				customUserParam.setSelectedCharacteristics3(selectedValueConverter(selectedCharacteristic3));
+				customUserParam.setSelectedCharacteristics4(selectedValueConverter(selectedCharacteristic4));
+				customUserParam.setSelectedCharacteristics5(selectedValueConverter(selectedCharacteristic5));
+				customUserParam.setSelectedCharacteristics6(selectedValueConverter(selectedCharacteristic6));
+				customUserParam.setSelectedCharacteristics7(selectedValueConverter(selectedCharacteristic7));
 			} else {
 				CustomUserParamDTO defaultUserParam = new CustomUserParamDTO();
 				request.getSession().setAttribute("customUserParam", defaultUserParam);
@@ -119,6 +131,16 @@ public class MainController {
 		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
 				request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
 		return RequestParamConstants.PRODUCT;
+	}
+
+	private String selectedValueConverter(String selectedCharacteristic2) {
+		String[] array = selectedCharacteristic2.split(",", -1);
+		selectedCharacteristic2 = "";
+		for (int i = 0; i < array.length; i++) {
+			selectedCharacteristic2 += array[i].replaceAll("[^a-zA-Z]+", "") + " ";
+		}
+		selectedCharacteristic2 = selectedCharacteristic2.substring(0, selectedCharacteristic2.length() - 1);
+		return selectedCharacteristic2;
 	}
 
 	@RequestMapping(value = RequestConstants.PRODUCT, method = RequestMethod.GET)

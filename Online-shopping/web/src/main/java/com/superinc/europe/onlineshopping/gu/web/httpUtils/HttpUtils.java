@@ -43,7 +43,6 @@ public class HttpUtils {
 	public static List<Characteristic> characteristicSixList;
 	public static List<Characteristic> characteristicSevenList;
 	public static Category category;
-	private static CustomUserParamDTO customUserParam;
 
 	Logger log = Logger.getLogger(HttpUtils.class);
 
@@ -390,14 +389,6 @@ public class HttpUtils {
 	
 	public static List<Characteristic> getCharacteristicSevenList(){
 		return characteristicSevenList;
-	}
-	
-	public static CustomUserParamDTO getCustomUserParam() {
-		return customUserParam;
-	}
-
-	public static void setCustomUserParam(CustomUserParamDTO customUserParam) {
-		HttpUtils.customUserParam = customUserParam;
 	}
 	
 }

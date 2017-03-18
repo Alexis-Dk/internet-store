@@ -253,6 +253,12 @@
                               -->
                         <form method="get"  action="product?" class="form-horizontal">
                         <div layout="column">
+                        <input hidden="true" type="text" name="selectedCharacteristic2" value="{{selected2}}">
+                        <input hidden="true" type="text" name="selectedCharacteristic3" value="{{selected3}}">
+                        <input hidden="true" type="text" name="selectedCharacteristic4" value="{{selected4}}">
+                        <input hidden="true" type="text" name="selectedCharacteristic5" value="{{selected5}}">
+                        <input hidden="true" type="text" name="selectedCharacteristic6" value="{{selected6}}">
+                        <input hidden="true" type="text" name="selectedCharacteristic7" value="{{selected7}}">
                         <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Price</font></H5> </legend>        
                           <div layout="row" layout-align="center">
                            <md-input-container >
@@ -314,7 +320,72 @@
                                       </md-checkbox> -->
                                     </div>
                                   </div>
-                                </fieldset>
+                                </fieldset> 
+                                <fieldset class="standard" >
+                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Characteristic3</font></H5> </legend>
+                                  <div layout="row" layout-wrap flex>
+                                    <div flex="50" ng-repeat="item in items3">
+                                      <md-checkbox ng-checked="exists2(item, selected3)" ng-click="toggle2(item, selected3)">
+                                        {{ item }} <span ng-if="exists2(item)">selected</span>
+                                      </md-checkbox>
+                        <!--               <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
+                                        {{ item }} <span ng-if="exists(item)">selected</span>
+                                      </md-checkbox> -->
+                                    </div>
+                                  </div>
+                                </fieldset>  
+                                <fieldset class="standard" >
+                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Characteristic4</font></H5> </legend>
+                                  <div layout="row" layout-wrap flex>
+                                    <div flex="50" ng-repeat="item in items4">
+                                      <md-checkbox ng-checked="exists2(item, selected4)" ng-click="toggle2(item, selected4)">
+                                        {{ item }} <span ng-if="exists2(item)">selected</span>
+                                      </md-checkbox>
+                        <!--               <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
+                                        {{ item }} <span ng-if="exists(item)">selected</span>
+                                      </md-checkbox> -->
+                                    </div>
+                                  </div>
+                                </fieldset> 
+                                <fieldset class="standard" >
+                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Characteristic5</font></H5> </legend>
+                                  <div layout="row" layout-wrap flex>
+                                    <div flex="50" ng-repeat="item in items2">
+                                      <md-checkbox ng-checked="exists2(item, selected5)" ng-click="toggle2(item, selected5)">
+                                        {{ item }} <span ng-if="exists2(item)">selected</span>
+                                      </md-checkbox>
+                        <!--               <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
+                                        {{ item }} <span ng-if="exists(item)">selected</span>
+                                      </md-checkbox> -->
+                                    </div>
+                                  </div>
+                                </fieldset> 
+                                <fieldset class="standard" >
+                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Characteristic6</font></H5> </legend>
+                                  <div layout="row" layout-wrap flex>
+                                    <div flex="50" ng-repeat="item in items6">
+                                      <md-checkbox ng-checked="exists2(item, selected6)" ng-click="toggle2(item, selected6)">
+                                        {{ item }} <span ng-if="exists2(item)">selected</span>
+                                      </md-checkbox>
+                        <!--               <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
+                                        {{ item }} <span ng-if="exists(item)">selected</span>
+                                      </md-checkbox> -->
+                                    </div>
+                                  </div>
+                                </fieldset> 
+                                <fieldset class="standard" >
+                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Characteristic7</font></H5> </legend>
+                                  <div layout="row" layout-wrap flex>
+                                    <div flex="50" ng-repeat="item in items7">
+                                      <md-checkbox ng-checked="exists2(item, selected7)" ng-click="toggle2(item, selected7)">
+                                        {{ item }} <span ng-if="exists2(item)">selected</span>
+                                      </md-checkbox>
+                        <!--               <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
+                                        {{ item }} <span ng-if="exists(item)">selected</span>
+                                      </md-checkbox> -->
+                                    </div>
+                                  </div>
+                                </fieldset>  
 							    <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>One</font></H5> </legend>
                                 <div layout-align="center none" class="parent">
 				                  <md-switch ng-model="data.cb1" aria-label="Switch 1">
