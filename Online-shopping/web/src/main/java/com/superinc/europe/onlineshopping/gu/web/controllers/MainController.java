@@ -92,6 +92,7 @@ public class MainController {
 			@RequestParam(value = RequestParamConstants.HIGHTER_PRICE, defaultValue = RequestParamConstants.EMPTY) String priceHighter,
 			@RequestParam(value = RequestParamConstants.CATEGORY) String category,
 			@RequestParam(value = RequestParamConstants.SELECTED_PAGE, defaultValue = RequestParamConstants.VALUE_STR_ONE) String selectedPage,
+			@RequestParam(value = "selectedCharacteristic1", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic1,
 			@RequestParam(value = "selectedCharacteristic2", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic2,
 			@RequestParam(value = "selectedCharacteristic3", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic3,
 			@RequestParam(value = "selectedCharacteristic4", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic4,
@@ -103,6 +104,7 @@ public class MainController {
 			if (customUserParam != null) {
 				customUserParam.setPriceMin(priceLower);
 				customUserParam.setPriceMax(priceHighter);
+				customUserParam.setSelectedCharacteristics1(selectedValueConverter(selectedCharacteristic1));
 				customUserParam.setSelectedCharacteristics2(selectedValueConverter(selectedCharacteristic2));
 				customUserParam.setSelectedCharacteristics3(selectedValueConverter(selectedCharacteristic3));
 				customUserParam.setSelectedCharacteristics4(selectedValueConverter(selectedCharacteristic4));

@@ -253,6 +253,7 @@
                               -->
                         <form method="get"  action="product?" class="form-horizontal">
                         <div layout="column">
+                        <input hidden="true" type="text" name="selectedCharacteristic1" value="{{selected1}}">
                         <input hidden="true" type="text" name="selectedCharacteristic2" value="{{selected2}}">
                         <input hidden="true" type="text" name="selectedCharacteristic3" value="{{selected3}}">
                         <input hidden="true" type="text" name="selectedCharacteristic4" value="{{selected4}}">
@@ -285,19 +286,19 @@
                          <!--  --><input type="hidden" class="form-control" id="category"
                          name="category" placeholder="to"
                          value="<%= request.getSession().getAttribute("categoryId") %>">
-                              <fieldset class="standard" >
-                                <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Characteristic1</font></H5> </legend>
-                                <div layout="row" layout-wrap flex>
-                                  <div flex="50" ng-repeat="item in items">
-                                    <md-checkbox class="green" ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
-                                      {{ item }} <span ng-if="exists(item)">selected</span>
-                                    </md-checkbox>
-                      <!--               <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
-                                      {{ item }} <span ng-if="exists(item)">selected</span>
-                                    </md-checkbox> -->
+                                <fieldset class="standard" >
+                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Characteristic1</font></H5> </legend>
+                                  <div layout="row" layout-wrap flex>
+                                    <div flex="50" ng-repeat="item in items1">
+                                      <md-checkbox ng-checked="exists2(item, selected1)" ng-click="toggle2(item, selected1)">
+                                        {{ item }} <span ng-if="exists2(item)">selected</span>
+                                      </md-checkbox>
+                        <!--               <md-checkbox ng-checked="exists(item, selected)" ng-click="toggle(item, selected)">
+                                        {{ item }} <span ng-if="exists(item)">selected</span>
+                                      </md-checkbox> -->
+                                    </div>
                                   </div>
-                                </div>
-                              </fieldset>
+                                </fieldset> 
                             </div>
                           </div>
                         </div>

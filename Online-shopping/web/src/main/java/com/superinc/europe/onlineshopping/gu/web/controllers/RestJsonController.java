@@ -151,6 +151,32 @@ public class RestJsonController {
     return customUserParam;
   }
     
+    @RequestMapping(value="/characteristic1", method = RequestMethod.GET)
+    public CustomUserParamDTO getCharacteristics1(@RequestParam (required = false) String type) {
+  	ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+  	String category = (String) attr.getRequest().getSession().getAttribute("categoryId");
+  	String items = "";
+  	try {
+		List<Characteristic> list = characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "1"));
+		for (Characteristic characteristic : list) {
+			items += characteristic.getCharacteristicName() + " ";
+		}
+		items = items.substring(0, items.length() - 1);
+	} catch (ServiceException e) {
+		e.printStackTrace();
+	}
+  	CustomUserParamDTO customUserParam = (CustomUserParamDTO) attr.getRequest().getSession().getAttribute("customUserParam");
+  	customUserParam.setCharacteristics1(items);
+    return customUserParam;
+  }
+    
+    @RequestMapping(value="/selectedCharacteristic1", method = RequestMethod.GET)
+    public CustomUserParamDTO getSelectedCharacteristics1(@RequestParam (required = false) String type) {
+    	ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+    	CustomUserParamDTO customUserParam = (CustomUserParamDTO) attr.getRequest().getSession().getAttribute("customUserParam");
+    return customUserParam;
+  }
+    
     @RequestMapping(value="/characteristic2", method = RequestMethod.GET)
     public CustomUserParamDTO getCharacteristics2(@RequestParam (required = false) String type) {
   	ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
