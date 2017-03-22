@@ -2,6 +2,7 @@ package com.superinc.europe.onlineshopping.gu.service.impl;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -123,6 +124,32 @@ public class ProductService implements IProductService<Product> {
 	}
 	
 	/**
+	 * Method obtain list of goods default numbers of page
+	 * @param priceLower
+	 * @param priceHighter
+	 * @param category
+	 * @param selectedItems
+	 * @throws DaoException
+	 */
+	@Override
+	public List<Product> obtainDefaultSelection(String priceLower,
+			String priceHighter, String category, Map<String, String[]> selectedItems) throws ServiceException {
+		Session session = daoProduct.getCurrentSession();
+		List<Product> products = null;
+		try {
+			products = (List<Product>) daoProduct.getProduct(
+					session.createCriteria(Product.class, PRODUCT), priceLower,
+					priceHighter, NUMBER_OF_START_PAGE, category, selectedItems);
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+			throw new ServiceException(
+					ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
+		}
+		return products;
+	}
+	
+	/**
 	 * Method obtain list of goods selection numbers of page
 	 * @param priceLower
 	 * @param priceHighter
@@ -131,13 +158,38 @@ public class ProductService implements IProductService<Product> {
 	 */
 	@Override
 	public List<Product> obtainUsersSelection(String priceLower,
-			String priceHighter, String userNumberOfPage, String category)throws ServiceException{
+			String priceHighter, String userNumberOfPage, String category) throws ServiceException{
 			Session session = daoProduct.getCurrentSession();
 			List<Product> products = null;
 			try {
 			products = (List<Product>) daoProduct.getProduct(
 					session.createCriteria(Product.class, PRODUCT), priceLower,
 					priceHighter, Integer.parseInt(userNumberOfPage), category);
+			} catch (Exception e) {
+				session.getTransaction().rollback();
+				logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+				throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
+			}
+			return products;
+	}
+	
+	/**
+	 * Method obtain list of goods selection numbers of page
+	 * @param priceLower
+	 * @param priceHighter
+	 * @param category
+	 * @param selectedItems
+	 * @throws DaoException
+	 */
+	@Override
+	public List<Product> obtainUsersSelection(String priceLower,
+			String priceHighter, String userNumberOfPage, String category, Map<String, String[]> selectedItems) throws ServiceException{
+			Session session = daoProduct.getCurrentSession();
+			List<Product> products = null;
+			try {
+			products = (List<Product>) daoProduct.getProduct(
+					session.createCriteria(Product.class, PRODUCT), priceLower,
+					priceHighter, Integer.parseInt(userNumberOfPage), category, selectedItems);
 			} catch (Exception e) {
 				session.getTransaction().rollback();
 				logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);

@@ -1,8 +1,10 @@
 package com.superinc.europe.onlineshopping.gu.web.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
 import com.superinc.europe.onlineshopping.gu.entities.dto.Bucket;
 import com.superinc.europe.onlineshopping.gu.entities.dto.CategoryDTO;
@@ -99,33 +102,30 @@ public class MainController {
 			@RequestParam(value = "selectedCharacteristic5", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic5,
 			@RequestParam(value = "selectedCharacteristic6", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic6,
 			@RequestParam(value = "selectedCharacteristic7", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic7) {
+		CustomUserParamDTO customUserParam = (CustomUserParamDTO) request.getSession().getAttribute("customUserParam");
+		Map<String, String[]> selectedItems = new HashMap<String, String[]>();
+		if (customUserParam != null) {
+			customUserParam.setPriceMin(priceLower);
+			customUserParam.setPriceMax(priceHighter);
+			String[] selcectedCharacteristics = {selectedCharacteristic1, selectedCharacteristic2, selectedCharacteristic3, selectedCharacteristic4, selectedCharacteristic5, selectedCharacteristic6, selectedCharacteristic7};
+			setCustomUserParam(selcectedCharacteristics, customUserParam);
+			selectedItems = getSelectedCharacteristics(selcectedCharacteristics);
+		} else {
+			CustomUserParamDTO defaultUserParam = new CustomUserParamDTO();
+			request.getSession().setAttribute("customUserParam", defaultUserParam);
+		}
 		try {
-			CustomUserParamDTO customUserParam = (CustomUserParamDTO) request.getSession().getAttribute("customUserParam");
-			if (customUserParam != null) {
-				customUserParam.setPriceMin(priceLower);
-				customUserParam.setPriceMax(priceHighter);
-				customUserParam.setSelectedCharacteristics1(selectedValueConverter(selectedCharacteristic1));
-				customUserParam.setSelectedCharacteristics2(selectedValueConverter(selectedCharacteristic2));
-				customUserParam.setSelectedCharacteristics3(selectedValueConverter(selectedCharacteristic3));
-				customUserParam.setSelectedCharacteristics4(selectedValueConverter(selectedCharacteristic4));
-				customUserParam.setSelectedCharacteristics5(selectedValueConverter(selectedCharacteristic5));
-				customUserParam.setSelectedCharacteristics6(selectedValueConverter(selectedCharacteristic6));
-				customUserParam.setSelectedCharacteristics7(selectedValueConverter(selectedCharacteristic7));
-			} else {
-				CustomUserParamDTO defaultUserParam = new CustomUserParamDTO();
-				request.getSession().setAttribute("customUserParam", defaultUserParam);
-			}
 			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
 					navigationService.getDataToPaginationWidget(goodsService.getQuantityOfPage()));
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
 			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, category);
-			if (request.getParameter(RequestParamConstants.SELECTED_PAGE) == null) {
-				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainDefaultSelection((String) priceLower,
-								(String) priceHighter, (String) category));
-			} else {
+			//if (request.getParameter(RequestParamConstants.SELECTED_PAGE) == null) {
+			//	model.put(RequestParamConstants.PRODUCTS, goodsService.obtainDefaultSelection((String) priceLower,
+			//					(String) priceHighter, (String) category, selectedItems));
+			//} else {
 				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainUsersSelection((String) priceLower,
-								(String) priceHighter, selectedPage, (String) category));
-			}
+								(String) priceHighter, selectedPage, (String) category, selectedItems));
+			//}
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
@@ -135,14 +135,40 @@ public class MainController {
 		return RequestParamConstants.PRODUCT;
 	}
 
-	private String selectedValueConverter(String selectedCharacteristic2) {
-		String[] array = selectedCharacteristic2.split(",", -1);
-		selectedCharacteristic2 = "";
+	private Map<String, String[]> getSelectedCharacteristics(String[] selectedCharacteristics) {
+		Map<String, String[]> selectedItems = new HashMap<String, String[]>();
+		selectedItems.put("characteristic1", selectedValueConverter(selectedCharacteristics[0]).split(" "));
+		selectedItems.put("characteristic2", selectedValueConverter(selectedCharacteristics[1]).split(" "));
+		selectedItems.put("characteristic3", selectedValueConverter(selectedCharacteristics[2]).split(" "));
+		selectedItems.put("characteristic4", selectedValueConverter(selectedCharacteristics[3]).split(" "));
+		selectedItems.put("characteristic5", selectedValueConverter(selectedCharacteristics[4]).split(" "));
+		selectedItems.put("characteristic6", selectedValueConverter(selectedCharacteristics[5]).split(" "));
+		selectedItems.put("characteristic7", selectedValueConverter(selectedCharacteristics[6]).split(" "));
+		return selectedItems;
+	}
+
+	private void setCustomUserParam(String[] selectedCharacteristics, CustomUserParamDTO customUserParam) {
+		customUserParam.setSelectedCharacteristics1(selectedValueConverter(selectedCharacteristics[0]));
+		customUserParam.setSelectedCharacteristics2(selectedValueConverter(selectedCharacteristics[1]));
+		customUserParam.setSelectedCharacteristics3(selectedValueConverter(selectedCharacteristics[2]));
+		customUserParam.setSelectedCharacteristics4(selectedValueConverter(selectedCharacteristics[3]));
+		customUserParam.setSelectedCharacteristics5(selectedValueConverter(selectedCharacteristics[4]));
+		customUserParam.setSelectedCharacteristics6(selectedValueConverter(selectedCharacteristics[5]));
+		customUserParam.setSelectedCharacteristics7(selectedValueConverter(selectedCharacteristics[6]));
+	}
+
+	private String selectedValueConverter(String selectedCharacteristic) {
+		String[] array = selectedCharacteristic.split(",", -1);
+		selectedCharacteristic = "";
 		for (int i = 0; i < array.length; i++) {
-			selectedCharacteristic2 += array[i].replaceAll("[^a-zA-Z]+", "") + " ";
+			if (!array[i].equals("")) {
+				selectedCharacteristic += array[i].replaceAll("[^a-zA-Z]+", "") + " ";	
+			}
 		}
-		selectedCharacteristic2 = selectedCharacteristic2.substring(0, selectedCharacteristic2.length() - 1);
-		return selectedCharacteristic2;
+		if (selectedCharacteristic.length() > 1) {
+			selectedCharacteristic = selectedCharacteristic.substring(0, selectedCharacteristic.length() - 1);	
+		}
+		return selectedCharacteristic;
 	}
 
 	@RequestMapping(value = RequestConstants.PRODUCT, method = RequestMethod.GET)

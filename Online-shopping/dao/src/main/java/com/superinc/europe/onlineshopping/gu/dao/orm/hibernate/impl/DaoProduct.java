@@ -1,6 +1,7 @@
 package com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
@@ -49,15 +50,47 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Product> getProduct(Criteria criteria, String priceLower,
-			String priceHighter, int quantityOfPage, String category) {
+			String priceHighter, int numberOfPage, String category) {
 		criteria.add(Restrictions.sqlRestriction(CATEGORY_ID + category));
 		criteria.setMaxResults(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE);
-		criteria.setFirstResult(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE*(quantityOfPage - 1));
+		criteria.setFirstResult(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE*(numberOfPage - 1));
 		if (!priceLower.equals(EMPTY_FIELD)) {
 			criteria.add(Restrictions.sqlRestriction(PRICE_MORE + priceLower));
 		}
 		if (!priceHighter.equals(EMPTY_FIELD)) {
 		criteria.add(Restrictions.sqlRestriction(PRICE_LESS + priceHighter));
+		}
+		return criteria.list();
+	}
+	
+	/**
+	 * Method get list products
+	 * @param criteria
+	 * @param priceLower
+	 * @param priceHighter
+	 * @param numberOfPage
+	 * @param category
+	 * @param selectedItems
+	 * @throws DaoException
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Product> getProduct(Criteria criteria, String priceLower,
+			String priceHighter, int numberOfPage, String category, Map<String, String[]> selectedItems) {
+		criteria.add(Restrictions.sqlRestriction(CATEGORY_ID + category));
+		criteria.setMaxResults(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE);
+		criteria.setFirstResult(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE*(numberOfPage - 1));
+		if (!priceLower.equals(EMPTY_FIELD)) {
+			criteria.add(Restrictions.sqlRestriction(PRICE_MORE + priceLower));
+		}
+		if (!priceHighter.equals(EMPTY_FIELD)) {
+		criteria.add(Restrictions.sqlRestriction(PRICE_LESS + priceHighter));
+		}
+		for(Map.Entry<String, String[]> entry : selectedItems.entrySet()) {
+			if (entry.getValue().length > 1) {
+				String key = entry.getKey();
+				String[] value = entry.getValue();
+				criteria.add(Restrictions.in(key, value));
+			}
 		}
 		return criteria.list();
 	}

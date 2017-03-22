@@ -253,13 +253,13 @@
                               -->
                         <form method="get"  action="product?" class="form-horizontal">
                         <div layout="column">
-                        <input hidden="true" type="text" name="selectedCharacteristic1" value="{{selected1}}">
-                        <input hidden="true" type="text" name="selectedCharacteristic2" value="{{selected2}}">
-                        <input hidden="true" type="text" name="selectedCharacteristic3" value="{{selected3}}">
-                        <input hidden="true" type="text" name="selectedCharacteristic4" value="{{selected4}}">
-                        <input hidden="true" type="text" name="selectedCharacteristic5" value="{{selected5}}">
-                        <input hidden="true" type="text" name="selectedCharacteristic6" value="{{selected6}}">
-                        <input hidden="true" type="text" name="selectedCharacteristic7" value="{{selected7}}">
+                        <input hidden="true" type="text" id="selectedCharacteristic1" name="selectedCharacteristic1" value="{{selected1}}">
+                        <input hidden="true" type="text" id="selectedCharacteristic2" name="selectedCharacteristic2" value="{{selected2}}">
+                        <input hidden="true" type="text" id="selectedCharacteristic3" name="selectedCharacteristic3" value="{{selected3}}">
+                        <input hidden="true" type="text" id="selectedCharacteristic4" name="selectedCharacteristic4" value="{{selected4}}">
+                        <input hidden="true" type="text" id="selectedCharacteristic5" name="selectedCharacteristic5" value="{{selected5}}">
+                        <input hidden="true" type="text" id="selectedCharacteristic6" name="selectedCharacteristic6" value="{{selected6}}">
+                        <input hidden="true" type="text" id="selectedCharacteristic7" name="selectedCharacteristic7" value="{{selected7}}">
                         <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Price</font></H5> </legend>        
                           <div layout="row" layout-align="center">
                            <md-input-container >
@@ -351,7 +351,7 @@
                                 <fieldset class="standard" >
                                   <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Characteristic5</font></H5> </legend>
                                   <div layout="row" layout-wrap flex>
-                                    <div flex="50" ng-repeat="item in items2">
+                                    <div flex="50" ng-repeat="item in items5">
                                       <md-checkbox ng-checked="exists2(item, selected5)" ng-click="toggle2(item, selected5)">
                                         {{ item }} <span ng-if="exists2(item)">selected</span>
                                       </md-checkbox>
@@ -502,7 +502,15 @@
                         </li>
 							<c:forEach items="${requestScope.numberOfPage}" var="number">
 							<li><a href='' 
-							 onclick=" this.href='?number=${number.numberOfPageId}&priceLower='+document.getElementById('priceLower').value+'&priceHighter='+document.getElementById('priceHighter').value+'&category='+document.getElementById('category').value" id="add-product-save-link">${number.numberOfPageId}</a>
+							 onclick=" this.href='?number=${number.numberOfPageId}&priceLower='+document.getElementById('priceLower').value+'&priceHighter='+document.getElementById('priceHighter').value+'&category='+document.getElementById('category').value
+							 +'&selectedCharacteristic1='+document.getElementById('selectedCharacteristic1').value
+							 +'&selectedCharacteristic2='+document.getElementById('selectedCharacteristic2').value
+							 +'&selectedCharacteristic3='+document.getElementById('selectedCharacteristic3').value
+							 +'&selectedCharacteristic4='+document.getElementById('selectedCharacteristic4').value
+							 +'&selectedCharacteristic5='+document.getElementById('selectedCharacteristic5').value
+							 +'&selectedCharacteristic6='+document.getElementById('selectedCharacteristic6').value
+							 +'&selectedCharacteristic7='+document.getElementById('selectedCharacteristic7').value
+							 " id="add-product-save-link">${number.numberOfPageId}</a>
 							 </li>
 							 </c:forEach>
                         <li>

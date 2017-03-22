@@ -1,6 +1,7 @@
 package com.superinc.europe.onlineshopping.gu.dao.orm.hibernate;
 
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -24,6 +25,20 @@ public interface IDaoProduct extends IBaseDao<Product>{
 	 */
 	List<Product> getProduct(Criteria criteria, String priveLower,
 			String priceHighter, int numberOfPage, String category)
+			throws DaoException;
+	
+	/**
+	 * Method get list products
+	 * @param criteria
+	 * @param priceLower
+	 * @param priceHighter
+	 * @param numberOfPage
+	 * @param category
+	 * @param selectedItems
+	 * @throws DaoException
+	 */
+	List<Product> getProduct(Criteria criteria, String priveLower,
+			String priceHighter, int numberOfPage, String category, Map<String, String[]> selectedItems)
 			throws DaoException;
 
 	/**

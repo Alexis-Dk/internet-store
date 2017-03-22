@@ -553,7 +553,7 @@ public class AdminController {
 	product.setCharacteristic2(productDTO.getCharacteristic2().getName());
 	product.setCharacteristic3(productDTO.getCharacteristic3().getName());
 	product.setCharacteristic4(productDTO.getCharacteristic4().getName());
-	product.setCharacteristic5("");
+	product.setCharacteristic5(productDTO.getCharacteristic5().getName());
 	product.setCharacteristic6(productDTO.getCharacteristic6().getName());
 	product.setStockStatus(productDTO.getCharacteristic5().getName());
 	product.setImage_path(productDTO.getDepartment().getId()+ "/"+productDTO.getDescription()+ "_"+Integer.toString(id) + ".jpg");
