@@ -191,6 +191,7 @@ else {
 								<form action="neww?" method="GET">
 									<select name="categoryId" id="categoryId"
 										onchange="this.form.submit()">
+										<option >Choose category</option>
 										<c:forEach items="${requestScope.productCategory}" var="category">
 					                     <option   <c:out value="${category.selectedItem}"></c:out>   value="<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"></c:out></option>
 		                            	</c:forEach>

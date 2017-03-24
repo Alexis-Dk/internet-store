@@ -60,7 +60,7 @@ public class Product implements Serializable {
 	private String characteristic6;
 	
 	@Column(name="characteristic7")
-	private int characteristic7;
+	private String characteristic7;
 	
 	@Column(name="characteristic8")
 	private int characteristic8;
@@ -116,7 +116,7 @@ public class Product implements Serializable {
 			String image_path, int price, int oldprice, String description,
 			String characteristic1, String characteristic2,
 			String characteristic3, String characteristic4,
-			String characteristic5, String characteristic6,int characteristic7, int characteristic8,
+			String characteristic5, String characteristic6,String characteristic7, int characteristic8,
 			int characteristic9, int characteristic10, int characteristic11,
 			int deleteStatus, String stockStatus, int rating) {
 		this.productId = productId;
@@ -146,7 +146,7 @@ public class Product implements Serializable {
 			String image_path, int price, int oldprice, String description,
 			String characteristic1, String characteristic2,
 			String characteristic3, String characteristic4,
-			String characteristic5, String characteristic6,int characteristic7, int characteristic8,
+			String characteristic5, String characteristic6, String characteristic7, int characteristic8,
 			int characteristic9, int characteristic10, int characteristic11,
 			int deleteStatus, String stockStatus, int rating) {
 		this.categoryFk = categoryFk;
@@ -274,11 +274,11 @@ public class Product implements Serializable {
 	public void setCharacteristic6(String characteristic6) {
 		this.characteristic6 = characteristic6;
 	}
-	public int getCharacteristic7() {
+	public String getCharacteristic7() {
 		return characteristic7;
 	}
 	
-	public void setCharacteristic7(int characteristic7) {
+	public void setCharacteristic7(String characteristic7) {
 		this.characteristic7 = characteristic7;
 	}
 

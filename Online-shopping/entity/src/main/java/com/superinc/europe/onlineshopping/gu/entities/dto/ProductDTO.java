@@ -67,7 +67,6 @@ public class ProductDTO implements Serializable {
 			String description, CharacteristicOneVO characteristic1, CharacteristicTwoVO characteristic2,
 			CharacteristicThreeVO characteristic3, CharacteristicFourVO characteristic4,
 			CharacteristicSixVO characteristic6, CharacteristicFiveVO characteristic5) {
-		this.characteristic7 = characteristic7;
 		this.price = price;
 		this.count = count;
 		this.description = description;
@@ -75,11 +74,10 @@ public class ProductDTO implements Serializable {
 		this.characteristic2 = characteristic2;
 		this.characteristic3 = characteristic3;
 		this.characteristic4 = characteristic4;
-		this.characteristic6 = characteristic6;
 		this.characteristic5 = characteristic5;
+		this.characteristic6 = characteristic6;
+		this.characteristic7 = characteristic7;
 	}
-
-
 
 	public int getPrice() {
 		return price;
@@ -161,13 +159,13 @@ public class ProductDTO implements Serializable {
 		this.characteristic7 = characteristic7;
 	}
 	
-	public CharacteristicSevenVO getName() {
-		return characteristic7;
-	}
-
-	public void setName(CharacteristicSevenVO name) {
-		this.characteristic7 = name;
-	}
+//	public CharacteristicSevenVO getName() {
+//		return characteristic7;
+//	}
+//
+//	public void setName(CharacteristicSevenVO name) {
+//		this.characteristic7 = name;
+//	}
 	
 	public CharacteristicFiveVO getCharacteristic5() {
 		return characteristic5;

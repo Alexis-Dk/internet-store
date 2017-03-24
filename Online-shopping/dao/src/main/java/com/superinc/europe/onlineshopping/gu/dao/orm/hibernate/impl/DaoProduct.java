@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
@@ -159,6 +160,9 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 		Integer lastId = (Integer) getCurrentSession().createSQLQuery(SELECT_MAX_PRODUCT_ID_FROM_PRODUCTS)
 			    .uniqueResult();  
 		try {
+			if (lastId == null) {
+				return 0;
+			}
 			return lastId;
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_DAO + e);

@@ -170,7 +170,7 @@
 				<tr>
 					<td><p class="user-menuMy">Name</p></td>
 					<td><p class="user-menuMy" />
-						<h3><%=request.getParameter("name")%></h3></td>
+						<h3><%=request.getParameter("characteristic1")%></h3></td>
 				</tr>
 				<tr>
 					<td><p class="user-menuMy">Model</p></td>
@@ -180,30 +180,30 @@
 				<tr>
 					<td><p class="user-menuMy">Color</p></td>
 					<td><p class="user-menuMy" />
-						<h3><%=request.getParameter("characteristic1")%></h3></td>
+						<h3><%=request.getParameter("characteristic3")%></h3></td>
 				</tr>
 				<tr>
 					<td><p class="user-menuMy">Socket</p></td>
 					<td><p class="user-menuMy" />
-						<h3><%=request.getParameter("characteristic2")%></h3></td>
+						<h3><%=request.getParameter("characteristic4")%></h3></td>
 				</tr>
 				<tr>
 					<td><p class="user-menuMy">Smart</p></td>
 					<td><p class="user-menuMy" />
-						<h3><%=request.getParameter("characteristic3")%></h3></td>
+						<h3><%=request.getParameter("characteristic6")%></h3></td>
 				</tr>
 				<tr>
 					<td><p class="user-menuMy">Screen resolution</p></td>
 					<td><p class="user-menuMy" />
-						<h3><%=request.getParameter("characteristic4")%></h3></td>
+						<h3><%=request.getParameter("characteristic2")%></h3></td>
 				</tr>
 				<tr>
-					<td><p class="user-menuMy">Aspect ratio</p></td>
+					<td><p class="user-menuMy">Screen</p></td>
 					<td><p class="user-menuMy" />
-						<h3><%=request.getParameter("characteristic6")%></h3></td>
+						<h3><%=request.getParameter("characteristic5")%></h3></td>
 				</tr>
 				<tr>
-					<td><p class="user-menuMy">Diagonal</p></td>
+					<td><p class="user-menuMy">Market</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("characteristic7")%></h3></td>
 				</tr>

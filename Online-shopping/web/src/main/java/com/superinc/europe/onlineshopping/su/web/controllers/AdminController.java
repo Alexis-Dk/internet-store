@@ -540,22 +540,20 @@ public class AdminController {
     }
 	
     private void setProductFields(Product product, ProductDTO productDTO, int id) {
-	product.setName(productDTO.getName().getName());
 	product.setPrice(productDTO.getPrice());
 	product.setOldprice(productDTO.getPrice());
 	product.setDescription(productDTO.getDescription());
 	int categoryId = productDTO.getDepartment().getId();
 	Category category = productCategoryService.getCategoryById(categoryId);
 	product.setCategoryFk(category);
-//	product.setCharacteristic1(productDTO.getCharacteristic1());
 	product.setCharacteristic1(productDTO.getCharacteristic1().getName());
-//	product.setCharacteristic1(productDTO.getCharacteristic2());
 	product.setCharacteristic2(productDTO.getCharacteristic2().getName());
 	product.setCharacteristic3(productDTO.getCharacteristic3().getName());
 	product.setCharacteristic4(productDTO.getCharacteristic4().getName());
 	product.setCharacteristic5(productDTO.getCharacteristic5().getName());
 	product.setCharacteristic6(productDTO.getCharacteristic6().getName());
-	product.setStockStatus(productDTO.getCharacteristic5().getName());
+	product.setCharacteristic7(productDTO.getCharacteristic7().getName());
+	product.setCharacteristic8(productDTO.getCount());
 	product.setImage_path(productDTO.getDepartment().getId()+ "/"+productDTO.getDescription()+ "_"+Integer.toString(id) + ".jpg");
     }
 	
