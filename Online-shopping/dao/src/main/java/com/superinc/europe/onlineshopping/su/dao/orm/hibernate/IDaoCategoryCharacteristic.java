@@ -31,9 +31,19 @@ public interface IDaoCategoryCharacteristic extends IBaseDao<CategoryCharacteris
 
 	/**
 	 * Method return id of category characteristic
+	 * @param criteria
 	 * @param categoryCharacteristicName
 	 * @throws DaoException
 	 */
 	public int getCategoryCharacteristicName(Criteria createCriteria, String categoryCharacteristicName);
+
+	/**
+	 * Method return list of category characteristic names
+	 * @param criteria
+	 * @param categoryCharacteristicName
+	 * @throws DaoException
+	 */
+	List<CategoryCharacteristic> getCategoryCharacteristicStrNames(Criteria criteria,
+			String categoryCharacteristicName);
 
 }

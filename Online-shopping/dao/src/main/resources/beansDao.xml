@@ -27,7 +27,8 @@
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.connection.isolation">2</prop>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <!--  --><prop key="hibernate.dialect">com.superinc.europe.onlineshopping.gu.web.utils.Mysql5BitBooleanDialect</prop>
+                <!-- <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop> -->
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.hbm2ddl.auto">validate</prop>
                 <prop key="hibernate.cglib.use_reflection_optimizer">true</prop>

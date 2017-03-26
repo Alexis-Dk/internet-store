@@ -11,7 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
+@Entity
 @Table(name="products")
 public class Product implements Serializable {
 	
@@ -82,6 +85,21 @@ public class Product implements Serializable {
 	
 	@Column(name="rating")
 	private int rating;
+	
+	@Column(name="boolCharacteristic1", nullable = false)
+	private Boolean boolCharacteristic1 = false;
+	
+	@Column(name="boolCharacteristic2", nullable = false)
+	private Boolean boolCharacteristic2 = false;
+	
+	@Column(name="boolCharacteristic3", nullable = false)
+	private Boolean boolCharacteristic3 = false;
+	
+	@Column(name="boolCharacteristic4", nullable = false)
+	private Boolean boolCharacteristic4 = false;
+	
+	@Column(name="boolCharacteristic5", nullable = false)
+	private Boolean boolCharacteristic5 = false;
 	
 	public Product() {
 	}
@@ -169,6 +187,44 @@ public class Product implements Serializable {
 		this.deleteStatus = deleteStatus;
 		this.stockStatus = stockStatus;
 		this.rating = rating;
+	}
+
+	public Product(int productId, Category categoryFk, String name,
+			String imagePath, int price, int oldprice, String description,
+			String characteristic1, String characteristic2,
+			String characteristic3, String characteristic4,
+			String characteristic5, String characteristic6,
+			String characteristic7, int characteristic8, int characteristic9,
+			int characteristic10, int characteristic11, int deleteStatus,
+			String stockStatus, int rating, Boolean boolCharacteristic1,
+			Boolean boolCharacteristic2, Boolean boolCharacteristic3,
+			Boolean boolCharacteristic4, Boolean boolCharacteristic5) {
+		this.productId = productId;
+		this.categoryFk = categoryFk;
+		this.name = name;
+		this.imagePath = imagePath;
+		this.price = price;
+		this.oldprice = oldprice;
+		this.description = description;
+		this.characteristic1 = characteristic1;
+		this.characteristic2 = characteristic2;
+		this.characteristic3 = characteristic3;
+		this.characteristic4 = characteristic4;
+		this.characteristic5 = characteristic5;
+		this.characteristic6 = characteristic6;
+		this.characteristic7 = characteristic7;
+		this.characteristic8 = characteristic8;
+		this.characteristic9 = characteristic9;
+		this.characteristic10 = characteristic10;
+		this.characteristic11 = characteristic11;
+		this.deleteStatus = deleteStatus;
+		this.stockStatus = stockStatus;
+		this.rating = rating;
+		this.boolCharacteristic1 = boolCharacteristic1;
+		this.boolCharacteristic2 = boolCharacteristic2;
+		this.boolCharacteristic3 = boolCharacteristic3;
+		this.boolCharacteristic4 = boolCharacteristic4;
+		this.boolCharacteristic5 = boolCharacteristic5;
 	}
 
 	public int getProductId() {
@@ -342,6 +398,46 @@ public class Product implements Serializable {
 		return serialVersionUID;
 	}
 
+	public Boolean getBoolCharacteristic1() {
+		return boolCharacteristic1;
+	}
+
+	public void setBoolCharacteristic1(Boolean boolCharacteristic1) {
+		this.boolCharacteristic1 = boolCharacteristic1;
+	}
+
+	public Boolean getBoolCharacteristic2() {
+		return boolCharacteristic2;
+	}
+
+	public void setBoolCharacteristic2(Boolean boolCharacteristic2) {
+		this.boolCharacteristic2 = boolCharacteristic2;
+	}
+
+	public Boolean getBoolCharacteristic3() {
+		return boolCharacteristic3;
+	}
+
+	public void setBoolCharacteristic3(Boolean boolCharacteristic3) {
+		this.boolCharacteristic3 = boolCharacteristic3;
+	}
+
+	public Boolean getBoolCharacteristic4() {
+		return boolCharacteristic4;
+	}
+
+	public void setBoolCharacteristic4(Boolean boolCharacteristic4) {
+		this.boolCharacteristic4 = boolCharacteristic4;
+	}
+
+	public Boolean getBoolCharacteristic5() {
+		return boolCharacteristic5;
+	}
+
+	public void setBoolCharacteristic5(Boolean boolCharacteristic5) {
+		this.boolCharacteristic5 = boolCharacteristic5;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", categoryFk=" + categoryFk
@@ -356,7 +452,11 @@ public class Product implements Serializable {
 				+ characteristic9 + ", characteristic10=" + characteristic10
 				+ ", characteristic11=" + characteristic11 + ", deleteStatus="
 				+ deleteStatus + ", stockStatus=" + stockStatus + ", rating="
-				+ rating + "]";
+				+ rating + ", boolCharacteristic1=" + boolCharacteristic1
+				+ ", boolCharacteristic2=" + boolCharacteristic2
+				+ ", boolCharacteristic3=" + boolCharacteristic3
+				+ ", boolCharacteristic4=" + boolCharacteristic4
+				+ ", boolCharacteristic5=" + boolCharacteristic5 + "]";
 	}
 
 }

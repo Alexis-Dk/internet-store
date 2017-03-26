@@ -75,4 +75,19 @@ public class DaoCategoryCharacteristic extends BaseDao<CategoryCharacteristic> i
 		return categoryCharacteristic.getCategoryCharacteristicId();
 	}
 	
+	/**
+	 * Method return list of category characteristic names
+	 * @param criteria
+	 * @param categoryCharacteristicName
+	 * @throws DaoException
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CategoryCharacteristic> getCategoryCharacteristicStrNames(Criteria criteria, String categoryCharacteristicName) {
+		criteria.add(Restrictions.like("categoryCharacteristicName", PERCENT_SIGN + categoryCharacteristicName + PERCENT_SIGN));
+		List<CategoryCharacteristic> list = criteria.list();
+		CategoryCharacteristic categoryCharacteristic = list.get(0);
+		return list;
+	}
+	
 }

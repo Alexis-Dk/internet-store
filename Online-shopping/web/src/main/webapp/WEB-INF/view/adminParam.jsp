@@ -108,9 +108,13 @@
     top: 30px; 
     right: 70px;
 	left: 170px;
-
-
    }
+   
+      .tableChar {
+  border-style:solid;
+  border-width:1px 0;
+   }
+   
   </style>
  
 </head>
@@ -242,6 +246,29 @@
 		<div class="container">
 			<div class="block2">
 				<h4>String category characteristics 1</h4>
+					<form class="form-inline" action="categoryCharacteristicNew" method="get">
+					<table width="687" style="border:1px solid;">
+						<tr>
+							<td width="100">
+								<input name="lang1" type="text" value="df">
+							</td>
+							<td width="100">
+								<input name="lang2" type="text" value="rgrg">
+							</td>
+							<td width="100">
+								<input name="lang3" type="text" value="tyf">
+							</td>
+							<td align="center">
+								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+							</td>
+							<td>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
+						</tr>
+					</table>
+				</form>
 				<table class="table" border="1">
 					<c:forEach items="${requestScope.characteristics1}"
 						var="characteristic">
@@ -276,6 +303,29 @@
 
 			<div class="block2">
 				<h4>String category characteristics 2</h4>
+					<form class="form-inline" action="categoryCharacteristicNew" method="get">
+					<table width="687" style="border:1px solid;">
+						<tr>
+							<td width="100">
+								<input name="lang1" type="text" value="df">
+							</td>
+							<td width="100">
+								<input name="lang2" type="text" value="rgrg">
+							</td>
+							<td width="100">
+								<input name="lang3" type="text" value="tyf">
+							</td>
+							<td align="center">
+								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+							</td>
+							<td>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
+						</tr>
+					</table>
+				</form>
 				<table class="table" border="1">
 					<c:forEach items="${requestScope.characteristics2}"
 						var="characteristic">
@@ -310,6 +360,29 @@
 
 			<div class="block2">
 				<h4>String category characteristics 3</h4>
+					<form class="form-inline" action="categoryCharacteristicNew" method="get">
+					<table width="687" style="border:1px solid;">
+						<tr>
+							<td width="100">
+								<input name="lang1" type="text" value="df">
+							</td>
+							<td width="100">
+								<input name="lang2" type="text" value="rgrg">
+							</td>
+							<td width="100">
+								<input name="lang3" type="text" value="tyf">
+							</td>
+							<td align="center">
+								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+							</td>
+							<td>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
+						</tr>
+					</table>
+				</form>
 				<table class="table" border="1">
 					<c:forEach items="${requestScope.characteristics3}"
 						var="characteristic">
@@ -344,6 +417,29 @@
 
 			<div class="block2">
 				<h4>String category characteristics 4</h4>
+					<form class="form-inline" action="categoryCharacteristicNew" method="get">
+					<table width="687" style="border:1px solid;">
+						<tr>
+							<td width="100">
+								<input name="lang1" type="text" value="df">
+							</td>
+							<td width="100">
+								<input name="lang2" type="text" value="rgrg">
+							</td>
+							<td width="100">
+								<input name="lang3" type="text" value="tyf">
+							</td>
+							<td align="center">
+								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+							</td>
+							<td>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
+						</tr>
+					</table>
+				</form>
 				<table class="table" border="1">
 					<c:forEach items="${requestScope.characteristics4}"
 						var="characteristic">
@@ -378,6 +474,30 @@
 
 			<div class="block2">
 				<h4>String category characteristics 5</h4>
+				<form class="form-inline" action="categoryCharacteristicNew" method="get">
+					<table width="687" style="border:1px solid;">
+						<tr>
+							<td width="100">
+								<input name="lang1" type="text" value="df">
+							</td>
+							<td width="100">
+								<input name="lang2" type="text" value="rgrg">
+							</td>
+							<td width="100">
+								<input name="lang3" type="text" value="tyf">
+							</td>
+							<td align="center">
+								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+							</td>
+							<td>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+				<form class="form-inline" action="categoryCharacteristicNew" method="get">
 				<table class="table" border="1">
 					<c:forEach items="${requestScope.characteristics5}"
 						var="characteristic">
@@ -387,11 +507,11 @@
 									src="img/dicreaseButton.jpg" /> </a></td>
 						</tr>
 					</c:forEach>
-					<form class="form-inline" action="categoryCharacteristicNew"
-						method="get">
-						<input name="numberCharCategory" value="5" type="hidden">
-						<tr>
-							<td><input name="categoryCharName" type="text"></td>
+					<tr>
+							<td>
+								<input name="categoryCharName" type="text">
+								<input name="numberCharCategory" value="5" type="hidden">
+							</td>
 							<td>
 								<div class="form-group"></div>
 								<div class="form-group">
@@ -406,12 +526,35 @@
 								</button>
 							</td>
 						</tr>
-					</form>
-				</table>
+					</table>
+				</form>
 			</div>
 
 			<div class="block2">
 				<h4>String category characteristics 6</h4>
+				<form class="form-inline" action="categoryCharacteristicNew" method="get">
+					<table width="687" style="border:1px solid;">
+						<tr>
+							<td width="100">
+								<input name="lang1" type="text" value="df">
+							</td>
+							<td width="100">
+								<input name="lang2" type="text" value="rgrg">
+							</td>
+							<td width="100">
+								<input name="lang3" type="text" value="tyf">
+							</td>
+							<td align="center">
+								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+							</td>
+							<td>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
+						</tr>
+					</table>
+				</form>
 				<table class="table" border="1">
 					<c:forEach items="${requestScope.characteristics6}"
 						var="characteristic">
@@ -446,6 +589,29 @@
 
 			<div class="block2">
 				<h4>String category characteristics 7</h4>
+					<form class="form-inline" action="categoryCharacteristicNew" method="get">
+					<table width="687" style="border:1px solid;">
+						<tr>
+							<td width="100">
+								<input name="lang1" type="text" value="df">
+							</td>
+							<td width="100">
+								<input name="lang2" type="text" value="rgrg">
+							</td>
+							<td width="100">
+								<input name="lang3" type="text" value="tyf">
+							</td>
+							<td align="center">
+								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+							</td>
+							<td>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
+						</tr>
+					</table>
+				</form>
 				<table class="table" border="1">
 					<c:forEach items="${requestScope.characteristics7}"
 						var="characteristic">

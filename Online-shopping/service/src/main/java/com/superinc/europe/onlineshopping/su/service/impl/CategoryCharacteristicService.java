@@ -32,13 +32,22 @@ import com.superinc.europe.onlineshopping.su.service.ICategoryCharacteristicServ
 @Transactional
 public class CategoryCharacteristicService implements ICategoryCharacteristicService {
 	
-//    private static final String PERCENT_SIGN = "%";
+private static final String CHARACTERISTIC = "Characteristic";
 
+//    private static final String PERCENT_SIGN = "%";
+	private static final String INT = "INT";
+	
 	private static final String UNDERLINE = "_";
 
+	private static final String BOOL = "BOOL";
+	
 	private static final String UNDERSCORE = UNDERLINE;
 
+	private static final int NUMBER_INT_CATEGORY_CHARACTERISTIC = 5;
+	
     private static final int NUMBER_CATEGORY_CHARACTERISTIC = 7;
+    
+    private static final int NUMBER_BOOL_CATEGORY_CHARACTERISTIC = 3;
     
 	private static Logger log = Logger.getLogger(CategoryCharacteristicService.class);
     
@@ -59,8 +68,20 @@ public class CategoryCharacteristicService implements ICategoryCharacteristicSer
 	public void addNewCategory(String ob) throws ServiceException {
 		Session session = categoryCharacteristicDao.getBaseCurrentSession();
 		try {
+			for (int i = 1; i < NUMBER_INT_CATEGORY_CHARACTERISTIC + 1; i++) {
+				String intName = extractIntName(ob, i);
+				String internationalName = getInternationalName(i);
+				categoryCharacteristicDao.insertCategoryCharacteristic(new CategoryCharacteristic(intName, internationalName, internationalName, internationalName));	
+			}
 			for (int i = 1; i < NUMBER_CATEGORY_CHARACTERISTIC + 1; i++) {
-				categoryCharacteristicDao.insertCategoryCharacteristic(new CategoryCharacteristic(ob + UNDERSCORE + String.valueOf(i)));	
+				String strName = extractStrName(ob, i);
+				String internationalName = getInternationalName(i);
+				categoryCharacteristicDao.insertCategoryCharacteristic(new CategoryCharacteristic(strName, internationalName,  internationalName,  internationalName));	
+			}
+			for (int i = 1; i < NUMBER_BOOL_CATEGORY_CHARACTERISTIC + 1; i++) {
+				String boolName = extractBoolName(ob, i);
+				String internationalName = getInternationalName(i);
+				categoryCharacteristicDao.insertCategoryCharacteristic(new CategoryCharacteristic(boolName, internationalName,  internationalName,  internationalName));	
 			}
 			productCategoryDao.add(new Category(ob));
 		} catch (Exception e) {
@@ -68,6 +89,22 @@ public class CategoryCharacteristicService implements ICategoryCharacteristicSer
 			log.error(ExceptionMessages.ERROR_IN_SERVICE + e);
 			throw new ServiceException(ExceptionMessages.ERROR_IN_SERVICE, e);
 		}
+	}
+	
+	private String extractStrName(String ob, int i) {
+		return ob + UNDERSCORE + String.valueOf(i);
+	}
+
+	private String extractBoolName(String ob, int i) {
+		return ob + UNDERSCORE + BOOL + UNDERSCORE + String.valueOf(i);
+	}
+	
+	private String extractIntName(String ob, int i) {
+		return ob + UNDERSCORE + INT + UNDERSCORE + String.valueOf(i);
+	}
+
+	private String getInternationalName(int i) {
+		return CHARACTERISTIC + UNDERSCORE + INT + UNDERSCORE + String.valueOf(i);
 	}
     
 	/**
