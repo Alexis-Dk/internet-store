@@ -646,6 +646,7 @@ public class AdminController {
 			model.addAttribute("characteristics5", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "5")));
 			model.addAttribute("characteristics6", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "6")));
 			model.addAttribute("characteristics7", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "7")));
+			initModel(model, category);
 		} catch (ServiceException e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
 		}
@@ -675,6 +676,7 @@ public class AdminController {
 			model.put("characteristics5", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "5")));
 			model.put("characteristics6", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "6")));
 			model.put("characteristics7", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "7")));
+			initModel(model, category);
 			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, category);
 			if (request.getParameter(RequestParamConstants.SELECTED_PAGE) == null) {
 				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainDefaultSelection((String) priceLower,
@@ -709,6 +711,7 @@ public class AdminController {
 			model.put("characteristics5", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "5")));
 			model.put("characteristics6", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "6")));
 			model.put("characteristics7", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "7")));
+			initModel(model, category);
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
@@ -716,6 +719,23 @@ public class AdminController {
 		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
 				request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
 		return RequestParamConstants.CATEGORY_CHARACTERISTIC;
+	}
+
+
+	private void initModel(ModelMap model, String category)
+			throws ServiceException {
+		List<CategoryCharacteristic> itemsStr = iCategoryCharacteristicService.getCategoryCharacteristicStrNames(productCategoryService.getCategoryById(Integer.parseInt(category)).getCategoryName());
+		List<CategoryCharacteristic> itemsInt = iCategoryCharacteristicService.getCategoryCharacteristicIntNames(productCategoryService.getCategoryById(Integer.parseInt(category)).getCategoryName());
+		List<CategoryCharacteristic> itemsBool = iCategoryCharacteristicService.getCategoryCharacteristicBoolNames(productCategoryService.getCategoryById(Integer.parseInt(category)).getCategoryName());
+		for (int i = 0; i < itemsStr.size(); i++) {
+			model.put("categoryCharacteristicStr" + String.valueOf(i + 1), itemsStr.get(i));
+		}
+		for (int i = 0; i < itemsInt.size(); i++) {
+			model.put("categoryCharacteristicInt" + String.valueOf(i + 1), itemsInt.get(i));
+		}
+		for (int i = 0; i < itemsBool.size(); i++) {
+			model.put("categoryCharacteristicBool" + String.valueOf(i + 1), itemsBool.get(i));
+		}
 	}
 	
 }

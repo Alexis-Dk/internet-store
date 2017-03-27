@@ -21,7 +21,13 @@ import com.superinc.europe.onlineshopping.su.entities.pojo.CategoryCharacteristi
 @Repository("daoCategoryCharacteristic")
 public class DaoCategoryCharacteristic extends BaseDao<CategoryCharacteristic> implements IDaoCategoryCharacteristic{
 	
-    private static final String PERCENT_SIGN = "%";
+	private static final String STR = "_STR";
+
+	private static final String INT = "_INT";
+	
+    private static final String BOOL = "_BOOL";
+	
+	private static final String PERCENT_SIGN = "%";
 
 	private static final String UNDERSCORE = "_";
 
@@ -76,7 +82,7 @@ public class DaoCategoryCharacteristic extends BaseDao<CategoryCharacteristic> i
 	}
 	
 	/**
-	 * Method return list of category characteristic names
+	 * Method return list of category str characteristic names
 	 * @param criteria
 	 * @param categoryCharacteristicName
 	 * @throws DaoException
@@ -84,10 +90,36 @@ public class DaoCategoryCharacteristic extends BaseDao<CategoryCharacteristic> i
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<CategoryCharacteristic> getCategoryCharacteristicStrNames(Criteria criteria, String categoryCharacteristicName) {
-		criteria.add(Restrictions.like("categoryCharacteristicName", PERCENT_SIGN + categoryCharacteristicName + PERCENT_SIGN));
+		criteria.add(Restrictions.like("categoryCharacteristicName", PERCENT_SIGN + categoryCharacteristicName + STR + PERCENT_SIGN));
 		List<CategoryCharacteristic> list = criteria.list();
-		CategoryCharacteristic categoryCharacteristic = list.get(0);
 		return list;
 	}
 	
+	/**
+	 * Method return list of category int characteristic names
+	 * @param criteria
+	 * @param categoryCharacteristicName
+	 * @throws DaoException
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CategoryCharacteristic> getCategoryCharacteristicIntNames(Criteria criteria, String categoryCharacteristicName) {
+		criteria.add(Restrictions.like("categoryCharacteristicName", PERCENT_SIGN + categoryCharacteristicName + INT + PERCENT_SIGN));
+		List<CategoryCharacteristic> list = criteria.list();
+		return list;
+	}
+	
+	/**
+	 * Method return list of category boolean characteristic names
+	 * @param criteria
+	 * @param categoryCharacteristicName
+	 * @throws DaoException
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CategoryCharacteristic> getCategoryCharacteristicBoolNames(Criteria criteria, String categoryCharacteristicName) {
+		criteria.add(Restrictions.like("categoryCharacteristicName", PERCENT_SIGN + categoryCharacteristicName + BOOL + PERCENT_SIGN));
+		List<CategoryCharacteristic> list = criteria.list();
+		return list;
+	}
 }

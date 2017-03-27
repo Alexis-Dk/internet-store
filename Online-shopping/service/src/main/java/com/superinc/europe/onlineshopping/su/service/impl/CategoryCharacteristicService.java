@@ -7,7 +7,9 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,11 +33,13 @@ import com.superinc.europe.onlineshopping.su.service.ICategoryCharacteristicServ
 @Service
 @Transactional
 public class CategoryCharacteristicService implements ICategoryCharacteristicService {
-	
+
 private static final String CHARACTERISTIC = "Characteristic";
 
 //    private static final String PERCENT_SIGN = "%";
 	private static final String INT = "INT";
+	
+	private static final String STR = "STR";
 	
 	private static final String UNDERLINE = "_";
 
@@ -43,6 +47,8 @@ private static final String CHARACTERISTIC = "Characteristic";
 	
 	private static final String UNDERSCORE = UNDERLINE;
 
+	private static final String PERCENT_SIGN = "%";
+	
 	private static final int NUMBER_INT_CATEGORY_CHARACTERISTIC = 5;
 	
     private static final int NUMBER_CATEGORY_CHARACTERISTIC = 7;
@@ -92,7 +98,7 @@ private static final String CHARACTERISTIC = "Characteristic";
 	}
 	
 	private String extractStrName(String ob, int i) {
-		return ob + UNDERSCORE + String.valueOf(i);
+		return ob + UNDERSCORE + STR + UNDERSCORE + String.valueOf(i);
 	}
 
 	private String extractBoolName(String ob, int i) {
@@ -104,7 +110,7 @@ private static final String CHARACTERISTIC = "Characteristic";
 	}
 
 	private String getInternationalName(int i) {
-		return CHARACTERISTIC + UNDERSCORE + INT + UNDERSCORE + String.valueOf(i);
+		return CHARACTERISTIC + UNDERSCORE + String.valueOf(i);
 	}
     
 	/**
@@ -148,7 +154,7 @@ private static final String CHARACTERISTIC = "Characteristic";
 	/**
 	 * Method return id of category characteristic
 	 * @param categoryCharacteristicName
-	 * @throws DaoException
+	 * @throws ServiceException
 	 */
 	@Override
 	public int getCategoryCharacteristicId(String categoryCharacteristicName) throws ServiceException {
@@ -169,20 +175,80 @@ private static final String CHARACTERISTIC = "Characteristic";
 	/**
 	 * Method return id of category characteristic
 	 * @param categoryCharacteristicName
-	 * @throws DaoException
+	 * @throws ServiceException
 	 */
 	@Override
 	public int getCategoryCharacteristicId(String category, String numberCharCategory) throws ServiceException {
 		Session session = categoryCharacteristicDao.getBaseCurrentSession();
 		int id;
 		try {
-			id = getCategoryCharacteristicId(productCategoryService.getCategoryById(Integer.parseInt(category)).getCategoryName()+UNDERLINE+numberCharCategory);	
+			id = getCategoryCharacteristicId(productCategoryService.getCategoryById(Integer.parseInt(category)).getCategoryName() + UNDERLINE + STR + UNDERSCORE + numberCharCategory);	
 		} catch (Exception e) {
 			session.getTransaction().rollback();
 			log.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
 			throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
 		}
 		return id;
+	}
+	
+	/**
+	 * Method return list of category str characteristic names
+	 * @param category
+	 * @throws ServiceException 
+	 * @throws DaoException
+	 */
+	@Override
+	public List<CategoryCharacteristic> getCategoryCharacteristicStrNames(String category) throws ServiceException {
+		Session session = categoryCharacteristicDao.getBaseCurrentSession();
+		List<CategoryCharacteristic> categoryCharacteristic = null;
+		try {
+		categoryCharacteristic = categoryCharacteristicDao.getCategoryCharacteristicStrNames(session.createCriteria(
+						CategoryCharacteristic.class, "categoryCharacteristic"), category);
+	} catch (DaoException e) {
+		log.error(ExceptionMessages.ERROR_IN_ORDER_SERVICE + e);
+		throw new ServiceException(ExceptionMessages.ERROR_IN_ORDER_SERVICE, e);
+	}
+		return categoryCharacteristic;
+	}
+	
+	/**
+	 * Method return list of category int characteristic names
+	 * @param category
+	 * @throws ServiceException 
+	 * @throws DaoException
+	 */
+	@Override
+	public List<CategoryCharacteristic> getCategoryCharacteristicIntNames(String category) throws ServiceException {
+		Session session = categoryCharacteristicDao.getBaseCurrentSession();
+		List<CategoryCharacteristic> categoryCharacteristic = null;
+		try {
+		categoryCharacteristic = categoryCharacteristicDao.getCategoryCharacteristicIntNames(session.createCriteria(
+						CategoryCharacteristic.class, "categoryCharacteristic"), category);
+	} catch (DaoException e) {
+		log.error(ExceptionMessages.ERROR_IN_ORDER_SERVICE + e);
+		throw new ServiceException(ExceptionMessages.ERROR_IN_ORDER_SERVICE, e);
+	}
+		return categoryCharacteristic;
+	}
+	
+	/**
+	 * Method return list of category boolean characteristic names
+	 * @param category
+	 * @throws ServiceException 
+	 * @throws DaoException
+	 */
+	@Override
+	public List<CategoryCharacteristic> getCategoryCharacteristicBoolNames(String category) throws ServiceException {
+		Session session = categoryCharacteristicDao.getBaseCurrentSession();
+		List<CategoryCharacteristic> categoryCharacteristic = null;
+		try {
+		categoryCharacteristic = categoryCharacteristicDao.getCategoryCharacteristicBoolNames(session.createCriteria(
+						CategoryCharacteristic.class, "categoryCharacteristic"), category);
+	} catch (DaoException e) {
+		log.error(ExceptionMessages.ERROR_IN_ORDER_SERVICE + e);
+		throw new ServiceException(ExceptionMessages.ERROR_IN_ORDER_SERVICE, e);
+	}
+		return categoryCharacteristic;
 	}
 	
 }

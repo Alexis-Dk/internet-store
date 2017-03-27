@@ -248,15 +248,16 @@
 				<h4>String category characteristics 1</h4>
 					<form class="form-inline" action="categoryCharacteristicNew" method="get">
 					<table width="687" style="border:1px solid;">
+					
 						<tr>
 							<td width="100">
-								<input name="lang1" type="text" value="df">
+								<input name="lang1" type="text" value="${categoryCharacteristicStr1.categoryCharacteristicNameLanguageOne}">
 							</td>
 							<td width="100">
-								<input name="lang2" type="text" value="rgrg">
+								<input name="lang2" type="text" value="${categoryCharacteristicStr1.categoryCharacteristicNameLanguageTwo}">
 							</td>
 							<td width="100">
-								<input name="lang3" type="text" value="tyf">
+								<input name="lang3" type="text" value="${categoryCharacteristicStr1.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
 								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
@@ -307,13 +308,13 @@
 					<table width="687" style="border:1px solid;">
 						<tr>
 							<td width="100">
-								<input name="lang1" type="text" value="df">
+								<input name="lang1" type="text" value="${categoryCharacteristicStr2.categoryCharacteristicNameLanguageOne}">
 							</td>
 							<td width="100">
-								<input name="lang2" type="text" value="rgrg">
+								<input name="lang2" type="text" value="${categoryCharacteristicStr2.categoryCharacteristicNameLanguageTwo}">
 							</td>
 							<td width="100">
-								<input name="lang3" type="text" value="tyf">
+								<input name="lang3" type="text" value="${categoryCharacteristicStr2.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
 								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
@@ -364,13 +365,13 @@
 					<table width="687" style="border:1px solid;">
 						<tr>
 							<td width="100">
-								<input name="lang1" type="text" value="df">
+								<input name="lang1" type="text" value="${categoryCharacteristicStr3.categoryCharacteristicNameLanguageOne}">
 							</td>
 							<td width="100">
-								<input name="lang2" type="text" value="rgrg">
+								<input name="lang2" type="text" value="${categoryCharacteristicStr3.categoryCharacteristicNameLanguageTwo}">
 							</td>
 							<td width="100">
-								<input name="lang3" type="text" value="tyf">
+								<input name="lang3" type="text" value="${categoryCharacteristicStr3.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
 								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
@@ -421,13 +422,13 @@
 					<table width="687" style="border:1px solid;">
 						<tr>
 							<td width="100">
-								<input name="lang1" type="text" value="df">
+								<input name="lang1" type="text" value="${categoryCharacteristicStr4.categoryCharacteristicNameLanguageOne}">
 							</td>
 							<td width="100">
-								<input name="lang2" type="text" value="rgrg">
+								<input name="lang2" type="text" value="${categoryCharacteristicStr4.categoryCharacteristicNameLanguageTwo}">
 							</td>
 							<td width="100">
-								<input name="lang3" type="text" value="tyf">
+								<input name="lang3" type="text" value="${categoryCharacteristicStr4.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
 								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
@@ -478,13 +479,13 @@
 					<table width="687" style="border:1px solid;">
 						<tr>
 							<td width="100">
-								<input name="lang1" type="text" value="df">
+								<input name="lang1" type="text" value="${categoryCharacteristicStr5.categoryCharacteristicNameLanguageOne}">
 							</td>
 							<td width="100">
-								<input name="lang2" type="text" value="rgrg">
+								<input name="lang2" type="text" value="${categoryCharacteristicStr5.categoryCharacteristicNameLanguageTwo}">
 							</td>
 							<td width="100">
-								<input name="lang3" type="text" value="tyf">
+								<input name="lang3" type="text" value="${categoryCharacteristicStr5.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
 								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
@@ -536,13 +537,13 @@
 					<table width="687" style="border:1px solid;">
 						<tr>
 							<td width="100">
-								<input name="lang1" type="text" value="df">
+								<input name="lang1" type="text" value="${categoryCharacteristicStr6.categoryCharacteristicNameLanguageOne}">
 							</td>
 							<td width="100">
-								<input name="lang2" type="text" value="rgrg">
+								<input name="lang2" type="text" value="${categoryCharacteristicStr6.categoryCharacteristicNameLanguageTwo}">
 							</td>
 							<td width="100">
-								<input name="lang3" type="text" value="tyf">
+								<input name="lang3" type="text" value="${categoryCharacteristicStr6.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
 								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
@@ -593,13 +594,13 @@
 					<table width="687" style="border:1px solid;">
 						<tr>
 							<td width="100">
-								<input name="lang1" type="text" value="df">
+								<input name="lang1" type="text" value="${categoryCharacteristicStr7.categoryCharacteristicNameLanguageOne}">
 							</td>
 							<td width="100">
-								<input name="lang2" type="text" value="rgrg">
+								<input name="lang2" type="text" value="${categoryCharacteristicStr7.categoryCharacteristicNameLanguageTwo}">
 							</td>
 							<td width="100">
-								<input name="lang3" type="text" value="tyf">
+								<input name="lang3" type="text" value="${categoryCharacteristicStr7.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
 								<input name="optionEnable" type="checkbox" value="true">Enable<Br>

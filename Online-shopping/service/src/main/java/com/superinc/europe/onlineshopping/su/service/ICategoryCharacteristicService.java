@@ -1,6 +1,7 @@
 package com.superinc.europe.onlineshopping.su.service;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
@@ -33,11 +34,42 @@ public interface ICategoryCharacteristicService {
 	/**
 	 * Method return id of category characteristic
 	 * @param categoryCharacteristicName
-	 * @throws DaoException
+	 * @throws ServiceException
 	 */
 	int getCategoryCharacteristicId(String categoryCharacteristicName) throws ServiceException;
 
+	/**
+	 * Method return id of category characteristic
+	 * @param categoryCharacteristicName
+	 * @throws ServiceException
+	 */
 	int getCategoryCharacteristicId(String category, String numberCharCategory)
 			throws ServiceException;
+
+	/**S
+	 * Method return list of category characteristic names
+	 * @param category
+	 * @throws ServiceException
+	 */
+	List<CategoryCharacteristic> getCategoryCharacteristicStrNames(
+			String category) throws ServiceException;
+
+	/**
+	 * Method return list of category int characteristic names
+	 * @param category
+	 * @throws ServiceException 
+	 * @throws DaoException
+	 */
+	List<CategoryCharacteristic> getCategoryCharacteristicIntNames(
+			String category) throws ServiceException;
+
+	/**
+	 * Method return list of category boolean characteristic names
+	 * @param category
+	 * @throws ServiceException 
+	 * @throws DaoException
+	 */
+	List<CategoryCharacteristic> getCategoryCharacteristicBoolNames(
+			String category) throws ServiceException;
 	
 }

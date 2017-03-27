@@ -35,7 +35,7 @@ public interface IDaoCategoryCharacteristic extends IBaseDao<CategoryCharacteris
 	 * @param categoryCharacteristicName
 	 * @throws DaoException
 	 */
-	public int getCategoryCharacteristicName(Criteria createCriteria, String categoryCharacteristicName);
+	public int getCategoryCharacteristicName(Criteria createCriteria, String categoryCharacteristicName) throws DaoException;
 
 	/**
 	 * Method return list of category characteristic names
@@ -44,6 +44,24 @@ public interface IDaoCategoryCharacteristic extends IBaseDao<CategoryCharacteris
 	 * @throws DaoException
 	 */
 	List<CategoryCharacteristic> getCategoryCharacteristicStrNames(Criteria criteria,
-			String categoryCharacteristicName);
+			String categoryCharacteristicName) throws DaoException;
+
+	/**
+	 * Method return list of category int characteristic names
+	 * @param criteria
+	 * @param categoryCharacteristicName
+	 * @throws DaoException
+	 */
+	List<CategoryCharacteristic> getCategoryCharacteristicIntNames(
+			Criteria criteria, String categoryCharacteristicName) throws DaoException;
+
+	/**
+	 * Method return list of category boolean characteristic names
+	 * @param criteria
+	 * @param categoryCharacteristicName
+	 * @throws DaoException
+	 */
+	List<CategoryCharacteristic> getCategoryCharacteristicBoolNames(
+			Criteria criteria, String categoryCharacteristicName) throws DaoException;
 
 }

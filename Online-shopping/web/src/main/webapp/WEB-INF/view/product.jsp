@@ -115,6 +115,12 @@
     padding-right: 0;
     width: 4.8rem;
 	}
+	
+	@media (min-width: 768px)
+	bootstrap.min.css:5
+	.col-sm-9 {
+	width: 110%;
+	}
   </style>
  
 </head>
@@ -287,7 +293,7 @@
                          name="category" placeholder="to"
                          value="<%= request.getSession().getAttribute("categoryId") %>">
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Characteristic1</font></H5> </legend>
+                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr1.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
                                   <div layout="row" layout-wrap flex>
                                     <div flex="50" ng-repeat="item in items1">
                                       <md-checkbox ng-checked="exists2(item, selected1)" ng-click="toggle2(item, selected1)">
@@ -310,7 +316,7 @@
                                   @see https://github.com/philipwalton/flexbugs#9-some-html-elements-cant-be-flex-containers
                                 -->
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Characteristic2</font></H5> </legend>
+                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr2.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
                                   <div layout="row" layout-wrap flex>
                                     <div flex="50" ng-repeat="item in items2">
                                       <md-checkbox ng-checked="exists2(item, selected2)" ng-click="toggle2(item, selected2)">
@@ -323,7 +329,7 @@
                                   </div>
                                 </fieldset> 
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Characteristic3</font></H5> </legend>
+                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr3.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
                                   <div layout="row" layout-wrap flex>
                                     <div flex="50" ng-repeat="item in items3">
                                       <md-checkbox ng-checked="exists2(item, selected3)" ng-click="toggle2(item, selected3)">
@@ -336,7 +342,7 @@
                                   </div>
                                 </fieldset>  
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Characteristic4</font></H5> </legend>
+                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr4.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
                                   <div layout="row" layout-wrap flex>
                                     <div flex="50" ng-repeat="item in items4">
                                       <md-checkbox ng-checked="exists2(item, selected4)" ng-click="toggle2(item, selected4)">
@@ -349,7 +355,7 @@
                                   </div>
                                 </fieldset> 
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Characteristic5</font></H5> </legend>
+                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr5.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
                                   <div layout="row" layout-wrap flex>
                                     <div flex="50" ng-repeat="item in items5">
                                       <md-checkbox ng-checked="exists2(item, selected5)" ng-click="toggle2(item, selected5)">
@@ -362,7 +368,7 @@
                                   </div>
                                 </fieldset> 
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Characteristic6</font></H5> </legend>
+                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr6.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
                                   <div layout="row" layout-wrap flex>
                                     <div flex="50" ng-repeat="item in items6">
                                       <md-checkbox ng-checked="exists2(item, selected6)" ng-click="toggle2(item, selected6)">
@@ -375,7 +381,7 @@
                                   </div>
                                 </fieldset> 
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Characteristic7</font></H5> </legend>
+                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr7.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
                                   <div layout="row" layout-wrap flex>
                                     <div flex="50" ng-repeat="item in items7">
                                       <md-checkbox ng-checked="exists2(item, selected7)" ng-click="toggle2(item, selected7)">

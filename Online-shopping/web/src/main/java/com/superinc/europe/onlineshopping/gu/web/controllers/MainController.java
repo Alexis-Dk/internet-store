@@ -43,12 +43,15 @@ import com.superinc.europe.onlineshopping.gu.service.INavaigationService;
 import com.superinc.europe.onlineshopping.gu.service.IOrderService;
 import com.superinc.europe.onlineshopping.gu.service.IProductCategoryService;
 import com.superinc.europe.onlineshopping.gu.service.IUsersService;
+import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 import com.superinc.europe.onlineshopping.gu.web.utils.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestConstants;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpUtils;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.PdfGenerator;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpMailer;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamConstants;
+import com.superinc.europe.onlineshopping.su.entities.pojo.CategoryCharacteristic;
+import com.superinc.europe.onlineshopping.su.service.ICategoryCharacteristicService;
 
 /**
  * Created by Alexey Druzik on 11.09.2016.
@@ -86,6 +89,9 @@ public class MainController {
     
     @Autowired
     private MessageSource messageSource;
+    
+    @Autowired
+    private ICategoryCharacteristicService iCategoryCharacteristicService;
     
 //    @PreAuthorize("hasAnyRole('user')")
 //    @PreAuthorize("isAnonymous()")
@@ -125,6 +131,7 @@ public class MainController {
 			//} else {
 				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainUsersSelection((String) priceLower,
 								(String) priceHighter, selectedPage, (String) category, selectedItems));
+				initModel(model, category);
 			//}
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
@@ -189,6 +196,22 @@ public class MainController {
 		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
 				request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
 		return RequestParamConstants.PRODUCT_ALL;
+	}
+	
+	private void initModel(ModelMap model, String category)
+			throws ServiceException {
+		List<CategoryCharacteristic> itemsStr = iCategoryCharacteristicService.getCategoryCharacteristicStrNames(productCategoryService.getCategoryById(Integer.parseInt(category)).getCategoryName());
+		List<CategoryCharacteristic> itemsInt = iCategoryCharacteristicService.getCategoryCharacteristicIntNames(productCategoryService.getCategoryById(Integer.parseInt(category)).getCategoryName());
+		List<CategoryCharacteristic> itemsBool = iCategoryCharacteristicService.getCategoryCharacteristicBoolNames(productCategoryService.getCategoryById(Integer.parseInt(category)).getCategoryName());
+		for (int i = 0; i < itemsStr.size(); i++) {
+			model.put("categoryCharacteristicStr" + String.valueOf(i + 1), itemsStr.get(i));
+		}
+		for (int i = 0; i < itemsInt.size(); i++) {
+			model.put("categoryCharacteristicInt" + String.valueOf(i + 1), itemsInt.get(i));
+		}
+		for (int i = 0; i < itemsBool.size(); i++) {
+			model.put("categoryCharacteristicBool" + String.valueOf(i + 1), itemsBool.get(i));
+		}
 	}
 	
 	@RequestMapping(value = RequestConstants.SINGLE_PRODUCT, method = RequestMethod.GET)
