@@ -246,9 +246,14 @@
 		<div class="container">
 			<div class="block2">
 				<h4>String category characteristics 1</h4>
-					<form class="form-inline" action="categoryCharacteristicNew" method="get">
+					<form class="form-inline" action="changeLocalName" method="get">
 					<table width="687" style="border:1px solid;">
-					
+					<input type="hidden" class="form-control" id="category"
+										name="category" placeholder="to"
+										value="<%=request.getSession().getAttribute("categoryId")%>">
+					<input name="numberCharCategory" value="1" type="hidden">
+					<input name="categoryCharacteristicId" value="${categoryCharacteristicStr1.categoryCharacteristicId}" type="hidden">
+					<input name="categoryCharacteristicName" value="${categoryCharacteristicStr1.categoryCharacteristicName}" type="hidden">
 						<tr>
 							<td width="100">
 								<input name="lang1" type="text" value="${categoryCharacteristicStr1.categoryCharacteristicNameLanguageOne}">

@@ -250,5 +250,23 @@ private static final String CHARACTERISTIC = "Characteristic";
 	}
 		return categoryCharacteristic;
 	}
+
+	/**
+	 * Method update category characteristic in database
+	 * @param CategoryCharacteristic
+	 * @throws ServiceException
+	 * @throws DaoException
+	 */
+	@Override
+	public void updateCategoryCharacteristic(
+			CategoryCharacteristic ob) throws ServiceException {
+		try {
+			categoryCharacteristicDao.update(ob);
+		} catch (DaoException e) {
+			log.error(ExceptionMessages.ERROR_IN_ORDER_SERVICE + e);
+			throw new ServiceException(
+					ExceptionMessages.ERROR_IN_ORDER_SERVICE, e);
+		}
+	}
 	
 }

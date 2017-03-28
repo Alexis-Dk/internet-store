@@ -71,5 +71,14 @@ public interface ICategoryCharacteristicService {
 	 */
 	List<CategoryCharacteristic> getCategoryCharacteristicBoolNames(
 			String category) throws ServiceException;
+
+	/**
+	 * Method update category characteristic in database
+	 * @param CategoryCharacteristic
+	 * @throws ServiceException
+	 * @throws DaoException
+	 */
+	void updateCategoryCharacteristic(
+			CategoryCharacteristic ob) throws ServiceException;
 	
 }

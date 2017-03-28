@@ -721,6 +721,38 @@ public class AdminController {
 		return RequestParamConstants.CATEGORY_CHARACTERISTIC;
 	}
 
+	@PreAuthorize("hasAnyRole('admin')")
+	@RequestMapping(value = "/changeLocalName", method = RequestMethod.GET, params=RequestParamConstants.CATEGORY)
+	public String changeLocalName(HttpServletRequest request, ModelMap model,
+			
+			@RequestParam(value = "lang1", defaultValue = RequestParamConstants.EMPTY) String lang1,
+			@RequestParam(value = "lang2", defaultValue = RequestParamConstants.EMPTY) String lang2,
+			@RequestParam(value = "lang3", defaultValue = RequestParamConstants.EMPTY) String lang3,
+			@RequestParam(value = "optionEnable", defaultValue = "false") String optionEnable,
+			@RequestParam(value = "categoryCharacteristicId", defaultValue = "1") String categoryCharacteristicId,			
+			@RequestParam(value = "categoryCharacteristicName", defaultValue = "1") String categoryCharacteristicName,			
+			@RequestParam(value = "numberCharCategory", defaultValue = "1") String numberCharCategory,
+			@RequestParam(value = RequestParamConstants.CATEGORY) String category) {
+		try {
+			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
+			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, category);
+			iCategoryCharacteristicService.updateCategoryCharacteristic(new CategoryCharacteristic(Integer.parseInt(categoryCharacteristicId), categoryCharacteristicName, lang1, lang2, lang3, Boolean.parseBoolean(optionEnable)));
+			model.put("characteristics1", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "1")));
+			model.put("characteristics2", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "2")));
+			model.put("characteristics3", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "3")));
+			model.put("characteristics4", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "4")));
+			model.put("characteristics5", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "5")));
+			model.put("characteristics6", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "6")));
+			model.put("characteristics7", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "7")));
+			initModel(model, category);
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
+			return RequestParamConstants.ERROR_PAGE;
+		}
+		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
+				request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+		return RequestParamConstants.CATEGORY_CHARACTERISTIC;
+	}
 
 	private void initModel(ModelMap model, String category)
 			throws ServiceException {

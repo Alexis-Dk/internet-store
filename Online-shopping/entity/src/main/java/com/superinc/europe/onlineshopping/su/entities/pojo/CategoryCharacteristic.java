@@ -55,6 +55,20 @@ class CategoryCharacteristic implements Serializable{
 	}
 
 	public CategoryCharacteristic(int categoryCharacteristicId,
+			String categoryCharacteristicName,
+			String categoryCharacteristicNameLanguageOne,
+			String categoryCharacteristicNameLanguageTwo,
+			String categoryCharacteristicNameLanguageThree,
+			Boolean categoryCharacteristicEnable) {
+		this.categoryCharacteristicId = categoryCharacteristicId;
+		this.categoryCharacteristicName = categoryCharacteristicName;
+		this.categoryCharacteristicNameLanguageOne = categoryCharacteristicNameLanguageOne;
+		this.categoryCharacteristicNameLanguageTwo = categoryCharacteristicNameLanguageTwo;
+		this.categoryCharacteristicNameLanguageThree = categoryCharacteristicNameLanguageThree;
+		this.categoryCharacteristicEnable = categoryCharacteristicEnable;
+	}
+
+	public CategoryCharacteristic(int categoryCharacteristicId,
 			String categoryCharacteristicName) {
 		this.categoryCharacteristicId = categoryCharacteristicId;
 		this.categoryCharacteristicName = categoryCharacteristicName;
