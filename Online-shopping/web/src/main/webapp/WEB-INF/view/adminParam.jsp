@@ -309,7 +309,14 @@
 
 			<div class="block2">
 				<h4>String category characteristics 2</h4>
-					<form class="form-inline" action="categoryCharacteristicNew" method="get">
+					<form class="form-inline" action="changeLocalName" method="get">
+					<table width="687" style="border:1px solid;">
+					<input type="hidden" class="form-control" id="category"
+										name="category" placeholder="to"
+										value="<%=request.getSession().getAttribute("categoryId")%>">
+					<input name="numberCharCategory" value="1" type="hidden">
+					<input name="categoryCharacteristicId" value="${categoryCharacteristicStr2.categoryCharacteristicId}" type="hidden">
+					<input name="categoryCharacteristicName" value="${categoryCharacteristicStr2.categoryCharacteristicName}" type="hidden">
 					<table width="687" style="border:1px solid;">
 						<tr>
 							<td width="100">
@@ -366,7 +373,14 @@
 
 			<div class="block2">
 				<h4>String category characteristics 3</h4>
-					<form class="form-inline" action="categoryCharacteristicNew" method="get">
+					<form class="form-inline" action="changeLocalName" method="get">
+					<table width="687" style="border:1px solid;">
+					<input type="hidden" class="form-control" id="category"
+										name="category" placeholder="to"
+										value="<%=request.getSession().getAttribute("categoryId")%>">
+					<input name="numberCharCategory" value="1" type="hidden">
+					<input name="categoryCharacteristicId" value="${categoryCharacteristicStr3.categoryCharacteristicId}" type="hidden">
+					<input name="categoryCharacteristicName" value="${categoryCharacteristicStr3.categoryCharacteristicName}" type="hidden">
 					<table width="687" style="border:1px solid;">
 						<tr>
 							<td width="100">
@@ -423,7 +437,14 @@
 
 			<div class="block2">
 				<h4>String category characteristics 4</h4>
-					<form class="form-inline" action="categoryCharacteristicNew" method="get">
+					<form class="form-inline" action="changeLocalName" method="get">
+					<table width="687" style="border:1px solid;">
+					<input type="hidden" class="form-control" id="category"
+										name="category" placeholder="to"
+										value="<%=request.getSession().getAttribute("categoryId")%>">
+					<input name="numberCharCategory" value="1" type="hidden">
+					<input name="categoryCharacteristicId" value="${categoryCharacteristicStr4.categoryCharacteristicId}" type="hidden">
+					<input name="categoryCharacteristicName" value="${categoryCharacteristicStr4.categoryCharacteristicName}" type="hidden">
 					<table width="687" style="border:1px solid;">
 						<tr>
 							<td width="100">
@@ -480,7 +501,14 @@
 
 			<div class="block2">
 				<h4>String category characteristics 5</h4>
-				<form class="form-inline" action="categoryCharacteristicNew" method="get">
+					<form class="form-inline" action="changeLocalName" method="get">
+					<table width="687" style="border:1px solid;">
+					<input type="hidden" class="form-control" id="category"
+										name="category" placeholder="to"
+										value="<%=request.getSession().getAttribute("categoryId")%>">
+					<input name="numberCharCategory" value="1" type="hidden">
+					<input name="categoryCharacteristicId" value="${categoryCharacteristicStr5.categoryCharacteristicId}" type="hidden">
+					<input name="categoryCharacteristicName" value="${categoryCharacteristicStr5.categoryCharacteristicName}" type="hidden">
 					<table width="687" style="border:1px solid;">
 						<tr>
 							<td width="100">
@@ -538,7 +566,14 @@
 
 			<div class="block2">
 				<h4>String category characteristics 6</h4>
-				<form class="form-inline" action="categoryCharacteristicNew" method="get">
+					<form class="form-inline" action="changeLocalName" method="get">
+					<table width="687" style="border:1px solid;">
+					<input type="hidden" class="form-control" id="category"
+										name="category" placeholder="to"
+										value="<%=request.getSession().getAttribute("categoryId")%>">
+					<input name="numberCharCategory" value="1" type="hidden">
+					<input name="categoryCharacteristicId" value="${categoryCharacteristicStr6.categoryCharacteristicId}" type="hidden">
+					<input name="categoryCharacteristicName" value="${categoryCharacteristicStr6.categoryCharacteristicName}" type="hidden">
 					<table width="687" style="border:1px solid;">
 						<tr>
 							<td width="100">
@@ -595,7 +630,14 @@
 
 			<div class="block2">
 				<h4>String category characteristics 7</h4>
-					<form class="form-inline" action="categoryCharacteristicNew" method="get">
+					<form class="form-inline" action="changeLocalName" method="get">
+					<table width="687" style="border:1px solid;">
+					<input type="hidden" class="form-control" id="category"
+										name="category" placeholder="to"
+										value="<%=request.getSession().getAttribute("categoryId")%>">
+					<input name="numberCharCategory" value="1" type="hidden">
+					<input name="categoryCharacteristicId" value="${categoryCharacteristicStr7.categoryCharacteristicId}" type="hidden">
+					<input name="categoryCharacteristicName" value="${categoryCharacteristicStr7.categoryCharacteristicName}" type="hidden">
 					<table width="687" style="border:1px solid;">
 						<tr>
 							<td width="100">
