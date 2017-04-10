@@ -266,7 +266,7 @@
                         <input hidden="true" type="text" id="selectedCharacteristic5" name="selectedCharacteristic5" value="{{selected5}}">
                         <input hidden="true" type="text" id="selectedCharacteristic6" name="selectedCharacteristic6" value="{{selected6}}">
                         <input hidden="true" type="text" id="selectedCharacteristic7" name="selectedCharacteristic7" value="{{selected7}}">
-                        <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Price</font></H5> </legend>        
+                        <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicInt1.categoryCharacteristicNameLanguageOne}</font></H5> </legend>        
                           <div layout="row" layout-align="center">
                            <md-input-container >
                              <label for="testInput1" >Min</label>
@@ -277,7 +277,7 @@
                              <input type="text" id="testInput2" ng-model="customUserParam.priceMax" md-autofocus="" name="priceHighter">
                            </md-input-container>
                          </div>
-                                                 <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Quantity</font></H5> </legend>
+                                                 <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicInt2.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
                          <div layout="row" layout-align="center">
                             <md-input-container >
                                <label for="testInput" >Min</label>
@@ -393,19 +393,19 @@
                                     </div>
                                   </div>
                                 </fieldset>  
-							    <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>One</font></H5> </legend>
+							    <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool1.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
                                 <div layout-align="center none" class="parent">
 				                  <md-switch ng-model="data.cb1" aria-label="Switch 1">
 					                <div align="center">  Switch 1: {{ data.cb1 }}</div>
 					              </md-switch>
 					            </div>
-							    <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Two</font></H5> </legend>
+							    <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool2.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
                                 <div layout-align="center none" class="parent">
 				                  <md-switch ng-model="data.cb1" aria-label="Switch 2">
 					                <div align="center">  Switch 2: {{ data.cb1 }}</div>
 					              </md-switch>
 					            </div>
-							    <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>Three</font></H5> </legend>
+							    <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool3.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
                                 <div layout-align="center none" class="parent">
 				                  <md-switch ng-model="data.cb1" aria-label="Switch 3">
 					                <div align="center">  Switch 3: {{ data.cb1 }}</div>

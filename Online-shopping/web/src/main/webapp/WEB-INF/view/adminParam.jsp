@@ -244,6 +244,172 @@
 
 	<div class="single-product-area">
 		<div class="container">
+		
+			<div class="block2" style="background-color:#e3e4e5">
+			<h4>Int category characteristics 1</h4>
+			<form class="form-inline" action="changeLocalName" method="get">
+			<input type="hidden" class="form-control" id="category"
+								name="category" placeholder="to"
+								value="<%=request.getSession().getAttribute("categoryId")%>">
+			<input name="numberCharCategory" value="1" type="hidden">
+			<input name="categoryCharacteristicId" value="${categoryCharacteristicInt1.categoryCharacteristicId}" type="hidden">
+			<input name="categoryCharacteristicName" value="${categoryCharacteristicInt1.categoryCharacteristicName}" type="hidden">
+			<table width="687" style="border:1px solid;">
+						<tr bgcolor="#F6F6F6">
+							<td width="100">
+								<input name="lang1" type="text" value="${categoryCharacteristicInt1.categoryCharacteristicNameLanguageOne}">
+							</td>
+							<td width="100">
+								<input name="lang2" type="text" value="${categoryCharacteristicInt1.categoryCharacteristicNameLanguageTwo}">
+							</td>
+							<td width="100">
+								<input name="lang3" type="text" value="${categoryCharacteristicInt1.categoryCharacteristicNameLanguageThree}">
+							</td>
+							<td align="center">
+								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+							</td>
+							<td>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		
+			<div class="block2" style="background-color:#e3e4e5">
+			<h4>Int category characteristics 2</h4>
+			<form class="form-inline" action="changeLocalName" method="get">
+			<input type="hidden" class="form-control" id="category"
+								name="category" placeholder="to"
+								value="<%=request.getSession().getAttribute("categoryId")%>">
+			<input name="numberCharCategory" value="1" type="hidden">
+			<input name="categoryCharacteristicId" value="${categoryCharacteristicInt2.categoryCharacteristicId}" type="hidden">
+			<input name="categoryCharacteristicName" value="${categoryCharacteristicInt2.categoryCharacteristicName}" type="hidden">
+			<table width="687" style="border:1px solid;">
+						<tr bgcolor="#F6F6F6">
+							<td width="100">
+								<input name="lang1" type="text" value="${categoryCharacteristicInt2.categoryCharacteristicNameLanguageOne}">
+							</td>
+							<td width="100">
+								<input name="lang2" type="text" value="${categoryCharacteristicInt2.categoryCharacteristicNameLanguageTwo}">
+							</td>
+							<td width="100">
+								<input name="lang3" type="text" value="${categoryCharacteristicInt2.categoryCharacteristicNameLanguageThree}">
+							</td>
+							<td align="center">
+								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+							</td>
+							<td>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		
+			<div class="block2" style="background-color:#e3e4e5">
+			<h4>Int category characteristics 3</h4>
+			<form class="form-inline" action="changeLocalName" method="get">
+			<input type="hidden" class="form-control" id="category"
+								name="category" placeholder="to"
+								value="<%=request.getSession().getAttribute("categoryId")%>">
+			<input name="numberCharCategory" value="1" type="hidden">
+			<input name="categoryCharacteristicId" value="${categoryCharacteristicInt3.categoryCharacteristicId}" type="hidden">
+			<input name="categoryCharacteristicName" value="${categoryCharacteristicInt3.categoryCharacteristicName}" type="hidden">
+			<table width="687" style="border:1px solid;">
+						<tr bgcolor="#F6F6F6">
+							<td width="100">
+								<input name="lang1" type="text" value="${categoryCharacteristicInt3.categoryCharacteristicNameLanguageOne}">
+							</td>
+							<td width="100">
+								<input name="lang2" type="text" value="${categoryCharacteristicInt3.categoryCharacteristicNameLanguageTwo}">
+							</td>
+							<td width="100">
+								<input name="lang3" type="text" value="${categoryCharacteristicInt3.categoryCharacteristicNameLanguageThree}">
+							</td>
+							<td align="center">
+								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+							</td>
+							<td>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		
+			<div class="block2" style="background-color:#e3e4e5">
+			<h4>Int category characteristics 4</h4>
+			<form class="form-inline" action="changeLocalName" method="get">
+			<input type="hidden" class="form-control" id="category"
+								name="category" placeholder="to"
+								value="<%=request.getSession().getAttribute("categoryId")%>">
+			<input name="numberCharCategory" value="1" type="hidden">
+			<input name="categoryCharacteristicId" value="${categoryCharacteristicInt4.categoryCharacteristicId}" type="hidden">
+			<input name="categoryCharacteristicName" value="${categoryCharacteristicInt4.categoryCharacteristicName}" type="hidden">
+			<table width="687" style="border:1px solid;">
+						<tr bgcolor="#F6F6F6">
+							<td width="100">
+								<input name="lang1" type="text" value="${categoryCharacteristicInt4.categoryCharacteristicNameLanguageOne}">
+							</td>
+							<td width="100">
+								<input name="lang2" type="text" value="${categoryCharacteristicInt4.categoryCharacteristicNameLanguageTwo}">
+							</td>
+							<td width="100">
+								<input name="lang3" type="text" value="${categoryCharacteristicInt4.categoryCharacteristicNameLanguageThree}">
+							</td>
+							<td align="center">
+								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+							</td>
+							<td>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		
+			<div class="block2" style="background-color:#e3e4e5">
+			<h4>Int category characteristics 5</h4>
+			<form class="form-inline" action="changeLocalName" method="get">
+			<input type="hidden" class="form-control" id="category"
+								name="category" placeholder="to"
+								value="<%=request.getSession().getAttribute("categoryId")%>">
+			<input name="numberCharCategory" value="1" type="hidden">
+			<input name="categoryCharacteristicId" value="${categoryCharacteristicInt5.categoryCharacteristicId}" type="hidden">
+			<input name="categoryCharacteristicName" value="${categoryCharacteristicInt5.categoryCharacteristicName}" type="hidden">
+			<table width="687" style="border:1px solid;">
+						<tr bgcolor="#F6F6F6">
+							<td width="100">
+								<input name="lang1" type="text" value="${categoryCharacteristicInt5.categoryCharacteristicNameLanguageOne}">
+							</td>
+							<td width="100">
+								<input name="lang2" type="text" value="${categoryCharacteristicInt5.categoryCharacteristicNameLanguageTwo}">
+							</td>
+							<td width="100">
+								<input name="lang3" type="text" value="${categoryCharacteristicInt5.categoryCharacteristicNameLanguageThree}">
+							</td>
+							<td align="center">
+								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+							</td>
+							<td>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		
 			<div class="block2">
 				<h4>String category characteristics 1</h4>
 					<form class="form-inline" action="changeLocalName" method="get">
@@ -690,6 +856,105 @@
 						</tr>
 					</form>
 				</table>
+			</div>
+
+			<div class="block2" style="background-color:#e3e4e5">
+			<h4>Bool category characteristics 1</h4>
+			<form class="form-inline" action="changeLocalName" method="get">
+			<input type="hidden" class="form-control" id="category"
+								name="category" placeholder="to"
+								value="<%=request.getSession().getAttribute("categoryId")%>">
+			<input name="numberCharCategory" value="1" type="hidden">
+			<input name="categoryCharacteristicId" value="${categoryCharacteristicBool1.categoryCharacteristicId}" type="hidden">
+			<input name="categoryCharacteristicName" value="${categoryCharacteristicBool1.categoryCharacteristicName}" type="hidden">
+			<table width="687" style="border:1px solid;">
+						<tr bgcolor="#F6F6F6">
+							<td width="100">
+								<input name="lang1" type="text" value="${categoryCharacteristicBool1.categoryCharacteristicNameLanguageOne}">
+							</td>
+							<td width="100">
+								<input name="lang2" type="text" value="${categoryCharacteristicBool1.categoryCharacteristicNameLanguageTwo}">
+							</td>
+							<td width="100">
+								<input name="lang3" type="text" value="${categoryCharacteristicBool1.categoryCharacteristicNameLanguageThree}">
+							</td>
+							<td align="center">
+								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+							</td>
+							<td>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		
+			<div class="block2" style="background-color:#e3e4e5">
+			<h4>Bool category characteristics 2</h4>
+			<form class="form-inline" action="changeLocalName" method="get">
+			<input type="hidden" class="form-control" id="category"
+								name="category" placeholder="to"
+								value="<%=request.getSession().getAttribute("categoryId")%>">
+			<input name="numberCharCategory" value="1" type="hidden">
+			<input name="categoryCharacteristicId" value="${categoryCharacteristicBool2.categoryCharacteristicId}" type="hidden">
+			<input name="categoryCharacteristicName" value="${categoryCharacteristicBool2.categoryCharacteristicName}" type="hidden">
+			<table width="687" style="border:1px solid;">
+						<tr bgcolor="#F6F6F6">
+							<td width="100">
+								<input name="lang1" type="text" value="${categoryCharacteristicBool2.categoryCharacteristicNameLanguageOne}">
+							</td>
+							<td width="100">
+								<input name="lang2" type="text" value="${categoryCharacteristicBool2.categoryCharacteristicNameLanguageTwo}">
+							</td>
+							<td width="100">
+								<input name="lang3" type="text" value="${categoryCharacteristicBool2.categoryCharacteristicNameLanguageThree}">
+							</td>
+							<td align="center">
+								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+							</td>
+							<td>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		
+			<div class="block2" style="background-color:#e3e4e5">
+			<h4>Bool category characteristics 3</h4>
+			<form class="form-inline" action="changeLocalName" method="get">
+			<input type="hidden" class="form-control" id="category"
+								name="category" placeholder="to"
+								value="<%=request.getSession().getAttribute("categoryId")%>">
+			<input name="numberCharCategory" value="1" type="hidden">
+			<input name="categoryCharacteristicId" value="${categoryCharacteristicBool3.categoryCharacteristicId}" type="hidden">
+			<input name="categoryCharacteristicName" value="${categoryCharacteristicBool3.categoryCharacteristicName}" type="hidden">
+			<table width="687" style="border:1px solid;">
+						<tr bgcolor="#F6F6F6">
+							<td width="100">
+								<input name="lang1" type="text" value="${categoryCharacteristicBool3.categoryCharacteristicNameLanguageOne}">
+							</td>
+							<td width="100">
+								<input name="lang2" type="text" value="${categoryCharacteristicBool3.categoryCharacteristicNameLanguageTwo}">
+							</td>
+							<td width="100">
+								<input name="lang3" type="text" value="${categoryCharacteristicBool3.categoryCharacteristicNameLanguageThree}">
+							</td>
+							<td align="center">
+								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+							</td>
+							<td>
+								<button type="submit" class="btn btn-default">
+									<locale:message code="label.find" />
+								</button>
+							</td>
+						</tr>
+					</table>
+				</form>
 			</div>
 
 		</div>
