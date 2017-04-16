@@ -7,6 +7,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
+import com.superinc.europe.onlineshopping.gu.entities.dto.CustomUserParamDTO;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 
 /**
@@ -17,40 +18,34 @@ public interface IDaoProduct extends IBaseDao<Product>{
 	/**
 	 * Method get list products
 	 * @param criteria
-	 * @param priceLower
-	 * @param priceHighter
+	 * @param customUserParam
 	 * @param numberOfPage
 	 * @param category
 	 * @throws DaoException
 	 */
-	List<Product> getProduct(Criteria criteria, String priveLower,
-			String priceHighter, int numberOfPage, String category)
+	List<Product> getProduct(Criteria criteria, CustomUserParamDTO customUserParam, int numberOfPage, String category)
 			throws DaoException;
 	
 	/**
 	 * Method get list products
 	 * @param criteria
-	 * @param priceLower
-	 * @param priceHighter
+	 * @param customUserParam
 	 * @param numberOfPage
 	 * @param category
 	 * @param selectedItems
 	 * @throws DaoException
 	 */
-	List<Product> getProduct(Criteria criteria, String priveLower,
-			String priceHighter, int numberOfPage, String category, Map<String, String[]> selectedItems)
+	List<Product> getProduct(Criteria criteria, CustomUserParamDTO customUserParam, int numberOfPage, String category, Map<String, String[]> selectedItems)
 			throws DaoException;
 
 	/**
 	 * Method get list products
 	 * @param criteria
-	 * @param priceLower
-	 * @param priceHighter
+	 * @param customUserParam
 	 * @param numberOfPage
 	 * @throws DaoException
 	 */
-	List<Product> getAllProduct(Criteria createCriteria, String priceLower,
-			String priceHighter, int numberOfStartPage);
+	List<Product> getAllProduct(Criteria createCriteria, CustomUserParamDTO customUserParam, int numberOfStartPage);
 	
 	/**
 	 * Method get current session
@@ -60,14 +55,12 @@ public interface IDaoProduct extends IBaseDao<Product>{
 	
 	/**
 	 * Method get number integer number products in the page
-	 * @param priceLower
-	 * @param priceHighter
 	 * @throws DaoException
 	 */
 	int getQuantityOfPage() throws DaoException;
 	
 	/**
-	 * Method get quantitu of row
+	 * Method get quantity of row
 	 * @throws ServiceException 
 	 * @throws DaoException
 	 */

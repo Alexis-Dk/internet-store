@@ -237,9 +237,19 @@ else {
 				</div>
 
 				<div class="form-group">
+					<div class="col-xs-3">
+						<label for="productDescriptData" class="control-label">StringDescription1:</label>
+					</div>
+					<div class="col-xs-5">
+						<sf:errors path="description" cssStyle="color: red" />
+						<sf:textarea id="productDescriptData" path="description"
+							class="form-control" name="description" rows="1" cols="50"></sf:textarea>
+					</div>
+				</div>
+
+				<div class="form-group">
 				
-					<div class="col-xs-3"><label for="productNameData" class="control-label">Product
-							Name:</label>
+					<div class="col-xs-3"><label for="productNameData" class="control-label"><%= request.getAttribute("categoryCharacteristicStr1") %>:</label>
 					</div>
 					<div class="col-xs-5">
 							
@@ -271,19 +281,7 @@ else {
 
 				<div class="form-group">
 					<div class="col-xs-3">
-						<label for="productDescriptData" class="control-label">Product
-							description:</label>
-					</div>
-					<div class="col-xs-5">
-						<sf:errors path="description" cssStyle="color: red" />
-						<sf:textarea id="productDescriptData" path="description"
-							class="form-control" name="description" rows="1" cols="50"></sf:textarea>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<div class="col-xs-3">
-						<label for="productCharacteristic1" class="control-label">Color:</label>
+						<label for="productCharacteristic1" class="control-label"><%= request.getAttribute("categoryCharacteristicStr2") %>:</label>
 					</div>
 					<div class="col-xs-5">
 						<sf:select path="characteristic2" items="${characteristic2}"
@@ -296,7 +294,7 @@ else {
 
 				<div class="form-group">
 					<div class="col-xs-3">
-						<label for="productCharacteristic2" class="control-label">Socket:</label>
+						<label for="productCharacteristic2" class="control-label"><%= request.getAttribute("categoryCharacteristicStr3") %>:</label>
 					</div>
 					<div class="col-xs-5">
 					<sf:select path="characteristic3" items="${characteristic3}"
@@ -309,7 +307,7 @@ else {
 
 				<div class="form-group">
 					<div class="col-xs-3">
-						<label for="productCharacteristic3" class="control-label">Smart:</label>
+						<label for="productCharacteristic3" class="control-label"><%= request.getAttribute("categoryCharacteristicStr4") %>:</label>
 					</div>
 					<div class="col-xs-5">
 					<sf:select path="characteristic4" items="${characteristic4}"
@@ -322,8 +320,7 @@ else {
 
 				<div class="form-group">
 					<div class="col-xs-3">
-						<label for="productCharacteristic4" class="control-label">Screen
-							resolution:</label>
+						<label for="productCharacteristic4" class="control-label"><%= request.getAttribute("categoryCharacteristicStr5") %>:</label>
 					</div>
 					<div class="col-xs-5">
 						<sf:errors path="characteristic5" cssStyle="color: red" />
@@ -336,8 +333,7 @@ else {
 
 				<div class="form-group">
 					<div class="col-xs-3">
-						<label for="productCharacteristic6" class="control-label">Aspect
-							ratio:</label>
+						<label for="productCharacteristic6" class="control-label"><%= request.getAttribute("categoryCharacteristicStr6") %>:</label>
 					</div>
 					<div class="col-xs-5">
 						<sf:errors path="characteristic6" cssStyle="color: red" />
@@ -350,8 +346,7 @@ else {
 
 				<div class="form-group">
 					<div class="col-xs-3">
-						<label for="productStockStatus" class="control-label">Stock
-							availability:</label>
+						<label for="productStockStatus" class="control-label"><%= request.getAttribute("categoryCharacteristicStr7") %>:</label>
 					</div>
 					<div class="col-xs-5">
 						<sf:errors path="characteristic7" cssStyle="color: red" />
@@ -364,29 +359,60 @@ else {
 
 				<div class="form-group">
 					<div class="col-xs-3">
-						<label for="productPriceData" class="control-label">Product
-							Price:</label>
+						<label for="intCharacteristicData2" class="control-label"><%= request.getAttribute("categoryCharacteristicInt1") %>:</label>
 					</div>
 					<div class="col-xs-5">
-						<sf:errors path="price" cssStyle="color: red" />
-						<sf:input id="productPriceData" path="price" class="form-control"
-							type="text" name="price"         
+						<sf:errors path="intCharacteristic1" cssStyle="color: red" />
+						<sf:input id="intCharacteristicData2" path="intCharacteristic1" class="form-control"
+							type="text" name="intCharacteristic1"         
 							value="" />
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<div class="col-xs-3">
-						<label for="productCountData" class="control-label">Product
-							count:</label>
+						<label for="intCharacteristicData2" class="control-label"><%= request.getAttribute("categoryCharacteristicInt2") %>:</label>
 					</div>
 					<div class="col-xs-5">
-						<sf:errors path="count" cssStyle="color: red" />
-						<sf:input id="productCountData" path="count" class="form-control"
-							type="text" name="count" value="" />
+						<sf:errors path="intCharacteristic2" cssStyle="color: red" />
+						<sf:input id="intCharacteristicData2" path="intCharacteristic2" class="form-control"
+							type="text" name="intCharacteristic2" value="" />
 					</div>
 				</div>
 
+				<div class="form-group">
+					<div class="col-xs-3">
+						<label for="intCharacteristicData3" class="control-label"><%= request.getAttribute("categoryCharacteristicInt3") %>:</label>
+					</div>
+					<div class="col-xs-5">
+						<sf:errors path="intCharacteristic3" cssStyle="color: red" />
+						<sf:input id="intCharacteristicData3" path="intCharacteristic3" class="form-control"
+							type="text" name="intCharacteristic3" value="" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-xs-3">
+						<label for="intCharacteristicData4" class="control-label"><%= request.getAttribute("categoryCharacteristicInt4") %>:</label>
+					</div>
+					<div class="col-xs-5">
+						<sf:errors path="intCharacteristic4" cssStyle="color: red" />
+						<sf:input id="intCharacteristicData4" path="intCharacteristic4" class="form-control"
+							type="text" name="intCharacteristic4" value="" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-xs-3">
+						<label for="intCharacteristicData5" class="control-label"><%= request.getAttribute("categoryCharacteristicInt5") %>:</label>
+					</div>
+					<div class="col-xs-5">
+						<sf:errors path="intCharacteristic5" cssStyle="color: red" />
+						<sf:input id="intCharacteristicData5" path="intCharacteristic5" class="form-control"
+							type="text" name="intCharacteristic5" value="" />
+					</div>
+				</div>
+ 
 				<div class="form-group">
 					<div class="col-xs-3">
 						<label for="inputFile">Product image: </label>

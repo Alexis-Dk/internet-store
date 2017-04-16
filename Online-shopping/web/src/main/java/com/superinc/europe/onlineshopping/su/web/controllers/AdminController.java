@@ -51,6 +51,7 @@ import com.superinc.europe.onlineshopping.gu.entities.dto.CharacteristicSevenVO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.CharacteristicSixVO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.CharacteristicThreeVO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.CharacteristicTwoVO;
+import com.superinc.europe.onlineshopping.gu.entities.dto.CustomUserParamDTO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.DepartmentVO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.ProductDTO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
@@ -228,11 +229,17 @@ public class AdminController {
 	} catch (ErrorGettingCategoryServiceException e) {
 		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
 	}
+	try {
+		initModel(request, Integer.parseInt(categoryId));
+	} catch (ServiceException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	return "redirect:/neww3";
     }
     
     @RequestMapping(path = "/neww3", method = RequestMethod.GET)
-    public String saveNewProduct3(ModelMap model, String categoryId) {
+    public String saveNewProduct3(ModelMap model, String categoryId, HttpServletRequest request) {
 	ProductDTO productDTO = new ProductDTO();
 	List<Category> categoryList = null;
 	try {
@@ -256,6 +263,12 @@ public class AdminController {
 		model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, list);
 	} catch (ErrorGettingCategoryServiceException e) {
 		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+	}
+	try {
+		initModel(request, category.getCategoryId());
+	} catch (ServiceException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
 	return "admin";
     }
@@ -535,13 +548,20 @@ public class AdminController {
 	} catch (ErrorGettingCategoryServiceException e) {
 		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
 	}
-	
+	try {
+		initModel(request, category.getCategoryId());
+	} catch (ServiceException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	return "admin";
     }
 	
     private void setProductFields(Product product, ProductDTO productDTO, int id) {
-	product.setPrice(productDTO.getPrice());
-	product.setOldprice(productDTO.getPrice());
+//	product.setPrice(productDTO.getPrice());
+//	product.setOldprice(productDTO.getPrice());
+    	product.setPrice(0);
+    	product.setOldprice(0);
 	product.setDescription(productDTO.getDescription());
 	int categoryId = productDTO.getDepartment().getId();
 	Category category = productCategoryService.getCategoryById(categoryId);
@@ -553,7 +573,13 @@ public class AdminController {
 	product.setCharacteristic5(productDTO.getCharacteristic5().getName());
 	product.setCharacteristic6(productDTO.getCharacteristic6().getName());
 	product.setCharacteristic7(productDTO.getCharacteristic7().getName());
-	product.setCharacteristic8(productDTO.getCount());
+//	product.setCharacteristic8(productDTO.getCount());
+	product.setCharacteristic8(0);
+	product.setIntCharacteristic1(productDTO.getIntCharacteristic1());
+	product.setIntCharacteristic2(productDTO.getIntCharacteristic2());
+	product.setIntCharacteristic3(productDTO.getIntCharacteristic3());
+	product.setIntCharacteristic4(productDTO.getIntCharacteristic4());
+	product.setIntCharacteristic5(productDTO.getIntCharacteristic5());
 	product.setImage_path(productDTO.getDepartment().getId()+ "/"+productDTO.getDescription()+ "_"+Integer.toString(id) + ".jpg");
     }
 	
@@ -678,12 +704,13 @@ public class AdminController {
 			model.put("characteristics7", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "7")));
 			initModel(model, category);
 			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, category);
+			CustomUserParamDTO customUserParam = (CustomUserParamDTO) request.getSession().getAttribute("customUserParam");
+			customUserParam.setIntCharacteristicMin1(priceLower);
+			customUserParam.setIntCharacteristicMax1(priceHighter);
 			if (request.getParameter(RequestParamConstants.SELECTED_PAGE) == null) {
-				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainDefaultSelection((String) priceLower,
-								(String) priceHighter, (String) category));
+				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainDefaultSelection(customUserParam, (String) category));
 			} else {
-				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainUsersSelection((String) priceLower,
-								(String) priceHighter, selectedPage, (String) category));
+				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainUsersSelection(customUserParam, selectedPage, (String) category));
 			}
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
@@ -767,6 +794,22 @@ public class AdminController {
 		}
 		for (int i = 0; i < itemsBool.size(); i++) {
 			model.put("categoryCharacteristicBool" + String.valueOf(i + 1), itemsBool.get(i));
+		}
+	}
+	
+	private void initModel(HttpServletRequest request, int category)
+			throws ServiceException {
+		List<CategoryCharacteristic> itemsStr = iCategoryCharacteristicService.getCategoryCharacteristicStrNames(productCategoryService.getCategoryById(category).getCategoryName());
+		List<CategoryCharacteristic> itemsInt = iCategoryCharacteristicService.getCategoryCharacteristicIntNames(productCategoryService.getCategoryById(category).getCategoryName());
+		List<CategoryCharacteristic> itemsBool = iCategoryCharacteristicService.getCategoryCharacteristicBoolNames(productCategoryService.getCategoryById(category).getCategoryName());
+		for (int i = 0; i < itemsStr.size(); i++) {
+			request.setAttribute("categoryCharacteristicStr" + String.valueOf(i + 1), itemsStr.get(i).getCategoryCharacteristicName());
+		}
+		for (int i = 0; i < itemsInt.size(); i++) {
+			request.setAttribute("categoryCharacteristicInt" + String.valueOf(i + 1), itemsInt.get(i).getCategoryCharacteristicName());
+		}
+		for (int i = 0; i < itemsBool.size(); i++) {
+			request.setAttribute("categoryCharacteristicBool" + String.valueOf(i + 1), itemsBool.get(i).getCategoryCharacteristicName());
 		}
 	}
 	

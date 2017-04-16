@@ -221,12 +221,33 @@
                     <!--    -->	<form class="form-inline" action="${context}/product" method="get" hidden="true">
 							  <div class="form-group">
 							    <label for="priceLower"><locale:message code="label.priceLow"/></label>
-							    <input type="text" class="form-control" id="priceLower" placeholder="from" name="priceLower" value="<%= request.getSession().getAttribute("priceLower") %>">
+<%-- 							<% String intCharacteristicMin1 = (String) request.getSession().getAttribute("intCharacteristicMin1"); if (intCharacteristicMin1 == null) {intCharacteristicMin1 = "";} %>
+							    <% String intCharacteristicMax1 = (String) request.getSession().getAttribute("intCharacteristicMax1"); if (intCharacteristicMax1 == null) {intCharacteristicMax1 = "";} %> --%>
+							    <% String intCharacteristicMin1 = (String) request.getSession().getAttribute("intCharacteristicMin1");%>
+							    <% String intCharacteristicMax1 = (String) request.getSession().getAttribute("intCharacteristicMax1");%>
+							    <% String intCharacteristicMin2 = (String) request.getSession().getAttribute("intCharacteristicMin2");%>
+							    <% String intCharacteristicMax2 = (String) request.getSession().getAttribute("intCharacteristicMax2");%>
+							    <% String intCharacteristicMin3 = (String) request.getSession().getAttribute("intCharacteristicMin3");%>
+							    <% String intCharacteristicMax3 = (String) request.getSession().getAttribute("intCharacteristicMax3");%>
+							    <% String intCharacteristicMin4 = (String) request.getSession().getAttribute("intCharacteristicMin4");%>
+							    <% String intCharacteristicMax4 = (String) request.getSession().getAttribute("intCharacteristicMax4");%>
+							    <% String intCharacteristicMin5 = (String) request.getSession().getAttribute("intCharacteristicMin5");%>
+							    <% String intCharacteristicMax5 = (String) request.getSession().getAttribute("intCharacteristicMax5");%>
+							    <input type="text" class="form-control" id="intCharacteristicMin1" placeholder="from" name="intCharacteristicMin1" value="<%= intCharacteristicMin1 %>">
+								<input type="text" class="form-control" id="intCharacteristicMin2" placeholder="from" name="intCharacteristicMin2" value="<%= intCharacteristicMin2 %>">
+								<input type="text" class="form-control" id="intCharacteristicMin3" placeholder="from" name="intCharacteristicMin3" value="<%= intCharacteristicMin3 %>">
+								<input type="text" class="form-control" id="intCharacteristicMin4" placeholder="from" name="intCharacteristicMin4" value="<%= intCharacteristicMin4 %>">
+								<input type="text" class="form-control" id="intCharacteristicMin5" placeholder="from" name="intCharacteristicMin5" value="<%= intCharacteristicMin5 %>">
 							  </div>
 							  <div class="form-group">
 							    <label for="priceHighter"><locale:message code="label.priceHight"/></label>
-							  	 Latest jQuery form server   <input type="text" class="form-control" id="priceHighter" name="priceHighter" placeholder="to" value="<%= request.getSession().getAttribute("priceHighter") %>"> 
-							 	<input type="text" class="form-control" id="priceHighter" name="priceHighter" placeholder="to" value="<%= request.getSession().getAttribute("priceHighter") %>">  
+							  	 Latest jQuery form server   
+							  	<input type="text" class="form-control" id="intCharacteristicMax1" name="intCharacteristicMax1" placeholder="to" value="<%= intCharacteristicMax1 %>"> 
+							 	<input type="text" class="form-control" id="intCharacteristicMax2" name="intCharacteristicMax2" placeholder="to" value="<%= intCharacteristicMax2 %>">  
+								<input type="text" class="form-control" id="intCharacteristicMax3" name="intCharacteristicMax3" placeholder="to" value="<%= intCharacteristicMax3 %>">  
+								<input type="text" class="form-control" id="intCharacteristicMax4" name="intCharacteristicMax4" placeholder="to" value="<%= intCharacteristicMax4 %>">  
+								<input type="text" class="form-control" id="intCharacteristicMax5" name="intCharacteristicMax5" placeholder="to" value="<%= intCharacteristicMax5 %>">  
+													  
 							  <input type="hidden" class="form-control" id="category" name="category" placeholder="to" value="<%= request.getSession().getAttribute("categoryId") %>"> 
 							  </div> 
 							  <button type="submit" class="btn btn-default"><locale:message code="label.find"/></button>                      
@@ -270,22 +291,55 @@
                           <div layout="row" layout-align="center">
                            <md-input-container >
                              <label for="testInput1" >Min</label>
-                             <input type="text" id="testInput1" ng-model="customUserParam.priceMin" md-autofocus="" name="priceLower" ><!-- name="priceLower" -->
+                             <input type="text" id="intCharacteristicMin1" ng-model="customUserParam.intCharacteristicMin1" md-autofocus="" name="intCharacteristicMin1" ><!-- name="priceLower" -->
                            </md-input-container>
                            <md-input-container >
                              <label for="testInput2" >Max</label>
-                             <input type="text" id="testInput2" ng-model="customUserParam.priceMax" md-autofocus="" name="priceHighter">
+                             <input type="text" id="intCharacteristicMax1" ng-model="customUserParam.intCharacteristicMax1" md-autofocus="" name="intCharacteristicMax1">
                            </md-input-container>
                          </div>
-                                                 <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicInt2.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                         <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicInt2.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
                          <div layout="row" layout-align="center">
                             <md-input-container >
                                <label for="testInput" >Min</label>
-                               <input type="text" id="testInput" ng-model="data" md-autofocus="">
+                               <input type="text" id="intCharacteristicMin2" ng-model="customUserParam.intCharacteristicMin2" md-autofocus="" name="intCharacteristicMin2">
                              </md-input-container>
                              <md-input-container >
                                <label for="testInput" >Max</label>
-                               <input type="text" id="testInput" ng-model="data" md-autofocus="" ng-value="name">
+                               <input type="text" id="intCharacteristicMax2" ng-model="customUserParam.intCharacteristicMax2" md-autofocus="" name="intCharacteristicMax2">
+                             </md-input-container>
+                           </div>
+                           <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicInt3.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                         <div layout="row" layout-align="center">
+                            <md-input-container >
+                               <label for="testInput" >Min</label>
+                               <input type="text" id="intCharacteristicMin3" ng-model="customUserParam.intCharacteristicMin3" md-autofocus="" name="intCharacteristicMin3">
+                             </md-input-container>
+                             <md-input-container >
+                               <label for="testInput" >Max</label>
+                               <input type="text" id="intCharacteristicMax3" ng-model="customUserParam.intCharacteristicMax3" md-autofocus="" name="intCharacteristicMax3">
+                             </md-input-container>
+                           </div>
+                           <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicInt4.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                         <div layout="row" layout-align="center">
+                            <md-input-container >
+                               <label for="testInput" >Min</label>
+                               <input type="text" id="intCharacteristicMin4" ng-model="customUserParam.intCharacteristicMin4" md-autofocus="" name="intCharacteristicMin4">
+                             </md-input-container>
+                             <md-input-container >
+                               <label for="testInput" >Max</label>
+                               <input type="text" id="intCharacteristicMax4" ng-model="customUserParam.intCharacteristicMax4" md-autofocus="" name="intCharacteristicMax4">
+                             </md-input-container>
+                           </div>
+                         <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicInt5.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                         <div layout="row" layout-align="center">
+                            <md-input-container >
+                               <label for="testInput" >Min</label>
+                               <input type="text" id="intCharacteristicMin5" ng-model="customUserParam.intCharacteristicMin5" md-autofocus="" name="intCharacteristicMin5">
+                             </md-input-container>
+                             <md-input-container >
+                               <label for="testInput" >Max</label>
+                               <input type="text" id="intCharacteristicMax5" ng-model="customUserParam.intCharacteristicMax5" md-autofocus="" name="intCharacteristicMax5">
                              </md-input-container>
                            </div>
                          </div>
@@ -502,13 +556,39 @@
                           <ul class="pagination">
                             <li>
                               <a href='' 
-							 onclick=" this.href='?number=1&priceLower='+document.getElementById('priceLower').value+'&priceHighter='+document.getElementById('priceHighter').value" id="add-product-save-link" aria-label="Previous">
+							 onclick=" this.href='?number=1&intCharacteristicMin1='+document.getElementById('intCharacteristicMin1').value
+									 +'&intCharacteristicMax1='+document.getElementById('intCharacteristicMax1').value
+									 +'&intCharacteristicMin2='+document.getElementById('intCharacteristicMin2').value
+									 +'&intCharacteristicMax2='+document.getElementById('intCharacteristicMax2').value
+									 +'&intCharacteristicMin3='+document.getElementById('intCharacteristicMin3').value
+									 +'&intCharacteristicMax3='+document.getElementById('intCharacteristicMax3').value
+									 +'&intCharacteristicMin4='+document.getElementById('intCharacteristicMin4').value
+									 +'&intCharacteristicMax4='+document.getElementById('intCharacteristicMax4').value
+									 +'&intCharacteristicMin5='+document.getElementById('intCharacteristicMin5').value
+									 +'&intCharacteristicMax5='+document.getElementById('intCharacteristicMax5').value
+									 +'&category='+document.getElementById('category').value
+									 +'&selectedCharacteristic1='+document.getElementById('selectedCharacteristic1').value
+									 +'&selectedCharacteristic2='+document.getElementById('selectedCharacteristic2').value
+									 +'&selectedCharacteristic3='+document.getElementById('selectedCharacteristic3').value
+									 +'&selectedCharacteristic4='+document.getElementById('selectedCharacteristic4').value
+									 +'&selectedCharacteristic5='+document.getElementById('selectedCharacteristic5').value
+									 +'&selectedCharacteristic6='+document.getElementById('selectedCharacteristic6').value
+									 +'&selectedCharacteristic7='+document.getElementById('selectedCharacteristic7').value" id="add-product-save-link" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
 							<c:forEach items="${requestScope.numberOfPage}" var="number">
 							<li><a href='' 
-							 onclick=" this.href='?number=${number.numberOfPageId}&priceLower='+document.getElementById('priceLower').value+'&priceHighter='+document.getElementById('priceHighter').value+'&category='+document.getElementById('category').value
+							 onclick=" this.href='?number=${number.numberOfPageId}&intCharacteristicMin1='+document.getElementById('intCharacteristicMin1').value+'&intCharacteristicMax1='+document.getElementById('intCharacteristicMax1').value
+							 +'&intCharacteristicMin2='+document.getElementById('intCharacteristicMin2').value
+							 +'&intCharacteristicMax2='+document.getElementById('intCharacteristicMax2').value
+							 +'&intCharacteristicMin3='+document.getElementById('intCharacteristicMin3').value
+							 +'&intCharacteristicMax3='+document.getElementById('intCharacteristicMax3').value
+							 +'&intCharacteristicMin4='+document.getElementById('intCharacteristicMin4').value
+							 +'&intCharacteristicMax4='+document.getElementById('intCharacteristicMax4').value
+							 +'&intCharacteristicMin5='+document.getElementById('intCharacteristicMin5').value
+							 +'&intCharacteristicMax5='+document.getElementById('intCharacteristicMax5').value
+							 +'&category='+document.getElementById('category').value
 							 +'&selectedCharacteristic1='+document.getElementById('selectedCharacteristic1').value
 							 +'&selectedCharacteristic2='+document.getElementById('selectedCharacteristic2').value
 							 +'&selectedCharacteristic3='+document.getElementById('selectedCharacteristic3').value
@@ -521,7 +601,24 @@
 							 </c:forEach>
                         <li>
                           <a href='' 
-							 onclick=" this.href='?number=2&priceLower='+document.getElementById('priceLower').value+'&priceHighter='+document.getElementById('priceHighter').value" id="add-product-save-link" aria-label="Next">
+							 onclick=" this.href='?number=2&intCharacteristicMin1='+document.getElementById('intCharacteristicMin1').value
+								 +'&intCharacteristicMax1='+document.getElementById('intCharacteristicMax1').value
+								 +'&intCharacteristicMin2='+document.getElementById('intCharacteristicMin2').value
+								 +'&intCharacteristicMax2='+document.getElementById('intCharacteristicMax2').value
+								 +'&intCharacteristicMin3='+document.getElementById('intCharacteristicMin3').value
+								 +'&intCharacteristicMax3='+document.getElementById('intCharacteristicMax3').value
+								 +'&intCharacteristicMin4='+document.getElementById('intCharacteristicMin4').value
+								 +'&intCharacteristicMax4='+document.getElementById('intCharacteristicMax4').value
+								 +'&intCharacteristicMin5='+document.getElementById('intCharacteristicMin5').value
+								 +'&intCharacteristicMax5='+document.getElementById('intCharacteristicMax5').value
+								 +'&category='+document.getElementById('category').value
+								 +'&selectedCharacteristic1='+document.getElementById('selectedCharacteristic1').value
+								 +'&selectedCharacteristic2='+document.getElementById('selectedCharacteristic2').value
+								 +'&selectedCharacteristic3='+document.getElementById('selectedCharacteristic3').value
+								 +'&selectedCharacteristic4='+document.getElementById('selectedCharacteristic4').value
+								 +'&selectedCharacteristic5='+document.getElementById('selectedCharacteristic5').value
+								 +'&selectedCharacteristic6='+document.getElementById('selectedCharacteristic6').value
+								 +'&selectedCharacteristic7='+document.getElementById('selectedCharacteristic7').value" id="add-product-save-link" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>

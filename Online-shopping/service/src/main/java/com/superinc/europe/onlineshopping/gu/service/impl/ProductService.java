@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
+import com.superinc.europe.onlineshopping.gu.entities.dto.CustomUserParamDTO;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 import com.superinc.europe.onlineshopping.gu.service.IProductService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ErrorAddingPoductServiceException;
@@ -100,20 +101,17 @@ public class ProductService implements IProductService<Product> {
 	
 	/**
 	 * Method obtain list of goods default numbers of page
-	 * @param priceLower
-	 * @param priceHighter
+	 * @param customUserParam
 	 * @param category
 	 * @throws DaoException
 	 */
 	@Override
-	public List<Product> obtainDefaultSelection(String priceLower,
-			String priceHighter, String category) throws ServiceException {
+	public List<Product> obtainDefaultSelection(CustomUserParamDTO customUserParam, String category) throws ServiceException {
 		Session session = daoProduct.getCurrentSession();
 		List<Product> products = null;
 		try {
 			products = (List<Product>) daoProduct.getProduct(
-					session.createCriteria(Product.class, PRODUCT), priceLower,
-					priceHighter, NUMBER_OF_START_PAGE, category);
+					session.createCriteria(Product.class, PRODUCT), customUserParam, NUMBER_OF_START_PAGE, category);
 		} catch (Exception e) {
 			session.getTransaction().rollback();
 			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
@@ -125,21 +123,18 @@ public class ProductService implements IProductService<Product> {
 	
 	/**
 	 * Method obtain list of goods default numbers of page
-	 * @param priceLower
-	 * @param priceHighter
+	 * @param customUserParam
 	 * @param category
 	 * @param selectedItems
 	 * @throws DaoException
 	 */
 	@Override
-	public List<Product> obtainDefaultSelection(String priceLower,
-			String priceHighter, String category, Map<String, String[]> selectedItems) throws ServiceException {
+	public List<Product> obtainDefaultSelection(CustomUserParamDTO customUserParam, String category, Map<String, String[]> selectedItems) throws ServiceException {
 		Session session = daoProduct.getCurrentSession();
 		List<Product> products = null;
 		try {
 			products = (List<Product>) daoProduct.getProduct(
-					session.createCriteria(Product.class, PRODUCT), priceLower,
-					priceHighter, NUMBER_OF_START_PAGE, category, selectedItems);
+					session.createCriteria(Product.class, PRODUCT), customUserParam, NUMBER_OF_START_PAGE, category, selectedItems);
 		} catch (Exception e) {
 			session.getTransaction().rollback();
 			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
@@ -151,20 +146,17 @@ public class ProductService implements IProductService<Product> {
 	
 	/**
 	 * Method obtain list of goods selection numbers of page
-	 * @param priceLower
-	 * @param priceHighter
+	 * @param customUserParam
 	 * @param category
 	 * @throws DaoException
 	 */
 	@Override
-	public List<Product> obtainUsersSelection(String priceLower,
-			String priceHighter, String userNumberOfPage, String category) throws ServiceException{
+	public List<Product> obtainUsersSelection(CustomUserParamDTO customUserParam, String userNumberOfPage, String category) throws ServiceException{
 			Session session = daoProduct.getCurrentSession();
 			List<Product> products = null;
 			try {
 			products = (List<Product>) daoProduct.getProduct(
-					session.createCriteria(Product.class, PRODUCT), priceLower,
-					priceHighter, Integer.parseInt(userNumberOfPage), category);
+					session.createCriteria(Product.class, PRODUCT), customUserParam, Integer.parseInt(userNumberOfPage), category);
 			} catch (Exception e) {
 				session.getTransaction().rollback();
 				logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
@@ -175,21 +167,18 @@ public class ProductService implements IProductService<Product> {
 	
 	/**
 	 * Method obtain list of goods selection numbers of page
-	 * @param priceLower
-	 * @param priceHighter
+	 * @param customUserParam
 	 * @param category
 	 * @param selectedItems
 	 * @throws DaoException
 	 */
 	@Override
-	public List<Product> obtainUsersSelection(String priceLower,
-			String priceHighter, String userNumberOfPage, String category, Map<String, String[]> selectedItems) throws ServiceException{
+	public List<Product> obtainUsersSelection(CustomUserParamDTO customUserParam, String userNumberOfPage, String category, Map<String, String[]> selectedItems) throws ServiceException{
 			Session session = daoProduct.getCurrentSession();
 			List<Product> products = null;
 			try {
 			products = (List<Product>) daoProduct.getProduct(
-					session.createCriteria(Product.class, PRODUCT), priceLower,
-					priceHighter, Integer.parseInt(userNumberOfPage), category, selectedItems);
+					session.createCriteria(Product.class, PRODUCT), customUserParam, Integer.parseInt(userNumberOfPage), category, selectedItems);
 			} catch (Exception e) {
 				session.getTransaction().rollback();
 				logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
@@ -200,19 +189,16 @@ public class ProductService implements IProductService<Product> {
 	
 	/**
 	 * Method obtain list of goods default numbers of page
-	 * @param priceLower
-	 * @param priceHighter
+	 * @param customUserParam
 	 * @throws DaoException
 	 */
 	@Override
-	public List<Product> obtainFullSelection(String priceLower,
-			String priceHighter, String userNumberOfPage) throws ServiceException {
+	public List<Product> obtainFullSelection(CustomUserParamDTO customUserParam, String userNumberOfPage) throws ServiceException {
 		Session session = daoProduct.getCurrentSession();
 		List<Product> products = null;
 		try {
 			products = (List<Product>) daoProduct.getAllProduct(
-					session.createCriteria(Product.class, PRODUCT), priceLower,
-					priceHighter, Integer.parseInt(userNumberOfPage));
+					session.createCriteria(Product.class, PRODUCT), customUserParam, Integer.parseInt(userNumberOfPage));
 		} catch (Exception e) {
 			session.getTransaction().rollback();
 			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);

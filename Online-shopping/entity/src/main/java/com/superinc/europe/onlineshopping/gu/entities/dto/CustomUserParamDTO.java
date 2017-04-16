@@ -5,8 +5,16 @@ import java.io.Serializable;
 public class CustomUserParamDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String priceMin = "";
-	private String priceMax = "";
+	private String intCharacteristicMin1 = "";
+	private String intCharacteristicMax1 = "";
+	private String intCharacteristicMin2 = "";
+	private String intCharacteristicMax2 = "";
+	private String intCharacteristicMin3 = "";
+	private String intCharacteristicMax3 = "";
+	private String intCharacteristicMin4 = "";
+	private String intCharacteristicMax4 = "";
+	private String intCharacteristicMin5 = "";
+	private String intCharacteristicMax5 = "";
 	private String characteristics1;
 	private String selectedCharacteristics1;
 	private String characteristics2;
@@ -25,16 +33,29 @@ public class CustomUserParamDTO implements Serializable {
 	public CustomUserParamDTO() {
 	}
 	
-	public CustomUserParamDTO(String priceMin, String priceMax,
-			String characteristics1, String selectedCharacteristics1,
-			String characteristics2, String selectedCharacteristics2,
-			String characteristics3, String selectedCharacteristics3,
-			String characteristics4, String selectedCharacteristics4,
-			String characteristics5, String selectedCharacteristics5,
-			String characteristics6, String selectedCharacteristics6,
-			String characteristics7, String selectedCharacteristics7) {
-		this.priceMin = priceMin;
-		this.priceMax = priceMax;
+	public CustomUserParamDTO(String intCharacteristicMin1,
+			String intCharacteristicMax1, String intCharacteristicMin2,
+			String intCharacteristicMax2, String intCharacteristicMin3,
+			String intCharacteristicMax3, String intCharacteristicMin4,
+			String intCharacteristicMax4, String intCharacteristicMin5,
+			String intCharacteristicMax5, String characteristics1,
+			String selectedCharacteristics1, String characteristics2,
+			String selectedCharacteristics2, String characteristics3,
+			String selectedCharacteristics3, String characteristics4,
+			String selectedCharacteristics4, String characteristics5,
+			String selectedCharacteristics5, String characteristics6,
+			String selectedCharacteristics6, String characteristics7,
+			String selectedCharacteristics7) {
+		this.intCharacteristicMin1 = intCharacteristicMin1;
+		this.intCharacteristicMax1 = intCharacteristicMax1;
+		this.intCharacteristicMin2 = intCharacteristicMin2;
+		this.intCharacteristicMax2 = intCharacteristicMax2;
+		this.intCharacteristicMin3 = intCharacteristicMin3;
+		this.intCharacteristicMax3 = intCharacteristicMax3;
+		this.intCharacteristicMin4 = intCharacteristicMin4;
+		this.intCharacteristicMax4 = intCharacteristicMax4;
+		this.intCharacteristicMin5 = intCharacteristicMin5;
+		this.intCharacteristicMax5 = intCharacteristicMax5;
 		this.characteristics1 = characteristics1;
 		this.selectedCharacteristics1 = selectedCharacteristics1;
 		this.characteristics2 = characteristics2;
@@ -51,20 +72,84 @@ public class CustomUserParamDTO implements Serializable {
 		this.selectedCharacteristics7 = selectedCharacteristics7;
 	}
 
-	public String getPriceMin() {
-		return priceMin;
+	public String getIntCharacteristicMin1() {
+		return intCharacteristicMin1;
 	}
 
-	public void setPriceMin(String priceMin) {
-		this.priceMin = priceMin;
+	public void setIntCharacteristicMin1(String intCharacteristicMin1) {
+		this.intCharacteristicMin1 = intCharacteristicMin1;
 	}
 
-	public String getPriceMax() {
-		return priceMax;
+	public String getIntCharacteristicMax1() {
+		return intCharacteristicMax1;
 	}
 
-	public void setPriceMax(String priceMax) {
-		this.priceMax = priceMax;
+	public void setIntCharacteristicMax1(String intCharacteristicMax1) {
+		this.intCharacteristicMax1 = intCharacteristicMax1;
+	}
+
+	public String getIntCharacteristicMin2() {
+		return intCharacteristicMin2;
+	}
+
+	public void setIntCharacteristicMin2(String intCharacteristicMin2) {
+		this.intCharacteristicMin2 = intCharacteristicMin2;
+	}
+
+	public String getIntCharacteristicMax2() {
+		return intCharacteristicMax2;
+	}
+
+	public void setIntCharacteristicMax2(String intCharacteristicMax2) {
+		this.intCharacteristicMax2 = intCharacteristicMax2;
+	}
+
+	public String getIntCharacteristicMin3() {
+		return intCharacteristicMin3;
+	}
+
+	public void setIntCharacteristicMin3(String intCharacteristicMin3) {
+		this.intCharacteristicMin3 = intCharacteristicMin3;
+	}
+
+	public String getIntCharacteristicMax3() {
+		return intCharacteristicMax3;
+	}
+
+	public void setIntCharacteristicMax3(String intCharacteristicMax3) {
+		this.intCharacteristicMax3 = intCharacteristicMax3;
+	}
+
+	public String getIntCharacteristicMin4() {
+		return intCharacteristicMin4;
+	}
+
+	public void setIntCharacteristicMin4(String intCharacteristicMin4) {
+		this.intCharacteristicMin4 = intCharacteristicMin4;
+	}
+
+	public String getIntCharacteristicMax4() {
+		return intCharacteristicMax4;
+	}
+
+	public void setIntCharacteristicMax4(String intCharacteristicMax4) {
+		this.intCharacteristicMax4 = intCharacteristicMax4;
+	}
+
+	public String getIntCharacteristicMin5() {
+		return intCharacteristicMin5;
+	}
+
+	public void setIntCharacteristicMin5(String intCharacteristicMin5) {
+		this.intCharacteristicMin5 = intCharacteristicMin5;
+	}
+
+	public String getIntCharacteristicMax5() {
+		return intCharacteristicMax5;
+	}
+
+	public void setIntCharacteristicMax5(String intCharacteristicMax5) {
+		this.intCharacteristicMax5 = intCharacteristicMax5;
 	}
 
 	public String getCharacteristics1() {
@@ -185,22 +270,23 @@ public class CustomUserParamDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CustomUserParamDTO [priceMin=" + priceMin + ", priceMax="
-				+ priceMax + ", characteristics1=" + characteristics1
-				+ ", selectedCharacteristics1=" + selectedCharacteristics1
-				+ ", characteristics2=" + characteristics2
-				+ ", selectedCharacteristics2=" + selectedCharacteristics2
-				+ ", characteristics3=" + characteristics3
-				+ ", selectedCharacteristics3=" + selectedCharacteristics3
-				+ ", characteristics4=" + characteristics4
-				+ ", selectedCharacteristics4=" + selectedCharacteristics4
-				+ ", characteristics5=" + characteristics5
-				+ ", selectedCharacteristics5=" + selectedCharacteristics5
-				+ ", characteristics6=" + characteristics6
-				+ ", selectedCharacteristics6=" + selectedCharacteristics6
-				+ ", characteristics7=" + characteristics7
-				+ ", selectedCharacteristics7=" + selectedCharacteristics7
-				+ "]";
+		return "CustomUserParamDTO [intCharacteristicMin1="
+				+ intCharacteristicMin1 + ", intCharacteristicMax1="
+				+ intCharacteristicMax1 + ", characteristics1="
+				+ characteristics1 + ", selectedCharacteristics1="
+				+ selectedCharacteristics1 + ", characteristics2="
+				+ characteristics2 + ", selectedCharacteristics2="
+				+ selectedCharacteristics2 + ", characteristics3="
+				+ characteristics3 + ", selectedCharacteristics3="
+				+ selectedCharacteristics3 + ", characteristics4="
+				+ characteristics4 + ", selectedCharacteristics4="
+				+ selectedCharacteristics4 + ", characteristics5="
+				+ characteristics5 + ", selectedCharacteristics5="
+				+ selectedCharacteristics5 + ", characteristics6="
+				+ characteristics6 + ", selectedCharacteristics6="
+				+ selectedCharacteristics6 + ", characteristics7="
+				+ characteristics7 + ", selectedCharacteristics7="
+				+ selectedCharacteristics7 + "]";
 	}
 	
 }

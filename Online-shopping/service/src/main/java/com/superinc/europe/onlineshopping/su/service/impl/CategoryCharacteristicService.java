@@ -53,7 +53,7 @@ private static final String CHARACTERISTIC = "Characteristic";
 	
     private static final int NUMBER_CATEGORY_CHARACTERISTIC = 7;
     
-    private static final int NUMBER_BOOL_CATEGORY_CHARACTERISTIC = 3;
+    private static final int NUMBER_BOOL_CATEGORY_CHARACTERISTIC = 5;
     
 	private static Logger log = Logger.getLogger(CategoryCharacteristicService.class);
     

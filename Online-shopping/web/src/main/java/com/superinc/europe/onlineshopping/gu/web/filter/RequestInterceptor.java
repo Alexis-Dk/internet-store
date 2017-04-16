@@ -28,6 +28,16 @@ public class RequestInterceptor implements HandlerInterceptor {
 			HttpServletResponse response, Object handler) throws Exception {
 		setPriceLower(request);
 		setPriceHighter(request);
+		setIntCharacteristic1Min(request);
+		setIntCharacteristic1Max(request);
+		setIntCharacteristic2Min(request);
+		setIntCharacteristic2Max(request);
+		setIntCharacteristic3Min(request);
+		setIntCharacteristic3Max(request);
+		setIntCharacteristic4Min(request);
+		setIntCharacteristic4Max(request);
+		setIntCharacteristic5Min(request);
+		setIntCharacteristic5Max(request);
 		initializeAllWdgets(request);
 		return true;
 	}
@@ -66,6 +76,126 @@ public class RequestInterceptor implements HandlerInterceptor {
 		}
 		request.getSession().setAttribute(RequestParamConstants.HIGHTER_PRICE, priceHighter);
 		request.setAttribute(RequestParamConstants.PRICE_HIGHTER, priceHighter);
+	}
+	
+	public void setIntCharacteristic1Min(HttpServletRequest request){
+		String intCharacteristic1Min = null;
+		if (request.getParameter(RequestParamConstants.INT_CHAR_MIN_1) == null) {
+			intCharacteristic1Min = RequestParamConstants.EMPTY;
+			request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MIN_1, RequestParamConstants.EMPTY);
+		} else {
+			intCharacteristic1Min = (request.getParameter(RequestParamConstants.INT_CHAR_MIN_1));
+		}
+		request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MIN_1, intCharacteristic1Min);
+		request.setAttribute(RequestParamConstants.INT_CHAR_MIN_1, intCharacteristic1Min);
+	}
+	
+	public void setIntCharacteristic1Max(HttpServletRequest request){
+		String intCharacteristic1Max = null;
+		if (request.getParameter(RequestParamConstants.INT_CHAR_MAX_1) == null) {
+			intCharacteristic1Max = RequestParamConstants.EMPTY;
+			request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MAX_1, RequestParamConstants.EMPTY);
+		} else {
+			intCharacteristic1Max = (request.getParameter(RequestParamConstants.INT_CHAR_MAX_1));
+		}
+		request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MAX_1, intCharacteristic1Max);
+		request.setAttribute(RequestParamConstants.INT_CHAR_MAX_1, intCharacteristic1Max);
+	}
+	
+	public void setIntCharacteristic2Min(HttpServletRequest request){
+		String intCharacteristic1Min = null;
+		if (request.getParameter(RequestParamConstants.INT_CHAR_MIN_2) == null) {
+			intCharacteristic1Min = RequestParamConstants.EMPTY;
+			request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MIN_2, RequestParamConstants.EMPTY);
+		} else {
+			intCharacteristic1Min = (request.getParameter(RequestParamConstants.INT_CHAR_MIN_2));
+		}
+		request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MIN_2, intCharacteristic1Min);
+		request.setAttribute(RequestParamConstants.INT_CHAR_MIN_2, intCharacteristic1Min);
+	}
+	
+	public void setIntCharacteristic2Max(HttpServletRequest request){
+		String intCharacteristic1Max = null;
+		if (request.getParameter(RequestParamConstants.INT_CHAR_MAX_2) == null) {
+			intCharacteristic1Max = RequestParamConstants.EMPTY;
+			request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MAX_2, RequestParamConstants.EMPTY);
+		} else {
+			intCharacteristic1Max = (request.getParameter(RequestParamConstants.INT_CHAR_MAX_2));
+		}
+		request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MAX_2, intCharacteristic1Max);
+		request.setAttribute(RequestParamConstants.INT_CHAR_MAX_2, intCharacteristic1Max);
+	}
+
+	public void setIntCharacteristic3Min(HttpServletRequest request){
+		String intCharacteristic1Min = null;
+		if (request.getParameter(RequestParamConstants.INT_CHAR_MIN_3) == null) {
+			intCharacteristic1Min = RequestParamConstants.EMPTY;
+			request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MIN_3, RequestParamConstants.EMPTY);
+		} else {
+			intCharacteristic1Min = (request.getParameter(RequestParamConstants.INT_CHAR_MIN_3));
+		}
+		request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MIN_3, intCharacteristic1Min);
+		request.setAttribute(RequestParamConstants.INT_CHAR_MIN_3, intCharacteristic1Min);
+	}
+	
+	public void setIntCharacteristic3Max(HttpServletRequest request){
+		String intCharacteristic1Max = null;
+		if (request.getParameter(RequestParamConstants.INT_CHAR_MAX_3) == null) {
+			intCharacteristic1Max = RequestParamConstants.EMPTY;
+			request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MAX_3, RequestParamConstants.EMPTY);
+		} else {
+			intCharacteristic1Max = (request.getParameter(RequestParamConstants.INT_CHAR_MAX_3));
+		}
+		request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MAX_3, intCharacteristic1Max);
+		request.setAttribute(RequestParamConstants.INT_CHAR_MAX_3, intCharacteristic1Max);
+	}
+	
+	public void setIntCharacteristic4Min(HttpServletRequest request){
+		String intCharacteristic1Min = null;
+		if (request.getParameter(RequestParamConstants.INT_CHAR_MIN_4) == null) {
+			intCharacteristic1Min = RequestParamConstants.EMPTY;
+			request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MIN_4, RequestParamConstants.EMPTY);
+		} else {
+			intCharacteristic1Min = (request.getParameter(RequestParamConstants.INT_CHAR_MIN_4));
+		}
+		request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MIN_4, intCharacteristic1Min);
+		request.setAttribute(RequestParamConstants.INT_CHAR_MIN_4, intCharacteristic1Min);
+	}
+	
+	public void setIntCharacteristic4Max(HttpServletRequest request){
+		String intCharacteristic1Max = null;
+		if (request.getParameter(RequestParamConstants.INT_CHAR_MAX_4) == null) {
+			intCharacteristic1Max = RequestParamConstants.EMPTY;
+			request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MAX_4, RequestParamConstants.EMPTY);
+		} else {
+			intCharacteristic1Max = (request.getParameter(RequestParamConstants.INT_CHAR_MAX_4));
+		}
+		request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MAX_4, intCharacteristic1Max);
+		request.setAttribute(RequestParamConstants.INT_CHAR_MAX_4, intCharacteristic1Max);
+	}
+	
+	public void setIntCharacteristic5Min(HttpServletRequest request){
+		String intCharacteristic1Min = null;
+		if (request.getParameter(RequestParamConstants.INT_CHAR_MIN_5) == null) {
+			intCharacteristic1Min = RequestParamConstants.EMPTY;
+			request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MIN_5, RequestParamConstants.EMPTY);
+		} else {
+			intCharacteristic1Min = (request.getParameter(RequestParamConstants.INT_CHAR_MIN_5));
+		}
+		request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MIN_5, intCharacteristic1Min);
+		request.setAttribute(RequestParamConstants.INT_CHAR_MIN_5, intCharacteristic1Min);
+	}
+	
+	public void setIntCharacteristic5Max(HttpServletRequest request){
+		String intCharacteristic1Max = null;
+		if (request.getParameter(RequestParamConstants.INT_CHAR_MAX_5) == null) {
+			intCharacteristic1Max = RequestParamConstants.EMPTY;
+			request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MAX_5, RequestParamConstants.EMPTY);
+		} else {
+			intCharacteristic1Max = (request.getParameter(RequestParamConstants.INT_CHAR_MAX_5));
+		}
+		request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MAX_5, intCharacteristic1Max);
+		request.setAttribute(RequestParamConstants.INT_CHAR_MAX_5, intCharacteristic1Max);
 	}
 	
 	public void initializeAllWdgets(HttpServletRequest request){

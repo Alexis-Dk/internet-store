@@ -13,6 +13,7 @@ import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
+import com.superinc.europe.onlineshopping.gu.entities.dto.CustomUserParamDTO;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 
 /**
@@ -25,8 +26,16 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 	private static final String GET_COUNT_ROW = "select count(*) from Product where delete_status=0";
 	private static final String CATEGORY_ID = "category_id = ";
 	private static final String EMPTY_FIELD = "";
-	private static final String PRICE_LESS = "price <= ";
-	private static final String PRICE_MORE = "price >= ";
+	private static final String INT_CHAR1_LESS = "intCharacteristic1 <= ";
+	private static final String INT_CHAR1_MORE = "intCharacteristic1 >= ";
+	private static final String INT_CHAR2_LESS = "intCharacteristic2 <= ";
+	private static final String INT_CHAR2_MORE = "intCharacteristic2 >= ";
+	private static final String INT_CHAR3_LESS = "intCharacteristic3 <= ";
+	private static final String INT_CHAR3_MORE = "intCharacteristic3 >= ";
+	private static final String INT_CHAR4_LESS = "intCharacteristic4 <= ";
+	private static final String INT_CHAR4_MORE = "intCharacteristic4 >= ";
+	private static final String INT_CHAR5_LESS = "intCharacteristic5 <= ";
+	private static final String INT_CHAR5_MORE = "intCharacteristic5 >= ";
 	private static final int DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE = 12;
 	
 	Logger log = Logger.getLogger(DaoProduct.class);
@@ -43,23 +52,55 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 	/**
 	 * Method get list products
 	 * @param criteria
-	 * @param priceLower
-	 * @param priceHighter
+	 * @param customUserParam
 	 * @param numberOfPage
 	 * @param category
 	 * @throws DaoException
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Product> getProduct(Criteria criteria, String priceLower,
-			String priceHighter, int numberOfPage, String category) {
+	public List<Product> getProduct(Criteria criteria, CustomUserParamDTO customUserParam, int numberOfPage, String category) {
 		criteria.add(Restrictions.sqlRestriction(CATEGORY_ID + category));
 		criteria.setMaxResults(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE);
 		criteria.setFirstResult(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE*(numberOfPage - 1));
-		if (!priceLower.equals(EMPTY_FIELD)) {
-			criteria.add(Restrictions.sqlRestriction(PRICE_MORE + priceLower));
+		String intCharacteristicMin1 = customUserParam.getIntCharacteristicMin1();
+		String intCharacteristicMax1 = customUserParam.getIntCharacteristicMax1();
+		String intCharacteristicMin2 = customUserParam.getIntCharacteristicMin2();
+		String intCharacteristicMax2 = customUserParam.getIntCharacteristicMax2();
+		String intCharacteristicMin3 = customUserParam.getIntCharacteristicMin3();
+		String intCharacteristicMax3 = customUserParam.getIntCharacteristicMax3();
+		String intCharacteristicMin4 = customUserParam.getIntCharacteristicMin4();
+		String intCharacteristicMax4 = customUserParam.getIntCharacteristicMax4();
+		String intCharacteristicMin5 = customUserParam.getIntCharacteristicMin5();
+		String intCharacteristicMax5 = customUserParam.getIntCharacteristicMax5();
+		if (!intCharacteristicMin1.equals(EMPTY_FIELD)) {
+			criteria.add(Restrictions.sqlRestriction(INT_CHAR1_MORE + intCharacteristicMin1));
 		}
-		if (!priceHighter.equals(EMPTY_FIELD)) {
-		criteria.add(Restrictions.sqlRestriction(PRICE_LESS + priceHighter));
+		if (!intCharacteristicMax1.equals(EMPTY_FIELD)) {
+		criteria.add(Restrictions.sqlRestriction(INT_CHAR1_LESS + intCharacteristicMax1));
+		}
+		if (!intCharacteristicMin2.equals(EMPTY_FIELD)) {
+			criteria.add(Restrictions.sqlRestriction(INT_CHAR2_MORE + intCharacteristicMin2));
+		}
+		if (!intCharacteristicMax2.equals(EMPTY_FIELD)) {
+		criteria.add(Restrictions.sqlRestriction(INT_CHAR2_LESS + intCharacteristicMax2));
+		}
+		if (!intCharacteristicMin3.equals(EMPTY_FIELD)) {
+			criteria.add(Restrictions.sqlRestriction(INT_CHAR3_MORE + intCharacteristicMin3));
+		}
+		if (!intCharacteristicMax3.equals(EMPTY_FIELD)) {
+		criteria.add(Restrictions.sqlRestriction(INT_CHAR3_LESS + intCharacteristicMax3));
+		}
+		if (!intCharacteristicMin4.equals(EMPTY_FIELD)) {
+			criteria.add(Restrictions.sqlRestriction(INT_CHAR4_MORE + intCharacteristicMin4));
+		}
+		if (!intCharacteristicMax4.equals(EMPTY_FIELD)) {
+		criteria.add(Restrictions.sqlRestriction(INT_CHAR4_LESS + intCharacteristicMax4));
+		}
+		if (!intCharacteristicMin5.equals(EMPTY_FIELD)) {
+			criteria.add(Restrictions.sqlRestriction(INT_CHAR5_MORE + intCharacteristicMin5));
+		}
+		if (!intCharacteristicMax5.equals(EMPTY_FIELD)) {
+		criteria.add(Restrictions.sqlRestriction(INT_CHAR5_LESS + intCharacteristicMax5));
 		}
 		return criteria.list();
 	}
@@ -67,24 +108,56 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 	/**
 	 * Method get list products
 	 * @param criteria
-	 * @param priceLower
-	 * @param priceHighter
+	 * @param customUserParam
 	 * @param numberOfPage
 	 * @param category
 	 * @param selectedItems
 	 * @throws DaoException
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Product> getProduct(Criteria criteria, String priceLower,
-			String priceHighter, int numberOfPage, String category, Map<String, String[]> selectedItems) {
+	public List<Product> getProduct(Criteria criteria, CustomUserParamDTO customUserParam, int numberOfPage, String category, Map<String, String[]> selectedItems) {
 		criteria.add(Restrictions.sqlRestriction(CATEGORY_ID + category));
 		criteria.setMaxResults(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE);
 		criteria.setFirstResult(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE*(numberOfPage - 1));
-		if (!priceLower.equals(EMPTY_FIELD)) {
-			criteria.add(Restrictions.sqlRestriction(PRICE_MORE + priceLower));
+		String intCharacteristicMin1 = customUserParam.getIntCharacteristicMin1();
+		String intCharacteristicMax1 = customUserParam.getIntCharacteristicMax1();
+		String intCharacteristicMin2 = customUserParam.getIntCharacteristicMin2();
+		String intCharacteristicMax2 = customUserParam.getIntCharacteristicMax2();
+		String intCharacteristicMin3 = customUserParam.getIntCharacteristicMin3();
+		String intCharacteristicMax3 = customUserParam.getIntCharacteristicMax3();
+		String intCharacteristicMin4 = customUserParam.getIntCharacteristicMin4();
+		String intCharacteristicMax4 = customUserParam.getIntCharacteristicMax4();
+		String intCharacteristicMin5 = customUserParam.getIntCharacteristicMin5();
+		String intCharacteristicMax5 = customUserParam.getIntCharacteristicMax5();
+		if (!intCharacteristicMin1.equals(EMPTY_FIELD)) {
+			criteria.add(Restrictions.sqlRestriction(INT_CHAR1_MORE + intCharacteristicMin1));
 		}
-		if (!priceHighter.equals(EMPTY_FIELD)) {
-		criteria.add(Restrictions.sqlRestriction(PRICE_LESS + priceHighter));
+		if (!intCharacteristicMax1.equals(EMPTY_FIELD)) {
+		criteria.add(Restrictions.sqlRestriction(INT_CHAR1_LESS + intCharacteristicMax1));
+		}
+		if (!intCharacteristicMin2.equals(EMPTY_FIELD)) {
+			criteria.add(Restrictions.sqlRestriction(INT_CHAR2_MORE + intCharacteristicMin2));
+		}
+		if (!intCharacteristicMax2.equals(EMPTY_FIELD)) {
+		criteria.add(Restrictions.sqlRestriction(INT_CHAR2_LESS + intCharacteristicMax2));
+		}
+		if (!intCharacteristicMin3.equals(EMPTY_FIELD)) {
+			criteria.add(Restrictions.sqlRestriction(INT_CHAR3_MORE + intCharacteristicMin3));
+		}
+		if (!intCharacteristicMax3.equals(EMPTY_FIELD)) {
+		criteria.add(Restrictions.sqlRestriction(INT_CHAR3_LESS + intCharacteristicMax3));
+		}
+		if (!intCharacteristicMin4.equals(EMPTY_FIELD)) {
+			criteria.add(Restrictions.sqlRestriction(INT_CHAR4_MORE + intCharacteristicMin4));
+		}
+		if (!intCharacteristicMax4.equals(EMPTY_FIELD)) {
+		criteria.add(Restrictions.sqlRestriction(INT_CHAR4_LESS + intCharacteristicMax4));
+		}
+		if (!intCharacteristicMin5.equals(EMPTY_FIELD)) {
+			criteria.add(Restrictions.sqlRestriction(INT_CHAR5_MORE + intCharacteristicMin5));
+		}
+		if (!intCharacteristicMax5.equals(EMPTY_FIELD)) {
+		criteria.add(Restrictions.sqlRestriction(INT_CHAR5_LESS + intCharacteristicMax5));
 		}
 		for(Map.Entry<String, String[]> entry : selectedItems.entrySet()) {
 			if (entry.getValue().length > 1) {
@@ -99,21 +172,53 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 	/**
 	 * Method get list products
 	 * @param criteria
-	 * @param priceLower
-	 * @param priceHighter
+	 * @param customUserParam
 	 * @param numberOfPage
 	 * @throws DaoException
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Product> getAllProduct(Criteria criteria, String priceLower,
-			String priceHighter, int quantityOfPage) {
+	public List<Product> getAllProduct(Criteria criteria, CustomUserParamDTO customUserParam, int quantityOfPage) {
 		criteria.setMaxResults(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE);
 		criteria.setFirstResult(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE*(quantityOfPage - 1));
-		if (!priceLower.equals(EMPTY_FIELD)) {
-			criteria.add(Restrictions.sqlRestriction(PRICE_MORE + priceLower));
+		String intCharacteristicMin1 = customUserParam.getIntCharacteristicMin1();
+		String intCharacteristicMax1 = customUserParam.getIntCharacteristicMax1();
+		String intCharacteristicMin2 = customUserParam.getIntCharacteristicMin2();
+		String intCharacteristicMax2 = customUserParam.getIntCharacteristicMax2();
+		String intCharacteristicMin3 = customUserParam.getIntCharacteristicMin3();
+		String intCharacteristicMax3 = customUserParam.getIntCharacteristicMax3();
+		String intCharacteristicMin4 = customUserParam.getIntCharacteristicMin4();
+		String intCharacteristicMax4 = customUserParam.getIntCharacteristicMax4();
+		String intCharacteristicMin5 = customUserParam.getIntCharacteristicMin5();
+		String intCharacteristicMax5 = customUserParam.getIntCharacteristicMax5();
+		if (!intCharacteristicMin1.equals(EMPTY_FIELD)) {
+			criteria.add(Restrictions.sqlRestriction(INT_CHAR1_MORE + intCharacteristicMin1));
 		}
-		if (!priceHighter.equals(EMPTY_FIELD)) {
-		criteria.add(Restrictions.sqlRestriction(PRICE_LESS + priceHighter));
+		if (!intCharacteristicMax1.equals(EMPTY_FIELD)) {
+		criteria.add(Restrictions.sqlRestriction(INT_CHAR1_LESS + intCharacteristicMax1));
+		}
+		if (!intCharacteristicMin2.equals(EMPTY_FIELD)) {
+			criteria.add(Restrictions.sqlRestriction(INT_CHAR2_MORE + intCharacteristicMin2));
+		}
+		if (!intCharacteristicMax2.equals(EMPTY_FIELD)) {
+		criteria.add(Restrictions.sqlRestriction(INT_CHAR2_LESS + intCharacteristicMax2));
+		}
+		if (!intCharacteristicMin3.equals(EMPTY_FIELD)) {
+			criteria.add(Restrictions.sqlRestriction(INT_CHAR3_MORE + intCharacteristicMin3));
+		}
+		if (!intCharacteristicMax3.equals(EMPTY_FIELD)) {
+		criteria.add(Restrictions.sqlRestriction(INT_CHAR3_LESS + intCharacteristicMax3));
+		}
+		if (!intCharacteristicMin4.equals(EMPTY_FIELD)) {
+			criteria.add(Restrictions.sqlRestriction(INT_CHAR4_MORE + intCharacteristicMin4));
+		}
+		if (!intCharacteristicMax4.equals(EMPTY_FIELD)) {
+		criteria.add(Restrictions.sqlRestriction(INT_CHAR4_LESS + intCharacteristicMax4));
+		}
+		if (!intCharacteristicMin5.equals(EMPTY_FIELD)) {
+			criteria.add(Restrictions.sqlRestriction(INT_CHAR5_MORE + intCharacteristicMin5));
+		}
+		if (!intCharacteristicMax5.equals(EMPTY_FIELD)) {
+		criteria.add(Restrictions.sqlRestriction(INT_CHAR5_LESS + intCharacteristicMax5));
 		}
 		return criteria.list();
 	}

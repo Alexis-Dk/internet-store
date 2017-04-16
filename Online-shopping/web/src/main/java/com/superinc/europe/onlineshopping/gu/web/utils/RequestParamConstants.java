@@ -34,6 +34,16 @@ public class RequestParamConstants {
 	public static final String ADMIN_PAGE_ATTR = "admin";
 	public static final String LOWER_PRICE = "priceLower";
 	public static final String HIGHTER_PRICE = "priceHighter";
+	public static final String INT_CHAR_MIN_1 = "intCharacteristicMin1";	
+	public static final String INT_CHAR_MAX_1 = "intCharacteristicMax1";
+	public static final String INT_CHAR_MIN_2 = "intCharacteristicMin2";	
+	public static final String INT_CHAR_MAX_2 = "intCharacteristicMax2";
+	public static final String INT_CHAR_MIN_3 = "intCharacteristicMin3";	
+	public static final String INT_CHAR_MAX_3 = "intCharacteristicMax3";
+	public static final String INT_CHAR_MIN_4 = "intCharacteristicMin4";	
+	public static final String INT_CHAR_MAX_4 = "intCharacteristicMax4";
+	public static final String INT_CHAR_MIN_5 = "intCharacteristicMin5";	
+	public static final String INT_CHAR_MAX_5 = "intCharacteristicMax5";
 	public static final String INCREASE_QUANTITY = "/increaseQuantity";
 	public static final String DECREASE_QUANTITY = "/decreaseQuantity";
 	public static final String EMPTY = "";

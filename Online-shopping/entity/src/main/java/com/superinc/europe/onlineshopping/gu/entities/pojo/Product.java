@@ -86,6 +86,21 @@ public class Product implements Serializable {
 	@Column(name="rating")
 	private int rating;
 	
+	@Column(name="intCharacteristic1")
+	private int intCharacteristic1;
+
+	@Column(name="intCharacteristic2")
+	private int intCharacteristic2;
+	
+	@Column(name="intCharacteristic3")
+	private int intCharacteristic3;
+	
+	@Column(name="intCharacteristic4")
+	private int intCharacteristic4;
+	
+	@Column(name="intCharacteristic5")
+	private int intCharacteristic5;
+	
 	@Column(name="boolCharacteristic1", nullable = false)
 	private Boolean boolCharacteristic1 = false;
 	
@@ -438,6 +453,46 @@ public class Product implements Serializable {
 		this.boolCharacteristic5 = boolCharacteristic5;
 	}
 
+	public int getIntCharacteristic1() {
+		return intCharacteristic1;
+	}
+
+	public void setIntCharacteristic1(int intCharacteristic1) {
+		this.intCharacteristic1 = intCharacteristic1;
+	}
+
+	public int getIntCharacteristic2() {
+		return intCharacteristic2;
+	}
+
+	public void setIntCharacteristic2(int intCharacteristic2) {
+		this.intCharacteristic2 = intCharacteristic2;
+	}
+
+	public int getIntCharacteristic3() {
+		return intCharacteristic3;
+	}
+
+	public void setIntCharacteristic3(int intCharacteristic3) {
+		this.intCharacteristic3 = intCharacteristic3;
+	}
+
+	public int getIntCharacteristic4() {
+		return intCharacteristic4;
+	}
+
+	public void setIntCharacteristic4(int intCharacteristic4) {
+		this.intCharacteristic4 = intCharacteristic4;
+	}
+
+	public int getIntCharacteristic5() {
+		return intCharacteristic5;
+	}
+
+	public void setIntCharacteristic5(int intCharacteristic5) {
+		this.intCharacteristic5 = intCharacteristic5;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", categoryFk=" + categoryFk
@@ -452,11 +507,16 @@ public class Product implements Serializable {
 				+ characteristic9 + ", characteristic10=" + characteristic10
 				+ ", characteristic11=" + characteristic11 + ", deleteStatus="
 				+ deleteStatus + ", stockStatus=" + stockStatus + ", rating="
-				+ rating + ", boolCharacteristic1=" + boolCharacteristic1
+				+ rating + ", intCharacteristic1=" + intCharacteristic1
+				+ ", intCharacteristic2=" + intCharacteristic2
+				+ ", intCharacteristic3=" + intCharacteristic3
+				+ ", intCharacteristic4=" + intCharacteristic4
+				+ ", intCharacteristic5=" + intCharacteristic5
+				+ ", boolCharacteristic1=" + boolCharacteristic1
 				+ ", boolCharacteristic2=" + boolCharacteristic2
 				+ ", boolCharacteristic3=" + boolCharacteristic3
 				+ ", boolCharacteristic4=" + boolCharacteristic4
 				+ ", boolCharacteristic5=" + boolCharacteristic5 + "]";
 	}
-
+	
 }

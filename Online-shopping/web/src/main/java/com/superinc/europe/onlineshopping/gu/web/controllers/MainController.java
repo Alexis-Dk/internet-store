@@ -97,8 +97,16 @@ public class MainController {
 //    @PreAuthorize("isAnonymous()")
 	@RequestMapping(value = RequestConstants.PRODUCT, method = RequestMethod.GET, params=RequestParamConstants.CATEGORY)
 	public String setProductPage(HttpServletRequest request, ModelMap model,
-			@RequestParam(value = RequestParamConstants.LOWER_PRICE, defaultValue = RequestParamConstants.EMPTY) String priceLower,
-			@RequestParam(value = RequestParamConstants.HIGHTER_PRICE, defaultValue = RequestParamConstants.EMPTY) String priceHighter,
+			@RequestParam(value = RequestParamConstants.INT_CHAR_MIN_1, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMin1,
+			@RequestParam(value = RequestParamConstants.INT_CHAR_MAX_1, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMax1,
+			@RequestParam(value = RequestParamConstants.INT_CHAR_MIN_2, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMin2,
+			@RequestParam(value = RequestParamConstants.INT_CHAR_MAX_2, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMax2,
+			@RequestParam(value = RequestParamConstants.INT_CHAR_MIN_3, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMin3,
+			@RequestParam(value = RequestParamConstants.INT_CHAR_MAX_3, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMax3,
+			@RequestParam(value = RequestParamConstants.INT_CHAR_MIN_4, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMin4,
+			@RequestParam(value = RequestParamConstants.INT_CHAR_MAX_4, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMax4,
+			@RequestParam(value = RequestParamConstants.INT_CHAR_MIN_5, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMin5,
+			@RequestParam(value = RequestParamConstants.INT_CHAR_MAX_5, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMax5,
 			@RequestParam(value = RequestParamConstants.CATEGORY) String category,
 			@RequestParam(value = RequestParamConstants.SELECTED_PAGE, defaultValue = RequestParamConstants.VALUE_STR_ONE) String selectedPage,
 			@RequestParam(value = "selectedCharacteristic1", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic1,
@@ -111,8 +119,16 @@ public class MainController {
 		CustomUserParamDTO customUserParam = (CustomUserParamDTO) request.getSession().getAttribute("customUserParam");
 		Map<String, String[]> selectedItems = new HashMap<String, String[]>();
 		if (customUserParam != null) {
-			customUserParam.setPriceMin(priceLower);
-			customUserParam.setPriceMax(priceHighter);
+			customUserParam.setIntCharacteristicMin1(intCharacteristicMin1);
+			customUserParam.setIntCharacteristicMax1(intCharacteristicMax1);
+			customUserParam.setIntCharacteristicMin2(intCharacteristicMin2);
+			customUserParam.setIntCharacteristicMax2(intCharacteristicMax2);
+			customUserParam.setIntCharacteristicMin3(intCharacteristicMin3);
+			customUserParam.setIntCharacteristicMax3(intCharacteristicMax3);
+			customUserParam.setIntCharacteristicMin4(intCharacteristicMin4);
+			customUserParam.setIntCharacteristicMax4(intCharacteristicMax4);
+			customUserParam.setIntCharacteristicMin5(intCharacteristicMin5);
+			customUserParam.setIntCharacteristicMax5(intCharacteristicMax5);
 			String[] selcectedCharacteristics = {selectedCharacteristic1, selectedCharacteristic2, selectedCharacteristic3, selectedCharacteristic4, selectedCharacteristic5, selectedCharacteristic6, selectedCharacteristic7};
 			setCustomUserParam(selcectedCharacteristics, customUserParam);
 			selectedItems = getSelectedCharacteristics(selcectedCharacteristics);
@@ -129,8 +145,7 @@ public class MainController {
 			//	model.put(RequestParamConstants.PRODUCTS, goodsService.obtainDefaultSelection((String) priceLower,
 			//					(String) priceHighter, (String) category, selectedItems));
 			//} else {
-				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainUsersSelection((String) priceLower,
-								(String) priceHighter, selectedPage, (String) category, selectedItems));
+				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainUsersSelection(customUserParam, selectedPage, (String) category, selectedItems));
 				initModel(model, category);
 			//}
 		} catch (Exception e) {
@@ -184,11 +199,13 @@ public class MainController {
 			@RequestParam(value = RequestParamConstants.HIGHTER_PRICE, defaultValue = RequestParamConstants.EMPTY) String priceHighter,
 			@RequestParam(value = RequestParamConstants.SELECTED_PAGE, defaultValue = RequestParamConstants.VALUE_STR_ONE) String selectedPage) {
 		try {
+			CustomUserParamDTO customUserParam = (CustomUserParamDTO) request.getSession().getAttribute("customUserParam");
+			customUserParam.setIntCharacteristicMin1(priceLower);
+			customUserParam.setIntCharacteristicMax1(priceHighter);
 			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
 					navigationService.getDataToPaginationWidget(goodsService.getQuantityOfPage()));
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getDefaultProductCategories());
-			model.put(RequestParamConstants.PRODUCTS, goodsService.obtainFullSelection((String) priceLower,
-								(String) priceHighter, selectedPage));
+			model.put(RequestParamConstants.PRODUCTS, goodsService.obtainFullSelection(customUserParam, selectedPage));
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
