@@ -507,22 +507,29 @@
                         <div class="product-upper">
                         <a href="singleProduct?description=<c:out value="${product.description}"></c:out>
 &name=<c:out value="${product.name}"></c:out>
+&intCharacteristic1=<c:out value="${product.intCharacteristic1}"></c:out>
+&intCharacteristic2=<c:out value="${product.intCharacteristic2}"></c:out>
+&intCharacteristic3=<c:out value="${product.intCharacteristic3}"></c:out>
+&intCharacteristic4=<c:out value="${product.intCharacteristic4}"></c:out>
+&intCharacteristic5=<c:out value="${product.intCharacteristic5}"></c:out>
 &characteristic1=<c:out value="${product.characteristic1}"></c:out>
 &characteristic2=<c:out value="${product.characteristic2}"></c:out>
 &characteristic3=<c:out value="${product.characteristic3}"></c:out>
 &characteristic4=<c:out value="${product.characteristic4}"></c:out>
+&characteristic5=<c:out value="${product.characteristic5}"></c:out>
 &characteristic6=<c:out value="${product.characteristic6}"></c:out>
 &characteristic7=<c:out value="${product.characteristic7}"></c:out> 
 &rating=<c:out value="${product.rating}"></c:out>
 &stockStatus=<c:out value="${product.stockStatus}"></c:out>
 &imagePath=<c:out value="${product.imagePath}"></c:out>
 &price=<c:out value="${product.price}"></c:out>
-&productId=<c:out value="${product.productId}"></c:out>">
+&productId=<c:out value="${product.productId}"></c:out>
+&categoryId=<%= request.getSession().getAttribute("categoryId") %>">
                         <img src="img/<c:out value="${product.imagePath}"></c:out>" alt=""></a>
                         </div>
 							<h2><a><c:out value="${product.name}"></c:out> <c:out value="${product.description}"></c:out></a></h2>
 						<div class="product-carousel-price">
-                            <ins>$<c:out value="${product.price}"></c:out></ins> <del>$<c:out value="${product.oldprice}"></c:out></del>
+                            <ins>$<c:out value="${product.intCharacteristic1}"></c:out></ins> <del>$<c:out value="${product.intCharacteristic1}"></c:out></del>
                         </div>  
                         <sec:authorize access="isAuthenticated()">  
 	                        <div class="product-option-shop">
@@ -632,7 +639,6 @@
 </div>
 </div>
 </div>
-
 
     <div class="footer-top-area">
         <div class="zigzag-bottom"></div>

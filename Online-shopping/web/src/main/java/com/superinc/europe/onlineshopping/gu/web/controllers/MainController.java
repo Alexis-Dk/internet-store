@@ -238,6 +238,7 @@ public class MainController {
 					.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET,
 					productCategoryService.getNoActiveProductCategories());
+			initModel(model, request.getParameter("categoryId"));
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
