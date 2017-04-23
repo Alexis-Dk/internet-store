@@ -5,7 +5,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -410,6 +410,61 @@ else {
 						<sf:errors path="intCharacteristic5" cssStyle="color: red" />
 						<sf:input id="intCharacteristicData5" path="intCharacteristic5" class="form-control"
 							type="text" name="intCharacteristic5" value="" />
+					</div>
+				</div>
+ 
+  				<div class="form-group">
+					<div class="col-xs-3">
+						<label for="boolCharacteristicData1" class="control-label"><%= request.getAttribute("categoryCharacteristicBool1") %>:</label>
+					</div>
+					<div class="col-xs-5">
+						<sf:radiobutton path="boolCharacteristic1" value="True" /> Yes
+						<sf:radiobutton path="boolCharacteristic1" value="False" /> No
+						<sf:errors path="boolCharacteristic1" cssStyle="color: red" />
+					</div>
+				</div>
+ 
+  				<div class="form-group">
+					<div class="col-xs-3">
+						<label for="boolCharacteristicData2" class="control-label"><%= request.getAttribute("categoryCharacteristicBool2") %>:</label>
+					</div>
+					<div class="col-xs-5">
+						<sf:radiobutton path="boolCharacteristic2" value="True" /> Yes
+						<sf:radiobutton path="boolCharacteristic2" value="False" /> No
+						<sf:errors path="boolCharacteristic2" cssStyle="color: red" />
+					</div>
+				</div>
+ 
+  				<div class="form-group">
+					<div class="col-xs-3">
+						<label for="boolCharacteristicData3" class="control-label"><%= request.getAttribute("categoryCharacteristicBool3") %>:</label>
+					</div>
+					<div class="col-xs-5">
+						<sf:radiobutton path="boolCharacteristic3" value="True" /> Yes
+						<sf:radiobutton path="boolCharacteristic3" value="False" /> No
+						<sf:errors path="boolCharacteristic3" cssStyle="color: red" />
+					</div>
+				</div>
+ 
+  				<div class="form-group">
+					<div class="col-xs-3">
+						<label for="boolCharacteristicData4" class="control-label"><%= request.getAttribute("categoryCharacteristicBool4") %>:</label>
+					</div>
+					<div class="col-xs-5">
+						<sf:radiobutton path="boolCharacteristic4" value="True" /> Yes
+						<sf:radiobutton path="boolCharacteristic4" value="False" /> No
+						<sf:errors path="boolCharacteristic4" cssStyle="color: red" />
+					</div>
+				</div>
+ 
+  				<div class="form-group">
+					<div class="col-xs-3">
+						<label for="boolCharacteristicData5" class="control-label"><%= request.getAttribute("categoryCharacteristicBool5") %>:</label>
+					</div>
+					<div class="col-xs-5">
+						<sf:radiobutton path="boolCharacteristic5" value="True" /> Yes
+						<sf:radiobutton path="boolCharacteristic5" value="False" /> No
+						<sf:errors path="boolCharacteristic5" cssStyle="color: red" />
 					</div>
 				</div>
  

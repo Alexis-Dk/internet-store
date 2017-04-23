@@ -580,6 +580,11 @@ public class AdminController {
 	product.setIntCharacteristic3(productDTO.getIntCharacteristic3());
 	product.setIntCharacteristic4(productDTO.getIntCharacteristic4());
 	product.setIntCharacteristic5(productDTO.getIntCharacteristic5());
+	product.setBoolCharacteristic1(Boolean.parseBoolean(productDTO.getBoolCharacteristic1()));
+	product.setBoolCharacteristic2(Boolean.parseBoolean(productDTO.getBoolCharacteristic2()));
+	product.setBoolCharacteristic3(Boolean.parseBoolean(productDTO.getBoolCharacteristic3()));
+	product.setBoolCharacteristic4(Boolean.parseBoolean(productDTO.getBoolCharacteristic4()));
+	product.setBoolCharacteristic5(Boolean.parseBoolean(productDTO.getBoolCharacteristic5()));
 	product.setImage_path(productDTO.getDepartment().getId()+ "/"+productDTO.getDescription()+ "_"+Integer.toString(id) + ".jpg");
     }
 	

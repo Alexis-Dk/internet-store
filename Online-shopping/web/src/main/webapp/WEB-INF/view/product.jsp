@@ -280,6 +280,11 @@
                               -->
                         <form method="get"  action="product?" class="form-horizontal">
                         <div layout="column">
+                        <input hidden="true" type="text" id="boolCharacteristic1" name="boolCharacteristic1" value="{{customUserParam.boolCharacteristic1}}">
+                        <input hidden="true" type="text" id="boolCharacteristic2" name="boolCharacteristic2" value="{{customUserParam.boolCharacteristic2}}">
+                        <input hidden="true" type="text" id="boolCharacteristic3" name="boolCharacteristic3" value="{{customUserParam.boolCharacteristic3}}">
+                        <input hidden="true" type="text" id="boolCharacteristic4" name="boolCharacteristic4" value="{{customUserParam.boolCharacteristic4}}">
+                        <input hidden="true" type="text" id="boolCharacteristic5" name="boolCharacteristic5" value="{{customUserParam.boolCharacteristic5}}">
                         <input hidden="true" type="text" id="selectedCharacteristic1" name="selectedCharacteristic1" value="{{selected1}}">
                         <input hidden="true" type="text" id="selectedCharacteristic2" name="selectedCharacteristic2" value="{{selected2}}">
                         <input hidden="true" type="text" id="selectedCharacteristic3" name="selectedCharacteristic3" value="{{selected3}}">
@@ -446,23 +451,35 @@
                                       </md-checkbox> -->
                                     </div>
                                   </div>
-                                </fieldset>  
-							    <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool1.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                </fieldset>
+          					    <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool1.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
                                 <div layout-align="center none" class="parent">
-				                  <md-switch ng-model="data.cb1" aria-label="Switch 1">
-					                <div align="center">  Switch 1: {{ data.cb1 }}</div>
+				                  <md-switch ng-model="customUserParam.boolCharacteristic1" aria-label="Switch 2" ng-click="updateBoolChar1()">
+					                <div align="center">  </div>
 					              </md-switch>
 					            </div>
 							    <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool2.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
                                 <div layout-align="center none" class="parent">
-				                  <md-switch ng-model="data.cb1" aria-label="Switch 2">
-					                <div align="center">  Switch 2: {{ data.cb1 }}</div>
+				                  <md-switch ng-model="customUserParam.boolCharacteristic2" aria-label="Switch 2" ng-click="updateBoolChar2()">
+					                <div align="center">  </div>
 					              </md-switch>
 					            </div>
 							    <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool3.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
                                 <div layout-align="center none" class="parent">
-				                  <md-switch ng-model="data.cb1" aria-label="Switch 3">
-					                <div align="center">  Switch 3: {{ data.cb1 }}</div>
+				                  <md-switch ng-model="customUserParam.boolCharacteristic3" aria-label="Switch 3" ng-click="updateBoolChar3()">
+					                <div align="center">  </div>
+					              </md-switch>
+					            </div>
+					            <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool4.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                <div layout-align="center none" class="parent">
+				                  <md-switch ng-model="customUserParam.boolCharacteristic4" aria-label="Switch 4" ng-click="updateBoolChar4()">
+					                <div align="center">  </div>
+					              </md-switch>
+					            </div>
+					            <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool5.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                <div layout-align="center none" class="parent">
+				                  <md-switch ng-model="customUserParam.boolCharacteristic5" aria-label="Switch 5" ng-click="updateBoolChar5()">
+					                <div align="center">  </div>
 					              </md-switch>
 					            </div>
 								
@@ -518,7 +535,12 @@
 &characteristic4=<c:out value="${product.characteristic4}"></c:out>
 &characteristic5=<c:out value="${product.characteristic5}"></c:out>
 &characteristic6=<c:out value="${product.characteristic6}"></c:out>
-&characteristic7=<c:out value="${product.characteristic7}"></c:out> 
+&characteristic7=<c:out value="${product.characteristic7}"></c:out>
+&boolCharacteristic1=<c:out value="${product.boolCharacteristic1}"></c:out>
+&boolCharacteristic2=<c:out value="${product.boolCharacteristic2}"></c:out>
+&boolCharacteristic3=<c:out value="${product.boolCharacteristic3}"></c:out>
+&boolCharacteristic4=<c:out value="${product.boolCharacteristic4}"></c:out>
+&boolCharacteristic5=<c:out value="${product.boolCharacteristic5}"></c:out>
 &rating=<c:out value="${product.rating}"></c:out>
 &stockStatus=<c:out value="${product.stockStatus}"></c:out>
 &imagePath=<c:out value="${product.imagePath}"></c:out>
@@ -580,7 +602,12 @@
 									 +'&selectedCharacteristic4='+document.getElementById('selectedCharacteristic4').value
 									 +'&selectedCharacteristic5='+document.getElementById('selectedCharacteristic5').value
 									 +'&selectedCharacteristic6='+document.getElementById('selectedCharacteristic6').value
-									 +'&selectedCharacteristic7='+document.getElementById('selectedCharacteristic7').value" id="add-product-save-link" aria-label="Previous">
+									 +'&selectedCharacteristic7='+document.getElementById('selectedCharacteristic7').value
+									 +'&boolCharacteristic1='+document.getElementById('boolCharacteristic1').value
+									 +'&boolCharacteristic2='+document.getElementById('boolCharacteristic2').value
+									 +'&boolCharacteristic3='+document.getElementById('boolCharacteristic3').value
+									 +'&boolCharacteristic4='+document.getElementById('boolCharacteristic4').value
+									 +'&boolCharacteristic5='+document.getElementById('boolCharacteristic5').value" id="add-product-save-link" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
@@ -603,7 +630,11 @@
 							 +'&selectedCharacteristic5='+document.getElementById('selectedCharacteristic5').value
 							 +'&selectedCharacteristic6='+document.getElementById('selectedCharacteristic6').value
 							 +'&selectedCharacteristic7='+document.getElementById('selectedCharacteristic7').value
-							 " id="add-product-save-link">${number.numberOfPageId}</a>
+							 +'&boolCharacteristic1='+document.getElementById('boolCharacteristic1').value
+							 +'&boolCharacteristic2='+document.getElementById('boolCharacteristic2').value
+							 +'&boolCharacteristic3='+document.getElementById('boolCharacteristic3').value
+							 +'&boolCharacteristic4='+document.getElementById('boolCharacteristic4').value
+							 +'&boolCharacteristic5='+document.getElementById('boolCharacteristic5').value" id="add-product-save-link">${number.numberOfPageId}</a>
 							 </li>
 							 </c:forEach>
                         <li>
@@ -625,7 +656,12 @@
 								 +'&selectedCharacteristic4='+document.getElementById('selectedCharacteristic4').value
 								 +'&selectedCharacteristic5='+document.getElementById('selectedCharacteristic5').value
 								 +'&selectedCharacteristic6='+document.getElementById('selectedCharacteristic6').value
-								 +'&selectedCharacteristic7='+document.getElementById('selectedCharacteristic7').value" id="add-product-save-link" aria-label="Next">
+								 +'&selectedCharacteristic7='+document.getElementById('selectedCharacteristic7').value
+								 +'&boolCharacteristic1='+document.getElementById('boolCharacteristic1').value
+								 +'&boolCharacteristic2='+document.getElementById('boolCharacteristic2').value
+								 +'&boolCharacteristic3='+document.getElementById('boolCharacteristic3').value
+								 +'&boolCharacteristic4='+document.getElementById('boolCharacteristic4').value
+								 +'&boolCharacteristic5='+document.getElementById('boolCharacteristic5').value" id="add-product-save-link" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>

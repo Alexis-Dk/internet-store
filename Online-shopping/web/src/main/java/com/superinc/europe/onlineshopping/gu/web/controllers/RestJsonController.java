@@ -151,6 +151,61 @@ public class RestJsonController {
     return customUserParam;
   }
     
+	@RequestMapping(value = "/boolStatusUpdateChar1", method = RequestMethod.POST)
+	public CustomUserParamDTO boolStatusUpdateChar1(@RequestParam(required = false) String type) {
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder
+				.currentRequestAttributes();
+		CustomUserParamDTO customUserParam = (CustomUserParamDTO) attr
+				.getRequest().getSession().getAttribute("customUserParam");
+		customUserParam.setBoolCharacteristic1(!customUserParam
+				.getBoolCharacteristic1());
+		return customUserParam;
+	}
+    
+	@RequestMapping(value = "/boolStatusUpdateChar2", method = RequestMethod.POST)
+	public CustomUserParamDTO boolStatusUpdateChar2(@RequestParam(required = false) String type) {
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder
+				.currentRequestAttributes();
+		CustomUserParamDTO customUserParam = (CustomUserParamDTO) attr
+				.getRequest().getSession().getAttribute("customUserParam");
+		customUserParam.setBoolCharacteristic2(!customUserParam
+				.getBoolCharacteristic2());
+		return customUserParam;
+	}
+	
+	@RequestMapping(value = "/boolStatusUpdateChar3", method = RequestMethod.POST)
+	public CustomUserParamDTO boolStatusUpdateChar3(@RequestParam(required = false) String type) {
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder
+				.currentRequestAttributes();
+		CustomUserParamDTO customUserParam = (CustomUserParamDTO) attr
+				.getRequest().getSession().getAttribute("customUserParam");
+		customUserParam.setBoolCharacteristic3(!customUserParam
+				.getBoolCharacteristic3());
+		return customUserParam;
+	}
+	
+	@RequestMapping(value = "/boolStatusUpdateChar4", method = RequestMethod.POST)
+	public CustomUserParamDTO boolStatusUpdateChar4(@RequestParam(required = false) String type) {
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder
+				.currentRequestAttributes();
+		CustomUserParamDTO customUserParam = (CustomUserParamDTO) attr
+				.getRequest().getSession().getAttribute("customUserParam");
+		customUserParam.setBoolCharacteristic4(!customUserParam
+				.getBoolCharacteristic4());
+		return customUserParam;
+	}
+	
+	@RequestMapping(value = "/boolStatusUpdateChar5", method = RequestMethod.POST)
+	public CustomUserParamDTO boolStatusUpdateChar5(@RequestParam(required = false) String type) {
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder
+				.currentRequestAttributes();
+		CustomUserParamDTO customUserParam = (CustomUserParamDTO) attr
+				.getRequest().getSession().getAttribute("customUserParam");
+		customUserParam.setBoolCharacteristic5(!customUserParam
+				.getBoolCharacteristic5());
+		return customUserParam;
+	}
+	
     @RequestMapping(value="/characteristic1", method = RequestMethod.GET)
     public CustomUserParamDTO getCharacteristics1(@RequestParam (required = false) String type) {
   	ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();

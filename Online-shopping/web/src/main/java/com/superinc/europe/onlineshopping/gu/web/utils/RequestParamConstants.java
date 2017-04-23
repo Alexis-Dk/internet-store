@@ -44,10 +44,16 @@ public class RequestParamConstants {
 	public static final String INT_CHAR_MAX_4 = "intCharacteristicMax4";
 	public static final String INT_CHAR_MIN_5 = "intCharacteristicMin5";	
 	public static final String INT_CHAR_MAX_5 = "intCharacteristicMax5";
+	public static final String BOOL_CHARACTERISTIC_1 = "boolCharacteristic1";
+	public static final String BOOL_CHARACTERISTIC_2 = "boolCharacteristic2";
+	public static final String BOOL_CHARACTERISTIC_3 = "boolCharacteristic3";
+	public static final String BOOL_CHARACTERISTIC_4 = "boolCharacteristic4";
+	public static final String BOOL_CHARACTERISTIC_5 = "boolCharacteristic5";
 	public static final String INCREASE_QUANTITY = "/increaseQuantity";
 	public static final String DECREASE_QUANTITY = "/decreaseQuantity";
 	public static final String EMPTY = "";
 	public static final String EMPTY_FIELD = " ";
+	public static final String FALSE = "false";
 	public static final String VALUE_STR_ONE = "1";
 	public static final int VALUE_ONE = 1;
 	public static final String EMAIL = "email";

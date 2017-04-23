@@ -1,5 +1,6 @@
 package com.superinc.europe.onlineshopping.gu.entities.dto;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
@@ -50,8 +51,8 @@ public class ProductDTO implements Serializable {
     private CharacteristicFourVO characteristic4;
 	
 //  @Pattern(regexp = "^[1-9a-zA-Z\\w]{3,50}$", message="Stock availability has to has between 3 and 50 symbols")
-  @NotNull
-  private CharacteristicFiveVO characteristic5;
+    @NotNull
+    private CharacteristicFiveVO characteristic5;
     
 //    @Pattern(regexp = "^[1-9a-zA-Z]{3,50}$", message="Aspect ratio has to has between 3 and 50 symbols")
     @NotNull
@@ -60,6 +61,7 @@ public class ProductDTO implements Serializable {
 //	@Pattern(regexp = "^[1-9a-zA-Z]{3,10}$", message="Login has to has between 3 and 10 symbols")
     @NotNull
     private CharacteristicSevenVO characteristic7;
+    
     @Range(min=1, max=1000000, message="intCharacteristic1 has to has between 1 and 1000000")
     private int intCharacteristic1;
     
@@ -74,6 +76,21 @@ public class ProductDTO implements Serializable {
     
     @Range(min=1, max=1000000, message="intCharacteristic5 has to has between 1 and 1000000")
     private int intCharacteristic5;
+    
+    @NotNull
+	private String boolCharacteristic1;
+	
+    @NotNull
+	private String boolCharacteristic2;
+	
+    @NotNull
+	private String boolCharacteristic3;
+	
+    @NotNull
+	private String boolCharacteristic4;
+	
+    @NotNull
+	private String boolCharacteristic5;
     
     public ProductDTO() {
     }
@@ -245,41 +262,69 @@ public class ProductDTO implements Serializable {
 	public void setIntCharacteristic5(int intCharacteristic5) {
 		this.intCharacteristic5 = intCharacteristic5;
 	}
-	
-//	public CharacteristicSevenVO getName() {
-//		return characteristic7;
-//	}
-//
-//	public void setName(CharacteristicSevenVO name) {
-//		this.characteristic7 = name;
-//	}
-	
+
+	public String getBoolCharacteristic1() {
+		return boolCharacteristic1;
+	}
+
+	public void setBoolCharacteristic1(String boolCharacteristic1) {
+		this.boolCharacteristic1 = boolCharacteristic1;
+	}
+
+	public String getBoolCharacteristic2() {
+		return boolCharacteristic2;
+	}
+
+	public void setBoolCharacteristic2(String boolCharacteristic2) {
+		this.boolCharacteristic2 = boolCharacteristic2;
+	}
+
+	public String getBoolCharacteristic3() {
+		return boolCharacteristic3;
+	}
+
+	public void setBoolCharacteristic3(String boolCharacteristic3) {
+		this.boolCharacteristic3 = boolCharacteristic3;
+	}
+
+	public String getBoolCharacteristic4() {
+		return boolCharacteristic4;
+	}
+
+	public void setBoolCharacteristic4(String boolCharacteristic4) {
+		this.boolCharacteristic4 = boolCharacteristic4;
+	}
+
+	public String getBoolCharacteristic5() {
+		return boolCharacteristic5;
+	}
+
+	public void setBoolCharacteristic5(String boolCharacteristic5) {
+		this.boolCharacteristic5 = boolCharacteristic5;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	@Override
 	public String toString() {
-		return "ProductDTO [intCharacteristic1=" + intCharacteristic1
+		return "ProductDTO [department=" + department + ", description="
+				+ description + ", characteristic1=" + characteristic1
+				+ ", characteristic2=" + characteristic2 + ", characteristic3="
+				+ characteristic3 + ", characteristic4=" + characteristic4
+				+ ", characteristic5=" + characteristic5 + ", characteristic6="
+				+ characteristic6 + ", characteristic7=" + characteristic7
+				+ ", intCharacteristic1=" + intCharacteristic1
 				+ ", intCharacteristic2=" + intCharacteristic2
-				+ ", department=" + department + ", description=" + description
-				+ ", characteristic1=" + characteristic1 + ", characteristic2="
-				+ characteristic2 + ", characteristic3=" + characteristic3
-				+ ", characteristic4=" + characteristic4 + ", characteristic5="
-				+ characteristic5 + ", characteristic6=" + characteristic6
-				+ ", characteristic7=" + characteristic7 + "]";
+				+ ", intCharacteristic3=" + intCharacteristic3
+				+ ", intCharacteristic4=" + intCharacteristic4
+				+ ", intCharacteristic5=" + intCharacteristic5
+				+ ", boolCharacteristic1=" + boolCharacteristic1
+				+ ", boolCharacteristic2=" + boolCharacteristic2
+				+ ", boolCharacteristic3=" + boolCharacteristic3
+				+ ", boolCharacteristic4=" + boolCharacteristic4
+				+ ", boolCharacteristic5=" + boolCharacteristic5 + "]";
 	}
-
-//	@Override
-//	public String toString() {
-//		return "ProductDTO [characteristic7=" + characteristic7 + ", price="
-//				+ price + ", department=" + department + ", count=" + count
-//				+ ", description=" + description + ", characteristic1="
-//				+ characteristic1 + ", characteristic2=" + characteristic2
-//				+ ", characteristic3=" + characteristic3 + ", characteristic4="
-//				+ characteristic4 + ", characteristic6=" + characteristic6
-//				+ ", characteristic5=" + characteristic5 + "]";
-//	}
-	
 
 }

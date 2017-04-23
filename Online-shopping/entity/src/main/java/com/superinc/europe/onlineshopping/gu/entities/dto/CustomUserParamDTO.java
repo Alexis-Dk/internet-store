@@ -29,6 +29,11 @@ public class CustomUserParamDTO implements Serializable {
 	private String selectedCharacteristics6;
 	private String characteristics7;
 	private String selectedCharacteristics7;
+	private Boolean boolCharacteristic1;
+	private Boolean boolCharacteristic2;
+	private Boolean boolCharacteristic3;
+	private Boolean boolCharacteristic4;
+	private Boolean boolCharacteristic5;
 
 	public CustomUserParamDTO() {
 	}
@@ -264,6 +269,46 @@ public class CustomUserParamDTO implements Serializable {
 		this.selectedCharacteristics7 = selectedCharacteristics7;
 	}
 
+	public Boolean getBoolCharacteristic1() {
+		return boolCharacteristic1;
+	}
+
+	public void setBoolCharacteristic1(Boolean boolCharacteristic1) {
+		this.boolCharacteristic1 = boolCharacteristic1;
+	}
+
+	public Boolean getBoolCharacteristic2() {
+		return boolCharacteristic2;
+	}
+
+	public void setBoolCharacteristic2(Boolean boolCharacteristic2) {
+		this.boolCharacteristic2 = boolCharacteristic2;
+	}
+
+	public Boolean getBoolCharacteristic3() {
+		return boolCharacteristic3;
+	}
+
+	public void setBoolCharacteristic3(Boolean boolCharacteristic3) {
+		this.boolCharacteristic3 = boolCharacteristic3;
+	}
+
+	public Boolean getBoolCharacteristic4() {
+		return boolCharacteristic4;
+	}
+
+	public void setBoolCharacteristic4(Boolean boolCharacteristic4) {
+		this.boolCharacteristic4 = boolCharacteristic4;
+	}
+
+	public Boolean getBoolCharacteristic5() {
+		return boolCharacteristic5;
+	}
+
+	public void setBoolCharacteristic5(Boolean boolCharacteristic5) {
+		this.boolCharacteristic5 = boolCharacteristic5;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -272,7 +317,15 @@ public class CustomUserParamDTO implements Serializable {
 	public String toString() {
 		return "CustomUserParamDTO [intCharacteristicMin1="
 				+ intCharacteristicMin1 + ", intCharacteristicMax1="
-				+ intCharacteristicMax1 + ", characteristics1="
+				+ intCharacteristicMax1 + ", intCharacteristicMin2="
+				+ intCharacteristicMin2 + ", intCharacteristicMax2="
+				+ intCharacteristicMax2 + ", intCharacteristicMin3="
+				+ intCharacteristicMin3 + ", intCharacteristicMax3="
+				+ intCharacteristicMax3 + ", intCharacteristicMin4="
+				+ intCharacteristicMin4 + ", intCharacteristicMax4="
+				+ intCharacteristicMax4 + ", intCharacteristicMin5="
+				+ intCharacteristicMin5 + ", intCharacteristicMax5="
+				+ intCharacteristicMax5 + ", characteristics1="
 				+ characteristics1 + ", selectedCharacteristics1="
 				+ selectedCharacteristics1 + ", characteristics2="
 				+ characteristics2 + ", selectedCharacteristics2="
@@ -286,7 +339,12 @@ public class CustomUserParamDTO implements Serializable {
 				+ characteristics6 + ", selectedCharacteristics6="
 				+ selectedCharacteristics6 + ", characteristics7="
 				+ characteristics7 + ", selectedCharacteristics7="
-				+ selectedCharacteristics7 + "]";
+				+ selectedCharacteristics7 + ", boolCharacteristic1="
+				+ boolCharacteristic1 + ", boolCharacteristic2="
+				+ boolCharacteristic2 + ", boolCharacteristic3="
+				+ boolCharacteristic3 + ", boolCharacteristic4="
+				+ boolCharacteristic4 + ", boolCharacteristic5="
+				+ boolCharacteristic5 + "]";
 	}
 	
 }

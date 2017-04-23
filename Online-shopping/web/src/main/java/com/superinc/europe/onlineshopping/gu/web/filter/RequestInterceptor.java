@@ -38,6 +38,11 @@ public class RequestInterceptor implements HandlerInterceptor {
 		setIntCharacteristic4Max(request);
 		setIntCharacteristic5Min(request);
 		setIntCharacteristic5Max(request);
+		setBoolCharacteristic1(request);
+		setBoolCharacteristic2(request);
+		setBoolCharacteristic3(request);
+		setBoolCharacteristic4(request);
+		setBoolCharacteristic5(request);
 		initializeAllWdgets(request);
 		return true;
 	}
@@ -196,6 +201,66 @@ public class RequestInterceptor implements HandlerInterceptor {
 		}
 		request.getSession().setAttribute(RequestParamConstants.INT_CHAR_MAX_5, intCharacteristic1Max);
 		request.setAttribute(RequestParamConstants.INT_CHAR_MAX_5, intCharacteristic1Max);
+	}
+	
+	public void setBoolCharacteristic1(HttpServletRequest request){
+		String boolCharacteristic1 = null;
+		if (request.getParameter(RequestParamConstants.BOOL_CHARACTERISTIC_1) == null) {
+			boolCharacteristic1 = RequestParamConstants.FALSE;
+			request.getSession().setAttribute(RequestParamConstants.BOOL_CHARACTERISTIC_1, RequestParamConstants.FALSE);
+		} else {
+			boolCharacteristic1 = (request.getParameter(RequestParamConstants.BOOL_CHARACTERISTIC_1));
+		}
+		request.getSession().setAttribute(RequestParamConstants.BOOL_CHARACTERISTIC_1, boolCharacteristic1);
+		request.setAttribute(RequestParamConstants.BOOL_CHARACTERISTIC_1, boolCharacteristic1);
+	}
+	
+	public void setBoolCharacteristic2(HttpServletRequest request){
+		String boolCharacteristic2 = null;
+		if (request.getParameter(RequestParamConstants.BOOL_CHARACTERISTIC_2) == null) {
+			boolCharacteristic2 = RequestParamConstants.FALSE;
+			request.getSession().setAttribute(RequestParamConstants.BOOL_CHARACTERISTIC_2, RequestParamConstants.FALSE);
+		} else {
+			boolCharacteristic2 = (request.getParameter(RequestParamConstants.BOOL_CHARACTERISTIC_2));
+		}
+		request.getSession().setAttribute(RequestParamConstants.BOOL_CHARACTERISTIC_2, boolCharacteristic2);
+		request.setAttribute(RequestParamConstants.BOOL_CHARACTERISTIC_2, boolCharacteristic2);
+	}
+	
+	public void setBoolCharacteristic3(HttpServletRequest request){
+		String boolCharacteristic3 = null;
+		if (request.getParameter(RequestParamConstants.BOOL_CHARACTERISTIC_3) == null) {
+			boolCharacteristic3 = RequestParamConstants.FALSE;
+			request.getSession().setAttribute(RequestParamConstants.BOOL_CHARACTERISTIC_3, RequestParamConstants.FALSE);
+		} else {
+			boolCharacteristic3 = (request.getParameter(RequestParamConstants.BOOL_CHARACTERISTIC_3));
+		}
+		request.getSession().setAttribute(RequestParamConstants.BOOL_CHARACTERISTIC_3, boolCharacteristic3);
+		request.setAttribute(RequestParamConstants.BOOL_CHARACTERISTIC_3, boolCharacteristic3);
+	}
+	
+	public void setBoolCharacteristic4(HttpServletRequest request){
+		String boolCharacteristic4 = null;
+		if (request.getParameter(RequestParamConstants.BOOL_CHARACTERISTIC_4) == null) {
+			boolCharacteristic4 = RequestParamConstants.FALSE;
+			request.getSession().setAttribute(RequestParamConstants.BOOL_CHARACTERISTIC_4, RequestParamConstants.FALSE);
+		} else {
+			boolCharacteristic4 = (request.getParameter(RequestParamConstants.BOOL_CHARACTERISTIC_4));
+		}
+		request.getSession().setAttribute(RequestParamConstants.BOOL_CHARACTERISTIC_4, boolCharacteristic4);
+		request.setAttribute(RequestParamConstants.BOOL_CHARACTERISTIC_4, boolCharacteristic4);
+	}
+	
+	public void setBoolCharacteristic5(HttpServletRequest request){
+		String boolCharacteristic5 = null;
+		if (request.getParameter(RequestParamConstants.BOOL_CHARACTERISTIC_5) == null) {
+			boolCharacteristic5 = RequestParamConstants.FALSE;
+			request.getSession().setAttribute(RequestParamConstants.BOOL_CHARACTERISTIC_5, RequestParamConstants.FALSE);
+		} else {
+			boolCharacteristic5 = (request.getParameter(RequestParamConstants.BOOL_CHARACTERISTIC_5));
+		}
+		request.getSession().setAttribute(RequestParamConstants.BOOL_CHARACTERISTIC_5, boolCharacteristic5);
+		request.setAttribute(RequestParamConstants.BOOL_CHARACTERISTIC_5, boolCharacteristic5);
 	}
 	
 	public void initializeAllWdgets(HttpServletRequest request){

@@ -238,6 +238,31 @@
 						<h3><%=request.getParameter("characteristic7")%></h3></td>
 				</tr>
 				<tr>
+					<td><p class="user-menuMy">${categoryCharacteristicBool1.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("boolCharacteristic1")%></h3></td>
+				</tr>
+				<tr>
+					<td><p class="user-menuMy">${categoryCharacteristicBool2.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("boolCharacteristic2")%></h3></td>
+				</tr>
+				<tr>
+					<td><p class="user-menuMy">${categoryCharacteristicBool3.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("boolCharacteristic3")%></h3></td>
+				</tr>
+				<tr>
+					<td><p class="user-menuMy">${categoryCharacteristicBool4.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("boolCharacteristic4")%></h3></td>
+				</tr>
+				<tr>
+					<td><p class="user-menuMy">${categoryCharacteristicBool5.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("boolCharacteristic5")%></h3></td>
+				</tr>
+				<tr>
 					<td><p class="user-menuMy">Stock availability</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("stockStatus")%></h3></td>

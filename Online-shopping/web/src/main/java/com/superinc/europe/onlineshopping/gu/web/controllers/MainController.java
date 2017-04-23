@@ -115,7 +115,12 @@ public class MainController {
 			@RequestParam(value = "selectedCharacteristic4", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic4,
 			@RequestParam(value = "selectedCharacteristic5", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic5,
 			@RequestParam(value = "selectedCharacteristic6", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic6,
-			@RequestParam(value = "selectedCharacteristic7", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic7) {
+			@RequestParam(value = "selectedCharacteristic7", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic7,
+			@RequestParam(value = RequestParamConstants.BOOL_CHARACTERISTIC_1, defaultValue = RequestParamConstants.FALSE) String boolCharacteristic1,
+			@RequestParam(value = RequestParamConstants.BOOL_CHARACTERISTIC_2, defaultValue = RequestParamConstants.FALSE) String boolCharacteristic2,
+			@RequestParam(value = RequestParamConstants.BOOL_CHARACTERISTIC_3, defaultValue = RequestParamConstants.FALSE) String boolCharacteristic3,
+			@RequestParam(value = RequestParamConstants.BOOL_CHARACTERISTIC_4, defaultValue = RequestParamConstants.FALSE) String boolCharacteristic4,
+			@RequestParam(value = RequestParamConstants.BOOL_CHARACTERISTIC_5, defaultValue = RequestParamConstants.FALSE) String boolCharacteristic5) {
 		CustomUserParamDTO customUserParam = (CustomUserParamDTO) request.getSession().getAttribute("customUserParam");
 		Map<String, String[]> selectedItems = new HashMap<String, String[]>();
 		if (customUserParam != null) {
@@ -129,12 +134,38 @@ public class MainController {
 			customUserParam.setIntCharacteristicMax4(intCharacteristicMax4);
 			customUserParam.setIntCharacteristicMin5(intCharacteristicMin5);
 			customUserParam.setIntCharacteristicMax5(intCharacteristicMax5);
+			customUserParam.setBoolCharacteristic1(Boolean.parseBoolean(boolCharacteristic1));
+			customUserParam.setBoolCharacteristic2(Boolean.parseBoolean(boolCharacteristic2));
+			customUserParam.setBoolCharacteristic3(Boolean.parseBoolean(boolCharacteristic3));
+			customUserParam.setBoolCharacteristic4(Boolean.parseBoolean(boolCharacteristic4));
+			customUserParam.setBoolCharacteristic5(Boolean.parseBoolean(boolCharacteristic5));
+//			customUserParam.setBoolCharacteristic1(false);
+//			customUserParam.setBoolCharacteristic2(false);
+//			customUserParam.setBoolCharacteristic3(false);
+//			customUserParam.setBoolCharacteristic4(false);
+//			customUserParam.setBoolCharacteristic5(false);
 			String[] selcectedCharacteristics = {selectedCharacteristic1, selectedCharacteristic2, selectedCharacteristic3, selectedCharacteristic4, selectedCharacteristic5, selectedCharacteristic6, selectedCharacteristic7};
 			setCustomUserParam(selcectedCharacteristics, customUserParam);
 			selectedItems = getSelectedCharacteristics(selcectedCharacteristics);
 		} else {
-			CustomUserParamDTO defaultUserParam = new CustomUserParamDTO();
-			request.getSession().setAttribute("customUserParam", defaultUserParam);
+			//CustomUserParamDTO defaultUserParam = new CustomUserParamDTO();
+			customUserParam = new CustomUserParamDTO();
+			customUserParam.setIntCharacteristicMin1(intCharacteristicMin1);
+			customUserParam.setIntCharacteristicMax1(intCharacteristicMax1);
+			customUserParam.setIntCharacteristicMin2(intCharacteristicMin2);
+			customUserParam.setIntCharacteristicMax2(intCharacteristicMax2);
+			customUserParam.setIntCharacteristicMin3(intCharacteristicMin3);
+			customUserParam.setIntCharacteristicMax3(intCharacteristicMax3);
+			customUserParam.setIntCharacteristicMin4(intCharacteristicMin4);
+			customUserParam.setIntCharacteristicMax4(intCharacteristicMax4);
+			customUserParam.setIntCharacteristicMin5(intCharacteristicMin5);
+			customUserParam.setIntCharacteristicMax5(intCharacteristicMax5);
+			customUserParam.setBoolCharacteristic1(Boolean.parseBoolean(boolCharacteristic1));
+			customUserParam.setBoolCharacteristic2(Boolean.parseBoolean(boolCharacteristic2));
+			customUserParam.setBoolCharacteristic3(Boolean.parseBoolean(boolCharacteristic3));
+			customUserParam.setBoolCharacteristic4(Boolean.parseBoolean(boolCharacteristic4));
+			customUserParam.setBoolCharacteristic5(Boolean.parseBoolean(boolCharacteristic5));
+			request.getSession().setAttribute("customUserParam", customUserParam);
 		}
 		try {
 			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
