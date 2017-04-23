@@ -292,19 +292,19 @@
                         <input hidden="true" type="text" id="selectedCharacteristic5" name="selectedCharacteristic5" value="{{selected5}}">
                         <input hidden="true" type="text" id="selectedCharacteristic6" name="selectedCharacteristic6" value="{{selected6}}">
                         <input hidden="true" type="text" id="selectedCharacteristic7" name="selectedCharacteristic7" value="{{selected7}}">
-                        <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicInt1.categoryCharacteristicNameLanguageOne}</font></H5> </legend>        
-                          <div layout="row" layout-align="center">
-                           <md-input-container >
-                             <label for="testInput1" >Min</label>
+                        <legend class="demo-legend" ${categoryCharacteristicEnableIntStatus1}><H5 class="md-title" ><font size="3" color=#000000>${categoryCharacteristicInt1.categoryCharacteristicNameLanguageOne}</font></H5> </legend>        
+                          <div layout="row" ${categoryCharacteristicEnableIntStatus1}  layout-align="center" >
+                           <md-input-container>
+                             <label for="testInput1">Min</label>
                              <input type="text" id="intCharacteristicMin1" ng-model="customUserParam.intCharacteristicMin1" md-autofocus="" name="intCharacteristicMin1" ><!-- name="priceLower" -->
                            </md-input-container>
                            <md-input-container >
-                             <label for="testInput2" >Max</label>
+                             <label for="testInput2">Max</label>
                              <input type="text" id="intCharacteristicMax1" ng-model="customUserParam.intCharacteristicMax1" md-autofocus="" name="intCharacteristicMax1">
                            </md-input-container>
                          </div>
-                         <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicInt2.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
-                         <div layout="row" layout-align="center">
+                         <legend class="demo-legend" ${categoryCharacteristicEnableIntStatus2}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicInt2.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                         <div layout="row" ${categoryCharacteristicEnableIntStatus2} layout-align="center">
                             <md-input-container >
                                <label for="testInput" >Min</label>
                                <input type="text" id="intCharacteristicMin2" ng-model="customUserParam.intCharacteristicMin2" md-autofocus="" name="intCharacteristicMin2">
@@ -314,8 +314,8 @@
                                <input type="text" id="intCharacteristicMax2" ng-model="customUserParam.intCharacteristicMax2" md-autofocus="" name="intCharacteristicMax2">
                              </md-input-container>
                            </div>
-                           <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicInt3.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
-                         <div layout="row" layout-align="center">
+                           <legend class="demo-legend" ${categoryCharacteristicEnableIntStatus3}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicInt3.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                         <div layout="row" ${categoryCharacteristicEnableIntStatus3} layout-align="center">
                             <md-input-container >
                                <label for="testInput" >Min</label>
                                <input type="text" id="intCharacteristicMin3" ng-model="customUserParam.intCharacteristicMin3" md-autofocus="" name="intCharacteristicMin3">
@@ -325,8 +325,8 @@
                                <input type="text" id="intCharacteristicMax3" ng-model="customUserParam.intCharacteristicMax3" md-autofocus="" name="intCharacteristicMax3">
                              </md-input-container>
                            </div>
-                           <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicInt4.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
-                         <div layout="row" layout-align="center">
+                           <legend class="demo-legend" ${categoryCharacteristicEnableIntStatus4}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicInt4.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                         <div layout="row" ${categoryCharacteristicEnableIntStatus4} layout-align="center">
                             <md-input-container >
                                <label for="testInput" >Min</label>
                                <input type="text" id="intCharacteristicMin4" ng-model="customUserParam.intCharacteristicMin4" md-autofocus="" name="intCharacteristicMin4">
@@ -336,8 +336,8 @@
                                <input type="text" id="intCharacteristicMax4" ng-model="customUserParam.intCharacteristicMax4" md-autofocus="" name="intCharacteristicMax4">
                              </md-input-container>
                            </div>
-                         <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicInt5.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
-                         <div layout="row" layout-align="center">
+                         <legend class="demo-legend" ${categoryCharacteristicEnableIntStatus5}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicInt5.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                         <div layout="row" ${categoryCharacteristicEnableIntStatus5} layout-align="center">
                             <md-input-container >
                                <label for="testInput" >Min</label>
                                <input type="text" id="intCharacteristicMin5" ng-model="customUserParam.intCharacteristicMin5" md-autofocus="" name="intCharacteristicMin5">
@@ -352,8 +352,8 @@
                          name="category" placeholder="to"
                          value="<%= request.getSession().getAttribute("categoryId") %>">
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr1.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
-                                  <div layout="row" layout-wrap flex>
+                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus1}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr1.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                  <div layout="row" ${categoryCharacteristicEnableStrStatus1} layout-wrap flex>
                                     <div flex="50" ng-repeat="item in items1">
                                       <md-checkbox ng-checked="exists2(item, selected1)" ng-click="toggle2(item, selected1)">
                                         {{ item }} <span ng-if="exists2(item)">selected</span>
@@ -375,8 +375,8 @@
                                   @see https://github.com/philipwalton/flexbugs#9-some-html-elements-cant-be-flex-containers
                                 -->
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr2.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
-                                  <div layout="row" layout-wrap flex>
+                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus2}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr2.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                  <div layout="row" layout-wrap flex ${categoryCharacteristicEnableStrStatus2}>
                                     <div flex="50" ng-repeat="item in items2">
                                       <md-checkbox ng-checked="exists2(item, selected2)" ng-click="toggle2(item, selected2)">
                                         {{ item }} <span ng-if="exists2(item)">selected</span>
@@ -388,8 +388,8 @@
                                   </div>
                                 </fieldset> 
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr3.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
-                                  <div layout="row" layout-wrap flex>
+                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus3}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr3.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                  <div layout="row" layout-wrap flex ${categoryCharacteristicEnableStrStatus3}>
                                     <div flex="50" ng-repeat="item in items3">
                                       <md-checkbox ng-checked="exists2(item, selected3)" ng-click="toggle2(item, selected3)">
                                         {{ item }} <span ng-if="exists2(item)">selected</span>
@@ -401,8 +401,8 @@
                                   </div>
                                 </fieldset>  
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr4.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
-                                  <div layout="row" layout-wrap flex>
+                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus4}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr4.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                  <div layout="row" layout-wrap flex ${categoryCharacteristicEnableStrStatus4}>
                                     <div flex="50" ng-repeat="item in items4">
                                       <md-checkbox ng-checked="exists2(item, selected4)" ng-click="toggle2(item, selected4)">
                                         {{ item }} <span ng-if="exists2(item)">selected</span>
@@ -414,8 +414,8 @@
                                   </div>
                                 </fieldset> 
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr5.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
-                                  <div layout="row" layout-wrap flex>
+                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus5}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr5.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                  <div layout="row" layout-wrap flex ${categoryCharacteristicEnableStrStatus5}>
                                     <div flex="50" ng-repeat="item in items5">
                                       <md-checkbox ng-checked="exists2(item, selected5)" ng-click="toggle2(item, selected5)">
                                         {{ item }} <span ng-if="exists2(item)">selected</span>
@@ -427,8 +427,8 @@
                                   </div>
                                 </fieldset> 
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr6.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
-                                  <div layout="row" layout-wrap flex>
+                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus6}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr6.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                  <div layout="row" layout-wrap flex ${categoryCharacteristicEnableStrStatus6}>
                                     <div flex="50" ng-repeat="item in items6">
                                       <md-checkbox ng-checked="exists2(item, selected6)" ng-click="toggle2(item, selected6)">
                                         {{ item }} <span ng-if="exists2(item)">selected</span>
@@ -440,8 +440,8 @@
                                   </div>
                                 </fieldset> 
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr7.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
-                                  <div layout="row" layout-wrap flex>
+                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus7}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr7.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                  <div layout="row" layout-wrap flex ${categoryCharacteristicEnableStrStatus7}>
                                     <div flex="50" ng-repeat="item in items7">
                                       <md-checkbox ng-checked="exists2(item, selected7)" ng-click="toggle2(item, selected7)">
                                         {{ item }} <span ng-if="exists2(item)">selected</span>
@@ -452,32 +452,32 @@
                                     </div>
                                   </div>
                                 </fieldset>
-          					    <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool1.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
-                                <div layout-align="center none" class="parent">
+          					    <legend class="demo-legend" ${categoryCharacteristicEnableBoolStatus1}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool1.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                <div layout-align="center none" class="parent" ${categoryCharacteristicEnableBoolStatus1}>
 				                  <md-switch ng-model="customUserParam.boolCharacteristic1" aria-label="Switch 2" ng-click="updateBoolChar1()">
 					                <div align="center">  </div>
 					              </md-switch>
 					            </div>
-							    <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool2.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
-                                <div layout-align="center none" class="parent">
+							    <legend class="demo-legend" ${categoryCharacteristicEnableBoolStatus2}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool2.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                <div layout-align="center none" class="parent" ${categoryCharacteristicEnableBoolStatus2}>
 				                  <md-switch ng-model="customUserParam.boolCharacteristic2" aria-label="Switch 2" ng-click="updateBoolChar2()">
 					                <div align="center">  </div>
 					              </md-switch>
 					            </div>
-							    <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool3.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
-                                <div layout-align="center none" class="parent">
+							    <legend class="demo-legend" ${categoryCharacteristicEnableBoolStatus3}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool3.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                <div layout-align="center none" class="parent" ${categoryCharacteristicEnableBoolStatus3}>
 				                  <md-switch ng-model="customUserParam.boolCharacteristic3" aria-label="Switch 3" ng-click="updateBoolChar3()">
 					                <div align="center">  </div>
 					              </md-switch>
 					            </div>
-					            <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool4.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
-                                <div layout-align="center none" class="parent">
+					            <legend class="demo-legend" ${categoryCharacteristicEnableBoolStatus4}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool4.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                <div layout-align="center none" class="parent" ${categoryCharacteristicEnableBoolStatus4}>
 				                  <md-switch ng-model="customUserParam.boolCharacteristic4" aria-label="Switch 4" ng-click="updateBoolChar4()">
 					                <div align="center">  </div>
 					              </md-switch>
 					            </div>
-					            <legend class="demo-legend"><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool5.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
-                                <div layout-align="center none" class="parent">
+					            <legend class="demo-legend" ${categoryCharacteristicEnableBoolStatus5}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool5.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                <div layout-align="center none" class="parent" ${categoryCharacteristicEnableBoolStatus5}>
 				                  <md-switch ng-model="customUserParam.boolCharacteristic5" aria-label="Switch 5" ng-click="updateBoolChar5()">
 					                <div align="center">  </div>
 					              </md-switch>

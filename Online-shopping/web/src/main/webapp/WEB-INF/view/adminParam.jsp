@@ -266,7 +266,7 @@
 								<input name="lang3" type="text" value="${categoryCharacteristicInt1.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
-								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+								<input name="optionEnable" type="checkbox" value="true" ${categoryCharacteristicEnableIntStatus1} >Enable<Br>
 							</td>
 							<td>
 								<button type="submit" class="btn btn-default">
@@ -299,7 +299,7 @@
 								<input name="lang3" type="text" value="${categoryCharacteristicInt2.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
-								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+								<input name="optionEnable" type="checkbox" value="true" ${categoryCharacteristicEnableIntStatus2} >Enable<Br>
 							</td>
 							<td>
 								<button type="submit" class="btn btn-default">
@@ -332,7 +332,7 @@
 								<input name="lang3" type="text" value="${categoryCharacteristicInt3.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
-								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+								<input name="optionEnable" type="checkbox" value="true" ${categoryCharacteristicEnableIntStatus3} >Enable<Br>
 							</td>
 							<td>
 								<button type="submit" class="btn btn-default">
@@ -365,7 +365,7 @@
 								<input name="lang3" type="text" value="${categoryCharacteristicInt4.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
-								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+								<input name="optionEnable" type="checkbox" value="true" ${categoryCharacteristicEnableIntStatus4} >Enable<Br>
 							</td>
 							<td>
 								<button type="submit" class="btn btn-default">
@@ -398,7 +398,7 @@
 								<input name="lang3" type="text" value="${categoryCharacteristicInt5.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
-								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+								<input name="optionEnable" type="checkbox" value="true" ${categoryCharacteristicEnableIntStatus5} >Enable<Br>
 							</td>
 							<td>
 								<button type="submit" class="btn btn-default">
@@ -431,7 +431,7 @@
 								<input name="lang3" type="text" value="${categoryCharacteristicStr1.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
-								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+								<input name="optionEnable" type="checkbox" value="true" ${categoryCharacteristicEnableStrStatus1} >Enable<Br>
 							</td>
 							<td>
 								<button type="submit" class="btn btn-default">
@@ -495,7 +495,7 @@
 								<input name="lang3" type="text" value="${categoryCharacteristicStr2.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
-								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+								<input name="optionEnable" type="checkbox" value="true" ${categoryCharacteristicEnableStrStatus2} >Enable<Br>
 							</td>
 							<td>
 								<button type="submit" class="btn btn-default">
@@ -559,7 +559,7 @@
 								<input name="lang3" type="text" value="${categoryCharacteristicStr3.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
-								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+								<input name="optionEnable" type="checkbox" value="true" ${categoryCharacteristicEnableStrStatus3} >Enable<Br>
 							</td>
 							<td>
 								<button type="submit" class="btn btn-default">
@@ -623,7 +623,7 @@
 								<input name="lang3" type="text" value="${categoryCharacteristicStr4.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
-								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+								<input name="optionEnable" type="checkbox" value="true" ${categoryCharacteristicEnableStrStatus4} >Enable<Br>
 							</td>
 							<td>
 								<button type="submit" class="btn btn-default">
@@ -687,7 +687,7 @@
 								<input name="lang3" type="text" value="${categoryCharacteristicStr5.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
-								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+								<input name="optionEnable" type="checkbox" value="true" ${categoryCharacteristicEnableStrStatus5} >Enable<Br>
 							</td>
 							<td>
 								<button type="submit" class="btn btn-default">
@@ -752,7 +752,7 @@
 								<input name="lang3" type="text" value="${categoryCharacteristicStr6.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
-								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+								<input name="optionEnable" type="checkbox" value="true" ${categoryCharacteristicEnableStrStatus6} >Enable<Br>
 							</td>
 							<td>
 								<button type="submit" class="btn btn-default">
@@ -816,7 +816,7 @@
 								<input name="lang3" type="text" value="${categoryCharacteristicStr7.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
-								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+								<input name="optionEnable" type="checkbox" value="true" ${categoryCharacteristicEnableStrStatus7} >Enable<Br>
 							</td>
 							<td>
 								<button type="submit" class="btn btn-default">
@@ -879,7 +879,7 @@
 								<input name="lang3" type="text" value="${categoryCharacteristicBool1.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
-								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+								<input name="optionEnable" type="checkbox" value="true" ${categoryCharacteristicEnableBoolStatus1} >Enable<Br>
 							</td>
 							<td>
 								<button type="submit" class="btn btn-default">
@@ -912,7 +912,7 @@
 								<input name="lang3" type="text" value="${categoryCharacteristicBool2.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
-								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+								<input name="optionEnable" type="checkbox" value="true" ${categoryCharacteristicEnableBoolStatus2}>Enable<Br>
 							</td>
 							<td>
 								<button type="submit" class="btn btn-default">
@@ -945,7 +945,7 @@
 								<input name="lang3" type="text" value="${categoryCharacteristicBool3.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
-								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+								<input name="optionEnable" type="checkbox" value="true" ${categoryCharacteristicEnableBoolStatus3} >Enable<Br>
 							</td>
 							<td>
 								<button type="submit" class="btn btn-default">
@@ -978,7 +978,7 @@
 								<input name="lang3" type="text" value="${categoryCharacteristicBool3.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
-								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+								<input name="optionEnable" type="checkbox" value="true" ${categoryCharacteristicEnableBoolStatus4} >Enable<Br>
 							</td>
 							<td>
 								<button type="submit" class="btn btn-default">
@@ -1011,7 +1011,7 @@
 								<input name="lang3" type="text" value="${categoryCharacteristicBool3.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
-								<input name="optionEnable" type="checkbox" value="true">Enable<Br>
+								<input name="optionEnable" type="checkbox" value="true" ${categoryCharacteristicEnableBoolStatus5} >Enable<Br>
 							</td>
 							<td>
 								<button type="submit" class="btn btn-default">

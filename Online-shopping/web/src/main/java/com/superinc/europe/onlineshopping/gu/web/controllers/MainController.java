@@ -253,12 +253,21 @@ public class MainController {
 		List<CategoryCharacteristic> itemsBool = iCategoryCharacteristicService.getCategoryCharacteristicBoolNames(productCategoryService.getCategoryById(Integer.parseInt(category)).getCategoryName());
 		for (int i = 0; i < itemsStr.size(); i++) {
 			model.put("categoryCharacteristicStr" + String.valueOf(i + 1), itemsStr.get(i));
+			if (itemsStr.get(i).isCategoryCharacteristicEnable() == false){
+				model.put("categoryCharacteristicEnableStrStatus" + String.valueOf(i + 1), "style='display: none;'");
+			}
 		}
 		for (int i = 0; i < itemsInt.size(); i++) {
 			model.put("categoryCharacteristicInt" + String.valueOf(i + 1), itemsInt.get(i));
+			if (itemsInt.get(i).isCategoryCharacteristicEnable() == false){
+				model.put("categoryCharacteristicEnableIntStatus" + String.valueOf(i + 1), "style='display: none;'");
+			}
 		}
 		for (int i = 0; i < itemsBool.size(); i++) {
 			model.put("categoryCharacteristicBool" + String.valueOf(i + 1), itemsBool.get(i));
+			if (itemsBool.get(i).isCategoryCharacteristicEnable() == false){
+				model.put("categoryCharacteristicEnableBoolStatus" + String.valueOf(i + 1), "style='display: none;'");
+			}
 		}
 	}
 	

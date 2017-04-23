@@ -167,27 +167,27 @@
 		<div class="container">
 			<img src="img/<%=request.getParameter("imagePath")%>" alt="">
 			<table class="table">
-				<tr>
+				<tr ${categoryCharacteristicEnableIntStatus1}>
 					<td><p class="user-menuMy">${categoryCharacteristicInt1.categoryCharacteristicNameLanguageOne}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("intCharacteristic1")%></h3></td>
 				</tr>
-				<tr>
+				<tr ${categoryCharacteristicEnableIntStatus2}>
 					<td><p class="user-menuMy">${categoryCharacteristicInt2.categoryCharacteristicNameLanguageOne}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("intCharacteristic2")%></h3></td>
 				</tr>
-				<tr>
+				<tr ${categoryCharacteristicEnableIntStatus3}>
 					<td><p class="user-menuMy">${categoryCharacteristicInt3.categoryCharacteristicNameLanguageOne}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("intCharacteristic3")%></h3></td>
 				</tr>
-				<tr>
+				<tr ${categoryCharacteristicEnableIntStatus4}>
 					<td><p class="user-menuMy">${categoryCharacteristicInt4.categoryCharacteristicNameLanguageOne}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("intCharacteristic4")%></h3></td>
 				</tr>
-				<tr>
+				<tr ${categoryCharacteristicEnableIntStatus5}>
 					<td><p class="user-menuMy">${categoryCharacteristicInt5.categoryCharacteristicNameLanguageOne}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("intCharacteristic5")%></h3></td>
@@ -197,67 +197,62 @@
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("description")%></h3></td>
 				</tr>
-				<tr>
+				<tr ${categoryCharacteristicEnableStrStatus1}>
 					<td><p class="user-menuMy">${categoryCharacteristicStr1.categoryCharacteristicNameLanguageOne}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("characteristic1")%></h3></td>
 				</tr>
-				<tr>
+				<tr ${categoryCharacteristicEnableStrStatus2}>
 					<td><p class="user-menuMy">${categoryCharacteristicStr2.categoryCharacteristicNameLanguageOne}</p></td>
-					<td><p class="user-menuMy" />
-						<h3><%=request.getParameter("characteristic1")%></h3></td>
-				</tr>
-				<tr>
-					<td><p class="user-menuMy">${categoryCharacteristicStr3.categoryCharacteristicNameLanguageOne}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("characteristic2")%></h3></td>
 				</tr>
-				<tr>
-					<td><p class="user-menuMy">${categoryCharacteristicStr4.categoryCharacteristicNameLanguageOne}</p></td>
+				<tr ${categoryCharacteristicEnableStrStatus3}>
+					<td><p class="user-menuMy">${categoryCharacteristicStr3.categoryCharacteristicNameLanguageOne}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("characteristic3")%></h3></td>
 				</tr>
-				<tr>
-					<td><p class="user-menuMy">${categoryCharacteristicStr5.categoryCharacteristicNameLanguageOne}</p></td>
+				<tr ${categoryCharacteristicEnableStrStatus4}>
+					<td><p class="user-menuMy">${categoryCharacteristicStr4.categoryCharacteristicNameLanguageOne}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("characteristic4")%></h3></td>
 				</tr>
-				<tr>
+				<tr ${categoryCharacteristicEnableStrStatus5}>
 					<td><p class="user-menuMy">${categoryCharacteristicStr5.categoryCharacteristicNameLanguageOne}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("characteristic5")%></h3></td>
 				</tr>
-				<tr>
+				<tr ${categoryCharacteristicEnableStrStatus6}>
 					<td><p class="user-menuMy">${categoryCharacteristicStr6.categoryCharacteristicNameLanguageOne}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("characteristic6")%></h3></td>
 				</tr>
-				<tr>
+				<tr ${categoryCharacteristicEnableStrStatus7}>
 					<td><p class="user-menuMy">${categoryCharacteristicStr7.categoryCharacteristicNameLanguageOne}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("characteristic7")%></h3></td>
 				</tr>
-				<tr>
+				<tr ${categoryCharacteristicEnableBoolStatus1}>
 					<td><p class="user-menuMy">${categoryCharacteristicBool1.categoryCharacteristicNameLanguageOne}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("boolCharacteristic1")%></h3></td>
 				</tr>
-				<tr>
+				<tr ${categoryCharacteristicEnableBoolStatus2}>
 					<td><p class="user-menuMy">${categoryCharacteristicBool2.categoryCharacteristicNameLanguageOne}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("boolCharacteristic2")%></h3></td>
 				</tr>
-				<tr>
+				<tr ${categoryCharacteristicEnableBoolStatus3}>
 					<td><p class="user-menuMy">${categoryCharacteristicBool3.categoryCharacteristicNameLanguageOne}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("boolCharacteristic3")%></h3></td>
 				</tr>
-				<tr>
+				<tr ${categoryCharacteristicEnableBoolStatus4}>
 					<td><p class="user-menuMy">${categoryCharacteristicBool4.categoryCharacteristicNameLanguageOne}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("boolCharacteristic4")%></h3></td>
 				</tr>
-				<tr>
+				<tr ${categoryCharacteristicEnableBoolStatus5}>
 					<td><p class="user-menuMy">${categoryCharacteristicBool5.categoryCharacteristicNameLanguageOne}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("boolCharacteristic5")%></h3></td>
