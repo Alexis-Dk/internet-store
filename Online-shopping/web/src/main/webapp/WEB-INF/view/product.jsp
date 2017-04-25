@@ -262,14 +262,15 @@
        <div class="zigzag-bottom"></div>
         <div class="container-fluid" >
           <div ng-controller="AppCtrl"  style="height:48px;" ng-cloak >
-
+ 				  <!--  is-locked-open="$media('min-width: 1000px')"-->
                   <md-sidenav
-                  class="md-sidenav-left"
-                  md-component-id="left"
-                  md-is-locked-open="$mdMedia('gt-md')"
+                  class="md-sidenav-right"
+                  md-component-id="right"
+                  md-is-locked-open="lockLeft && $mdMedia('gt-md')"
+
                   md-whiteframe="4">
 
-                    <md-content layout-padding ng-controller="LeftCtrl">    
+                    <md-content layout-padding ng-controller="RightCtrl">    
                          <div ng-controller="NewAppCtrl as ctrl" class="md-padding checkboxdemoSyncing" ng-cloak style="min-height:100px">
                           <div layout="row" layout-wrap>
                             <div flex="100" flex-gt-sm="150" layout="column">
@@ -504,9 +505,9 @@
                     </md-content>
                   </md-sidenav>
 
-					<div style="background-color: #00000;" height=30px><!-- #4BC19E -->
-                        <md-button class="md-icon-button md-primary" aria-label="Settings" ng-click="toggleLeft()"
-                          class="md-primary" hide-gt-md>
+					<div style="background-color: #00000;" height=30px align="right"><!-- #4BC19E -->
+                        <md-button class="md-icon-button md-primary" aria-label="Settings" ng-click="toggleRight()"
+                          class="md-primary">
                           <md-icon md-svg-icon="img/icons/ic_search_black_24px.svg"></md-icon>
                         </md-button>
 					</div>
