@@ -817,13 +817,13 @@ public class AdminController {
 		List<CategoryCharacteristic> itemsInt = iCategoryCharacteristicService.getCategoryCharacteristicIntNames(productCategoryService.getCategoryById(category).getCategoryName());
 		List<CategoryCharacteristic> itemsBool = iCategoryCharacteristicService.getCategoryCharacteristicBoolNames(productCategoryService.getCategoryById(category).getCategoryName());
 		for (int i = 0; i < itemsStr.size(); i++) {
-			request.setAttribute("categoryCharacteristicStr" + String.valueOf(i + 1), itemsStr.get(i).getCategoryCharacteristicName());
+			request.setAttribute("categoryCharacteristicStr" + String.valueOf(i + 1), itemsStr.get(i).getCategoryCharacteristicNameLanguageOne());
 		}
 		for (int i = 0; i < itemsInt.size(); i++) {
-			request.setAttribute("categoryCharacteristicInt" + String.valueOf(i + 1), itemsInt.get(i).getCategoryCharacteristicName());
+			request.setAttribute("categoryCharacteristicInt" + String.valueOf(i + 1), itemsInt.get(i).getCategoryCharacteristicNameLanguageOne());
 		}
 		for (int i = 0; i < itemsBool.size(); i++) {
-			request.setAttribute("categoryCharacteristicBool" + String.valueOf(i + 1), itemsBool.get(i).getCategoryCharacteristicName());
+			request.setAttribute("categoryCharacteristicBool" + String.valueOf(i + 1), itemsBool.get(i).getCategoryCharacteristicNameLanguageOne());
 		}
 	}
 	
