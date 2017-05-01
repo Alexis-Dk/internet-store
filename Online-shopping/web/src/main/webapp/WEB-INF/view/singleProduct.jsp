@@ -257,7 +257,7 @@
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("boolCharacteristic5")%></h3></td>
 				</tr>
-				<tr>
+<%--  				<tr>
 					<td><p class="user-menuMy">Stock availability</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("stockStatus")%></h3></td>
@@ -271,7 +271,7 @@
 					<td><p class="user-menuMy">Price</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("price")%></h3></td>
-				</tr>
+				</tr> --%>
 			</table>
 
 			<div class="row">

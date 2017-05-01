@@ -964,18 +964,18 @@
 								name="category" placeholder="to"
 								value="<%=request.getSession().getAttribute("categoryId")%>">
 			<input name="numberCharCategory" value="1" type="hidden">
-			<input name="categoryCharacteristicId" value="${categoryCharacteristicBool3.categoryCharacteristicId}" type="hidden">
-			<input name="categoryCharacteristicName" value="${categoryCharacteristicBool3.categoryCharacteristicName}" type="hidden">
+			<input name="categoryCharacteristicId" value="${categoryCharacteristicBool4.categoryCharacteristicId}" type="hidden">
+			<input name="categoryCharacteristicName" value="${categoryCharacteristicBool4.categoryCharacteristicName}" type="hidden">
 			<table width="687" style="border:1px solid;">
 						<tr bgcolor="#F6F6F6">
 							<td width="100">
-								<input name="lang1" type="text" value="${categoryCharacteristicBool3.categoryCharacteristicNameLanguageOne}">
+								<input name="lang1" type="text" value="${categoryCharacteristicBool4.categoryCharacteristicNameLanguageOne}">
 							</td>
 							<td width="100">
-								<input name="lang2" type="text" value="${categoryCharacteristicBool3.categoryCharacteristicNameLanguageTwo}">
+								<input name="lang2" type="text" value="${categoryCharacteristicBool4.categoryCharacteristicNameLanguageTwo}">
 							</td>
 							<td width="100">
-								<input name="lang3" type="text" value="${categoryCharacteristicBool3.categoryCharacteristicNameLanguageThree}">
+								<input name="lang3" type="text" value="${categoryCharacteristicBool4.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
 								<input name="optionEnable" type="checkbox" value="true" ${categoryCharacteristicEnableBoolStatus4} >Enable<Br>
@@ -997,18 +997,18 @@
 								name="category" placeholder="to"
 								value="<%=request.getSession().getAttribute("categoryId")%>">
 			<input name="numberCharCategory" value="1" type="hidden">
-			<input name="categoryCharacteristicId" value="${categoryCharacteristicBool3.categoryCharacteristicId}" type="hidden">
-			<input name="categoryCharacteristicName" value="${categoryCharacteristicBool3.categoryCharacteristicName}" type="hidden">
+			<input name="categoryCharacteristicId" value="${categoryCharacteristicBool5.categoryCharacteristicId}" type="hidden">
+			<input name="categoryCharacteristicName" value="${categoryCharacteristicBool5.categoryCharacteristicName}" type="hidden">
 			<table width="687" style="border:1px solid;">
 						<tr bgcolor="#F6F6F6">
 							<td width="100">
-								<input name="lang1" type="text" value="${categoryCharacteristicBool3.categoryCharacteristicNameLanguageOne}">
+								<input name="lang1" type="text" value="${categoryCharacteristicBool5.categoryCharacteristicNameLanguageOne}">
 							</td>
 							<td width="100">
-								<input name="lang2" type="text" value="${categoryCharacteristicBool3.categoryCharacteristicNameLanguageTwo}">
+								<input name="lang2" type="text" value="${categoryCharacteristicBool5.categoryCharacteristicNameLanguageTwo}">
 							</td>
 							<td width="100">
-								<input name="lang3" type="text" value="${categoryCharacteristicBool3.categoryCharacteristicNameLanguageThree}">
+								<input name="lang3" type="text" value="${categoryCharacteristicBool5.categoryCharacteristicNameLanguageThree}">
 							</td>
 							<td align="center">
 								<input name="optionEnable" type="checkbox" value="true" ${categoryCharacteristicEnableBoolStatus5} >Enable<Br>

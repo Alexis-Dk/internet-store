@@ -545,7 +545,7 @@
 &rating=<c:out value="${product.rating}"></c:out>
 &stockStatus=<c:out value="${product.stockStatus}"></c:out>
 &imagePath=<c:out value="${product.imagePath}"></c:out>
-&price=<c:out value="${product.price}"></c:out>
+&price=<c:out value="${product.intCharacteristic1}"></c:out>
 &productId=<c:out value="${product.productId}"></c:out>
 &categoryId=<%= request.getSession().getAttribute("categoryId") %>">
                         <img src="img/<c:out value="${product.imagePath}"></c:out>" alt=""></a>
@@ -570,7 +570,7 @@
 &rating=<c:out value="${product.rating}"></c:out>
 &stockStatus=<c:out value="${product.stockStatus}"></c:out>
 &imagePath=<c:out value="${product.imagePath}"></c:out>
-&price=<c:out value="${product.price}"></c:out>
+&price=<c:out value="${product.intCharacteristic1}"></c:out>
 &productId=<c:out value="${product.productId}"></c:out>">Add to cart</a>
 								</div> 
                         </sec:authorize>                      
