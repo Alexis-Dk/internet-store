@@ -560,5 +560,16 @@ public class MainController {
 		}
 		return "rest";
 	}
+	
+//    @RequestMapping(value = "aaa", method = RequestMethod.GET)
+//    public String aaa() {
+//        try {
+//        	
+//    		} catch (Exception e) {
+//    			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
+//    			return RequestParamConstants.ERROR_PAGE;
+//    		}
+//		return RequestParamConstants.ERROR_PAGE;
+//	}
 
 }
