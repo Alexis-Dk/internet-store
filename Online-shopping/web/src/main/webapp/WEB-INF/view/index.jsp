@@ -48,21 +48,29 @@
     }
 </script>
     
-    <!-- Google Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
-    
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="<c:url value="/css/owl.carousel.css" />" rel="stylesheet">
-    <link rel="stylesheet" href="<c:url value="/css/styleMain.css" />" rel="stylesheet"> 
-    <link rel="stylesheet" href="<c:url value="/css/responsive.css" />" rel="stylesheet"> 
+                  <meta http-equiv=Content-Type content="text/html;charset=UTF-8">
+              <title>Payments system</title>
+              <link rel="stylesheet" href="resources/styles/bootstrap.css">
+              <link rel="stylesheet" href="resources/styles/style.css">
+              <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+              <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+              <link href='http://fonts.googleapis.com/css?family=Titillium+Web:4col-sm-60,200,300,700,600' rel='stylesheet' type='text/css'>
+              <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
+              <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
+
+              <!-- Bootstrap -->
+              <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+              <!-- Font Awesome -->
+              <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+              <!-- Custom CSS -->
+              <link rel="stylesheet" href="<c:url value="/css/owl.carousel.css" />" rel="stylesheet">
+              <link rel="stylesheet" href="<c:url value="/css/styleMain.css" />" rel="stylesheet"> 
+              <link rel="stylesheet" href="<c:url value="/css/responsive.css" />" rel="stylesheet"> 
+
+              <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+              <script src="js/payments.js"> </script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -111,7 +119,7 @@ else {
                         <ul>
                             <sec:authorize access="isAnonymous()">
                           		    <li><a href="registration"><i class="fa fa-user"></i> <locale:message code="label.registration"/></a></li>
-	                          	    <li><a href="${context}/login.jsp"><i class="fa fa-heart"></i> <locale:message code="label.login"/></a></li>
+	                          	    <li><a href="${context}/login"><i class="fa fa-heart"></i> <locale:message code="label.login"/></a></li>
                              </sec:authorize>
 	  						 <sec:authorize access="isAuthenticated()">  
 		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> <locale:message code="label.mycart"/></a></li>
@@ -138,7 +146,7 @@ else {
                                 <ul class="dropdown-menu">
                                     <li><a href="javascript:setParam('lang', 'en');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull1"/></a></li>
                                     <li><a href="javascript:setParam('lang', 'fr');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull2"/></a></li>
-                                    <li><a href="#">German</a></li>
+                                    <li><a href="javascript:setParam('lang', 'ru');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull3"/></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -160,7 +168,7 @@ else {
                        <c:forEach items="${requestScope.quantitiAndSum}" var="quantitiAndSum">
                 			<sec:authorize access="isAuthenticated()"> 
 	                    		<div class="shopping-item">
-	                      			 <a href="ViewItemsOfCart.html">Cart - <span class="cart-amunt"><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
+	                      			 <a href="ViewItemsOfCart.html"><locale:message code="label.cart"/> - <span class="cart-amunt"><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
 	                  		     </div>
                     		</sec:authorize>
                     	</c:forEach> 
@@ -238,8 +246,7 @@ else {
                                         <div class="col-md-6 col-md-offset-6">
                                             <div class="slide-http://localhost:8080/Web/index?lang=frcontent">
                                                 <h2><locale:message code="label.WeAreAwesome"/></h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur, dolorem, excepturi. Dolore aliquam quibusdam ut quae iure vero exercitationem ratione!</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi ab molestiae minus reiciendis! Pariatur ab rerum, sapiente ex nostrum laudantium.</p>
+													<p><locale:message code="label.eElectronics1"/></p>
                                                 <a href="" class="readmore"><locale:message code="label.LearnMore"/></a>
                                             </div>
                                         </div>
@@ -259,7 +266,7 @@ else {
                                         <div class="col-md-6 col-md-offset-6">
                                             <div class="slide-content">
                                                 <h2><locale:message code="label.WeAreGreat"/></h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe aspernatur, dolorum harum molestias tempora deserunt voluptas possimus quos eveniet, vitae voluptatem accusantium atque deleniti inventore. Enim quam placeat expedita! Quibusdam!</p>
+                                                <p><locale:message code="label.eElectronics2"/></p>
                                                 <a href="" class="readmore"><locale:message code="label.LearnMore"/></a>
                                             </div>
                                         </div>
@@ -279,8 +286,7 @@ else {
                                         <div class="col-md-6 col-md-offset-6">
                                             <div class="slide-content">
                                                 <h2><locale:message code="label.WeAreSuperb"/></h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, eius?</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti voluptates necessitatibus dicta recusandae quae amet nobis sapiente explicabo voluptatibus rerum nihil quas saepe, tempore error odio quam obcaecati suscipit sequi.</p>
+                                                <p><locale:message code="label.eElectronics3"/></p>
                                                 <a href="" class="readmore"><locale:message code="label.LearnMore"/></a>
                                             </div>
                                         </div>
@@ -371,11 +377,11 @@ else {
                 
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-menu">
-                        <h2 class="footer-wid-title">User Navigation </h2>
+                       <h2 class="footer-wid-title"><locale:message code="label.userNavigation"/> </h2>
                         <ul>
                             <sec:authorize access="isAnonymous()">
                           		    <li><a href="registration"><i class="fa fa-user"></i> <locale:message code="label.registration"/></a></li>
-	                          	    <li><a href="${context}/login.jsp"><i class="fa fa-heart"></i> <locale:message code="label.login"/></a></li>
+	                          	    <li><a href="${context}/login"><i class="fa fa-heart"></i> <locale:message code="label.login"/></a></li>
                              </sec:authorize>
 	  						 <sec:authorize access="isAuthenticated()">  
 		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> <locale:message code="label.mycart"/></a></li>
@@ -425,15 +431,17 @@ else {
     
     <!-- Bootstrap JS form CDN -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
     
     <!-- jQuery sticky menu -->
-    <script src="js/owl.carousel.min.js"></script>
+     
     <script src="js/jquery.sticky.js"></script>
-    
-    <!-- jQuery easing -->
+<!--     <script src="js/jquery.easing.1.3.min.js"></script> -->
+    <script src="js/main.js"></script> -->    
+    <!--jQuery easing
     <script src="js/jquery.easing.1.3.min.js"></script>
     
-    <!-- Main Script -->
-    <script src="js/main.js"></script>
+    Main Script
+    <script src="js/main.js"></script> -->
   </body>
 </html>

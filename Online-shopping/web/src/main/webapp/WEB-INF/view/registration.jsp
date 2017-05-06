@@ -87,13 +87,13 @@
                     <div class="user-menu">
                         <ul>
                             <sec:authorize access="isAnonymous()">
-                          		    <li><a href="registration"><i class="fa fa-user"></i> Registration</a></li>
-	                          	    <li><a href="${context}/login.jsp"><i class="fa fa-heart"></i> Login</a></li>
+                          		    <li><a href="registration"><i class="fa fa-user"></i> <locale:message code="label.registration"/></a></li>
+	                          	    <li><a href="${context}/login"><i class="fa fa-heart"></i> <locale:message code="label.login"/></a></li>
                              </sec:authorize>
 	  						 <sec:authorize access="isAuthenticated()">  
-		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> My Cart</a></li>
-		                            <li><a href="logout"><i class="fa fa-user"></i> Log out</a></li>
-         					 </sec:authorize>	
+		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> <locale:message code="label.mycart"/></a></li>
+		                            <li><a href="logout"><i class="fa fa-user"></i> <locale:message code="label.logout"/></a></li>
+         					 </sec:authorize>		                    
                         </ul>
                     </div>
                 </div>
@@ -101,8 +101,8 @@
                 <div class="col-md-4">
                     <div class="header-right">
                         <ul class="list-unstyled list-inline">
-<%--                             <li class="dropdown dropdown-small">
-                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">currency :</span><span class="value">USD </span><b class="caret"></b></a>
+                            <%-- <li class="dropdown dropdown-small">
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key"><locale:message code="label.currency"/> :</span><span class="value">USD </span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">USD</a></li>
                                     <li><a href="#">INR</a></li>
@@ -110,12 +110,12 @@
                                 </ul>
                             </li> --%>
 
-                           <li class="dropdown dropdown-small">
+                            <li class="dropdown dropdown-small">
                                 <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key"></span><span class="letter">${pageContext.response.locale} </span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="javascript:setParam('lang', 'en');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull1"/></a></li>
                                     <li><a href="javascript:setParam('lang', 'fr');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull2"/></a></li>
-                                    <li><a href="#">German</a></li>
+                                    <li><a href="javascript:setParam('lang', 'ru');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull3"/></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -125,26 +125,26 @@
         </div>
     </div> <!-- End header area -->
     
-    <div class="site-branding-area">
+        <div class="site-branding-area">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="logo">
-                        <h1><a href="index.html">e<span>Electronics</span></a></h1>
+                        <h1><a href="index">e<span><locale:message code="label.electronics"/></span></a></h1>
                     </div>
                 </div>
-                
                 <div class="col-sm-6">
-                	<sec:authorize access="isAuthenticated()"> 
-	                    <div class="shopping-item">
-	                      	 <a href="ViewItemsOfCart.html">Cart - <span class="cart-amunt">$0</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">0</span></a>
-	                    </div>
-                    </sec:authorize>
-                </div>
+                       <c:forEach items="${requestScope.quantitiAndSum}" var="quantitiAndSum">
+                			<sec:authorize access="isAuthenticated()"> 
+	                    		<div class="shopping-item">
+	                      			 <a href="ViewItemsOfCart.html"><locale:message code="label.cart"/> - <span class="cart-amunt"><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
+	                  		     </div>
+                    		</sec:authorize>
+                    	</c:forEach> 
                 </div>
             </div>
         </div>
-     <!-- End site branding area -->
+    </div> <!-- End site branding area -->
     
     <div class="mainmenu-area">
         <div class="container">
@@ -159,15 +159,15 @@
                 </div> 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="index">Home</a></li>
+                        <li><a href="index"><locale:message code="label.home"/></a></li>
                            	<c:forEach items="${requestScope.productCategory}" var="category">
 			                    <li><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
                             </c:forEach>
                             <sec:authorize access="isAuthenticated()">
-                         		<li><a href="ViewItemsOfCart">Cart</a></li>
+                         		<li><a href="ViewItemsOfCart"><locale:message code="label.cart"/></a></li>
                          	</sec:authorize>
-                        <li><a href="contact">Contact</a></li>
-                        <li class="active"><a href="registration">Registration</a></li>
+                        <li><a href="contact"><locale:message code="label.contact"/></a></li>
+                        <li class="active"><a href="registration"><locale:message code="label.registration"/></a></li>
                     </ul>
                 </div>  
             </div>
@@ -179,7 +179,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
-                        <h2>Registration page</h2>
+                        <h2><locale:message code="label.registration.headers"/></h2>
                     </div>
                 </div>
             </div>
@@ -198,10 +198,10 @@
 							<section class="container">
 								<div class="container-page">
 									<div class="col-md-6">
-										<h3 class="dark-grey">Registration</h3>
+										<h3 class="dark-grey"><locale:message code="label.registration.headers"/></h3>
 
 										<div class="form-group col-lg-8">
-											<label>Username</label>
+											<label><locale:message code="label.password"/></label>
 											<p>
 											<form:errors path="name" cssStyle="color: red"/>
 											<form:input id="name"  type="text" value="" path="name"
@@ -209,7 +209,7 @@
 										</div>
 
 										<div class="form-group col-lg-8">
-											<label>Password</label>
+											<label><locale:message code="label.password"/></label>
 											<p>
 											<form:errors path="password" cssStyle="color: red"/>
 											<form:input id="password" type="password" value="" path="password"
@@ -217,7 +217,7 @@
 										</div>
 
 										<div class="form-group col-lg-8">
-											<label>Repeat Password</label>
+											<label><locale:message code="label.registration.repeatpassword"/></label>
 											<p>
 											<form:errors path="repeatPassword" cssStyle="color: red"/>
 											<form:input id="repeatPassword" type="password" value="" path="repeatPassword"
@@ -225,7 +225,7 @@
 										</div>
 
 										<div class="form-group col-lg-8">
-											<label>Email Address</label>
+											<label><locale:message code="label.registration.email"/></label>
 											<p>
 											<form:errors path="email" cssStyle="color: red"/>
 											<form:input id="email" type="text" name="email" value="" path="email"
@@ -234,22 +234,16 @@
 										
 									</div>
 									<div class="col-md-6">
-										<h3 class="dark-grey">Terms and Conditions</h3>
-										<p>By clicking on "Register" you agree to The Company's'
-											Terms and Conditions</p>
-										<p>While rare, prices are subject to change based on
-											exchange rate fluctuations - should such a fluctuation
-											happen, we may request an additional payment. You have the
-											option to request a full refund or to pay the new price.
-											(Paragraph 13.5.8)</p>
-										<p>Should there be an error in the description or pricing
-											of a product, we will provide you with a full refund
-											(Paragraph 13.5.6)</p>
-										<p>Acceptance of an order by us is dependent on our
-											suppliers ability to provide the product. (Paragraph 13.5.6)
+										<h3 class="dark-grey"><locale:message code="label.registration.terms1"/></h3>
+										<p><locale:message code="label.registration.terms2"/></p>
+										<p><locale:message code="label.registration.terms3"/>
+										</p>
+										<p><locale:message code="label.registration.terms4"/>
+										</p>
+										<p><locale:message code="label.registration.terms5"/>
 										</p>
 
-										<button type="submit" class="btn btn-primary">Register</button>
+										<button type="submit" class="btn btn-primary"><locale:message code="label.registration.terms6"/></button>
 									</div>
 								</div>
 							</section>
@@ -267,33 +261,32 @@
             <div class="row">
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-about-us">
-                        <h2>e<span>Electronics</span></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis magni at?</p>
-
+                        <h2>e<span><locale:message code="label.electronics"/></span></h2>
+                        <p><locale:message code="label.eElectronics"/></p>
                     </div>
                 </div>
                 
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-menu">
-                        <h2 class="footer-wid-title">User Navigation </h2>
+                        <h2 class="footer-wid-title"><locale:message code="label.userNavigation"/> </h2>
                         <ul>
                             <sec:authorize access="isAnonymous()">
-                          		    <li><a href="registration"><i class="fa fa-user"></i> Registration</a></li>
-	                          	    <li><a href="${context}/login.jsp"><i class="fa fa-heart"></i> Login</a></li>
+                          		    <li><a href="registration"><i class="fa fa-user"></i> <locale:message code="label.registration"/></a></li>
+	                          	    <li><a href="${context}/login"><i class="fa fa-heart"></i> <locale:message code="label.login"/></a></li>
                              </sec:authorize>
 	  						 <sec:authorize access="isAuthenticated()">  
-		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> My Cart</a></li>
-		                            <li><a href="logout"><i class="fa fa-user"></i> Log out</a></li>
+		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> <locale:message code="label.mycart"/></a></li>
+		                            <li><a href="logout"><i class="fa fa-user"></i> <locale:message code="label.logout"/></a></li>
          					 </sec:authorize>	
                         </ul>                              
                     </div>
                 </div>
-
+                
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-menu">
-                        <h2 class="footer-wid-title">Categories</h2>
+                        <h2 class="footer-wid-title"><locale:message code="label.categories"/></h2>
                         <ul>
-                           	<c:forEach items="${requestScope.productCategory}" var="category">
+                          	<c:forEach items="${requestScope.productCategory}" var="category">
 			                    <li><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
                             </c:forEach>
                         </ul>                        
@@ -301,7 +294,6 @@
                 </div>
                 
                 <div class="col-md-3 col-sm-6">
-
                 </div>
             </div>
         </div>
@@ -312,7 +304,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="copyright">
-                        <p>&copy; 2015 eElectronics. All Rights Reserved. Coded with <i class="fa fa-heart"></i> by Alexey Druzik</p>
+                        <p>&copy; <locale:message code="label.footer1"/> <i class="fa fa-heart"></i> <locale:message code="label.footer2"/></p>
                     </div>
                 </div>
                 

@@ -6,6 +6,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.superinc.europe.onlineshopping.gu.entities.dto.*" %>
 <%@ page import="javax.servlet.http.HttpServletRequest.*" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="locale" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,6 +38,40 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    			  <script>
+			    function setParam(name, value) {
+			        var l = window.location;
+			
+			        /* build params */
+			        var params = {};        
+			        var x = /(?:\??)([^=&?]+)=?([^&?]*)/g;        
+			        var s = l.search;
+			        for(var r = x.exec(s); r; r = x.exec(s))
+			        {
+			            r[1] = decodeURIComponent(r[1]);
+			            if (!r[2]) r[2] = '%%';
+			            params[r[1]] = r[2];
+			        }
+			
+			        /* set param */
+			        params[name] = encodeURIComponent(value);
+			
+			        /* build search */
+			        var search = [];
+			        for(var i in params)
+			        {
+			            var p = encodeURIComponent(i);
+			            var v = params[i];
+			            if (v != '%%') p += '=' + v;
+			            search.push(p);
+			        }
+			        search = search.join('&');
+			
+			        /* execute search */
+			        l.search = search;
+			    }
+			</script>
+    
   </head>
    <body>
    
@@ -48,7 +83,7 @@
                         <ul>
                             <sec:authorize access="isAnonymous()">
                           		    <li><a href="registration"><i class="fa fa-user"></i> Registration</a></li>
-	                          	    <li><a href="${context}/login.jsp"><i class="fa fa-heart"></i> Login</a></li>
+	                          	    <li><a href="${context}/login"><i class="fa fa-heart"></i> Login</a></li>
                              </sec:authorize>
 	  						 <sec:authorize access="isAuthenticated()">  
 		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> My Cart</a></li>
@@ -62,11 +97,11 @@
                     <div class="header-right">
                         <ul class="list-unstyled list-inline">
                             <li class="dropdown dropdown-small">
-                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">language :</span><span class="value">English </span><b class="caret"></b></a>
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key"></span><span class="letter">${pageContext.response.locale} </span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">English</a></li>
-                                    <li><a href="#">French</a></li>
-                                    <li><a href="#">German</a></li>
+                                    <li><a href="javascript:setParam('lang', 'en');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull1"/></a></li>
+                                    <li><a href="javascript:setParam('lang', 'fr');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull2"/></a></li>
+                                    <li><a href="javascript:setParam('lang', 'ru');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull3"/></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -81,18 +116,18 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="logo">
-                        <h1><a href="index">e<span>Electronics</span></a></h1>
+                        <h1><a href="index">e<span><locale:message code="label.electronics"/></span></a></h1>
                     </div>
                 </div>
-                	<div class="col-sm-6">
+                <div class="col-sm-6">
                        <c:forEach items="${requestScope.quantitiAndSum}" var="quantitiAndSum">
                 			<sec:authorize access="isAuthenticated()"> 
 	                    		<div class="shopping-item">
-	                      			 <a href="ViewItemsOfCart.html">Cart - <span class="cart-amunt"><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
+	                      			 <a href="ViewItemsOfCart.html"><locale:message code="label.cart"/> - <span class="cart-amunt"><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
 	                  		     </div>
                     		</sec:authorize>
                     	</c:forEach> 
-                    </div>
+                </div>
             </div>
         </div>
     </div> <!-- End site branding area -->
@@ -202,18 +237,17 @@
             <div class="row">
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-about-us">
-                        <h2>e<span>Electronics</span></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis magni at?</p>
+                    	<p>&copy; <locale:message code="label.footer1"/> <i class="fa fa-heart"></i> <locale:message code="label.footer2"/></p>
                     </div>
                 </div>
                 
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-menu">
-                        <h2 class="footer-wid-title">User Navigation </h2>
+                       <h2 class="footer-wid-title"><locale:message code="label.userNavigation"/> </h2>
                         <ul>
                             <sec:authorize access="isAnonymous()">
                           		    <li><a href="registration"><i class="fa fa-user"></i> Registration</a></li>
-	                          	    <li><a href="${context}/login.jsp"><i class="fa fa-heart"></i> Login</a></li>
+	                          	    <li><a href="${context}/login"><i class="fa fa-heart"></i> Login</a></li>
                              </sec:authorize>
 	  						 <sec:authorize access="isAuthenticated()">  
 		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> My Cart</a></li>

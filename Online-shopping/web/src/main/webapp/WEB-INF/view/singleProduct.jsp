@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <c:set var="context" value="${pageContext.request.contextPath}" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,22 +47,29 @@
     }
 </script>
 
+              <meta http-equiv=Content-Type content="text/html;charset=UTF-8">
+              <title>Payments system</title>
+              <link rel="stylesheet" href="resources/styles/bootstrap.css">
+              <link rel="stylesheet" href="resources/styles/style.css">
+              <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+              <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+              <link href='http://fonts.googleapis.com/css?family=Titillium+Web:4col-sm-60,200,300,700,600' rel='stylesheet' type='text/css'>
+              <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
+              <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
 
-<!-- Google Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,100' rel='stylesheet' type='text/css'>
-    
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="<c:url value="/css/owl.carousel.css" />" rel="stylesheet">
-    <link rel="stylesheet" href="<c:url value="/css/styleMain.css" />" rel="stylesheet"> 
-    <link rel="stylesheet" href="<c:url value="/css/responsive.css" />" rel="stylesheet"> 
+              <!-- Bootstrap -->
+              <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+              <!-- Font Awesome -->
+              <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+              <!-- Custom CSS -->
+              <link rel="stylesheet" href="<c:url value="/css/owl.carousel.css" />" rel="stylesheet">
+              <link rel="stylesheet" href="<c:url value="/css/styleMain.css" />" rel="stylesheet"> 
+              <link rel="stylesheet" href="<c:url value="/css/responsive.css" />" rel="stylesheet"> 
+
+              <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+              <script src="js/payments.js"> </script>
 	  <style>
 		.letter {
 		    text-transform: uppercase;
@@ -78,7 +86,7 @@
                         <ul>
                             <sec:authorize access="isAnonymous()">
                           		    <li><a href="registration"><i class="fa fa-user"></i> <locale:message code="label.registration"/></a></li>
-	                          	    <li><a href="${context}/login.jsp"><i class="fa fa-heart"></i> <locale:message code="label.login"/></a></li>
+	                          	    <li><a href="${context}/login"><i class="fa fa-heart"></i> <locale:message code="label.login"/></a></li>
                              </sec:authorize>
 	  						 <sec:authorize access="isAuthenticated()">  
 		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i>  <locale:message code="label.mycart"/></a></li>
@@ -91,12 +99,12 @@
                 <div class="col-md-4">
                     <div class="header-right">
                         <ul class="list-unstyled list-inline">
-                           <li class="dropdown dropdown-small">
+                            <li class="dropdown dropdown-small">
                                 <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key"></span><span class="letter">${pageContext.response.locale} </span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="javascript:setParam('lang', 'en');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull1"/></a></li>
                                     <li><a href="javascript:setParam('lang', 'fr');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull2"/></a></li>
-                                    <li><a href="#">German</a></li>
+                                    <li><a href="javascript:setParam('lang', 'ru');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull3"/></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -106,7 +114,7 @@
         </div>
     </div> <!-- End header area -->
     
-    <div class="site-branding-area">
+        <div class="site-branding-area">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
@@ -114,11 +122,11 @@
                         <h1><a href="index">e<span><locale:message code="label.electronics"/></span></a></h1>
                     </div>
                 </div>
-                       <div class="col-sm-6">
+                <div class="col-sm-6">
                        <c:forEach items="${requestScope.quantitiAndSum}" var="quantitiAndSum">
                 			<sec:authorize access="isAuthenticated()"> 
 	                    		<div class="shopping-item">
-	                      			 <a href="ViewItemsOfCart.html">Cart - <span class="cart-amunt"><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
+	                      			 <a href="ViewItemsOfCart.html"><locale:message code="label.cart"/> - <span class="cart-amunt"><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
 	                  		     </div>
                     		</sec:authorize>
                     	</c:forEach> 
@@ -172,27 +180,27 @@
 			<img src="img/<%=request.getParameter("imagePath")%>" alt="">
 			<table class="table">
 				<tr ${categoryCharacteristicEnableIntStatus1}>
-					<td><p class="user-menuMy">${categoryCharacteristicInt1.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy">${categoryCharacteristicIntLang1}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("intCharacteristic1")%></h3></td>
 				</tr>
 				<tr ${categoryCharacteristicEnableIntStatus2}>
-					<td><p class="user-menuMy">${categoryCharacteristicInt2.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy">${categoryCharacteristicIntLang2}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("intCharacteristic2")%></h3></td>
 				</tr>
 				<tr ${categoryCharacteristicEnableIntStatus3}>
-					<td><p class="user-menuMy">${categoryCharacteristicInt3.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy">${categoryCharacteristicIntLang3}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("intCharacteristic3")%></h3></td>
 				</tr>
 				<tr ${categoryCharacteristicEnableIntStatus4}>
-					<td><p class="user-menuMy">${categoryCharacteristicInt4.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy">${categoryCharacteristicIntLang4}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("intCharacteristic4")%></h3></td>
 				</tr>
 				<tr ${categoryCharacteristicEnableIntStatus5}>
-					<td><p class="user-menuMy">${categoryCharacteristicInt5.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy">${categoryCharacteristicIntLang5}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("intCharacteristic5")%></h3></td>
 				</tr>
@@ -202,7 +210,7 @@
 						<h3><%=request.getParameter("description")%></h3></td>
 				</tr>
 				<tr ${categoryCharacteristicEnableStrStatus1}>
-					<td><p class="user-menuMy">${categoryCharacteristicStr1.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy">${categoryCharacteristicStrLang1}</p></td>
 					<td><p class="user-menuMy" />
 						<h3><%=request.getParameter("characteristic1")%></h3></td>
 				</tr>
@@ -332,7 +340,7 @@ description=<%=request.getParameter("description")%>
                         <ul>
                             <sec:authorize access="isAnonymous()">
                           		    <li><a href="registration"><i class="fa fa-user"></i> <locale:message code="label.registration"/></a></li>
-	                          	    <li><a href="${context}/login.jsp"><i class="fa fa-heart"></i> <locale:message code="label.login"/></a></li>
+	                          	    <li><a href="${context}/login"><i class="fa fa-heart"></i> <locale:message code="label.login"/></a></li>
                              </sec:authorize>
 	  						 <sec:authorize access="isAuthenticated()">  
 		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> <locale:message code="label.mycart"/></a></li>
@@ -381,20 +389,6 @@ description=<%=request.getParameter("description")%>
         </div>
     </div> <!-- End footer bottom area -->
 
-<!-- Latest jQuery form server -->
-<script src="https://code.jquery.com/jquery.min.js"></script>
 
-<!-- Bootstrap JS form CDN -->
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-<!-- jQuery sticky menu -->
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.sticky.js"></script>
-
-<!-- jQuery easing -->
-<script src="js/jquery.easing.1.3.min.js"></script>
-
-<!-- Main Script -->
-<script src="js/main.js"></script>
 </body>
 </html>

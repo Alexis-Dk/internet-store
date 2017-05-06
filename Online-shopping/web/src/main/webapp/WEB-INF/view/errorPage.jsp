@@ -3,6 +3,7 @@
 <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="locale" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>eElectronics - HTML eCommerce Template</title>
+    
+    <script>
+    function setParam(name, value) {
+        var l = window.location;
+
+        /* build params */
+        var params = {};        
+        var x = /(?:\??)([^=&?]+)=?([^&?]*)/g;        
+        var s = l.search;
+        for(var r = x.exec(s); r; r = x.exec(s))
+        {
+            r[1] = decodeURIComponent(r[1]);
+            if (!r[2]) r[2] = '%%';
+            params[r[1]] = r[2];
+        }
+
+        /* set param */
+        params[name] = encodeURIComponent(value);
+
+        /* build search */
+        var search = [];
+        for(var i in params)
+        {
+            var p = encodeURIComponent(i);
+            var v = params[i];
+            if (v != '%%') p += '=' + v;
+            search.push(p);
+        }
+        search = search.join('&');
+
+        /* execute search */
+        l.search = search;
+    }
+</script>
     
     <!-- Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
@@ -39,7 +74,7 @@
                         <ul>
                             <sec:authorize access="isAnonymous()">
                           		    <li><a href="registration"><i class="fa fa-user"></i> Registration</a></li>
-	                          	    <li><a href="${context}/login.jsp"><i class="fa fa-heart"></i> Login</a></li>
+	                          	    <li><a href="${context}/login"><i class="fa fa-heart"></i> Login</a></li>
                              </sec:authorize>
 	  						 <sec:authorize access="isAuthenticated()">  
 		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> My Cart</a></li>
@@ -53,11 +88,11 @@
                     <div class="header-right">
                         <ul class="list-unstyled list-inline">
                             <li class="dropdown dropdown-small">
-                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">language :</span><span class="value">English </span><b class="caret"></b></a>
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key"></span><span class="letter">${pageContext.response.locale} </span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">English</a></li>
-                                    <li><a href="#">French</a></li>
-                                    <li><a href="#">German</a></li>
+                                    <li><a href="javascript:setParam('lang', 'en');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull1"/></a></li>
+                                    <li><a href="javascript:setParam('lang', 'fr');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull2"/></a></li>
+                                    <li><a href="javascript:setParam('lang', 'ru');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull3"/></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -175,11 +210,11 @@
                 
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-menu">
-                        <h2 class="footer-wid-title">User Navigation </h2>
+                       <h2 class="footer-wid-title"><locale:message code="label.userNavigation"/> </h2>
                         <ul>
                             <sec:authorize access="isAnonymous()">
                           		    <li><a href="registration"><i class="fa fa-user"></i> Registration</a></li>
-	                          	    <li><a href="${context}/login.jsp"><i class="fa fa-heart"></i> Login</a></li>
+	                          	    <li><a href="${context}/login"><i class="fa fa-heart"></i> Login</a></li>
                              </sec:authorize>
 	  						 <sec:authorize access="isAuthenticated()">  
 		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> My Cart</a></li>
@@ -212,7 +247,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="copyright">
-                        <p>&copy; 2015 eElectronics. All Rights Reserved. Coded with <i class="fa fa-heart"></i> by Alexey Druzik</p>
+                        <p>&copy; <locale:message code="label.footer1"/> <i class="fa fa-heart"></i> <locale:message code="label.footer2"/></p>
                     </div>
                 </div>
                 

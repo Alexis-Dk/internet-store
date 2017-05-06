@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
@@ -29,6 +29,9 @@
               <link rel="stylesheet" href="<c:url value="/css/styleMain.css" />" rel="stylesheet"> 
               <link rel="stylesheet" href="<c:url value="/css/responsive.css" />" rel="stylesheet"> 
 
+			  <!-- <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+              
+		      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
               <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
               <script src="js/payments.js"> </script>
  <c:set var="context" value="${pageContext.request.contextPath}" />
@@ -136,7 +139,7 @@
                         <ul>
                             <sec:authorize access="isAnonymous()">
                           		    <li><a href="registration"><i class="fa fa-user"></i> <locale:message code="label.registration"/></a></li>
-	                          	    <li><a href="${context}/login.jsp"><i class="fa fa-heart"></i> <locale:message code="label.login"/></a></li>
+	                          	    <li><a href="${context}/login"><i class="fa fa-heart"></i> <locale:message code="label.login"/></a></li>
                              </sec:authorize>
 	  						 <sec:authorize access="isAuthenticated()">  
 		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> <locale:message code="label.mycart"/></a></li>
@@ -149,12 +152,12 @@
                 <div class="col-md-4">
                     <div class="header-right">
                         <ul class="list-unstyled list-inline">
-                           <li class="dropdown dropdown-small">
+                            <li class="dropdown dropdown-small">
                                 <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key"></span><span class="letter">${pageContext.response.locale} </span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="javascript:setParam('lang', 'en');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull1"/></a></li>
                                     <li><a href="javascript:setParam('lang', 'fr');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull2"/></a></li>
-                                    <li><a href="#">German</a></li>
+                                    <li><a href="javascript:setParam('lang', 'ru');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull3"/></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -164,7 +167,7 @@
         </div>
     </div> <!-- End header area -->
     
-    <div class="site-branding-area">
+            <div class="site-branding-area">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
@@ -176,7 +179,7 @@
                        <c:forEach items="${requestScope.quantitiAndSum}" var="quantitiAndSum">
                 			<sec:authorize access="isAuthenticated()"> 
 	                    		<div class="shopping-item">
-	                      			 <a href="ViewItemsOfCart.html">Cart - <span class="cart-amunt"><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
+	                      			 <a href="ViewItemsOfCart.html"><locale:message code="label.cart"/> - <span class="cart-amunt"><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
 	                  		     </div>
                     		</sec:authorize>
                     	</c:forEach> 
@@ -295,7 +298,7 @@
                         <input hidden="true" type="text" id="selectedCharacteristic5" name="selectedCharacteristic5" value="{{selected5}}">
                         <input hidden="true" type="text" id="selectedCharacteristic6" name="selectedCharacteristic6" value="{{selected6}}">
                         <input hidden="true" type="text" id="selectedCharacteristic7" name="selectedCharacteristic7" value="{{selected7}}">
-                        <legend class="demo-legend" ${categoryCharacteristicEnableIntStatus1}><H5 class="md-title" ><font size="3" color=#000000>${categoryCharacteristicInt1.categoryCharacteristicNameLanguageOne}</font></H5> </legend>        
+                        <legend class="demo-legend" ${categoryCharacteristicEnableIntStatus1}><H5 class="md-title" ><font size="3" color=#000000>${categoryCharacteristicIntLang1}</font></H5> </legend>        
                           <div layout="row" ${categoryCharacteristicEnableIntStatus1}  layout-align="center" >
                            <md-input-container>
                              <label for="testInput1">Min</label>
@@ -306,7 +309,7 @@
                              <input type="text" id="intCharacteristicMax1" ng-model="customUserParam.intCharacteristicMax1" md-autofocus="" name="intCharacteristicMax1">
                            </md-input-container>
                          </div>
-                         <legend class="demo-legend" ${categoryCharacteristicEnableIntStatus2}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicInt2.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                         <legend class="demo-legend" ${categoryCharacteristicEnableIntStatus2}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicIntLang2}</font></H5> </legend>
                          <div layout="row" ${categoryCharacteristicEnableIntStatus2} layout-align="center">
                             <md-input-container >
                                <label for="testInput" >Min</label>
@@ -317,7 +320,7 @@
                                <input type="text" id="intCharacteristicMax2" ng-model="customUserParam.intCharacteristicMax2" md-autofocus="" name="intCharacteristicMax2">
                              </md-input-container>
                            </div>
-                           <legend class="demo-legend" ${categoryCharacteristicEnableIntStatus3}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicInt3.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                           <legend class="demo-legend" ${categoryCharacteristicEnableIntStatus3}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicIntLang3}</font></H5> </legend>
                          <div layout="row" ${categoryCharacteristicEnableIntStatus3} layout-align="center">
                             <md-input-container >
                                <label for="testInput" >Min</label>
@@ -328,7 +331,7 @@
                                <input type="text" id="intCharacteristicMax3" ng-model="customUserParam.intCharacteristicMax3" md-autofocus="" name="intCharacteristicMax3">
                              </md-input-container>
                            </div>
-                           <legend class="demo-legend" ${categoryCharacteristicEnableIntStatus4}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicInt4.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                           <legend class="demo-legend" ${categoryCharacteristicEnableIntStatus4}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicIntLang4}</font></H5> </legend>
                          <div layout="row" ${categoryCharacteristicEnableIntStatus4} layout-align="center">
                             <md-input-container >
                                <label for="testInput" >Min</label>
@@ -339,7 +342,7 @@
                                <input type="text" id="intCharacteristicMax4" ng-model="customUserParam.intCharacteristicMax4" md-autofocus="" name="intCharacteristicMax4">
                              </md-input-container>
                            </div>
-                         <legend class="demo-legend" ${categoryCharacteristicEnableIntStatus5}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicInt5.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                         <legend class="demo-legend" ${categoryCharacteristicEnableIntStatus5}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicIntLang5}</font></H5> </legend>
                          <div layout="row" ${categoryCharacteristicEnableIntStatus5} layout-align="center">
                             <md-input-container >
                                <label for="testInput" >Min</label>
@@ -355,7 +358,7 @@
                          name="category" placeholder="to"
                          value="<%= request.getSession().getAttribute("categoryId") %>">
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus1}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr1.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus1}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStrLang1}</font></H5> </legend>
                                   <div layout="row" ${categoryCharacteristicEnableStrStatus1} layout-wrap flex>
                                     <div flex="50" ng-repeat="item in items1">
                                       <md-checkbox ng-checked="exists2(item, selected1)" ng-click="toggle2(item, selected1)">
@@ -378,7 +381,7 @@
                                   @see https://github.com/philipwalton/flexbugs#9-some-html-elements-cant-be-flex-containers
                                 -->
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus2}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr2.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus2}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStrLang2}</font></H5> </legend>
                                   <div layout="row" layout-wrap flex ${categoryCharacteristicEnableStrStatus2}>
                                     <div flex="50" ng-repeat="item in items2">
                                       <md-checkbox ng-checked="exists2(item, selected2)" ng-click="toggle2(item, selected2)">
@@ -391,7 +394,7 @@
                                   </div>
                                 </fieldset> 
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus3}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr3.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus3}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStrLang3}</font></H5> </legend>
                                   <div layout="row" layout-wrap flex ${categoryCharacteristicEnableStrStatus3}>
                                     <div flex="50" ng-repeat="item in items3">
                                       <md-checkbox ng-checked="exists2(item, selected3)" ng-click="toggle2(item, selected3)">
@@ -404,7 +407,7 @@
                                   </div>
                                 </fieldset>  
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus4}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr4.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus4}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStrLang4}</font></H5> </legend>
                                   <div layout="row" layout-wrap flex ${categoryCharacteristicEnableStrStatus4}>
                                     <div flex="50" ng-repeat="item in items4">
                                       <md-checkbox ng-checked="exists2(item, selected4)" ng-click="toggle2(item, selected4)">
@@ -417,7 +420,7 @@
                                   </div>
                                 </fieldset> 
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus5}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr5.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus5}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStrLang5}</font></H5> </legend>
                                   <div layout="row" layout-wrap flex ${categoryCharacteristicEnableStrStatus5}>
                                     <div flex="50" ng-repeat="item in items5">
                                       <md-checkbox ng-checked="exists2(item, selected5)" ng-click="toggle2(item, selected5)">
@@ -430,7 +433,7 @@
                                   </div>
                                 </fieldset> 
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus6}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr6.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus6}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStrLang6}</font></H5> </legend>
                                   <div layout="row" layout-wrap flex ${categoryCharacteristicEnableStrStatus6}>
                                     <div flex="50" ng-repeat="item in items6">
                                       <md-checkbox ng-checked="exists2(item, selected6)" ng-click="toggle2(item, selected6)">
@@ -443,7 +446,7 @@
                                   </div>
                                 </fieldset> 
                                 <fieldset class="standard" >
-                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus7}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStr7.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+                                  <legend class="demo-legend" ${categoryCharacteristicEnableStrStatus7}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicStrLang7}</font></H5> </legend>
                                   <div layout="row" layout-wrap flex ${categoryCharacteristicEnableStrStatus7}>
                                     <div flex="50" ng-repeat="item in items7">
                                       <md-checkbox ng-checked="exists2(item, selected7)" ng-click="toggle2(item, selected7)">
@@ -455,31 +458,31 @@
                                     </div>
                                   </div>
                                 </fieldset>
-          					    <legend class="demo-legend" ${categoryCharacteristicEnableBoolStatus1}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool1.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+          					    <legend class="demo-legend" ${categoryCharacteristicEnableBoolStatus1}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBoolLang1}</font></H5> </legend>
                                 <div layout-align="center none" class="parent" ${categoryCharacteristicEnableBoolStatus1}>
 				                  <md-switch ng-model="customUserParam.boolCharacteristic1" aria-label="Switch 2" ng-click="updateBoolChar1()">
 					                <div align="center">  </div>
 					              </md-switch>
 					            </div>
-							    <legend class="demo-legend" ${categoryCharacteristicEnableBoolStatus2}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool2.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+							    <legend class="demo-legend" ${categoryCharacteristicEnableBoolStatus2}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBoolLang2}</font></H5> </legend>
                                 <div layout-align="center none" class="parent" ${categoryCharacteristicEnableBoolStatus2}>
 				                  <md-switch ng-model="customUserParam.boolCharacteristic2" aria-label="Switch 2" ng-click="updateBoolChar2()">
 					                <div align="center">  </div>
 					              </md-switch>
 					            </div>
-							    <legend class="demo-legend" ${categoryCharacteristicEnableBoolStatus3}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool3.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+							    <legend class="demo-legend" ${categoryCharacteristicEnableBoolStatus3}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBoolLang3}</font></H5> </legend>
                                 <div layout-align="center none" class="parent" ${categoryCharacteristicEnableBoolStatus3}>
 				                  <md-switch ng-model="customUserParam.boolCharacteristic3" aria-label="Switch 3" ng-click="updateBoolChar3()">
 					                <div align="center">  </div>
 					              </md-switch>
 					            </div>
-					            <legend class="demo-legend" ${categoryCharacteristicEnableBoolStatus4}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool4.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+					            <legend class="demo-legend" ${categoryCharacteristicEnableBoolStatus4}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBoolLang4}</font></H5> </legend>
                                 <div layout-align="center none" class="parent" ${categoryCharacteristicEnableBoolStatus4}>
 				                  <md-switch ng-model="customUserParam.boolCharacteristic4" aria-label="Switch 4" ng-click="updateBoolChar4()">
 					                <div align="center">  </div>
 					              </md-switch>
 					            </div>
-					            <legend class="demo-legend" ${categoryCharacteristicEnableBoolStatus5}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBool5.categoryCharacteristicNameLanguageOne}</font></H5> </legend>
+					            <legend class="demo-legend" ${categoryCharacteristicEnableBoolStatus5}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicBoolLang5}</font></H5> </legend>
                                 <div layout-align="center none" class="parent" ${categoryCharacteristicEnableBoolStatus5}>
 				                  <md-switch ng-model="customUserParam.boolCharacteristic5" aria-label="Switch 5" ng-click="updateBoolChar5()">
 					                <div align="center">  </div>
@@ -696,7 +699,7 @@
                         <ul>
                             <sec:authorize access="isAnonymous()">
                           		    <li><a href="registration"><i class="fa fa-user"></i> <locale:message code="label.registration"/></a></li>
-	                          	    <li><a href="${context}/login.jsp"><i class="fa fa-heart"></i> <locale:message code="label.login"/></a></li>
+	                          	    <li><a href="${context}/login"><i class="fa fa-heart"></i> <locale:message code="label.login"/></a></li>
                              </sec:authorize>
 	  						 <sec:authorize access="isAuthenticated()">  
 		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> <locale:message code="label.mycart"/></a></li>

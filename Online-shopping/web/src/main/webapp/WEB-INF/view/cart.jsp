@@ -6,6 +6,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.superinc.europe.onlineshopping.gu.entities.dto.*" %>
 <%@ page import="javax.servlet.http.HttpServletRequest.*" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="locale" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,6 +15,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>eElectronics - HTML eCommerce Template</title>
+    
+    <script>
+    function setParam(name, value) {
+        var l = window.location;
+
+        /* build params */
+        var params = {};        
+        var x = /(?:\??)([^=&?]+)=?([^&?]*)/g;        
+        var s = l.search;
+        for(var r = x.exec(s); r; r = x.exec(s))
+        {
+            r[1] = decodeURIComponent(r[1]);
+            if (!r[2]) r[2] = '%%';
+            params[r[1]] = r[2];
+        }
+
+        /* set param */
+        params[name] = encodeURIComponent(value);
+
+        /* build search */
+        var search = [];
+        for(var i in params)
+        {
+            var p = encodeURIComponent(i);
+            var v = params[i];
+            if (v != '%%') p += '=' + v;
+            search.push(p);
+        }
+        search = search.join('&');
+
+        /* execute search */
+        l.search = search;
+    }
+</script>
     
     <!-- Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,700,600' rel='stylesheet' type='text/css'>
@@ -48,33 +83,42 @@
 		}
       else {d = ""; s = "hidden";}
       %>
-    <div class="header-area">
+<div class="header-area">
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
                     <div class="user-menu">
                         <ul>
                             <sec:authorize access="isAnonymous()">
-                          		    <li><a href="registration"><i class="fa fa-user"></i> Registration</a></li>
-	                          	    <li><a href="${context}/login.jsp"><i class="fa fa-heart"></i> Login</a></li>
+                          		    <li><a href="registration"><i class="fa fa-user"></i> <locale:message code="label.registration"/></a></li>
+	                          	    <li><a href="${context}/login"><i class="fa fa-heart"></i> <locale:message code="label.login"/></a></li>
                              </sec:authorize>
 	  						 <sec:authorize access="isAuthenticated()">  
-		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> My Cart</a></li>
-		                            <li><a href="logout"><i class="fa fa-user"></i> Log out</a></li>
-         					 </sec:authorize>	
+		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> <locale:message code="label.mycart"/></a></li>
+		                            <li><a href="logout"><i class="fa fa-user"></i> <locale:message code="label.logout"/></a></li>
+         					 </sec:authorize>		                    
                         </ul>
                     </div>
                 </div>
-
+                
                 <div class="col-md-4">
                     <div class="header-right">
                         <ul class="list-unstyled list-inline">
-                            <li class="dropdown dropdown-small">
-                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">language :</span><span class="value">English </span><b class="caret"></b></a>
+                            <%-- <li class="dropdown dropdown-small">
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key"><locale:message code="label.currency"/> :</span><span class="value">USD </span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">English</a></li>
-                                    <li><a href="#">French</a></li>
-                                    <li><a href="#">German</a></li>
+                                    <li><a href="#">USD</a></li>
+                                    <li><a href="#">INR</a></li>
+                                    <li><a href="#">GBP</a></li>
+                                </ul>
+                            </li> --%>
+
+                            <li class="dropdown dropdown-small">
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key"></span><span class="letter">${pageContext.response.locale} </span><b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:setParam('lang', 'en');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull1"/></a></li>
+                                    <li><a href="javascript:setParam('lang', 'fr');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull2"/></a></li>
+                                    <li><a href="javascript:setParam('lang', 'ru');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull3"/></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -83,24 +127,25 @@
             </div>
         </div>
     </div> <!-- End header area -->
+
     
-    <div class="site-branding-area">
+        <div class="site-branding-area">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="logo">
-                        <h1><a href="index">e<span>Electronics</span></a></h1>
+                        <h1><a href="index">e<span><locale:message code="label.electronics"/></span></a></h1>
                     </div>
                 </div>
-                	<div class="col-sm-6">
+                <div class="col-sm-6">
                        <c:forEach items="${requestScope.quantitiAndSum}" var="quantitiAndSum">
                 			<sec:authorize access="isAuthenticated()"> 
 	                    		<div class="shopping-item">
-	                      			 <a href="ViewItemsOfCart.html">Cart - <span class="cart-amunt"><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
+	                      			 <a href="ViewItemsOfCart.html"><locale:message code="label.cart"/> - <span class="cart-amunt"><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
 	                  		     </div>
                     		</sec:authorize>
                     	</c:forEach> 
-                    </div>
+                </div>
             </div>
         </div>
     </div> <!-- End site branding area -->
@@ -137,7 +182,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
-                        <h2>Shopping Cart</h2>
+                        <h2><locale:message code="label.cart"/></h2>
                     </div>
                 </div>
             </div>
@@ -241,39 +286,37 @@
             <div class="row">
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-about-us">
-                        <h2>e<span>Electronics</span></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis magni at?</p>
+                        <h2>e<span><locale:message code="label.electronics"/></span></h2>
+                        <p><locale:message code="label.eElectronics"/></p>
+
                     </div>
                 </div>
                 
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-menu">
-                        <h2 class="footer-wid-title">User Navigation </h2>
+                       <h2 class="footer-wid-title"><locale:message code="label.userNavigation"/> </h2>
                         <ul>
                             <sec:authorize access="isAnonymous()">
-                          		    <li><a href="registration"><i class="fa fa-user"></i> Registration</a></li>
-	                          	    <li><a href="${context}/login.jsp"><i class="fa fa-heart"></i> Login</a></li>
+                          		    <li><a href="registration"><i class="fa fa-user"></i> <locale:message code="label.registration"/></a></li>
+	                          	    <li><a href="${context}/login"><i class="fa fa-heart"></i> <locale:message code="label.login"/></a></li>
                              </sec:authorize>
 	  						 <sec:authorize access="isAuthenticated()">  
-		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> My Cart</a></li>
-		                            <li><a href="logout"><i class="fa fa-user"></i> Log out</a></li>
+		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> <locale:message code="label.mycart"/></a></li>
+		                            <li><a href="logout"><i class="fa fa-user"></i> <locale:message code="label.logout"/></a></li>
          					 </sec:authorize>	
-                        </ul>                              
-                    </div>
-                </div>
-                
-                <div class="col-md-3 col-sm-6">
-                    <div class="footer-menu">
-                        <h2 class="footer-wid-title">Categories</h2>
-                        <ul>
-                           	<c:forEach items="${requestScope.productCategory}" var="category">
-			                    <li><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
-                            </c:forEach>
                         </ul>                        
                     </div>
                 </div>
                 
                 <div class="col-md-3 col-sm-6">
+                    <div class="footer-menu">
+                        <h2 class="footer-wid-title"><locale:message code="label.categories"/></h2>
+                        <ul>
+                         	<c:forEach items="${requestScope.productCategory}" var="category">
+			                    <li><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+                            </c:forEach>
+                        </ul>                        
+                    </div>
                 </div>
             </div>
         </div>
@@ -284,7 +327,7 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="copyright">
-                        <p>&copy; 2015 eElectronics. All Rights Reserved. Coded with <i class="fa fa-heart"></i> by <a href="http://leshaminskiy.by" target="_blank">Alexey Druzik</a></p>
+                        <p>&copy; <locale:message code="label.footer1"/> <i class="fa fa-heart"></i> <locale:message code="label.footer2"/></p>
                     </div>
                 </div>
                 

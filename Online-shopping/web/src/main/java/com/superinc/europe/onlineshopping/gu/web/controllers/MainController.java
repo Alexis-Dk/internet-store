@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -248,22 +249,44 @@ public class MainController {
 	
 	private void initModel(ModelMap model, String category)
 			throws ServiceException {
+		Locale locale = getLocale();
 		List<CategoryCharacteristic> itemsStr = iCategoryCharacteristicService.getCategoryCharacteristicStrNames(productCategoryService.getCategoryById(Integer.parseInt(category)).getCategoryName());
 		List<CategoryCharacteristic> itemsInt = iCategoryCharacteristicService.getCategoryCharacteristicIntNames(productCategoryService.getCategoryById(Integer.parseInt(category)).getCategoryName());
 		List<CategoryCharacteristic> itemsBool = iCategoryCharacteristicService.getCategoryCharacteristicBoolNames(productCategoryService.getCategoryById(Integer.parseInt(category)).getCategoryName());
 		for (int i = 0; i < itemsStr.size(); i++) {
+			if (locale.toString().equals("en")) {
+				model.put("categoryCharacteristicStrLang" + String.valueOf(i + 1), itemsStr.get(i).getCategoryCharacteristicNameLanguageOne());
+			} else if (locale.toString().equals("fr")) {
+				model.put("categoryCharacteristicStrLang" + String.valueOf(i + 1), itemsStr.get(i).getCategoryCharacteristicNameLanguageTwo());
+			} else {
+				model.put("categoryCharacteristicStrLang" + String.valueOf(i + 1), itemsStr.get(i).getCategoryCharacteristicNameLanguageThree());
+			}
 			model.put("categoryCharacteristicStr" + String.valueOf(i + 1), itemsStr.get(i));
 			if (itemsStr.get(i).isCategoryCharacteristicEnable() == false){
 				model.put("categoryCharacteristicEnableStrStatus" + String.valueOf(i + 1), "style='display: none;'");
 			}
 		}
 		for (int i = 0; i < itemsInt.size(); i++) {
+			if (locale.toString().equals("en")) {
+				model.put("categoryCharacteristicIntLang" + String.valueOf(i + 1), itemsInt.get(i).getCategoryCharacteristicNameLanguageOne());
+			} else if (locale.toString().equals("fr")) {
+				model.put("categoryCharacteristicIntLang" + String.valueOf(i + 1), itemsInt.get(i).getCategoryCharacteristicNameLanguageTwo());
+			} else {
+				model.put("categoryCharacteristicIntLang" + String.valueOf(i + 1), itemsInt.get(i).getCategoryCharacteristicNameLanguageThree());
+			}
 			model.put("categoryCharacteristicInt" + String.valueOf(i + 1), itemsInt.get(i));
 			if (itemsInt.get(i).isCategoryCharacteristicEnable() == false){
 				model.put("categoryCharacteristicEnableIntStatus" + String.valueOf(i + 1), "style='display: none;'");
 			}
 		}
 		for (int i = 0; i < itemsBool.size(); i++) {
+			if (locale.toString().equals("en")) {
+				model.put("categoryCharacteristicBoolLang" + String.valueOf(i + 1), itemsBool.get(i).getCategoryCharacteristicNameLanguageOne());
+			} else if (locale.toString().equals("fr")) {
+				model.put("categoryCharacteristicBoolLang" + String.valueOf(i + 1), itemsBool.get(i).getCategoryCharacteristicNameLanguageTwo());
+			} else {
+				model.put("categoryCharacteristicBoolLang" + String.valueOf(i + 1), itemsBool.get(i).getCategoryCharacteristicNameLanguageThree());
+			}
 			model.put("categoryCharacteristicBool" + String.valueOf(i + 1), itemsBool.get(i));
 			if (itemsBool.get(i).isCategoryCharacteristicEnable() == false){
 				model.put("categoryCharacteristicEnableBoolStatus" + String.valueOf(i + 1), "style='display: none;'");
@@ -559,6 +582,47 @@ public class MainController {
 			return RequestParamConstants.ERROR_PAGE;
 		}
 		return "rest";
+	}
+	
+	Locale getLocale () {
+		Locale locale = LocaleContextHolder.getLocale();
+		return locale;
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView login(@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout) {
+
+		ModelAndView model = new ModelAndView();
+		if (error != null) {
+			model.addObject("error", "Invalid username and password!");
+		}
+
+		if (logout != null) {
+			model.addObject("msg", "You've been logged out successfully.");
+		}
+		model.setViewName("login");
+
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ModelAndView login2(@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout) {
+
+		ModelAndView model = new ModelAndView();
+		if (error != null) {
+			model.addObject("error", "Invalid username and password!");
+		}
+
+		if (logout != null) {
+			model.addObject("msg", "You've been logged out successfully.");
+		}
+		model.setViewName("login");
+
+		return model;
+
 	}
 	
 //    @RequestMapping(value = "aaa", method = RequestMethod.GET)

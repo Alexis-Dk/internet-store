@@ -3,6 +3,7 @@
 <%@  taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="locale" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -84,7 +85,7 @@
                         <ul>
                             <sec:authorize access="isAnonymous()">
                           		    <li><a href="registration"><i class="fa fa-user"></i> Registration</a></li>
-	                          	    <li><a href="${context}/login.jsp"><i class="fa fa-heart"></i> Login</a></li>
+	                          	    <li><a href="${context}/login"><i class="fa fa-heart"></i> Login</a></li>
                              </sec:authorize>
 	  						 <sec:authorize access="isAuthenticated()">  
 		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> My Cart</a></li>
@@ -106,12 +107,12 @@
                                 </ul>
                             </li> -->
 
-                           <li class="dropdown dropdown-small">
+                            <li class="dropdown dropdown-small">
                                 <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key"></span><span class="letter">${pageContext.response.locale} </span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="javascript:setParam('lang', 'en');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull1"/></a></li>
                                     <li><a href="javascript:setParam('lang', 'fr');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull2"/></a></li>
-                                    <li><a href="#">German</a></li>
+                                    <li><a href="javascript:setParam('lang', 'ru');" id="baseUrl"><input type="text" value="" id="appendUrl" hidden="true"/><locale:message code="label.languageFull3"/></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -126,21 +127,21 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="logo">
-                        <h1><a href="index.html">e<span>Electronics</span></a></h1>
+                        <h1><a href="index">e<span><locale:message code="label.electronics"/></span></a></h1>
                     </div>
                 </div>
-                
                 <div class="col-sm-6">
-                	<sec:authorize access="isAuthenticated()"> 
-	                    <div class="shopping-item">
-	                      	 <a href="ViewItemsOfCart.html">Cart - <span class="cart-amunt">$0</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">0</span></a>
-	                    </div>
-                    </sec:authorize>
-                </div>
+                       <c:forEach items="${requestScope.quantitiAndSum}" var="quantitiAndSum">
+                			<sec:authorize access="isAuthenticated()"> 
+	                    		<div class="shopping-item">
+	                      			 <a href="ViewItemsOfCart.html"><locale:message code="label.cart"/> - <span class="cart-amunt"><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
+	                  		     </div>
+                    		</sec:authorize>
+                    	</c:forEach> 
                 </div>
             </div>
         </div>
-     <!-- End site branding area -->
+    </div> <!-- End site branding area -->
     
     <div class="mainmenu-area">
         <div class="container">
@@ -227,11 +228,11 @@ You have been successfully registered...</h3>
                 
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-menu">
-                        <h2 class="footer-wid-title">User Navigation </h2>
+                       <h2 class="footer-wid-title"><locale:message code="label.userNavigation"/> </h2>
                         <ul>
                             <sec:authorize access="isAnonymous()">
                           		    <li><a href="registration"><i class="fa fa-user"></i> Registration</a></li>
-	                          	    <li><a href="${context}/login.jsp"><i class="fa fa-heart"></i> Login</a></li>
+	                          	    <li><a href="${context}/login"><i class="fa fa-heart"></i> Login</a></li>
                              </sec:authorize>
 	  						 <sec:authorize access="isAuthenticated()">  
 		                            <li><a href="ViewItemsOfCart"><i class="fa fa-user"></i> My Cart</a></li>
@@ -264,7 +265,7 @@ You have been successfully registered...</h3>
             <div class="row">
                 <div class="col-md-8">
                     <div class="copyright">
-                        <p>&copy; 2015 eElectronics. All Rights Reserved. Coded with <i class="fa fa-heart"></i> by Alexey Druzik</p>
+                        <p>&copy; <locale:message code="label.footer1"/> <i class="fa fa-heart"></i> <locale:message code="label.footer2"/></p>
                     </div>
                 </div>
                 
