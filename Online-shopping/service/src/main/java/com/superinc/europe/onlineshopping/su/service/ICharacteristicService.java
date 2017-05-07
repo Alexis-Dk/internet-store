@@ -29,5 +29,14 @@ public interface ICharacteristicService {
 	 * @throws ServiceException
 	 */
 	void deleteCharacteristic(String ob, String id) throws ServiceException;
+	
+	/**
+	 * 
+	 * @param characteristicsName
+	 * @return
+	 * @throws ServiceException
+	 */
+	List<Characteristic> getCharacteristics(String characteristicsName)
+			throws ServiceException;
     
 }

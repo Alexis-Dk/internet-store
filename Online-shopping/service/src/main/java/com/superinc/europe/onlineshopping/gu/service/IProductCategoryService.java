@@ -10,7 +10,7 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ErrorGettingCateg
 public interface IProductCategoryService {
 
     /**
-     * Returns an object of com.atroshonok.dao.entities.ProductCategory class
+     * Returns an object
      * using the specified category id. The method returns null if hasn't found
      * any.
      * 

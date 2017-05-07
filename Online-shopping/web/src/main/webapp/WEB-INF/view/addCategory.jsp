@@ -146,21 +146,24 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="index">Home</a></li>
-                            <sec:authorize access="hasRole('admin')">
-		                        <c:forEach items="${requestScope.productCategory}" var="category">
-					            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="categoryCharacteristic?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
-					            </c:forEach>
-			           		</sec:authorize>
-                        <sec:authorize access="hasRole('admin')">
-							<li><a href="new">Admin page</a></li>
-	  					</sec:authorize>
 	  					<sec:authorize access="hasRole('admin')">
 							<li class="active"><a href="addCategory">Add category</a></li>
 	  					</sec:authorize>
-	  					<sec:authorize access="isAuthenticated()">
-                         	<li><a href="ViewItemsOfCart">Cart</a></li>
+	  			        <sec:authorize access="hasRole('admin')">
+		                    <c:forEach items="${requestScope.productCategory}" var="category">
+				            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="categoryCharacteristic?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+					        </c:forEach>
+			           	</sec:authorize>
+			            <sec:authorize access="hasRole('admin')">
+							<li><a href="new">Admin page</a></li>
+	  					</sec:authorize>
+<%-- 	  				<sec:authorize access="isAnonymous() or hasRole('user')"> --%>			           		
+	  					<sec:authorize access="isAnonymous() or hasRole('user')">
+                         	<li><a href="ViewItemsOfCart"><locale:message code="label.cart"/></a></li>
                         </sec:authorize>
-                        <li><a href="contact">Contact</a></li>
+                        <sec:authorize access="isAnonymous() or hasRole('user')">
+                        <li><a href="contact"><locale:message code="label.contact"/></a></li>
+                        </sec:authorize>
                     </ul>
                 </div>  
             </div>

@@ -8,9 +8,11 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.WordUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.annotation.RegEx;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
@@ -98,7 +100,7 @@ public class AdminController {
 	List<QuantityAndSum> quantitySum = null;
 
 	@Autowired
-	private IProductService goodsService;
+	private IProductService productService;
 
 	@Autowired
 	private IUsersService usersService;
@@ -513,9 +515,9 @@ public class AdminController {
 	try {
 		if (!br.hasErrors()) {
 			if (productDTO != null) {
-				int id = (int)goodsService.getLastInsertId() + 1;
+				int id = (int)productService.getLastInsertId() + 1;
 				setProductFields(product, productDTO, id);
-				goodsService.add(product);
+				productService.add(product);
 			    if ((image != null) && !image.isEmpty()) {
 				validateImage(image);
 				String imageName = productDTO.getDescription() + "_"+Integer.toString(id) + ".jpg";
@@ -698,7 +700,7 @@ public class AdminController {
 			@RequestParam(value = RequestParamConstants.SELECTED_PAGE, defaultValue = RequestParamConstants.VALUE_STR_ONE) String selectedPage) {
 		try {
 			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
-					navigationService.getDataToPaginationWidget(goodsService.getQuantityOfPage()));
+					navigationService.getDataToPaginationWidget(productService.getQuantityOfPage()));
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
 			model.put("characteristics1", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "1")));
 			model.put("characteristics2", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "2")));
@@ -713,9 +715,9 @@ public class AdminController {
 			customUserParam.setIntCharacteristicMin1(priceLower);
 			customUserParam.setIntCharacteristicMax1(priceHighter);
 			if (request.getParameter(RequestParamConstants.SELECTED_PAGE) == null) {
-				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainDefaultSelection(customUserParam, (String) category));
+				model.put(RequestParamConstants.PRODUCTS, productService.obtainDefaultSelection(customUserParam, (String) category));
 			} else {
-				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainUsersSelection(customUserParam, selectedPage, (String) category));
+				model.put(RequestParamConstants.PRODUCTS, productService.obtainUsersSelection(customUserParam, selectedPage, (String) category));
 			}
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
@@ -827,4 +829,289 @@ public class AdminController {
 		}
 	}
 	
+
+	@RequestMapping(value = "/singleProductAdmin", method = RequestMethod.GET)
+	public String updatePoductPageAdmin(HttpServletRequest request, ModelMap model) {
+		ProductDTO productDTO = new ProductDTO();
+		List<Category> categoryList = null;
+		
+		int intCharacteristic1 = Integer.parseInt(request.getParameter("intCharacteristic1"));
+		int intCharacteristic2 = Integer.parseInt(request.getParameter("intCharacteristic2"));
+		int intCharacteristic3 = Integer.parseInt(request.getParameter("intCharacteristic3"));
+		int intCharacteristic4 = Integer.parseInt(request.getParameter("intCharacteristic4"));
+		int intCharacteristic5 = Integer.parseInt(request.getParameter("intCharacteristic5"));
+		int [] characteristicIntAdmin = new int[5];
+		characteristicIntAdmin[0] = intCharacteristic1;
+		characteristicIntAdmin[1] = intCharacteristic2;
+		characteristicIntAdmin[2] = intCharacteristic3;
+		characteristicIntAdmin[3] = intCharacteristic4;
+		characteristicIntAdmin[4] = intCharacteristic5;
+		request.getSession().setAttribute("characteristicIntAdmin", characteristicIntAdmin);
+		String characteristic1 = request.getParameter("characteristic1");
+		String characteristic2 = request.getParameter("characteristic2");
+		String characteristic3 = request.getParameter("characteristic3");
+		String characteristic4 = request.getParameter("characteristic4");
+		String characteristic5 = request.getParameter("characteristic5");
+		String characteristic6 = request.getParameter("characteristic6");
+		String characteristic7 = request.getParameter("characteristic7");
+		String[] characteristicStrAdmin = new String[7];
+		characteristicStrAdmin[0] = characteristic1;
+		characteristicStrAdmin[1] = characteristic2;
+		characteristicStrAdmin[2] = characteristic3;
+		characteristicStrAdmin[3] = characteristic4;
+		characteristicStrAdmin[4] = characteristic5;
+		characteristicStrAdmin[5] = characteristic6;
+		characteristicStrAdmin[6] = characteristic7;
+		request.getSession().setAttribute("characteristicStrAdmin", characteristicStrAdmin);
+		int characteristicId1 = getCharacteristicId(characteristic1);
+		int characteristicId2 = getCharacteristicId(characteristic2);
+		int characteristicId3 = getCharacteristicId(characteristic3);
+		int characteristicId4 = getCharacteristicId(characteristic4);
+		int characteristicId5 = getCharacteristicId(characteristic5);
+		int characteristicId6 = getCharacteristicId(characteristic6);
+		int characteristicId7 = getCharacteristicId(characteristic7);
+		int[] characteristicIdAdmin = new int[7];
+		characteristicIdAdmin[0] = characteristicId1;
+		characteristicIdAdmin[1] = characteristicId2;
+		characteristicIdAdmin[2] = characteristicId3;
+		characteristicIdAdmin[3] = characteristicId4;
+		characteristicIdAdmin[4] = characteristicId5;
+		characteristicIdAdmin[5] = characteristicId6;
+		characteristicIdAdmin[6] = characteristicId7;
+		request.getSession().setAttribute("characteristicIdAdmin", characteristicIdAdmin);
+		String boolCharacteristic1 = WordUtils.capitalize(request.getParameter("boolCharacteristic1"));
+		String boolCharacteristic2 = WordUtils.capitalize(request.getParameter("boolCharacteristic2"));
+		String boolCharacteristic3 = WordUtils.capitalize(request.getParameter("boolCharacteristic3"));
+		String boolCharacteristic4 = WordUtils.capitalize(request.getParameter("boolCharacteristic4"));
+		String boolCharacteristic5 = WordUtils.capitalize(request.getParameter("boolCharacteristic5"));
+		String [] characteristicBoolAdmin = new String[5];
+		characteristicBoolAdmin[0] = boolCharacteristic1;
+		characteristicBoolAdmin[1] = boolCharacteristic2;
+		characteristicBoolAdmin[2] = boolCharacteristic3;
+		characteristicBoolAdmin[3] = boolCharacteristic4;
+		characteristicBoolAdmin[4] = boolCharacteristic5;
+		String productDescription = request.getParameter("description");
+		request.getSession().setAttribute("productDescription", productDescription);
+		request.getSession().setAttribute("characteristicBoolAdmin", characteristicBoolAdmin);
+		String categoryId = request.getParameter("categoryId");
+		String productId = request.getParameter("productId");
+		request.getSession().setAttribute("categoryId", categoryId);
+		request.getSession().setAttribute("productId", productId);
+		try {
+			categoryList = productCategoryService.getAllProductCategories();
+			HttpUtils.setList(categoryList);
+			HttpUtils.setCharacteristicOneList(characteristicService.
+					getCharacteristics(iCategoryCharacteristicService
+							.getCategoryCharacteristicId(categoryId, "1")));
+			
+			HttpUtils.setCharacteristicTwoList(characteristicService.
+					getCharacteristics(iCategoryCharacteristicService
+							.getCategoryCharacteristicId(categoryId, "2")));
+			
+			HttpUtils.setCharacteristicThreeList(characteristicService.
+					getCharacteristics(iCategoryCharacteristicService
+							.getCategoryCharacteristicId(categoryId, "3")));
+
+			HttpUtils.setCharacteristicFourList(characteristicService.
+					getCharacteristics(iCategoryCharacteristicService
+							.getCategoryCharacteristicId(categoryId, "4")));
+			
+			HttpUtils.setCharacteristicFiveList(characteristicService.
+					getCharacteristics(iCategoryCharacteristicService
+							.getCategoryCharacteristicId(categoryId, "5")));
+			
+			HttpUtils.setCharacteristicSixList(characteristicService.
+					getCharacteristics(iCategoryCharacteristicService
+							.getCategoryCharacteristicId(categoryId, "6")));
+			
+			HttpUtils.setCharacteristicSevenList(characteristicService.
+					getCharacteristics(iCategoryCharacteristicService
+							.getCategoryCharacteristicId(categoryId, "7")));
+		} catch (ErrorGettingCategoryServiceException e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+		} catch (ServiceException e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+		}
+		model.addAttribute("categoryList", categoryList);
+		model.put(RequestParamConstants.PRODUCT_DTO, productDTO);
+		try {
+			List<CategoryDTO> list = productCategoryService.getAllProductCategories(categoryId);
+			for (CategoryDTO categoryDTO : list) {
+				if(categoryDTO.getSelectedItem().equals("active")){
+					categoryDTO.setSelectedItem("selected");
+					//request.setAttribute("categoryListMy", categoryDTO.getSelectedItem());
+					HttpUtils.setCategory(new Category(categoryDTO.getCategoryId(), categoryDTO.getCategoryName()));
+				}
+			}
+			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, list);
+		} catch (ErrorGettingCategoryServiceException e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+		}
+		try {
+			initModel(request, Integer.parseInt(categoryId));
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:/updatePoductPageAdmin2";
+	}
+    
+    @RequestMapping(path = "/updatePoductPageAdmin2", method = RequestMethod.GET)
+    public String updatePoductPageAdmin2(ModelMap model, String categoryId, HttpServletRequest request) {
+	ProductDTO productDTO = new ProductDTO();
+	List<Category> categoryList = null;
+	try {
+		categoryList = productCategoryService.getAllProductCategories();
+		HttpUtils.setList(categoryList);
+	} catch (ErrorGettingCategoryServiceException e) {
+		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+	}
+	model.addAttribute("categoryList", categoryList);
+	int [] characteristicIntAdmin = (int[]) request.getSession().getAttribute("characteristicIntAdmin");
+	String[] characteristicStrAdmin = (String[]) request.getSession().getAttribute("characteristicStrAdmin");
+	int[] characteristicIdAdmin = (int[]) request.getSession().getAttribute("characteristicIdAdmin");
+	String [] characteristicBoolAdmin = (String[]) request.getSession().getAttribute("characteristicBoolAdmin");
+	String productDescription = (String) request.getSession().getAttribute("productDescription");
+	
+	productDTO.setIntCharacteristic1(characteristicIntAdmin[0]);
+	productDTO.setIntCharacteristic2(characteristicIntAdmin[1]);
+	productDTO.setIntCharacteristic3(characteristicIntAdmin[2]);
+	productDTO.setIntCharacteristic4(characteristicIntAdmin[3]);
+	productDTO.setIntCharacteristic5(characteristicIntAdmin[4]);
+	productDTO.setCharacteristic1(new CharacteristicOneVO(characteristicIdAdmin[0], characteristicStrAdmin[0]));
+	productDTO.setCharacteristic2(new CharacteristicTwoVO(characteristicIdAdmin[1], characteristicStrAdmin[1]));
+	productDTO.setCharacteristic3(new CharacteristicThreeVO(characteristicIdAdmin[2], characteristicStrAdmin[2]));
+	productDTO.setCharacteristic4(new CharacteristicFourVO(characteristicIdAdmin[3], characteristicStrAdmin[3]));
+	productDTO.setCharacteristic5(new CharacteristicFiveVO(characteristicIdAdmin[4], characteristicStrAdmin[4]));
+	productDTO.setCharacteristic6(new CharacteristicSixVO(characteristicIdAdmin[5], characteristicStrAdmin[5]));
+	productDTO.setCharacteristic7(new CharacteristicSevenVO(characteristicIdAdmin[6], characteristicStrAdmin[6]));
+	productDTO.setBoolCharacteristic1(characteristicBoolAdmin[0]);
+	productDTO.setBoolCharacteristic2(characteristicBoolAdmin[1]);
+	productDTO.setBoolCharacteristic3(characteristicBoolAdmin[2]);
+	productDTO.setBoolCharacteristic4(characteristicBoolAdmin[3]);
+	productDTO.setBoolCharacteristic5(characteristicBoolAdmin[4]);
+	productDTO.setDescription(productDescription);
+
+	model.put(RequestParamConstants.PRODUCT_DTO, productDTO);
+	Category category = HttpUtils.getCatrgory();
+	try {
+		List<CategoryDTO> list = productCategoryService.getAllProductCategories(Integer.toString(category.getCategoryId()));
+		for (CategoryDTO categoryDTO : list) {
+			if(categoryDTO.getSelectedItem().equals("active")){
+				categoryDTO.setSelectedItem("selected");
+				//request.setAttribute("categoryListMy", categoryDTO.getSelectedItem());
+				//HttpUtils.setCategory(new Category(categoryDTO.getCategoryId(), categoryDTO.getCategoryName()));
+			}
+		}
+		model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, list);
+	} catch (ErrorGettingCategoryServiceException e) {
+		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+	}
+	try {
+		initModel(request, category.getCategoryId());
+	} catch (ServiceException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return "adminUpdateProduct";
+    }
+	
+    @SuppressWarnings("unchecked")
+	@RequestMapping(path = "/updateProduct", method = RequestMethod.POST)
+    public String updatePoductPageAdmin3(@Valid ProductDTO productDTO,
+            BindingResult br, @RequestParam(value = "productImage", required = false) MultipartFile image, RedirectAttributes redirectAttributes, HttpServletRequest request, Locale locale, @ModelAttribute("productDTO1") ProductDTO productDTO1) {
+		Product product = new Product();
+		Set<ConstraintViolation<ProductDTO>> violations = validator.validate(productDTO);
+		for (ConstraintViolation<ProductDTO> violation : violations) 
+		{
+            String propertyPath = violation.getPropertyPath().toString();
+            String message = violation.getMessage();
+//            Add JSR-303 errors to BindingResult
+//            This allows Spring to display them in view via a FieldError
+//            br.addError(new FieldError("productDTO", propertyPath, "Invalid "+ propertyPath + "(" + message + ")"));
+        }
+		try {
+			int productId = Integer.parseInt((String) request.getSession().getAttribute("productId"));
+			product = productService.getProductById(productId);
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			request.setAttribute(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getNoActiveProductCategories());
+			//redirectAttributes.addAttribute(attributeValue);
+		} catch (ErrorGettingCategoryServiceException e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+		}		
+	try {
+		if (!br.hasErrors()) {
+			if (productDTO != null) {
+				int id = (int)productService.getLastInsertId() + 1;
+				setProductFields(product, productDTO, id);
+				productService.update(product);
+			    if ((image != null) && !image.isEmpty()) {
+				validateImage(image);
+				String imageName = productDTO.getDescription() + "_"+Integer.toString(id) + ".jpg";
+				saveImage(imageName, image, request, productDTO);
+			    }
+			    redirectAttributes.addFlashAttribute("infoMessage", getMessageByKey("message.newproductadded", locale));
+				return "redirect:index";
+			}
+		}
+	} catch (IOException e) {
+	    log.error("Error saving product image. ", e);
+	    redirectAttributes.addFlashAttribute("infoMessage", e.getMessage());
+	}
+	catch (ErrorAddingPoductServiceException e) {
+	    log.error("Error adding new product to DB", e);
+	    redirectAttributes.addFlashAttribute("infoMessage", getMessageByKey("message.error.addnewproduct ", locale));
+	} catch (ServiceException e) {
+		e.printStackTrace();
+	}
+	
+	Category category = HttpUtils.getCatrgory();
+	
+	try {
+		List<CategoryDTO> list = productCategoryService.getAllProductCategories(Integer.toString(category.getCategoryId()));
+		for (CategoryDTO categoryDTO : list) {
+			if(categoryDTO.getSelectedItem().equals("active")){
+				categoryDTO.setSelectedItem("selected");
+				//request.setAttribute("categoryListMy", categoryDTO.getSelectedItem());
+				//HttpUtils.setCategory(new Category(categoryDTO.getCategoryId(), categoryDTO.getCategoryName()));
+			}
+		}
+		request.setAttribute(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, list);
+	} catch (ErrorGettingCategoryServiceException e) {
+		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+	}
+	try {
+		initModel(request, category.getCategoryId());
+	} catch (ServiceException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return "adminUpdateProduct";
+    }
+    
+	private int getCharacteristicId(String ob) {
+		int characteristicId = -1;
+		if(ob != null){
+			if(!ob.equals("")){
+				try {
+					List<Characteristic> characteristics = characteristicService.getCharacteristics(ob);
+					for (Characteristic characteristic : characteristics) {
+						if (characteristic != null) {
+							if (characteristic.getCharacteristicName().equals(ob)){
+								characteristicId = characteristic.getCharacteristicId();
+							}
+						}
+					}
+				} catch (ServiceException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return characteristicId;
+	}
+    
 }

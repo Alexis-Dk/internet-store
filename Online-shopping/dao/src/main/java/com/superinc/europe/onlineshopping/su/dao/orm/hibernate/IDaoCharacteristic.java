@@ -36,5 +36,13 @@ public interface IDaoCharacteristic extends IBaseDao<Characteristic>{
 	 * @throws ServiceException
 	 */
 	List<Characteristic> deleteCharacteristic(Criteria criteria, String name) throws DaoException;
+
+	/**
+	 * Method return list of characteristic
+	 * @param characteristicId
+	 * @throws DaoException
+	 */
+	List<Characteristic> getCharacteristics(Criteria criteria,
+			String characteristicName) throws DaoException;
 	
 }

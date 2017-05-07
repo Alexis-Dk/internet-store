@@ -68,7 +68,7 @@ public class MainController {
 	List<QuantityAndSum> quantitySum = null;
 
 	@Autowired
-	private IProductService goodsService;
+	private IProductService productService;
 
 	@Autowired
 	private IUsersService usersService;
@@ -170,14 +170,14 @@ public class MainController {
 		}
 		try {
 			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
-					navigationService.getDataToPaginationWidget(goodsService.getQuantityOfPage()));
+					navigationService.getDataToPaginationWidget(productService.getQuantityOfPage()));
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
 			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, category);
 			//if (request.getParameter(RequestParamConstants.SELECTED_PAGE) == null) {
 			//	model.put(RequestParamConstants.PRODUCTS, goodsService.obtainDefaultSelection((String) priceLower,
 			//					(String) priceHighter, (String) category, selectedItems));
 			//} else {
-				model.put(RequestParamConstants.PRODUCTS, goodsService.obtainUsersSelection(customUserParam, selectedPage, (String) category, selectedItems));
+				model.put(RequestParamConstants.PRODUCTS, productService.obtainUsersSelection(customUserParam, selectedPage, (String) category, selectedItems));
 				initModel(model, category);
 			//}
 		} catch (Exception e) {
@@ -189,6 +189,99 @@ public class MainController {
 		return RequestParamConstants.PRODUCT;
 	}
 
+	@RequestMapping(value = "/productAdmin", method = RequestMethod.GET, params=RequestParamConstants.CATEGORY)
+	public String setProductPageAdmin(HttpServletRequest request, ModelMap model,
+			@RequestParam(value = RequestParamConstants.INT_CHAR_MIN_1, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMin1,
+			@RequestParam(value = RequestParamConstants.INT_CHAR_MAX_1, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMax1,
+			@RequestParam(value = RequestParamConstants.INT_CHAR_MIN_2, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMin2,
+			@RequestParam(value = RequestParamConstants.INT_CHAR_MAX_2, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMax2,
+			@RequestParam(value = RequestParamConstants.INT_CHAR_MIN_3, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMin3,
+			@RequestParam(value = RequestParamConstants.INT_CHAR_MAX_3, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMax3,
+			@RequestParam(value = RequestParamConstants.INT_CHAR_MIN_4, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMin4,
+			@RequestParam(value = RequestParamConstants.INT_CHAR_MAX_4, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMax4,
+			@RequestParam(value = RequestParamConstants.INT_CHAR_MIN_5, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMin5,
+			@RequestParam(value = RequestParamConstants.INT_CHAR_MAX_5, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMax5,
+			@RequestParam(value = RequestParamConstants.CATEGORY) String category,
+			@RequestParam(value = RequestParamConstants.SELECTED_PAGE, defaultValue = RequestParamConstants.VALUE_STR_ONE) String selectedPage,
+			@RequestParam(value = "selectedCharacteristic1", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic1,
+			@RequestParam(value = "selectedCharacteristic2", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic2,
+			@RequestParam(value = "selectedCharacteristic3", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic3,
+			@RequestParam(value = "selectedCharacteristic4", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic4,
+			@RequestParam(value = "selectedCharacteristic5", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic5,
+			@RequestParam(value = "selectedCharacteristic6", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic6,
+			@RequestParam(value = "selectedCharacteristic7", defaultValue = RequestParamConstants.EMPTY) String selectedCharacteristic7,
+			@RequestParam(value = RequestParamConstants.BOOL_CHARACTERISTIC_1, defaultValue = RequestParamConstants.FALSE) String boolCharacteristic1,
+			@RequestParam(value = RequestParamConstants.BOOL_CHARACTERISTIC_2, defaultValue = RequestParamConstants.FALSE) String boolCharacteristic2,
+			@RequestParam(value = RequestParamConstants.BOOL_CHARACTERISTIC_3, defaultValue = RequestParamConstants.FALSE) String boolCharacteristic3,
+			@RequestParam(value = RequestParamConstants.BOOL_CHARACTERISTIC_4, defaultValue = RequestParamConstants.FALSE) String boolCharacteristic4,
+			@RequestParam(value = RequestParamConstants.BOOL_CHARACTERISTIC_5, defaultValue = RequestParamConstants.FALSE) String boolCharacteristic5) {
+		CustomUserParamDTO customUserParam = (CustomUserParamDTO) request.getSession().getAttribute("customUserParam");
+		Map<String, String[]> selectedItems = new HashMap<String, String[]>();
+		if (customUserParam != null) {
+			customUserParam.setIntCharacteristicMin1(intCharacteristicMin1);
+			customUserParam.setIntCharacteristicMax1(intCharacteristicMax1);
+			customUserParam.setIntCharacteristicMin2(intCharacteristicMin2);
+			customUserParam.setIntCharacteristicMax2(intCharacteristicMax2);
+			customUserParam.setIntCharacteristicMin3(intCharacteristicMin3);
+			customUserParam.setIntCharacteristicMax3(intCharacteristicMax3);
+			customUserParam.setIntCharacteristicMin4(intCharacteristicMin4);
+			customUserParam.setIntCharacteristicMax4(intCharacteristicMax4);
+			customUserParam.setIntCharacteristicMin5(intCharacteristicMin5);
+			customUserParam.setIntCharacteristicMax5(intCharacteristicMax5);
+			customUserParam.setBoolCharacteristic1(Boolean.parseBoolean(boolCharacteristic1));
+			customUserParam.setBoolCharacteristic2(Boolean.parseBoolean(boolCharacteristic2));
+			customUserParam.setBoolCharacteristic3(Boolean.parseBoolean(boolCharacteristic3));
+			customUserParam.setBoolCharacteristic4(Boolean.parseBoolean(boolCharacteristic4));
+			customUserParam.setBoolCharacteristic5(Boolean.parseBoolean(boolCharacteristic5));
+//			customUserParam.setBoolCharacteristic1(false);
+//			customUserParam.setBoolCharacteristic2(false);
+//			customUserParam.setBoolCharacteristic3(false);
+//			customUserParam.setBoolCharacteristic4(false);
+//			customUserParam.setBoolCharacteristic5(false);
+			String[] selcectedCharacteristics = {selectedCharacteristic1, selectedCharacteristic2, selectedCharacteristic3, selectedCharacteristic4, selectedCharacteristic5, selectedCharacteristic6, selectedCharacteristic7};
+			setCustomUserParam(selcectedCharacteristics, customUserParam);
+			selectedItems = getSelectedCharacteristics(selcectedCharacteristics);
+		} else {
+			//CustomUserParamDTO defaultUserParam = new CustomUserParamDTO();
+			customUserParam = new CustomUserParamDTO();
+			customUserParam.setIntCharacteristicMin1(intCharacteristicMin1);
+			customUserParam.setIntCharacteristicMax1(intCharacteristicMax1);
+			customUserParam.setIntCharacteristicMin2(intCharacteristicMin2);
+			customUserParam.setIntCharacteristicMax2(intCharacteristicMax2);
+			customUserParam.setIntCharacteristicMin3(intCharacteristicMin3);
+			customUserParam.setIntCharacteristicMax3(intCharacteristicMax3);
+			customUserParam.setIntCharacteristicMin4(intCharacteristicMin4);
+			customUserParam.setIntCharacteristicMax4(intCharacteristicMax4);
+			customUserParam.setIntCharacteristicMin5(intCharacteristicMin5);
+			customUserParam.setIntCharacteristicMax5(intCharacteristicMax5);
+			customUserParam.setBoolCharacteristic1(Boolean.parseBoolean(boolCharacteristic1));
+			customUserParam.setBoolCharacteristic2(Boolean.parseBoolean(boolCharacteristic2));
+			customUserParam.setBoolCharacteristic3(Boolean.parseBoolean(boolCharacteristic3));
+			customUserParam.setBoolCharacteristic4(Boolean.parseBoolean(boolCharacteristic4));
+			customUserParam.setBoolCharacteristic5(Boolean.parseBoolean(boolCharacteristic5));
+			request.getSession().setAttribute("customUserParam", customUserParam);
+		}
+		try {
+			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
+					navigationService.getDataToPaginationWidget(productService.getQuantityOfPage()));
+			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
+			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, category);
+			//if (request.getParameter(RequestParamConstants.SELECTED_PAGE) == null) {
+			//	model.put(RequestParamConstants.PRODUCTS, goodsService.obtainDefaultSelection((String) priceLower,
+			//					(String) priceHighter, (String) category, selectedItems));
+			//} else {
+				model.put(RequestParamConstants.PRODUCTS, productService.obtainUsersSelection(customUserParam, selectedPage, (String) category, selectedItems));
+				initModel(model, category);
+			//}
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
+			return RequestParamConstants.ERROR_PAGE;
+		}
+		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
+				request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+		return RequestParamConstants.PRODUCT;
+	}
+	
 	private Map<String, String[]> getSelectedCharacteristics(String[] selectedCharacteristics) {
 		Map<String, String[]> selectedItems = new HashMap<String, String[]>();
 		selectedItems.put("characteristic1", selectedValueConverter(selectedCharacteristics[0]).split(" "));
@@ -235,9 +328,9 @@ public class MainController {
 			customUserParam.setIntCharacteristicMin1(priceLower);
 			customUserParam.setIntCharacteristicMax1(priceHighter);
 			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
-					navigationService.getDataToPaginationWidget(goodsService.getQuantityOfPage()));
+					navigationService.getDataToPaginationWidget(productService.getQuantityOfPage()));
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getDefaultProductCategories());
-			model.put(RequestParamConstants.PRODUCTS, goodsService.obtainFullSelection(customUserParam, selectedPage));
+			model.put(RequestParamConstants.PRODUCTS, productService.obtainFullSelection(customUserParam, selectedPage));
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
@@ -308,7 +401,9 @@ public class MainController {
 		}
 		return RequestParamConstants.SINGLE_PRODUCT_PAGE;
 	}
-
+	
+	//@RequestParam(value = RequestParamConstants.INT_CHAR_MIN_1, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMin1,
+	
 //	@RequestMapping(value = RequestConstants.REGISTRATION, method = RequestMethod.GET)
 //	public ModelAndView setRegistrPage() {
 //		ModelAndView modelAndView = new ModelAndView();

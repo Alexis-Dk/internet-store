@@ -66,6 +66,25 @@ public class DaoCharacteristic extends BaseDao<Characteristic> implements IDaoCh
 	}
 	
 	/**
+	 * Method return list of characteristic
+	 * @param characteristicId
+	 * @throws DaoException
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Characteristic> getCharacteristics(Criteria criteria, String characteristicName) throws DaoException {
+		List<Characteristic> list = null;
+		try {
+			criteria.add(Restrictions.eq("characteristicName", characteristicName));
+			list = criteria.list();
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_DAO + e);
+			throw new DaoException(ExceptionMessages.ERROR_IN_DAO, e);
+		}
+		return list;
+	}
+	
+	/**
 	 * Method delete from Session
 	 * @param criteria
 	 * @param name

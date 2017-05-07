@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
 import com.superinc.europe.onlineshopping.gu.entities.dto.CustomUserParamDTO;
@@ -60,7 +61,8 @@ public class ProductService implements IProductService<Product> {
 	@Override
 	public void get(int id) throws ServiceException {
 		try {
-			daoProduct.get(id);
+			Product p = (Product) daoProduct.get(id);
+			System.out.println(p);
 		} catch (DaoException e) {
 			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
 			throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
@@ -68,6 +70,22 @@ public class ProductService implements IProductService<Product> {
 		
 	}
 
+	/**
+	 * Method get product by id
+	 * @param id
+	 * @throws ServiceException
+	 */
+	@Override
+	public Product getProductById(int id) throws ServiceException {
+		try {
+			Product product = (Product) daoProduct.get(id);
+			return product;
+		} catch (DaoException e) {
+			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
+		}
+	}
+	
 	/**
 	 * Method delete from Session
 	 * @param id

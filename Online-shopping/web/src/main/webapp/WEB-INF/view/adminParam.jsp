@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
@@ -8,7 +8,7 @@
 <html> 
 <head>
  <c:set var="context" value="${pageContext.request.contextPath}" />
-    <meta charset="ISO-8859-1">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>eElectronics - HTML eCommerce Template</title>
@@ -191,26 +191,29 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="index"><locale:message code="label.home"/></a></li>
-                            <sec:authorize access="hasRole('admin')">
-		                        <c:forEach items="${requestScope.productCategory}" var="category">
-					            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="categoryCharacteristic?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
-					            </c:forEach>
-			           		</sec:authorize>
-                        	<sec:authorize access="isAnonymous() or hasRole('user')">
-		                        <c:forEach items="${requestScope.productCategory}" var="category">
-					            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
-					            </c:forEach>
-			           		</sec:authorize>
-                         	<sec:authorize access="hasRole('admin')">
-							<li><a href="new">Admin page</a></li>
-	  					</sec:authorize>
-	  					<sec:authorize access="hasRole('admin')">
+                   		<sec:authorize access="hasRole('admin')">
 							<li><a href="addCategory">Add category</a></li>
 	  					</sec:authorize>
-	  					<sec:authorize access="isAuthenticated()">
+	  				    <sec:authorize access="hasRole('admin')">
+	                       <c:forEach items="${requestScope.productCategory}" var="category">
+				            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="categoryCharacteristic?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+				            </c:forEach>
+		           		</sec:authorize>
+                       	<sec:authorize access="isAnonymous() or hasRole('user')">
+		                    <c:forEach items="${requestScope.productCategory}" var="category">
+			                	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+					        </c:forEach>
+			           	</sec:authorize>
+                        <sec:authorize access="hasRole('admin')">
+							<li><a href="new">Admin page</a></li>
+	  					</sec:authorize>
+<%-- 	  				<sec:authorize access="isAnonymous() or hasRole('user')"> --%>			           		
+	  					<sec:authorize access="isAnonymous() or hasRole('user')">
                          	<li><a href="ViewItemsOfCart"><locale:message code="label.cart"/></a></li>
                         </sec:authorize>
+                        <sec:authorize access="isAnonymous() or hasRole('user')">
                         <li><a href="contact"><locale:message code="label.contact"/></a></li>
+                        </sec:authorize>
                     </ul>
                 </div>  
             </div>

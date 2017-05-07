@@ -52,7 +52,7 @@ public class CharacteristicService implements ICharacteristicService {
 	
 	/**
 	 * Method return id of category characteristic
-	 * @param categoryCharacteristicName
+	 * @param characteristicsId
 	 * @throws DaoException
 	 */
 	@Override
@@ -62,6 +62,28 @@ public class CharacteristicService implements ICharacteristicService {
 		try {
 			list = iDaoCharacteristic.getCharacteristics(
 			session.createCriteria(Characteristic.class, "Characteristic"), characteristicsId);
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			log.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+			throw new ServiceException(
+					ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
+		}
+		return list;
+	}
+	
+	/**
+	 * 
+	 * @param characteristicsName
+	 * @return
+	 * @throws ServiceException
+	 */
+	@Override
+	public List<Characteristic> getCharacteristics(String characteristicsName) throws ServiceException {
+		Session session = iDaoCharacteristic.getBaseCurrentSession();
+		List<Characteristic> list = null;
+		try {
+			list = iDaoCharacteristic.getCharacteristics(
+			session.createCriteria(Characteristic.class, "Characteristic"), characteristicsName);
 		} catch (Exception e) {
 			session.getTransaction().rollback();
 			log.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);

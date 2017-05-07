@@ -522,12 +522,15 @@
 				<div class="col-sm-9">
 
 
+			           	
+
         <div class="container">
             <div class="row">
                 <c:forEach items="${requestScope.products}" var="product">
                 <div class="col-md-3 col-sm-6">
                     <div class="single-shop-product">
                         <div class="product-upper">
+                        <sec:authorize access="isAnonymous() or hasRole('user')">
                         <a href="singleProduct?description=<c:out value="${product.description}"></c:out>
 &name=<c:out value="${product.name}"></c:out>
 &intCharacteristic1=<c:out value="${product.intCharacteristic1}"></c:out>
@@ -552,8 +555,37 @@
 &imagePath=<c:out value="${product.imagePath}"></c:out>
 &price=<c:out value="${product.intCharacteristic1}"></c:out>
 &productId=<c:out value="${product.productId}"></c:out>
-&categoryId=<%= request.getSession().getAttribute("categoryId") %>">
-                        <img src="img/<c:out value="${product.imagePath}"></c:out>" alt=""></a>
+&categoryId=<%= request.getSession().getAttribute("categoryId") %>">        
+                        <img src="img/<c:out value="${product.imagePath}"></c:out>" alt=""></a></sec:authorize>
+                        
+                                                <sec:authorize access="hasRole('admin')">
+                        <a href="singleProductAdmin?description=<c:out value="${product.description}"></c:out>
+&name=<c:out value="${product.name}"></c:out>
+&intCharacteristic1=<c:out value="${product.intCharacteristic1}"></c:out>
+&intCharacteristic2=<c:out value="${product.intCharacteristic2}"></c:out>
+&intCharacteristic3=<c:out value="${product.intCharacteristic3}"></c:out>
+&intCharacteristic4=<c:out value="${product.intCharacteristic4}"></c:out>
+&intCharacteristic5=<c:out value="${product.intCharacteristic5}"></c:out>
+&characteristic1=<c:out value="${product.characteristic1}"></c:out>
+&characteristic2=<c:out value="${product.characteristic2}"></c:out>
+&characteristic3=<c:out value="${product.characteristic3}"></c:out>
+&characteristic4=<c:out value="${product.characteristic4}"></c:out>
+&characteristic5=<c:out value="${product.characteristic5}"></c:out>
+&characteristic6=<c:out value="${product.characteristic6}"></c:out>
+&characteristic7=<c:out value="${product.characteristic7}"></c:out>
+&boolCharacteristic1=<c:out value="${product.boolCharacteristic1}"></c:out>
+&boolCharacteristic2=<c:out value="${product.boolCharacteristic2}"></c:out>
+&boolCharacteristic3=<c:out value="${product.boolCharacteristic3}"></c:out>
+&boolCharacteristic4=<c:out value="${product.boolCharacteristic4}"></c:out>
+&boolCharacteristic5=<c:out value="${product.boolCharacteristic5}"></c:out>
+&rating=<c:out value="${product.rating}"></c:out>
+&stockStatus=<c:out value="${product.stockStatus}"></c:out>
+&imagePath=<c:out value="${product.imagePath}"></c:out>
+&price=<c:out value="${product.intCharacteristic1}"></c:out>
+&productId=<c:out value="${product.productId}"></c:out>
+&categoryId=<%= request.getSession().getAttribute("categoryId") %>">        
+                        <img src="img/<c:out value="${product.imagePath}"></c:out>" alt=""></a></sec:authorize>
+                        
                         </div>
 							<h2><a><c:out value="${product.name}"></c:out> <c:out value="${product.description}"></c:out></a></h2>
 						<div class="product-carousel-price">
@@ -583,6 +615,7 @@
                 </div>
                 </c:forEach>  
             </div>
+
 
             <div class="row">
                 <div class="col-md-12">

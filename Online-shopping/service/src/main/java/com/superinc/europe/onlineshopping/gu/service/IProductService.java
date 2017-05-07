@@ -73,5 +73,12 @@ public interface IProductService<T> extends IBaseService<T> {
 	 * @throws ServiceException 
 	 */
 	int getLastInsertId() throws ErrorAddingPoductServiceException;
+	
+	/**
+	 * Method get product by id
+	 * @param id
+	 * @throws ServiceException
+	 */
+	Product getProductById(int id) throws ServiceException;
 
 }

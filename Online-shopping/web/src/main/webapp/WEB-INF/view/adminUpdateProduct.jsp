@@ -263,7 +263,7 @@ else {
 
 			<sf:form class="form-horizontal" name="productDTO"
 				modelAttribute="productDTO"
-				action="${pageContext.request.contextPath}/new" method="POST"
+				action="${pageContext.request.contextPath}/updateProduct" method="POST"
 				enctype="multipart/form-data" title="Add product form">
 				<input type="hidden" name="command" value="saveproduct" />
 
