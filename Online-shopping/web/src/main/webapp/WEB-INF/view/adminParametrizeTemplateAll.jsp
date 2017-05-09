@@ -1,12 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page import="org.springframework.security.core.Authentication"%>
+<%@ page import="org.springframework.security.core.context.SecurityContextHolder"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="locale" %>
-<!DOCTYPE html> 
-<html> 
-<head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
  <c:set var="context" value="${pageContext.request.contextPath}" />
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -70,20 +73,25 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     
     <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="js/payments.js"> </script>
     <script type="text/javascript">
 
    </script>
  
    <style>
-    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-    .row.content {height: 1375px;}
-    
-      #layer1 {
+
+	   .letter {
+		    text-transform: uppercase;
+		}
+   
+	   #layer1 {
 	   	background: #FAFAFA; 
 	    padding: 15px;
-	    padding-left: 140px;
+	    padding-left: 200px;
 	   }
+   
+   
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1375px;}
     
     /* Set gray background color and 100% height */
     .sidenav {
@@ -121,10 +129,6 @@
   border-style:solid;
   border-width:1px 0;
    }
-   
-  	.letter {
-	    text-transform: uppercase;
-	}
    
   </style>
  
@@ -265,11 +269,7 @@
             </div>
         </div>
     </div>
-
-	<div class="single-product-area">
-		<div class="container">
-		
-		                <div id="layer1">
+				<div id="layer1">
 					<table>
 						<tr>
 							<td>
@@ -289,6 +289,12 @@
 						</tr>
 					</table>
 				</div>
+
+	<div class="single-product-area">
+		<div class="container">
+		
+
+		
 		
 			<div class="block2" style="background-color:#e3e4e5">
 			<h4>Int category characteristics 1</h4>

@@ -32,6 +32,9 @@
     <link rel="stylesheet" href="<c:url value="/css/styleMain.css" />" rel="stylesheet"> 
     <link rel="stylesheet" href="<c:url value="/css/responsive.css" />" rel="stylesheet"> 
 
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="js/payments.js"> </script>
+              
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -73,6 +76,13 @@
 			</script>
     
   </head>
+  
+  <style>
+	.letter {
+	    text-transform: uppercase;
+	}
+  </style>
+  
    <body>
    
     <div class="header-area">
@@ -121,7 +131,7 @@
                 </div>
                 <div class="col-sm-6">
                        <c:forEach items="${requestScope.quantitiAndSum}" var="quantitiAndSum">
-                			<sec:authorize access="isAuthenticated()"> 
+                			<sec:authorize access="hasRole('user')"> 
 	                    		<div class="shopping-item">
 	                      			 <a href="ViewItemsOfCart.html"><locale:message code="label.cart"/> - <span class="cart-amunt"><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
 	                  		     </div>
@@ -148,17 +158,29 @@
                         <li><a href="index">Home</a></li>
 	  					<sec:authorize access="hasRole('admin')">
 							<li class="active"><a href="addCategory">Add category</a></li>
+	  					</sec:authorize><sec:authorize access="hasRole('admin')">
+							<li><a href="parametrizeTemplateStep0">Parametrize template</a></li>
 	  					</sec:authorize>
-	  			        <sec:authorize access="hasRole('admin')">
-		                    <c:forEach items="${requestScope.productCategory}" var="category">
+<%-- 	  		            <sec:authorize access="hasRole('admin')">
+	                        <c:forEach items="${requestScope.productCategory}" var="category">
 				            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="categoryCharacteristic?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
-					        </c:forEach>
-			           	</sec:authorize>
-			            <sec:authorize access="hasRole('admin')">
-							<li><a href="new">Admin page</a></li>
+				            </c:forEach>
+	            		</sec:authorize> --%>
+                       	<sec:authorize access="hasRole('admin')">
+							<li><a href="new">Add product</a></li>
 	  					</sec:authorize>
+                       	<sec:authorize access="isAnonymous() or hasRole('user')">
+		                    <c:forEach items="${requestScope.productCategory}" var="category">
+				            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+				            </c:forEach>
+			           	</sec:authorize>
+			           	<sec:authorize access="hasRole('admin')">
+		                    <c:forEach items="${requestScope.productCategory}" var="category">
+				            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="productAdmin?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+				            </c:forEach>
+			           	</sec:authorize>
 <%-- 	  				<sec:authorize access="isAnonymous() or hasRole('user')"> --%>			           		
-	  					<sec:authorize access="isAnonymous() or hasRole('user')">
+	  					<sec:authorize access="hasRole('user')">
                          	<li><a href="ViewItemsOfCart"><locale:message code="label.cart"/></a></li>
                         </sec:authorize>
                         <sec:authorize access="isAnonymous() or hasRole('user')">
@@ -308,8 +330,8 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/jquery.sticky.js"></script>
     
-    <!-- jQuery easing -->
-    <script src="js/jquery.easing.1.3.min.js"></script>
+<!--     jQuery easing
+    <script src="js/jquery.easing.1.3.min.js"></script> -->
     
     <!-- Main Script -->
     <script src="js/main.js"></script>

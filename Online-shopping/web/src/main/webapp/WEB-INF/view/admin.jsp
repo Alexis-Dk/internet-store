@@ -97,6 +97,13 @@
 			    }
 			</script>
   </head>
+  
+    <style>
+	.letter {
+	    text-transform: uppercase;
+	}
+    </style>
+  
   <body>
   
 
@@ -138,14 +145,14 @@ else {
                 <div class="col-md-4">
                     <div class="header-right">
                         <ul class="list-unstyled list-inline">
-                            <li class="dropdown dropdown-small">
+                            <%-- <li class="dropdown dropdown-small">
                                 <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key">currency :</span><span class="value">USD </span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">USD</a></li>
                                     <li><a href="#">INR</a></li>
                                     <li><a href="#">GBP</a></li>
                                 </ul>
-                            </li>
+                            </li> --%>
 
                             <li class="dropdown dropdown-small">
                                 <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key"></span><span class="letter">${pageContext.response.locale} </span><b class="caret"></b></a>
@@ -171,13 +178,13 @@ else {
                     </div>
                 </div>
                 <div class="col-sm-6">
-                       <c:forEach items="${requestScope.quantitiAndSum}" var="quantitiAndSum">
+<%--                        <c:forEach items="${requestScope.quantitiAndSum}" var="quantitiAndSum">
                 			<sec:authorize access="isAuthenticated()"> 
 	                    		<div class="shopping-item">
 	                      			 <a href="ViewItemsOfCart.html"><locale:message code="label.cart"/> - <span class="cart-amunt"><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
 	                  		     </div>
                     		</sec:authorize>
-                    	</c:forEach> 
+                    	</c:forEach>  --%>
                 </div>
             </div>
         </div>
@@ -196,25 +203,35 @@ else {
                 </div> 
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="index">Home</a></li>
-	  					<sec:authorize access="hasRole('admin')">
+						<li>
+							<a href="index"><locale:message code="label.home"/></a>
+						</li>
+			       		<sec:authorize access="hasRole('admin')">
 							<li><a href="addCategory">Add category</a></li>
 	  					</sec:authorize>
-                        <sec:authorize access="hasRole('admin')">
-		                    <c:forEach items="${requestScope.productCategory}" var="category">
-		 		            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="categoryCharacteristic?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
-				            </c:forEach>
-		           		</sec:authorize>
-                       	<sec:authorize access="isAnonymous() or hasRole('user')">
-	                        <c:forEach items="${requestScope.productCategory}" var="category">
-				            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
-					        </c:forEach>
-			           	</sec:authorize>
-                       	<sec:authorize access="hasRole('admin')">
-							<li class="active"><a href="admin">Admin page</a></li>
+	  					<sec:authorize access="hasRole('admin')">
+							<li><a href="parametrizeTemplateStep0">Parametrize template</a></li>
 	  					</sec:authorize>
+<%-- 	  		            <sec:authorize access="hasRole('admin')">
+	                        <c:forEach items="${requestScope.productCategory}" var="category">
+				            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="categoryCharacteristic?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+				            </c:forEach>
+	            		</sec:authorize> --%>
+                       	<sec:authorize access="hasRole('admin')">
+							<li class="active"><a href="new">Add product</a></li>
+	  					</sec:authorize>
+                       	<sec:authorize access="isAnonymous() or hasRole('user')">
+		                    <c:forEach items="${requestScope.productCategory}" var="category">
+				            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+				            </c:forEach>
+			           	</sec:authorize>
+			           	<sec:authorize access="hasRole('admin')">
+		                    <c:forEach items="${requestScope.productCategory}" var="category">
+				            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="productAdmin?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
+				            </c:forEach>
+			           	</sec:authorize>
 <%-- 	  				<sec:authorize access="isAnonymous() or hasRole('user')"> --%>			           		
-	  					<sec:authorize access="isAnonymous() or hasRole('user')">
+	  					<sec:authorize access="hasRole('user')">
                          	<li><a href="ViewItemsOfCart"><locale:message code="label.cart"/></a></li>
                         </sec:authorize>
                         <sec:authorize access="isAnonymous() or hasRole('user')">

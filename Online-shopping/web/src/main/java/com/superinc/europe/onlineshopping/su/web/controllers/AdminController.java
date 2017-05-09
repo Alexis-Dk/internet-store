@@ -3,8 +3,10 @@ package com.superinc.europe.onlineshopping.su.web.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
@@ -712,8 +714,10 @@ public class AdminController {
 			initModel(model, category);
 			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, category);
 			CustomUserParamDTO customUserParam = (CustomUserParamDTO) request.getSession().getAttribute("customUserParam");
+			//TO DO REMOVE THIS!!!!!!!!!!!!
 			customUserParam.setIntCharacteristicMin1(priceLower);
 			customUserParam.setIntCharacteristicMax1(priceHighter);
+			initAdminCategoryWidget(model);
 			if (request.getParameter(RequestParamConstants.SELECTED_PAGE) == null) {
 				model.put(RequestParamConstants.PRODUCTS, productService.obtainDefaultSelection(customUserParam, (String) category));
 			} else {
@@ -746,6 +750,7 @@ public class AdminController {
 			model.put("characteristics6", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "6")));
 			model.put("characteristics7", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "7")));
 			initModel(model, category);
+			initAdminCategoryWidget(model);
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
@@ -779,6 +784,7 @@ public class AdminController {
 			model.put("characteristics6", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "6")));
 			model.put("characteristics7", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "7")));
 			initModel(model, category);
+			initAdminCategoryWidget(model);
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
@@ -1112,6 +1118,137 @@ public class AdminController {
 			}
 		}
 		return characteristicId;
+	}
+	
+	@RequestMapping(value = "/deleteProduct", method = RequestMethod.GET, params=RequestParamConstants.CATEGORY)
+	public String deleteProduct(HttpServletRequest request, ModelMap model,
+			@RequestParam(value = RequestParamConstants.CATEGORY) String category,
+			@RequestParam(value = RequestParamConstants.SELECTED_PAGE, defaultValue = RequestParamConstants.VALUE_STR_ONE) String selectedPage,
+			@RequestParam(value = RequestParamConstants.PRODUCT_ID) String productId) {
+		CustomUserParamDTO customUserParam = (CustomUserParamDTO) request.getSession().getAttribute("customUserParam");
+		Map<String, String[]> selectedItems = new HashMap<String, String[]>();
+		try {productService.delete(Integer.parseInt(productId));
+			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
+					navigationService.getDataToPaginationWidget(productService.getQuantityOfPage()));
+			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
+			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, category);
+				model.put(RequestParamConstants.PRODUCTS, productService.obtainUsersSelection(customUserParam, selectedPage, (String) category, selectedItems));
+				initModel(model, category);
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
+			return RequestParamConstants.ERROR_PAGE;
+		}
+		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
+				request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+		return RequestParamConstants.PRODUCT;
+	}
+	
+	@RequestMapping(path = "/parametrizeTemplateStep0", method = RequestMethod.GET)
+    public String parametrizeTemplateStep0(ModelMap model) {
+	ProductDTO productDTO = new ProductDTO();
+	List<Category> categoryList = null;
+	try {
+		categoryList = productCategoryService.getAllProductCategories();
+		HttpUtils.setList(categoryList);
+	} catch (ErrorGettingCategoryServiceException e) {
+		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+	}
+	model.addAttribute("categoryList", categoryList);
+	model.put(RequestParamConstants.PRODUCT_DTO, productDTO);
+	try {
+		model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getNoActiveProductCategories());
+	} catch (ErrorGettingCategoryServiceException e) {
+		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+	}
+	return "adminPrametrizeTemplate";
+    }
+	
+    @RequestMapping(path = "/parametrizeTemplateStep1", method = RequestMethod.GET)
+    public String adminParametrizeTemplate1(ModelMap model, String categoryId, HttpServletRequest request) {
+	List<Category> categoryList = null;
+	try {
+		categoryList = productCategoryService.getAllProductCategories();
+		HttpUtils.setList(categoryList);
+
+	} catch (ErrorGettingCategoryServiceException e) {
+		e.printStackTrace();
+	}
+	model.addAttribute("categoryList", categoryList);
+	try {
+		List<CategoryDTO> list = productCategoryService.getAllProductCategories(categoryId);
+		for (CategoryDTO categoryDTO : list) {
+			if(categoryDTO.getSelectedItem().equals("active")){
+				categoryDTO.setSelectedItem("selected");
+				HttpUtils.setCategory(new Category(categoryDTO.getCategoryId(), categoryDTO.getCategoryName()));
+			}
+		}
+		model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, list);
+	} catch (ErrorGettingCategoryServiceException e) {
+		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+	}
+	return "redirect:/parametrizeTemplateStep2";
+    }
+    
+    @RequestMapping(path = "/parametrizeTemplateStep2", method = RequestMethod.GET)
+    public String parametrizeTemplateStep2(ModelMap model, String categoryId, HttpServletRequest request) {
+	List<Category> categoryList = null;
+	try {
+		categoryList = productCategoryService.getAllProductCategories();
+		HttpUtils.setList(categoryList);
+	} catch (ErrorGettingCategoryServiceException e) {
+		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+	}
+	model.addAttribute("categoryList", categoryList);
+	Category category = initAdminCategoryWidget(model);
+	
+	
+	
+	categoryId = String.valueOf(category.getCategoryId());
+	String categoryName = category.getCategoryName();
+	try {
+		model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
+				navigationService.getDataToPaginationWidget(productService.getQuantityOfPage()));
+		model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(categoryId));
+		model.put("characteristics1", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(categoryId, "1")));
+		model.put("characteristics2", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(categoryId, "2")));
+		model.put("characteristics3", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(categoryId, "3")));
+		model.put("characteristics4", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(categoryId, "4")));
+		model.put("characteristics5", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(categoryId, "5")));
+		model.put("characteristics6", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(categoryId, "6")));
+		model.put("characteristics7", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(categoryId, "7")));
+		initModel(model, categoryId);
+		request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, categoryId);
+	} catch (Exception e) {
+		log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
+		return RequestParamConstants.ERROR_PAGE;
+	}
+	model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
+			request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+	return "adminParametrizeTemplateAll";
+	
+	
+	
+	
+	
+	
+	
+    }
+
+
+	private Category initAdminCategoryWidget(ModelMap model) {
+		Category category = HttpUtils.getCatrgory();
+		try {
+			List<CategoryDTO> list = productCategoryService.getAllProductCategories(Integer.toString(category.getCategoryId()));
+			for (CategoryDTO categoryDTO : list) {
+				if(categoryDTO.getSelectedItem().equals("active")){
+					categoryDTO.setSelectedItem("selected");
+				}
+			}
+			model.put("productCategory2", list);
+		} catch (ErrorGettingCategoryServiceException e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
+		}
+		return category;
 	}
     
 }

@@ -16,6 +16,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>eElectronics - HTML eCommerce Template</title>
     
+    <style>
+	.letter {
+	    text-transform: uppercase;
+	}
+  </style>
+    
     <script>
     function setParam(name, value) {
         var l = window.location;
@@ -65,6 +71,9 @@
     <link rel="stylesheet" href="<c:url value="/css/owl.carousel.css" />" rel="stylesheet">
     <link rel="stylesheet" href="<c:url value="/css/styleMain.css" />" rel="stylesheet"> 
     <link rel="stylesheet" href="<c:url value="/css/responsive.css" />" rel="stylesheet"> 
+
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="js/payments.js"> </script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -268,7 +277,8 @@
                             
                             <div class="quantity buttons_added">
 								<form action="${context}/product">
-									<button class="button" value="1" name="calc_shipping" type="submit">Return to shop</button>
+									<!-- <button class="button" value="1" name="calc_shipping" type="submit">Return to shop</button> -->
+									<button class="button" value="1" name="category" type="submit">Return to shop</button>
 								</form>
                             </div>
 

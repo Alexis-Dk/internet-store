@@ -166,7 +166,7 @@ else {
                 </div>
                 <div class="col-sm-6">
                        <c:forEach items="${requestScope.quantitiAndSum}" var="quantitiAndSum">
-                			<sec:authorize access="isAuthenticated()"> 
+                			<sec:authorize access="hasRole('user')"> 
 	                    		<div class="shopping-item">
 	                      			 <a href="ViewItemsOfCart.html"><locale:message code="label.cart"/> - <span class="cart-amunt"><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
 	                  		     </div>
@@ -194,13 +194,16 @@ else {
 			       		<sec:authorize access="hasRole('admin')">
 							<li><a href="addCategory">Add category</a></li>
 	  					</sec:authorize>
-	  		            <sec:authorize access="hasRole('admin')">
+	  					<sec:authorize access="hasRole('admin')">
+							<li><a href="parametrizeTemplateStep0">Parametrize template</a></li>
+	  					</sec:authorize>
+<%-- 	  		            <sec:authorize access="hasRole('admin')">
 	                        <c:forEach items="${requestScope.productCategory}" var="category">
 				            	<li class="<c:out value="${category.selectedItem}"></c:out>"><a href="categoryCharacteristic?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
 				            </c:forEach>
-	            		</sec:authorize>
+	            		</sec:authorize> --%>
                        	<sec:authorize access="hasRole('admin')">
-							<li><a href="new">Admin page</a></li>
+							<li><a href="new">Add product</a></li>
 	  					</sec:authorize>
                        	<sec:authorize access="isAnonymous() or hasRole('user')">
 		                    <c:forEach items="${requestScope.productCategory}" var="category">
