@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -22,6 +23,7 @@ import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 @Repository("daoProduct")
 public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 
+	private static final String PRODUCT_ID = "productId";
 	private static final String BOOL_CHARACTERISTIC1_EQUALS = "boolCharacteristic1 = ";
 	private static final String BOOL_CHARACTERISTIC2_EQUALS = "boolCharacteristic2 = ";
 	private static final String BOOL_CHARACTERISTIC3_EQUALS = "boolCharacteristic3 = ";
@@ -40,7 +42,7 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 	private static final String INT_CHAR4_MORE = "intCharacteristic4 >= ";
 	private static final String INT_CHAR5_LESS = "intCharacteristic5 <= ";
 	private static final String INT_CHAR5_MORE = "intCharacteristic5 >= ";
-	private static final String SELECT_MAX_PRODUCT_ID_FROM_PRODUCTS = "SELECT MAX(product_id) FROM Products";
+	//private static final String SELECT_MAX_PRODUCT_ID_FROM_PRODUCTS = "SELECT MAX(product_id) FROM Products";
 	private static final int DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE = 12;
 	
 	Logger log = Logger.getLogger(DaoProduct.class);
@@ -162,9 +164,11 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 	 * @throws DaoException
 	 */
 	@Override
-	public int getLastInsertId() throws DaoException {
-		Integer lastId = (Integer) getCurrentSession().createSQLQuery(SELECT_MAX_PRODUCT_ID_FROM_PRODUCTS)
-			    .uniqueResult();  
+	public int getLastInsertId(Criteria criteria) throws DaoException {
+		criteria.setProjection(Projections.max(PRODUCT_ID));
+		Integer lastId = (Integer) criteria.uniqueResult();
+//		Integer lastId = (Integer) getCurrentSession().createSQLQuery(SELECT_MAX_PRODUCT_ID_FROM_PRODUCTS)
+//			    .uniqueResult();  
 		try {
 			if (lastId == null) {
 				return 0;

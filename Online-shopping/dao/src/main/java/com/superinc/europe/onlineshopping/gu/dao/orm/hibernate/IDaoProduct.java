@@ -68,9 +68,10 @@ public interface IDaoProduct extends IBaseDao<Product>{
 
 	/**
 	 * Method get last insert id
+	 * @param criteria 
 	 * @throws ServiceException 
 	 * @throws DaoException
 	 */
-	int getLastInsertId() throws DaoException;
+	int getLastInsertId(Criteria criteria) throws DaoException;
 
 }

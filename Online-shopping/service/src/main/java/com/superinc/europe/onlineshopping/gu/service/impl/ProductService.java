@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
 import com.superinc.europe.onlineshopping.gu.entities.dto.CustomUserParamDTO;
@@ -246,8 +245,9 @@ public class ProductService implements IProductService<Product> {
 	 */
 	@Override
 	public int getLastInsertId() throws ErrorAddingPoductServiceException {
+		Session session = daoProduct.getCurrentSession();
 		try {
-			return  daoProduct.getLastInsertId();
+			return  daoProduct.getLastInsertId(session.createCriteria(Product.class));
 		} catch (Exception e) {
 			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
 			throw new ErrorAddingPoductServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
