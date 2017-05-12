@@ -1,16 +1,9 @@
 package com.superinc.europe.onlineshopping.gu.entities.dto;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
-
 import java.io.Serializable;
-
 import javax.validation.constraints.Pattern;
-
-import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
-
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 
 public class ProductDTO implements Serializable {
 
@@ -27,7 +20,7 @@ public class ProductDTO implements Serializable {
     @NotNull
     private DepartmentVO department;    
     
-    @Pattern(regexp = "^[0-9a-zA-Z]{3,50}$", message="Description has to has between 3 and 50 symbols")
+    @Pattern(regexp = "^[-0-9a-zA-Zà-ÿÀ-ß]{3,50}$", message="Description has to has between 3 and 50 symbols")
     private String description;
     
 //    @Pattern(regexp = "^[1-9a-zA-Z]{3,50}$", message="Color has to has between 3 and 50 symbols")
