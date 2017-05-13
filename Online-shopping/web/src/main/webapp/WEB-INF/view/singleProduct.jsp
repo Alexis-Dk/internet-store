@@ -75,7 +75,10 @@
               <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
 	<script src="js/simpleCart.min.js"> </script>
-	<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
+	    <script src="https://code.jquery.com/jquery.min.js"></script>
+    
+    <!-- Bootstrap JS form CDN -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	
 	  <style>
 		.letter {
@@ -98,11 +101,11 @@
 		}
 		
 .new-product{
-	width:78%;
+	width:100%;
 	float:right;
 	background:rgba(245, 243, 243, 0.27);
 	min-height:800px;
-	padding:4em;
+	padding:2em;
 }
 
 .dress-name {

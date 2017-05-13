@@ -22,6 +22,7 @@
 	}
   </style>
     
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script>
     function setParam(name, value) {
         var l = window.location;
