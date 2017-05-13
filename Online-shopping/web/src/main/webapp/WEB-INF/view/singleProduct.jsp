@@ -109,7 +109,7 @@
 }
 
 .dress-name {
-	margin:30px 0;
+	margin:50px 0;
 }
 .dress-name h3 {
     float: left;
@@ -137,7 +137,7 @@ p.left {
     color: #000;
     letter-spacing: 2px;
 	margin-right:5%;
-	width:40%;
+	width:50%;
 }
 p.right {
     float: left;
