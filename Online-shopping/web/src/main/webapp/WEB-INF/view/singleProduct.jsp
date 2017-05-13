@@ -105,7 +105,7 @@
 	float:right;
 	background:rgba(245, 243, 243, 0.27);
 	min-height:800px;
-	padding:2em;
+	padding:0em;
 }
 
 .dress-name {
