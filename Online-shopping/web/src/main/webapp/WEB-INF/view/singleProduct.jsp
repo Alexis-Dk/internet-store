@@ -86,13 +86,13 @@
 		}
 		
 		.flexslider {
-		    width: 300px;
-		    height: 520px;
+		    width: 370px;
+		    height: 550px;
 		}
 		
 		 .flexslider .slides img {
-		    width: 300
-		    height: 520px;
+		    width: 370
+		    height: 550px;
 		} 
 		
 		img {
