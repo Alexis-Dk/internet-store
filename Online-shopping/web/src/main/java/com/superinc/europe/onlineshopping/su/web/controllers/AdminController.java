@@ -1052,7 +1052,7 @@ public class AdminController {
 	try {
 		if (!br.hasErrors()) {
 			if (productDTO != null) {
-				int id = (int)productService.getLastInsertId() + 1;
+				int id = (int)productService.getLastInsertId();
 				setProductFields(product, productDTO, id);
 				productService.update(product);
 			    if ((image != null) && !image.isEmpty()) {
