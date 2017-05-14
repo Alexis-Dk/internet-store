@@ -32,8 +32,23 @@ public class Product implements Serializable {
 	@Column(name="name")
 	private String name;
 	
-	@Column(name="image_path")
-	private String imagePath;
+	@Column(name="image1_path")
+	private String image1Path;
+	
+	@Column(name="image2_path")
+	private String image2Path;
+	
+	@Column(name="image3_path")
+	private String image3Path;
+	
+	@Column(name="image4_path")
+	private String image4Path;
+	
+	@Column(name="image5_path")
+	private String image5Path;
+	
+	@Column(name="image6_path")
+	private String image6Path;
 	
 	@Column(name="price")
 	private int price;
@@ -123,24 +138,24 @@ public class Product implements Serializable {
 		this.productId = productId;
 	}
 	
-	public Product(int productId, String name, String imagePath, int price, String description) {
+	public Product(int productId, String name, String image1Path, int price, String description) {
 		this.productId = productId;
 		this.name = name;
-		this.imagePath = imagePath;
+		this.image1Path = image1Path;
 		this.price = price;
 		this.description = description;
 	}
 	
-	public Product(String name, String imagePath, int price, String description) {
+	public Product(String name, String image1Path, int price, String description) {
 		this.name = name;
-		this.imagePath = imagePath;
+		this.image1Path = image1Path;
 		this.price = price;
 		this.description = description;
 	}
 	
 	public Product(Category category, String name, String imagePath, int price, String description) {
 		this.name = name;
-		this.imagePath = imagePath;
+		this.image1Path = imagePath;
 		this.price = price;
 		this.description = description;
 	}
@@ -155,7 +170,7 @@ public class Product implements Serializable {
 		this.productId = productId;
 		this.categoryFk = categoryFk;
 		this.name = name;
-		this.imagePath = image_path;
+		this.image1Path = image_path;
 		this.price = price;
 		this.oldprice = oldprice;
 		this.description = description;
@@ -184,7 +199,7 @@ public class Product implements Serializable {
 			int deleteStatus, String stockStatus, int rating) {
 		this.categoryFk = categoryFk;
 		this.name = name;
-		this.imagePath = image_path;
+		this.image1Path = image_path;
 		this.price = price;
 		this.oldprice = oldprice;
 		this.description = description;
@@ -217,7 +232,7 @@ public class Product implements Serializable {
 		this.productId = productId;
 		this.categoryFk = categoryFk;
 		this.name = name;
-		this.imagePath = imagePath;
+		this.image1Path = imagePath;
 		this.price = price;
 		this.oldprice = oldprice;
 		this.description = description;
@@ -266,12 +281,56 @@ public class Product implements Serializable {
 		this.name = name;
 	}
 
-	public String getImagePath() {
-		return imagePath;
+	public String getImage1Path() {
+		return image1Path;
 	}
 
-	public void setImage_path(String imagePath) {
-		this.imagePath = imagePath;
+	public void setImage1_path(String image1Path) {
+		this.image1Path = image1Path;
+	}
+
+	public String getImage2Path() {
+		return image2Path;
+	}
+
+	public void setImage2Path(String image2Path) {
+		this.image2Path = image2Path;
+	}
+
+	public String getImage3Path() {
+		return image3Path;
+	}
+
+	public void setImage3Path(String image3Path) {
+		this.image3Path = image3Path;
+	}
+
+	public String getImage4Path() {
+		return image4Path;
+	}
+
+	public void setImage4Path(String image4Path) {
+		this.image4Path = image4Path;
+	}
+
+	public String getImage5Path() {
+		return image5Path;
+	}
+
+	public void setImage5Path(String image5Path) {
+		this.image5Path = image5Path;
+	}
+
+	public String getImage6Path() {
+		return image6Path;
+	}
+
+	public void setImage6Path(String image6Path) {
+		this.image6Path = image6Path;
+	}
+
+	public void setImage1Path(String image1Path) {
+		this.image1Path = image1Path;
 	}
 
 	public int getPrice() {
@@ -496,7 +555,7 @@ public class Product implements Serializable {
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", categoryFk=" + categoryFk
-				+ ", name=" + name + ", imagePath=" + imagePath + ", price="
+				+ ", name=" + name + ", imagePath=" + image1Path + ", price="
 				+ price + ", oldprice=" + oldprice + ", description="
 				+ description + ", characteristic1=" + characteristic1
 				+ ", characteristic2=" + characteristic2 + ", characteristic3="

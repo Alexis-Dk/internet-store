@@ -23,7 +23,7 @@ public class RequestParamConstants {
 	public static final String NAME = "name";
 	public static final String DESCRIPTION = "description";
 	public static final String PRICE = "price";
-	public static final String IMAGE_PATH = "imagePath";
+	public static final String IMAGE_PATH = "image1Path";
 	public static final String BUCKET_WIDGET = "cart";
 	public static final String DELETE_BY_DESCRIPTION = "deleteByDescription";
 	public static final String TOTAL_COST = "totalCost";

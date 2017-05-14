@@ -57,7 +57,7 @@ public class HttpUtils {
 		for (OrderedProduct goodsOrders : listGoodsOrders) {
 			bucket.add(new Bucket(goodsOrders.getProductFk().getProductId(),
 					goodsOrders.getProductFk().getName(), goodsOrders
-							.getProductFk().getImagePath(), goodsOrders
+							.getProductFk().getImage1Path(), goodsOrders
 							.getProductFk().getPrice(), goodsOrders
 							.getProductFk().getDescription(), goodsOrders
 							.getCount()));

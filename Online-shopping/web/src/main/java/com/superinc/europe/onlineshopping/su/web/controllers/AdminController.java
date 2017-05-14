@@ -497,7 +497,14 @@ public class AdminController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(path = "/new", method = RequestMethod.POST)
     public String saveNewProduct(@Valid ProductDTO productDTO,
-            BindingResult br, @RequestParam(value = "productImage", required = false) MultipartFile image, RedirectAttributes redirectAttributes, HttpServletRequest request, Locale locale, @ModelAttribute("productDTO1") ProductDTO productDTO1) {
+            BindingResult br,
+            @RequestParam(value = "productImage1", required = false) MultipartFile image1,
+            @RequestParam(value = "productImage2", required = false) MultipartFile image2,
+            @RequestParam(value = "productImage3", required = false) MultipartFile image3,
+            @RequestParam(value = "productImage4", required = false) MultipartFile image4,
+            @RequestParam(value = "productImage5", required = false) MultipartFile image5,
+            @RequestParam(value = "productImage6", required = false) MultipartFile image6,
+            RedirectAttributes redirectAttributes, HttpServletRequest request, Locale locale, @ModelAttribute("productDTO1") ProductDTO productDTO1) {
 		Product product = new Product();
 		Set<ConstraintViolation<ProductDTO>> violations = validator.validate(productDTO);
 		for (ConstraintViolation<ProductDTO> violation : violations) 
@@ -520,11 +527,12 @@ public class AdminController {
 				int id = (int)productService.getLastInsertId() + 1;
 				setProductFields(product, productDTO, id);
 				productService.add(product);
-			    if ((image != null) && !image.isEmpty()) {
-				validateImage(image);
-				String imageName = productDTO.getDescription() + "_"+Integer.toString(id) + ".jpg";
-				saveImage(imageName, image, request, productDTO);
-			    }
+			    validateImage(productDTO, image1, request, id, "1");
+			    validateImage(productDTO, image2, request, id, "2");
+			    validateImage(productDTO, image3, request, id, "3");
+			    validateImage(productDTO, image4, request, id, "4");
+			    validateImage(productDTO, image5, request, id, "5");
+			    validateImage(productDTO, image6, request, id, "6");
 			    redirectAttributes.addFlashAttribute("infoMessage", getMessageByKey("message.newproductadded", locale));
 				return "redirect:index";
 			}
@@ -560,6 +568,16 @@ public class AdminController {
 	}
 	return "admin";
     }
+
+
+	private void validateImage(ProductDTO productDTO, MultipartFile image1,
+			HttpServletRequest request, int id, String imageNumber) throws IOException {
+		if ((image1 != null) && !image1.isEmpty()) {
+		validateImage(image1);
+		String image1Name = productDTO.getDescription() + "_" + Integer.toString(id) + "_" + imageNumber + ".jpg";
+		saveImage(image1Name, image1, request, productDTO);
+		}
+	}
 	
     private void setProductFields(Product product, ProductDTO productDTO, int id) {
 //	product.setPrice(productDTO.getPrice());
@@ -589,7 +607,12 @@ public class AdminController {
 	product.setBoolCharacteristic3(Boolean.parseBoolean(productDTO.getBoolCharacteristic3()));
 	product.setBoolCharacteristic4(Boolean.parseBoolean(productDTO.getBoolCharacteristic4()));
 	product.setBoolCharacteristic5(Boolean.parseBoolean(productDTO.getBoolCharacteristic5()));
-	product.setImage_path(productDTO.getDepartment().getId()+ "/"+productDTO.getDescription()+ "_"+Integer.toString(id) + ".jpg");
+	product.setImage1_path(productDTO.getDepartment().getId() + "/" + productDTO.getDescription() + "_" + Integer.toString(id) + "_" + "1" + ".jpg");
+	product.setImage2Path(productDTO.getDepartment().getId() + "/" + productDTO.getDescription() + "_" + Integer.toString(id) + "_" + "2" + ".jpg");
+	product.setImage3Path(productDTO.getDepartment().getId() + "/" + productDTO.getDescription() + "_" + Integer.toString(id) + "_" + "3" + ".jpg");
+	product.setImage4Path(productDTO.getDepartment().getId() + "/" + productDTO.getDescription() + "_" + Integer.toString(id) + "_" + "4" + ".jpg");
+	product.setImage5Path(productDTO.getDepartment().getId() + "/" + productDTO.getDescription() + "_" + Integer.toString(id) + "_" + "5" + ".jpg");
+	product.setImage6Path(productDTO.getDepartment().getId() + "/" + productDTO.getDescription() + "_" + Integer.toString(id) + "_" + "6" + ".jpg");
     }
 	
 	private void saveImage(String filename, MultipartFile image,
@@ -1025,7 +1048,14 @@ public class AdminController {
     @SuppressWarnings("unchecked")
 	@RequestMapping(path = "/updateProduct", method = RequestMethod.POST)
     public String updatePoductPageAdmin3(@Valid ProductDTO productDTO,
-            BindingResult br, @RequestParam(value = "productImage", required = false) MultipartFile image, RedirectAttributes redirectAttributes, HttpServletRequest request, Locale locale, @ModelAttribute("productDTO1") ProductDTO productDTO1) {
+            BindingResult br,
+            @RequestParam(value = "productImage1", required = false) MultipartFile image1,
+            @RequestParam(value = "productImage2", required = false) MultipartFile image2,
+            @RequestParam(value = "productImage3", required = false) MultipartFile image3,
+            @RequestParam(value = "productImage4", required = false) MultipartFile image4,
+            @RequestParam(value = "productImage5", required = false) MultipartFile image5,
+            @RequestParam(value = "productImage6", required = false) MultipartFile image6,
+            RedirectAttributes redirectAttributes, HttpServletRequest request, Locale locale, @ModelAttribute("productDTO1") ProductDTO productDTO1) {
 		Product product = new Product();
 		Set<ConstraintViolation<ProductDTO>> violations = validator.validate(productDTO);
 		for (ConstraintViolation<ProductDTO> violation : violations) 
@@ -1055,11 +1085,12 @@ public class AdminController {
 				int id = (int)productService.getLastInsertId();
 				setProductFields(product, productDTO, id);
 				productService.update(product);
-			    if ((image != null) && !image.isEmpty()) {
-				validateImage(image);
-				String imageName = productDTO.getDescription() + "_"+Integer.toString(id) + ".jpg";
-				saveImage(imageName, image, request, productDTO);
-			    }
+			    validateImage(productDTO, image1, request, id, "1");
+			    validateImage(productDTO, image2, request, id, "2");
+			    validateImage(productDTO, image3, request, id, "3");
+			    validateImage(productDTO, image4, request, id, "4");
+			    validateImage(productDTO, image5, request, id, "5");
+			    validateImage(productDTO, image6, request, id, "6");
 			    redirectAttributes.addFlashAttribute("infoMessage", getMessageByKey("message.newproductadded", locale));
 				return "redirect:index";
 			}

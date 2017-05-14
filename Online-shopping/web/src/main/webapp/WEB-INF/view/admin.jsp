@@ -525,10 +525,60 @@ else {
  
 				<div class="form-group">
 					<div class="col-xs-3">
-						<label for="inputFile">Product image: </label>
+						<label for="inputFile">Product image 1: </label>
 					</div>
 					<div class="col-xs-5">
-						<input type="file" id="inputFile" name="productImage">
+						<input type="file" id="inputFile" name="productImage1">
+						<p class="help-block">Load an image for the product.</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-xs-3">
+						<label for="inputFile2">Product image 2: </label>
+					</div>
+					<div class="col-xs-5">
+						<input type="file" id="inputFile2" name="productImage2">
+						<p class="help-block">Load an image for the product.</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-xs-3">
+						<label for="inputFile3">Product image 3: </label>
+					</div>
+					<div class="col-xs-5">
+						<input type="file" id="inputFile3" name="productImage3">
+						<p class="help-block">Load an image for the product.</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-xs-3">
+						<label for="inputFile4">Product image 4: </label>
+					</div>
+					<div class="col-xs-5">
+						<input type="file" id="inputFile4" name="productImage4">
+						<p class="help-block">Load an image for the product.</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-xs-3">
+						<label for="inputFile5">Product image 5: </label>
+					</div>
+					<div class="col-xs-5">
+						<input type="file" id="inputFile5" name="productImage5">
+						<p class="help-block">Load an image for the product.</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-xs-3">
+						<label for="inputFile6">Product image 6: </label>
+					</div>
+					<div class="col-xs-5">
+						<input type="file" id="inputFile6" name="productImage6">
 						<p class="help-block">Load an image for the product.</p>
 					</div>
 				</div>

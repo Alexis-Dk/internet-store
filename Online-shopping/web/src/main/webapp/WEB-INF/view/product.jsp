@@ -576,11 +576,16 @@
 &boolCharacteristic5=<c:out value="${product.boolCharacteristic5}"></c:out>
 &rating=<c:out value="${product.rating}"></c:out>
 &stockStatus=<c:out value="${product.stockStatus}"></c:out>
-&imagePath=<c:out value="${product.imagePath}"></c:out>
+&image1Path=<c:out value="${product.image1Path}"></c:out>
+&image2Path=<c:out value="${product.image2Path}"></c:out>
+&image3Path=<c:out value="${product.image3Path}"></c:out>
+&image4Path=<c:out value="${product.image4Path}"></c:out>
+&image5Path=<c:out value="${product.image5Path}"></c:out>
+&image6Path=<c:out value="${product.image6Path}"></c:out>
 &price=<c:out value="${product.intCharacteristic1}"></c:out>
 &productId=<c:out value="${product.productId}"></c:out>
 &categoryId=<%= request.getSession().getAttribute("categoryId") %>">        
-                        <img src="img/<c:out value="${product.imagePath}"></c:out>" alt=""></a></sec:authorize>
+                        <img src="img/<c:out value="${product.image1Path}"></c:out>" alt=""></a></sec:authorize>
                         
                                                 <sec:authorize access="hasRole('admin')">
                         <a href="singleProductAdmin?description=<c:out value="${product.description}"></c:out>
@@ -604,11 +609,16 @@
 &boolCharacteristic5=<c:out value="${product.boolCharacteristic5}"></c:out>
 &rating=<c:out value="${product.rating}"></c:out>
 &stockStatus=<c:out value="${product.stockStatus}"></c:out>
-&imagePath=<c:out value="${product.imagePath}"></c:out>
+&image1Path=<c:out value="${product.image1Path}"></c:out>
+&image2Path=<c:out value="${product.image2Path}"></c:out>
+&image3Path=<c:out value="${product.image3Path}"></c:out>
+&image4Path=<c:out value="${product.image4Path}"></c:out>
+&image5Path=<c:out value="${product.image5Path}"></c:out>
+&image6Path=<c:out value="${product.image6Path}"></c:out>
 &price=<c:out value="${product.intCharacteristic1}"></c:out>
 &productId=<c:out value="${product.productId}"></c:out>
 &categoryId=<%= request.getSession().getAttribute("categoryId") %>">        
-                        <img src="img/<c:out value="${product.imagePath}"></c:out>" alt=""></a></sec:authorize>
+                        <img src="img/<c:out value="${product.image1Path}"></c:out>" alt=""></a></sec:authorize>
                         
                         </div>
 							<h2><a><c:out value="${product.name}"></c:out> <c:out value="${product.description}"></c:out></a></h2>
@@ -630,7 +640,7 @@
 										&characteristic7=<c:out value="${product.characteristic7}"></c:out>
 										&rating=<c:out value="${product.rating}"></c:out>
 										&stockStatus=<c:out value="${product.stockStatus}"></c:out>
-										&imagePath=<c:out value="${product.imagePath}"></c:out>
+										&image1Path=<c:out value="${product.image1Path}"></c:out>
 										&price=<c:out value="${product.intCharacteristic1}"></c:out>
 										&productId=<c:out value="${product.productId}"></c:out>">Add to cart
 									</a>

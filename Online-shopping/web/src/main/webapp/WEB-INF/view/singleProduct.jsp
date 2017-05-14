@@ -268,17 +268,17 @@ p.right {
 				<div class="col-md-5 zoom-grid">
 					<div class="flexslider" >
 						<ul class="slides">
-							<li data-thumb="img/<%=request.getParameter("imagePath")%>">
-								<div class="thumb-image"> <img src="img/<%=request.getParameter("imagePath")%>" data-imagezoom="true" class="img-responsive" alt="" /> </div>
+							<li data-thumb="img/<%=request.getParameter("image1Path")%>">
+								<div class="thumb-image"> <img src="img/<%=request.getParameter("image1Path")%>" data-imagezoom="true" class="img-responsive" alt="" /> </div>
 							</li>
-							<li data-thumb="img/tv/UE48J6300AU.jpg">
-								<div class="thumb-image"> <img src="img/tv/UE48J6300AU.jpg" data-imagezoom="true" class="img-responsive" alt="" /> </div>
+							<li data-thumb="img/<%=request.getParameter("image2Path")%>">
+								<div class="thumb-image"> <img src="img/<%=request.getParameter("image2Path")%>" data-imagezoom="true" class="img-responsive" alt="" /> </div>
 							</li>
-							<li data-thumb="img/tv/UE32J4900AK.jpg">
-							<div class="thumb-image"> <img src="img/tv/UE32J4900AK.jpg" data-imagezoom="true" class="img-responsive" alt="" /> </div>
+							<li data-thumb="img/<%=request.getParameter("image3Path")%>">
+								<div class="thumb-image"> <img src="img/<%=request.getParameter("image3Path")%>" data-imagezoom="true" class="img-responsive" alt="" /> </div>
 							</li> 
-							<li data-thumb="img/tv/UE40JU6610U.jpg">
-							<div class="thumb-image"> <img src="img/tv/UE40JU6610U.jpg" data-imagezoom="true" class="img-responsive" alt="" /> </div>
+							<li data-thumb="img/<%=request.getParameter("image4Path")%>">
+								<div class="thumb-image"> <img src="img/<%=request.getParameter("image4Path")%>" data-imagezoom="true" class="img-responsive" alt="" /> </div>
 							</li> 
 						</ul>
 					</div>
@@ -395,7 +395,7 @@ description=<%=request.getParameter("description")%>
 &characteristic7=<%=request.getParameter("characteristic7")%>
 &rating=<%=request.getParameter("rating")%>
 &stockStatus=<%=request.getParameter("stockStatus")%>
-&imagePath=<%=request.getParameter("imagePath")%>
+&image1Path=<%=request.getParameter("image1Path")%>
 &price=<%=request.getParameter("price")%>
 &productId=<%=request.getParameter("productId")%>">Add
 									to cart</a>
