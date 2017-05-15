@@ -241,6 +241,7 @@ p.right {
                           	<c:forEach items="${requestScope.productCategory}" var="category">
 			                    <li><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
                             </c:forEach>
+                            <li class="active"><a><locale:message code="label.singleProduct"/></a></li>
                             <sec:authorize access="hasRole('user') or isAnonymous()">
                          		<li><a href="ViewItemsOfCart"><locale:message code="label.cart"/></a></li>
                          	</sec:authorize>

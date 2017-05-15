@@ -155,7 +155,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                 </div>
                 <div class="col-sm-6">
                        <c:forEach items="${requestScope.quantitiAndSum}" var="quantitiAndSum">
-                			<sec:authorize access="isAuthenticated()"> 
+                			<sec:authorize access="hasRole('user') or isAnonymous()"> 
 	                    		<div class="shopping-item">
 	                      			 <a href="ViewItemsOfCart.html"><locale:message code="label.cart"/> - <span class="cart-amunt"><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
 	                  		     </div>
@@ -183,7 +183,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 	                        <c:forEach items="${requestScope.productCategory}" var="category">
 				                <li class="<c:out value="${category.selectedItem}"></c:out>"><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
 				            </c:forEach>
-                            <sec:authorize access="isAuthenticated()">
+                            <sec:authorize access="hasRole('user') or isAnonymous()">
                          		<li><a href="ViewItemsOfCart"><locale:message code="label.cart"/></a></li>
                          	</sec:authorize>
                         <li class="active"><a href="contact"><locale:message code="label.contact"/></a></li>

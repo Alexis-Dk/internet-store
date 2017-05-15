@@ -177,7 +177,7 @@
                 </div>
                 <div class="col-sm-6">
                        <c:forEach items="${requestScope.quantitiAndSum}" var="quantitiAndSum">
-                			<sec:authorize access="hasRole('user')"> 
+                			<sec:authorize access="hasRole('user') or isAnonymous()"> 
 	                    		<div class="shopping-item">
 	                      			 <a href="ViewItemsOfCart.html"><locale:message code="label.cart"/> - <span class="cart-amunt"><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
 	                  		     </div>
@@ -229,7 +229,7 @@
 				            </c:forEach>
 			           	</sec:authorize>
 <%-- 	  				<sec:authorize access="isAnonymous() or hasRole('user')"> --%>			           		
-	  					<sec:authorize access="hasRole('user')">
+	  					<sec:authorize access="hasRole('user') or isAnonymous()">
                          	<li><a href="ViewItemsOfCart"><locale:message code="label.cart"/></a></li>
                         </sec:authorize>
                         <sec:authorize access="isAnonymous() or hasRole('user')">

@@ -582,7 +582,7 @@ public class MainController {
 			return RequestParamConstants.ERROR_PAGE;
 		}
 		try {
-			HttpMailer.sendLetter(HttpUtils.getEmail());
+			//HttpMailer.sendLetter(HttpUtils.getEmail());
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ADD_PURCHASE;

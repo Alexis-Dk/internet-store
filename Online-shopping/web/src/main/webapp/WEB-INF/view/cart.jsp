@@ -149,7 +149,7 @@
                 </div>
                 <div class="col-sm-6">
                        <c:forEach items="${requestScope.quantitiAndSum}" var="quantitiAndSum">
-                			<sec:authorize access="isAuthenticated()"> 
+                			<sec:authorize access="hasRole('user') or isAnonymous()"> 
 	                    		<div class="shopping-item">
 	                      			 <a href="ViewItemsOfCart.html"><locale:message code="label.cart"/> - <span class="cart-amunt"><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
 	                  		     </div>
@@ -177,7 +177,7 @@
                            	<c:forEach items="${requestScope.productCategory}" var="category">
 			                    <li><a href="product?category=<c:out value="${category.categoryId}"></c:out>"><c:out value="${category.categoryName}"> </c:out></a></li>
                             </c:forEach>
-                    		<sec:authorize access="isAuthenticated()">
+                    		<sec:authorize access="hasRole('user') or isAnonymous()">
                          		<li class="active"><a href="ViewItemsOfCart">Cart</a></li>
                          	</sec:authorize>
                         <li><a href="contact">Contact</a></li>
@@ -208,7 +208,7 @@
                     <div class="single-sidebar">
                     </div>   
                 </div> 
-                <sec:authorize access="isAuthenticated()">   
+                <sec:authorize access="hasRole('user') or isAnonymous()">   
                 <div class="col-md-8">
                     <div class="product-content-right">
                         <div class="woocommerce">
