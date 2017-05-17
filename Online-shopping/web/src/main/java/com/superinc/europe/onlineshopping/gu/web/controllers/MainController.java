@@ -53,6 +53,10 @@ import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpMailer;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamConstants;
 import com.superinc.europe.onlineshopping.su.entities.pojo.CategoryCharacteristic;
 import com.superinc.europe.onlineshopping.su.service.ICategoryCharacteristicService;
+import com.tunyk.currencyconverter.BankUaCom;
+import com.tunyk.currencyconverter.api.Currency;
+import com.tunyk.currencyconverter.api.CurrencyConverter;
+import com.tunyk.currencyconverter.api.CurrencyConverterException;
 
 /**
  * Created by Alexey Druzik on 11.09.2016.
@@ -122,6 +126,15 @@ public class MainController {
 			@RequestParam(value = RequestParamConstants.BOOL_CHARACTERISTIC_3, defaultValue = RequestParamConstants.FALSE) String boolCharacteristic3,
 			@RequestParam(value = RequestParamConstants.BOOL_CHARACTERISTIC_4, defaultValue = RequestParamConstants.FALSE) String boolCharacteristic4,
 			@RequestParam(value = RequestParamConstants.BOOL_CHARACTERISTIC_5, defaultValue = RequestParamConstants.FALSE) String boolCharacteristic5) {
+		try {
+			CurrencyConverter currencyConverter = new BankUaCom(Currency.USD, Currency.RUB);
+			float value = currencyConverter.convertCurrency((float) 100.0, Currency.USD, Currency.RUB);
+			System.out.println(value);
+		} catch (CurrencyConverterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		CustomUserParamDTO customUserParam = (CustomUserParamDTO) request.getSession().getAttribute("customUserParam");
 		Map<String, String[]> selectedItems = new HashMap<String, String[]>();
 		if (customUserParam != null) {
@@ -715,20 +728,8 @@ public class MainController {
 			model.addObject("msg", "You've been logged out successfully.");
 		}
 		model.setViewName("login");
-
 		return model;
 
 	}
 	
-//    @RequestMapping(value = "aaa", method = RequestMethod.GET)
-//    public String aaa() {
-//        try {
-//        	
-//    		} catch (Exception e) {
-//    			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
-//    			return RequestParamConstants.ERROR_PAGE;
-//    		}
-//		return RequestParamConstants.ERROR_PAGE;
-//	}
-
 }
