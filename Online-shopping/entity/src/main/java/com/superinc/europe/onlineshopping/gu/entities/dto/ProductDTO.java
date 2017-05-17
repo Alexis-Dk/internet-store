@@ -20,7 +20,7 @@ public class ProductDTO implements Serializable {
     @NotNull
     private DepartmentVO department;    
     
-    @Pattern(regexp = "^[-0-9a-zA-Zà-ÿÀ-ß]{3,50}$", message="Description has to has between 3 and 50 symbols")
+    @Pattern(regexp = "^[-0-9a-zA-Zï¿½-ï¿½ï¿½-ï¿½]{3,50}$", message="Description has to has between 3 and 50 symbols")
     private String description;
     
 //    @Pattern(regexp = "^[1-9a-zA-Z]{3,50}$", message="Color has to has between 3 and 50 symbols")
@@ -56,16 +56,16 @@ public class ProductDTO implements Serializable {
     private CharacteristicSevenVO characteristic7;
     
     @Range(min=1, max=1000000, message="intCharacteristic1 has to has between 1 and 1000000")
-    private int intCharacteristic1;
+    private double intCharacteristic1;
     
     @Range(min=1, max=1000000, message="intCharacteristic2 has to has between 1 and 1000000")
-    private int intCharacteristic2;
+    private double intCharacteristic2;
     
     @Range(min=1, max=1000000, message="intCharacteristic3 has to has between 1 and 1000000")
-    private int intCharacteristic3;
+    private double intCharacteristic3;
     
     @Range(min=1, max=1000000, message="intCharacteristic4 has to has between 1 and 1000000")
-    private int intCharacteristic4;
+    private double intCharacteristic4;
     
     @Range(min=1, max=1000000, message="intCharacteristic5 has to has between 1 and 1000000")
     private int intCharacteristic5;
@@ -216,35 +216,35 @@ public class ProductDTO implements Serializable {
 	public void setCharacteristic7(CharacteristicSevenVO characteristic7) {
 		this.characteristic7 = characteristic7;
 	}
-	public int getIntCharacteristic1() {
+	public double getIntCharacteristic1() {
 		return intCharacteristic1;
 	}
 
-	public void setIntCharacteristic1(int intCharacteristic1) {
+	public void setIntCharacteristic1(double intCharacteristic1) {
 		this.intCharacteristic1 = intCharacteristic1;
 	}
 
-	public int getIntCharacteristic2() {
+	public double getIntCharacteristic2() {
 		return intCharacteristic2;
 	}
 
-	public void setIntCharacteristic2(int intCharacteristic2) {
+	public void setIntCharacteristic2(double intCharacteristic2) {
 		this.intCharacteristic2 = intCharacteristic2;
 	}
 	
-	public int getIntCharacteristic3() {
+	public double getIntCharacteristic3() {
 		return intCharacteristic3;
 	}
 
-	public void setIntCharacteristic3(int intCharacteristic3) {
+	public void setIntCharacteristic3(double intCharacteristic3) {
 		this.intCharacteristic3 = intCharacteristic3;
 	}
 
-	public int getIntCharacteristic4() {
+	public double getIntCharacteristic4() {
 		return intCharacteristic4;
 	}
 
-	public void setIntCharacteristic4(int intCharacteristic4) {
+	public void setIntCharacteristic4(double intCharacteristic4) {
 		this.intCharacteristic4 = intCharacteristic4;
 	}
 

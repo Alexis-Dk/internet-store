@@ -414,13 +414,12 @@ else {
 
 				<div class="form-group">
 					<div class="col-xs-3">
-						<label for="intCharacteristicData2" class="control-label"><%= request.getAttribute("categoryCharacteristicInt1") %>:</label>
+						<label for="intCharacteristicData1" class="control-label"><%= request.getAttribute("categoryCharacteristicInt1") %>:</label>
 					</div>
 					<div class="col-xs-5">
 						<sf:errors path="intCharacteristic1" cssStyle="color: red" />
-						<sf:input id="intCharacteristicData2" path="intCharacteristic1" class="form-control"
-							type="text" name="intCharacteristic1"         
-							value="" />
+						<sf:input id="intCharacteristicData1" path="intCharacteristic1" class="form-control"
+							type="text" name="intCharacteristic1" onchange="this.value = parseFloat(this.value.replace(/,/g, '.'))" value="" />
 					</div>
 				</div>
 				
@@ -431,7 +430,7 @@ else {
 					<div class="col-xs-5">
 						<sf:errors path="intCharacteristic2" cssStyle="color: red" />
 						<sf:input id="intCharacteristicData2" path="intCharacteristic2" class="form-control"
-							type="text" name="intCharacteristic2" value="" />
+							type="text" name="intCharacteristic2" onchange="this.value = parseFloat(this.value.replace(/,/g, '.'))" value="" /> 
 					</div>
 				</div>
 
@@ -442,7 +441,7 @@ else {
 					<div class="col-xs-5">
 						<sf:errors path="intCharacteristic3" cssStyle="color: red" />
 						<sf:input id="intCharacteristicData3" path="intCharacteristic3" class="form-control"
-							type="text" name="intCharacteristic3" value="" />
+							type="text" name="intCharacteristic3" onchange="this.value = parseFloat(this.value.replace(/,/g, '.'))" value="" />
 					</div>
 				</div>
 
@@ -453,7 +452,7 @@ else {
 					<div class="col-xs-5">
 						<sf:errors path="intCharacteristic4" cssStyle="color: red" />
 						<sf:input id="intCharacteristicData4" path="intCharacteristic4" class="form-control"
-							type="text" name="intCharacteristic4" value="" />
+							type="text" name="intCharacteristic4" onchange="this.value = parseFloat(this.value.replace(/,/g, '.'))" value="" />
 					</div>
 				</div>
 
@@ -463,7 +462,7 @@ else {
 					</div>
 					<div class="col-xs-5">
 						<sf:errors path="intCharacteristic5" cssStyle="color: red" />
-						<sf:input id="intCharacteristicData5" path="intCharacteristic5" class="form-control"
+						<sf:input id="intCharacteristicData5" path="intCharacteristic5" class="form-control" onchange="this.value = Math.round(this.value.replace(/,/g, '.'))"
 							type="text" name="intCharacteristic5" value="" />
 					</div>
 				</div>

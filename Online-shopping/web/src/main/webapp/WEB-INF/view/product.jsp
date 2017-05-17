@@ -326,55 +326,55 @@
                           <div layout="row" ${categoryCharacteristicEnableIntStatus1}  layout-align="center" >
                            <md-input-container>
                              <label for="testInput1">Min</label>
-                             <input type="text" id="intCharacteristicMin1" ng-model="customUserParam.intCharacteristicMin1" md-autofocus="false" name="intCharacteristicMin1" ><!-- name="priceLower" -->
+                             <input type="text" id="intCharacteristicMin1" ng-model="customUserParam.intCharacteristicMin1" md-autofocus="false" name="intCharacteristicMin1" onchange="this.value = parseFloat(this.value.replace(/,/g, '.'))"><!-- name="priceLower" -->
                            </md-input-container>
                            <md-input-container >
                              <label for="testInput2">Max</label>
-                             <input type="text" id="intCharacteristicMax1" ng-model="customUserParam.intCharacteristicMax1" md-autofocus="false" name="intCharacteristicMax1">
+                             <input type="text" id="intCharacteristicMax1" ng-model="customUserParam.intCharacteristicMax1" md-autofocus="false" name="intCharacteristicMax1" onchange="this.value = parseFloat(this.value.replace(/,/g, '.'))">
                            </md-input-container>
                          </div>
                          <legend class="demo-legend" ${categoryCharacteristicEnableIntStatus2}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicIntLang2}</font></H5> </legend>
                          <div layout="row" ${categoryCharacteristicEnableIntStatus2} layout-align="center">
                             <md-input-container >
                                <label for="testInput" >Min</label>
-                               <input type="text" id="intCharacteristicMin2" ng-model="customUserParam.intCharacteristicMin2" md-autofocus="false" name="intCharacteristicMin2">
+                               <input type="text" id="intCharacteristicMin2" ng-model="customUserParam.intCharacteristicMin2" md-autofocus="false" name="intCharacteristicMin2" onchange="this.value = parseFloat(this.value.replace(/,/g, '.'))">
                              </md-input-container>
                              <md-input-container >
                                <label for="testInput" >Max</label>
-                               <input type="text" id="intCharacteristicMax2" ng-model="customUserParam.intCharacteristicMax2" md-autofocus="false" name="intCharacteristicMax2">
+                               <input type="text" id="intCharacteristicMax2" ng-model="customUserParam.intCharacteristicMax2" md-autofocus="false" name="intCharacteristicMax2" onchange="this.value = parseFloat(this.value.replace(/,/g, '.'))">
                              </md-input-container>
                            </div>
                            <legend class="demo-legend" ${categoryCharacteristicEnableIntStatus3}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicIntLang3}</font></H5> </legend>
                          <div layout="row" ${categoryCharacteristicEnableIntStatus3} layout-align="center">
                             <md-input-container >
                                <label for="testInput" >Min</label>
-                               <input type="text" id="intCharacteristicMin3" ng-model="customUserParam.intCharacteristicMin3" md-autofocus="false" name="intCharacteristicMin3">
+                               <input type="text" id="intCharacteristicMin3" ng-model="customUserParam.intCharacteristicMin3" md-autofocus="false" name="intCharacteristicMin3" onchange="this.value = parseFloat(this.value.replace(/,/g, '.'))">
                              </md-input-container>
                              <md-input-container >
                                <label for="testInput" >Max</label>
-                               <input type="text" id="intCharacteristicMax3" ng-model="customUserParam.intCharacteristicMax3" md-autofocus="false" name="intCharacteristicMax3">
+                               <input type="text" id="intCharacteristicMax3" ng-model="customUserParam.intCharacteristicMax3" md-autofocus="false" name="intCharacteristicMax3" onchange="this.value = parseFloat(this.value.replace(/,/g, '.'))">
                              </md-input-container>
                            </div>
                            <legend class="demo-legend" ${categoryCharacteristicEnableIntStatus4}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicIntLang4}</font></H5> </legend>
                          <div layout="row" ${categoryCharacteristicEnableIntStatus4} layout-align="center">
                             <md-input-container >
                                <label for="testInput" >Min</label>
-                               <input type="text" id="intCharacteristicMin4" ng-model="customUserParam.intCharacteristicMin4" md-autofocus="false" name="intCharacteristicMin4">
+                               <input type="text" id="intCharacteristicMin4" ng-model="customUserParam.intCharacteristicMin4" md-autofocus="false" name="intCharacteristicMin4" onchange="this.value = parseFloat(this.value.replace(/,/g, '.'))">
                              </md-input-container>
                              <md-input-container >
                                <label for="testInput" >Max</label>
-                               <input type="text" id="intCharacteristicMax4" ng-model="customUserParam.intCharacteristicMax4" md-autofocus="false" name="intCharacteristicMax4">
+                               <input type="text" id="intCharacteristicMax4" ng-model="customUserParam.intCharacteristicMax4" md-autofocus="false" name="intCharacteristicMax4" onchange="this.value = parseFloat(this.value.replace(/,/g, '.'))">
                              </md-input-container>
                            </div>
                          <legend class="demo-legend" ${categoryCharacteristicEnableIntStatus5}><H5 class="md-title"><font size="3" color=#000000>${categoryCharacteristicIntLang5}</font></H5> </legend>
                          <div layout="row" ${categoryCharacteristicEnableIntStatus5} layout-align="center">
                             <md-input-container >
                                <label for="testInput" >Min</label>
-                               <input type="text" id="intCharacteristicMin5" ng-model="customUserParam.intCharacteristicMin5" md-autofocus="false" name="intCharacteristicMin5">
+                               <input type="text" id="intCharacteristicMin5" ng-model="customUserParam.intCharacteristicMin5" md-autofocus="false" onchange="this.value = Math.round(this.value.replace(/,/g, '.'))" name="intCharacteristicMin5">
                              </md-input-container>
                              <md-input-container >
                                <label for="testInput" >Max</label>
-                               <input type="text" id="intCharacteristicMax5" ng-model="customUserParam.intCharacteristicMax5" md-autofocus="false" name="intCharacteristicMax5">
+                               <input type="text" id="intCharacteristicMax5" ng-model="customUserParam.intCharacteristicMax5" md-autofocus="false" onchange="this.value = Math.round(this.value.replace(/,/g, '.'))" name="intCharacteristicMax5">
                              </md-input-container>
                            </div>
                          </div>

@@ -864,12 +864,12 @@ public class AdminController {
 		ProductDTO productDTO = new ProductDTO();
 		List<Category> categoryList = null;
 		
-		int intCharacteristic1 = Integer.parseInt(request.getParameter("intCharacteristic1"));
-		int intCharacteristic2 = Integer.parseInt(request.getParameter("intCharacteristic2"));
-		int intCharacteristic3 = Integer.parseInt(request.getParameter("intCharacteristic3"));
-		int intCharacteristic4 = Integer.parseInt(request.getParameter("intCharacteristic4"));
-		int intCharacteristic5 = Integer.parseInt(request.getParameter("intCharacteristic5"));
-		int [] characteristicIntAdmin = new int[5];
+		double intCharacteristic1 = Double.parseDouble(request.getParameter("intCharacteristic1"));
+		double intCharacteristic2 = Double.parseDouble(request.getParameter("intCharacteristic2"));
+		double intCharacteristic3 = Double.parseDouble(request.getParameter("intCharacteristic3"));
+		double intCharacteristic4 = Double.parseDouble(request.getParameter("intCharacteristic4"));
+		double intCharacteristic5 = Double.parseDouble(request.getParameter("intCharacteristic5"));
+		double [] characteristicIntAdmin = new double[5];
 		characteristicIntAdmin[0] = intCharacteristic1;
 		characteristicIntAdmin[1] = intCharacteristic2;
 		characteristicIntAdmin[2] = intCharacteristic3;
