@@ -221,6 +221,12 @@
 			<version>1.9</version>
 		</dependency>
 
+		<dependency>
+		    <groupId>com.tunyk.currencyconverter</groupId>
+		    <artifactId>currency-converter-api</artifactId>
+		    <version>1.0</version>
+		</dependency>
+
 	</dependencies>
 
     <reporting>
