@@ -412,9 +412,9 @@ p.right {
                 <div class="col-md-8">
                     <div class="product-content-right">
                         <div class="product-breadcroumb">
-                            <a href="">Home</a>
-                            <a href="">Category Name</a>
-                            <a href="">Sony Smart TV - 2015</a>
+                            <a href="index">Home</a>
+                            <a href="product?category=${requestScope.category.categoryId}">${requestScope.category.categoryName}</a>
+                            <a href=""><%=request.getParameter("characteristic1")%> <%=request.getParameter("description")%></a>
                         </div>
                          
                         <div class="row">
@@ -469,7 +469,7 @@ p.right {
                                 <div class="product-inner">
                                     <h2 class="product-name"><%=request.getParameter("characteristic1")%> <%=request.getParameter("description")%></h2>
                                     <div class="product-inner-price">
-                                        <ins>$<%=request.getParameter("intCharacteristic1")%></ins> <del><%=request.getParameter("intCharacteristic1")%></del>
+                                       <ins>$<%=request.getParameter("intCharacteristic1")%></ins> <del><%=request.getParameter("intCharacteristic1")%></del>
                                     </div>    
                                     
                                     <form action="${context}/addNewProductToCart?" class="cart">
@@ -514,7 +514,7 @@ p.right {
 												to cart</a> --%>
                                     
                                     <div class="product-inner-category">
-                                        <p>Category: <a href="">Summer</a>. Tags: <a href="">awesome</a>, <a href="">best</a>, <a href="">sale</a>, <a href="">shoes</a>. </p>
+                                        <p>Category: <a href="product?category=${requestScope.category.categoryId}"> ${requestScope.category.categoryName}</a>. Tags: <a href="">awesome</a>, <a href="">best</a>, <a href="">sale</a>. </p>
                                     </div> 
                                     
                                     <div role="tabpanel">
