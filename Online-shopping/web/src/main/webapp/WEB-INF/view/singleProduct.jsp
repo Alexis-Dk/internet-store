@@ -416,7 +416,7 @@ p.right {
                             <a href="">Category Name</a>
                             <a href="">Sony Smart TV - 2015</a>
                         </div>
-                        
+                         
                         <div class="row">
                            	
                            <div class="col-sm-6">
