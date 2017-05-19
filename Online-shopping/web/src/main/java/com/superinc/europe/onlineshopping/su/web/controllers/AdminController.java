@@ -996,7 +996,7 @@ public class AdminController {
 		log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY + e);
 	}
 	model.addAttribute("categoryList", categoryList);
-	int [] characteristicIntAdmin = (int[]) request.getSession().getAttribute("characteristicIntAdmin");
+	double [] characteristicIntAdmin = (double[]) request.getSession().getAttribute("characteristicIntAdmin");
 	String[] characteristicStrAdmin = (String[]) request.getSession().getAttribute("characteristicStrAdmin");
 	int[] characteristicIdAdmin = (int[]) request.getSession().getAttribute("characteristicIdAdmin");
 	String [] characteristicBoolAdmin = (String[]) request.getSession().getAttribute("characteristicBoolAdmin");
@@ -1006,7 +1006,7 @@ public class AdminController {
 	productDTO.setIntCharacteristic2(characteristicIntAdmin[1]);
 	productDTO.setIntCharacteristic3(characteristicIntAdmin[2]);
 	productDTO.setIntCharacteristic4(characteristicIntAdmin[3]);
-	productDTO.setIntCharacteristic5(characteristicIntAdmin[4]);
+	productDTO.setIntCharacteristic5((int) characteristicIntAdmin[4]);
 	productDTO.setCharacteristic1(new CharacteristicOneVO(characteristicIdAdmin[0], characteristicStrAdmin[0]));
 	productDTO.setCharacteristic2(new CharacteristicTwoVO(characteristicIdAdmin[1], characteristicStrAdmin[1]));
 	productDTO.setCharacteristic3(new CharacteristicThreeVO(characteristicIdAdmin[2], characteristicStrAdmin[2]));

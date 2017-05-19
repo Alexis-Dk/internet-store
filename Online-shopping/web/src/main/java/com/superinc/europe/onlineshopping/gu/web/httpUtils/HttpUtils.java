@@ -197,7 +197,7 @@ public class HttpUtils {
 
 		List<QuantityAndSum> quantityAndSum = null;
 		List<OrderedProduct> list = null;
-		int sumFinal = SUM_FINAL_VALUE;
+		double sumFinal = SUM_FINAL_VALUE;
 
 		if (checkBucketExistOrEmpty(session) == true) {
 			sumFinal = getSum(session);
@@ -210,8 +210,8 @@ public class HttpUtils {
 		return quantityAndSum;
 	}
 
-	public static int getSum(HttpSession session) {
-		int sum = SUM_VALUE;
+	public static double getSum(HttpSession session) {
+		double sum = SUM_VALUE;
 		if (checkBucketExistOrEmpty(session) == true) {
 			List<OrderedProduct> listGoodsOrders = (List<OrderedProduct>) session
 					.getAttribute(RequestParamConstants.BUCKET);
@@ -224,7 +224,7 @@ public class HttpUtils {
 	}
 
 	public static List<QuantityAndSum> addAndGetQuantitySum(HttpSession session,
-			List<OrderedProduct> list, int sumFinal) {
+			List<OrderedProduct> list, double sumFinal) {
 		ArrayList<QuantityAndSum> quantityAndSum = new ArrayList<QuantityAndSum>();
 		quantityAndSum.add(new QuantityAndSum(list.size(), sumFinal));
 		return quantityAndSum;
@@ -242,7 +242,7 @@ public class HttpUtils {
 		return quantityAndSum;
 	}
 
-	static void setSumToSession(HttpSession session, int sum) {
+	static void setSumToSession(HttpSession session, double sum) {
 		session.setAttribute(RequestParamConstants.TOTAL_COST, sum);
 	}
 

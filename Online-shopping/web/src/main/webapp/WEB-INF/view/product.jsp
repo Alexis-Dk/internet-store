@@ -152,6 +152,12 @@
                 <div class="col-md-4">
                     <div class="header-right">
                         <ul class="list-unstyled list-inline">
+                           <li class="dropdown dropdown-small">
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key"><locale:message code="label.currency"/> :</span><span class="value">USD </span><b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">${currentCurrency}</a></li>
+                                </ul>
+                            </li>                 
                             <li class="dropdown dropdown-small">
                                 <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key"></span><span class="letter">${pageContext.response.locale} </span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
@@ -582,7 +588,7 @@
 &image4Path=<c:out value="${product.image4Path}"></c:out>
 &image5Path=<c:out value="${product.image5Path}"></c:out>
 &image6Path=<c:out value="${product.image6Path}"></c:out>
-&price=<c:out value="${product.intCharacteristic1}"></c:out>
+&price=<c:out value="${product.price}"></c:out>
 &productId=<c:out value="${product.productId}"></c:out>
 &categoryId=<%= request.getSession().getAttribute("categoryId") %>">        
                         <img src="img/<c:out value="${product.image1Path}"></c:out>" alt=""></a></sec:authorize>
@@ -615,7 +621,7 @@
 &image4Path=<c:out value="${product.image4Path}"></c:out>
 &image5Path=<c:out value="${product.image5Path}"></c:out>
 &image6Path=<c:out value="${product.image6Path}"></c:out>
-&price=<c:out value="${product.intCharacteristic1}"></c:out>
+&price=<c:out value="${product.price}"></c:out>
 &productId=<c:out value="${product.productId}"></c:out>
 &categoryId=<%= request.getSession().getAttribute("categoryId") %>">        
                         <img src="img/<c:out value="${product.image1Path}"></c:out>" alt=""></a></sec:authorize>
@@ -623,9 +629,9 @@
                         </div>
 							<h2><a><c:out value="${product.name}"></c:out> <c:out value="${product.description}"></c:out></a></h2>
 						<div class="product-carousel-price">
-                            <ins>$<c:out value="${product.intCharacteristic1}"></c:out></ins> <del>$<c:out value="${product.intCharacteristic1}"></c:out></del>
+                            <ins>$<c:out value="${product.price}"></c:out></ins> <del>$<c:out value="${product.price}"></c:out></del>
                         </div>  
-                        <sec:authorize access="hasRole('user')">  
+                        <sec:authorize access="hasRole('user') or isAnonymous()">  
 	                        <div class="product-option-shop">
 									<a class="add_to_cart_button" data-quantity="1"
 										data-product_sku="" data-product_id="70" rel="nofollow"

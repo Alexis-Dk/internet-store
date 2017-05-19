@@ -8,7 +8,7 @@ public class Bucket {
 	
 	private String imagePath;
 	
-	private int price;
+	private double price;
 	
 	private String description;
 	
@@ -17,7 +17,7 @@ public class Bucket {
 	public Bucket() {
 	}
 
-	public Bucket(int productId, String name, String imagePath, int price,
+	public Bucket(int productId, String name, String imagePath, double price,
 			String description, int quantity) {
 		this.productId = productId;
 		this.name = name;
@@ -51,11 +51,11 @@ public class Bucket {
 		this.imagePath = imagePath;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 

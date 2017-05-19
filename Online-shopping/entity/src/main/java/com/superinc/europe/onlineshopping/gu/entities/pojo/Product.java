@@ -51,7 +51,7 @@ public class Product implements Serializable {
 	private String image6Path;
 	
 	@Column(name="price")
-	private int price;
+	private double price;
 	
 	@Column(name="oldprice")
 	private int oldprice;
@@ -138,7 +138,7 @@ public class Product implements Serializable {
 		this.productId = productId;
 	}
 	
-	public Product(int productId, String name, String image1Path, int price, String description) {
+	public Product(int productId, String name, String image1Path, double price, String description) {
 		this.productId = productId;
 		this.name = name;
 		this.image1Path = image1Path;
@@ -146,14 +146,14 @@ public class Product implements Serializable {
 		this.description = description;
 	}
 	
-	public Product(String name, String image1Path, int price, String description) {
+	public Product(String name, String image1Path, double price, String description) {
 		this.name = name;
 		this.image1Path = image1Path;
 		this.price = price;
 		this.description = description;
 	}
 	
-	public Product(Category category, String name, String imagePath, int price, String description) {
+	public Product(Category category, String name, String imagePath, double price, String description) {
 		this.name = name;
 		this.image1Path = imagePath;
 		this.price = price;
@@ -161,7 +161,7 @@ public class Product implements Serializable {
 	}
 	
 	public Product(int productId, Category categoryFk, String name,
-			String image_path, int price, int oldprice, String description,
+			String image_path, double price, int oldprice, String description,
 			String characteristic1, String characteristic2,
 			String characteristic3, String characteristic4,
 			String characteristic5, String characteristic6,String characteristic7, int characteristic8,
@@ -191,7 +191,7 @@ public class Product implements Serializable {
 	}
 	
 	public Product(Category categoryFk, String name,
-			String image_path, int price, int oldprice, String description,
+			String image_path, double price, int oldprice, String description,
 			String characteristic1, String characteristic2,
 			String characteristic3, String characteristic4,
 			String characteristic5, String characteristic6, String characteristic7, int characteristic8,
@@ -220,7 +220,7 @@ public class Product implements Serializable {
 	}
 
 	public Product(int productId, Category categoryFk, String name,
-			String imagePath, int price, int oldprice, String description,
+			String imagePath, double price, int oldprice, String description,
 			String characteristic1, String characteristic2,
 			String characteristic3, String characteristic4,
 			String characteristic5, String characteristic6,
@@ -333,11 +333,11 @@ public class Product implements Serializable {
 		this.image1Path = image1Path;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 

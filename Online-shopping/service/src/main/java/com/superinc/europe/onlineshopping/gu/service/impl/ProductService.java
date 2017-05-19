@@ -14,10 +14,12 @@ import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
 import com.superinc.europe.onlineshopping.gu.entities.dto.CustomUserParamDTO;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
+import com.superinc.europe.onlineshopping.gu.service.ICurrencyService;
 import com.superinc.europe.onlineshopping.gu.service.IProductService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ErrorAddingPoductServiceException;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
+import com.tunyk.currencyconverter.api.CurrencyConverterException;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
@@ -31,6 +33,9 @@ public class ProductService implements IProductService<Product> {
 	private static final int NUMBER_OF_START_PAGE = 1;
 	
 	private static final String PRODUCT = "product";
+
+    @Autowired
+    private ICurrencyService iCurrencyService;
 	
 	@Autowired
 	private IDaoProduct daoProduct;
@@ -196,12 +201,22 @@ public class ProductService implements IProductService<Product> {
 			try {
 			products = (List<Product>) daoProduct.getProduct(
 					session.createCriteria(Product.class, PRODUCT), customUserParam, Integer.parseInt(userNumberOfPage), category, selectedItems);
+			filterPrice(products);
 			} catch (Exception e) {
 				session.getTransaction().rollback();
 				logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
 				throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
 			}
 			return products;
+	}
+	
+	public List<Product> filterPrice(List<Product> list) throws CurrencyConverterException {
+		for (Product product : list) {
+			double ob = product.getIntCharacteristic1();
+			double value = iCurrencyService.getCurrentCurrencyValue(ob);
+			product.setPrice((Math.round(value * 100))/100.0);
+		}
+		return list;
 	}
 	
 	/**

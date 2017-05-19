@@ -6,13 +6,16 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
+import com.superinc.europe.onlineshopping.gu.service.ICurrencyService;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpUtils;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamConstants;
+import com.tunyk.currencyconverter.api.CurrencyConverterException;
 
 /**
  * Created by Alexey Druzik on 11.09.2016.
@@ -22,6 +25,9 @@ public class RequestInterceptor implements HandlerInterceptor {
 
 	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
+	
+    @Autowired
+    private ICurrencyService iCurrencyService;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request,
@@ -276,9 +282,14 @@ public class RequestInterceptor implements HandlerInterceptor {
 	}
 	
 	public List<QuantityAndSum> getQuantityAndSum(List<OrderedProduct> list, HttpServletRequest request){
-		int sumFinal = 0;
+		double sumFinal = 0;
 		if (HttpUtils.checkBucketExistOrEmpty(request.getSession()) == true){
 			sumFinal = HttpUtils.getSum(request.getSession());
+			try {
+				sumFinal = iCurrencyService.getCurrentCurrencyValueRounding(sumFinal);
+			} catch (CurrencyConverterException e) {
+				e.printStackTrace();
+			}
 			list  = HttpUtils.getBucketFromSession(request.getSession());
 			return HttpUtils.addAndGetQuantitySum(request.getSession(), list, sumFinal);
 			}

@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component;
 public class QuantityAndSum {
 	
     private int quantity; 
-    private int sum;
+    private double sum;
     
 	public QuantityAndSum() {
 	}
 
-	public QuantityAndSum(int quantity, int sum) {
+	public QuantityAndSum(int quantity, double sum) {
 		this.quantity = quantity;
 		this.sum = sum;
 	}
@@ -26,11 +26,11 @@ public class QuantityAndSum {
 		this.quantity = quantity;
 	}
 
-	public int getSum() {
+	public double getSum() {
 		return sum;
 	}
 
-	public void setSum(int sum) {
+	public void setSum(double sum) {
 		this.sum = sum;
 	}
 

@@ -353,6 +353,7 @@ p.right {
     </div>
 
 	<div class="single-product-area">
+<<<<<<< Updated upstream
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
@@ -752,6 +753,354 @@ p.right {
         </div>
     </div>
 
+=======
+	        <div class="new-product">
+				<div class="col-md-5 zoom-grid">
+					<div class="flexslider" >
+						<ul class="slides">
+							<li data-thumb="img/<%=request.getParameter("image1Path")%>">
+								<div class="thumb-image"> <img src="img/<%=request.getParameter("image1Path")%>" data-imagezoom="true" class="img-responsive" alt="" /> </div>
+							</li>
+							<li data-thumb="img/<%=request.getParameter("image2Path")%>">
+								<div class="thumb-image"> <img src="img/<%=request.getParameter("image2Path")%>" data-imagezoom="true" class="img-responsive" alt="" /> </div>
+							</li>
+							<li data-thumb="img/<%=request.getParameter("image3Path")%>">
+								<div class="thumb-image"> <img src="img/<%=request.getParameter("image3Path")%>" data-imagezoom="true" class="img-responsive" alt="" /> </div>
+							</li> 
+							<li data-thumb="img/<%=request.getParameter("image4Path")%>">
+								<div class="thumb-image"> <img src="img/<%=request.getParameter("image4Path")%>" data-imagezoom="true" class="img-responsive" alt="" /> </div>
+							</li> 
+						</ul>
+					</div>
+
+				</div>
+				<div class="col-md-7 dress-info">
+					<div class="dress-name">
+						<h3><%=request.getParameter("characteristic1")%> <%=request.getParameter("description")%></h3>
+						<span>$<%=request.getParameter("price")%></span>
+						<div class="clearfix"></div>
+						<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo</p>
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p>
+					</div>
+					<div class="span span1" ${categoryCharacteristicEnableIntStatus1}>
+						<p class="left">${categoryCharacteristicIntLang1}</p>
+						<p class="right"><%=request.getParameter("intCharacteristic1")%></p>
+						<div class="clearfix"></div>
+					</div>
+					<div class="span span2" ${categoryCharacteristicEnableIntStatus2}>
+						<p class="left">${categoryCharacteristicIntLang2}</p>
+						<p class="right"><%=request.getParameter("intCharacteristic2")%></p>
+						<div class="clearfix"></div>
+					</div>
+					<div class="span span3" ${categoryCharacteristicEnableIntStatus3}>
+						<p class="left">${categoryCharacteristicIntLang3}</p>
+						<p class="right"><%=request.getParameter("intCharacteristic3")%></p>
+						<div class="clearfix"></div>
+					</div>
+					<div class="span span2" ${categoryCharacteristicEnableIntStatus4}>
+						<p class="left">${categoryCharacteristicIntLang4}</p>
+						<p class="right"><%=request.getParameter("intCharacteristic4")%></p>
+						<div class="clearfix"></div>
+					</div>
+					<div class="span span3" ${categoryCharacteristicEnableIntStatus5}>
+						<p class="left">${categoryCharacteristicIntLang5}</p>
+						<p class="right"><%=request.getParameter("intCharacteristic5")%></p>
+						<div class="clearfix"></div>
+					</div>
+					
+					<div class="span span2" ${categoryCharacteristicEnableStrStatus1}>
+						<p class="left">${categoryCharacteristicStrLang1}</p>
+						<p class="right"><%=request.getParameter("characteristic1")%></p>
+						<div class="clearfix"></div>
+					</div>
+					<div class="span span3" ${categoryCharacteristicEnableStrStatus2}>
+						<p class="left">${categoryCharacteristicStrLang2}</p>
+						<p class="right"><%=request.getParameter("characteristic2")%></p>
+						<div class="clearfix"></div>
+					</div>
+					<div class="span span2" ${categoryCharacteristicEnableStrStatus3}>
+						<p class="left">${categoryCharacteristicStrLang3}</p>
+						<p class="right"><%=request.getParameter("characteristic3")%></p>
+						<div class="clearfix"></div>
+					</div>
+					<div class="span span3" ${categoryCharacteristicEnableStrStatus4}>
+						<p class="left">${categoryCharacteristicStrLang4}</p>
+						<p class="right"><%=request.getParameter("characteristic4")%></p>
+						<div class="clearfix"></div>
+					</div>
+					<div class="span span2" ${categoryCharacteristicEnableStrStatus5}>
+						<p class="left">${categoryCharacteristicStrLang5}</p>
+						<p class="right"><%=request.getParameter("characteristic5")%></p>
+						<div class="clearfix"></div>
+					</div>
+					<div class="span span3" ${categoryCharacteristicEnableStrStatus6}>
+						<p class="left">${categoryCharacteristicStrLang6}</p>
+						<p class="right"><%=request.getParameter("characteristic6")%></p>
+						<div class="clearfix"></div>
+					</div>
+					<div class="span span2" ${categoryCharacteristicEnableStrStatus7}>
+						<p class="left">${categoryCharacteristicStrLang7}</p>
+						<p class="right"><%=request.getParameter("characteristic7")%></p>
+						<div class="clearfix"></div>
+					</div>
+					
+					<div class="span span3" ${categoryCharacteristicEnableBoolStatus1}>
+						<p class="left">${categoryCharacteristicBoolLang1}</p>
+						<p class="right"><%=request.getParameter("boolCharacteristic1")%></p>
+						<div class="clearfix"></div>
+					</div>
+					<div class="span span2" ${categoryCharacteristicEnableBoolStatus2}>
+						<p class="left">${categoryCharacteristicBoolLang2}</p>
+						<p class="right"><%=request.getParameter("boolCharacteristic2")%></p>
+						<div class="clearfix"></div>
+					</div>
+					<div class="span span3" ${categoryCharacteristicEnableBoolStatus3}>
+						<p class="left">${categoryCharacteristicBoolLang3}</p>
+						<p class="right"><%=request.getParameter("boolCharacteristic3")%></p>
+						<div class="clearfix"></div>
+					</div>
+					<div class="span span2" ${categoryCharacteristicEnableBoolStatus4}>
+						<p class="left">${categoryCharacteristicBoolLang4}</p>
+						<p class="right"><%=request.getParameter("boolCharacteristic4")%></p>
+						<div class="clearfix"></div>
+					</div>
+					<div class="span span3" ${categoryCharacteristicEnableBoolStatus5}>
+						<p class="left">${categoryCharacteristicBoolLang5}</p>
+						<p class="right"><%=request.getParameter("boolCharacteristic5")%></p>
+						<div class="clearfix"></div>
+					</div>
+					
+					<sec:authorize access="hasRole('user') or isAnonymous()">
+							<div class="product-option-shop">
+								<a class="add_to_cart_button" data-quantity="1"
+									data-product_sku="" data-product_id="70" rel="nofollow"
+									href="${context}/addNewProductToCart?
+description=<%=request.getParameter("description")%>
+&name=<%=request.getParameter("name")%>
+&characteristic1=<%=request.getParameter("characteristic1")%>
+&characteristic2=<%=request.getParameter("characteristic2")%>
+&characteristic3=<%=request.getParameter("characteristic3")%>
+&characteristic4=<%=request.getParameter("characteristic4")%>
+&characteristic6=<%=request.getParameter("characteristic6")%>
+&characteristic7=<%=request.getParameter("characteristic7")%>
+&rating=<%=request.getParameter("rating")%>
+&stockStatus=<%=request.getParameter("stockStatus")%>
+&image1Path=<%=request.getParameter("image1Path")%>
+&price=<%=request.getParameter("price")%>
+&productId=<%=request.getParameter("productId")%>">Add
+									to cart</a>
+							</div>
+						</sec:authorize>
+					
+					
+<!-- 					<div class="span span2">
+						<p class="left">MADE IN</p>
+						<p class="right">China</p>
+						<div class="clearfix"></div>
+					</div>
+					<div class="span span3">
+						<p class="left">COLOR</p>
+						<p class="right">White</p>
+						<div class="clearfix"></div>
+					</div>
+					<div class="span span4">
+						<p class="left">SIZE</p>
+						<p class="right"><span class="selection-box"><select class="domains valid" name="domains">
+										   <option>M</option>
+										   <option>L</option>
+										   <option>XL</option>
+										   <option>FS</option>
+										   <option>S</option>
+									   </select></span></p>
+						<div class="clearfix"></div>
+					</div> -->
+<!-- 					<div class="purchase">
+						<a href="#">Purchase Now</a>
+						<div class="social-icons">
+							<ul>
+								<li><a class="facebook1" href="#"></a></li>
+								<li><a class="twitter1" href="#"></a></li>
+								<li><a class="googleplus1" href="#"></a></li>
+							</ul>
+						</div>
+						<div class="clearfix"></div>
+					</div> -->
+				<script src="<c:url value="/js/imagezoom.js" />"></script>
+					<!-- FlexSlider -->
+					<script defer src="<c:url value="/js/jquery.flexslider.js" />"></script>
+					<script>
+						// Can also be used with $(document).ready()
+						$(window).load(function() {
+						  $('.flexslider').flexslider({
+							animation: "slide",
+							controlNav: "thumbnails"
+						  });
+						});
+					</script>
+				</div>
+			</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<div class="zigzag-bottom"></div>
+<%-- 		<div class="container">
+			<img src="img/<%=request.getParameter("imagePath")%>" alt="">
+			<table class="table">
+				<tr ${categoryCharacteristicEnableIntStatus1}>
+					<td><p class="user-menuMy">${categoryCharacteristicIntLang1}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("intCharacteristic1")%></h3></td>
+				</tr>
+				<tr ${categoryCharacteristicEnableIntStatus2}>
+					<td><p class="user-menuMy">${categoryCharacteristicIntLang2}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("intCharacteristic2")%></h3></td>
+				</tr>
+				<tr ${categoryCharacteristicEnableIntStatus3}>
+					<td><p class="user-menuMy">${categoryCharacteristicIntLang3}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("intCharacteristic3")%></h3></td>
+				</tr>
+				<tr ${categoryCharacteristicEnableIntStatus4}>
+					<td><p class="user-menuMy">${categoryCharacteristicIntLang4}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("intCharacteristic4")%></h3></td>
+				</tr>
+				<tr ${categoryCharacteristicEnableIntStatus5}>
+					<td><p class="user-menuMy">${categoryCharacteristicIntLang5}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("intCharacteristic5")%></h3></td>
+				</tr>
+				<tr>
+					<td><p class="user-menuMy">Model</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("description")%></h3></td>
+				</tr>
+				<tr ${categoryCharacteristicEnableStrStatus1}>
+					<td><p class="user-menuMy">${categoryCharacteristicStrLang1}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("characteristic1")%></h3></td>
+				</tr>
+				<tr ${categoryCharacteristicEnableStrStatus2}>
+					<td><p class="user-menuMy">${categoryCharacteristicStr2.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("characteristic2")%></h3></td>
+				</tr>
+				<tr ${categoryCharacteristicEnableStrStatus3}>
+					<td><p class="user-menuMy">${categoryCharacteristicStr3.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("characteristic3")%></h3></td>
+				</tr>
+				<tr ${categoryCharacteristicEnableStrStatus4}>
+					<td><p class="user-menuMy">${categoryCharacteristicStr4.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("characteristic4")%></h3></td>
+				</tr>
+				<tr ${categoryCharacteristicEnableStrStatus5}>
+					<td><p class="user-menuMy">${categoryCharacteristicStr5.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("characteristic5")%></h3></td>
+				</tr>
+				<tr ${categoryCharacteristicEnableStrStatus6}>
+					<td><p class="user-menuMy">${categoryCharacteristicStr6.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("characteristic6")%></h3></td>
+				</tr>
+				<tr ${categoryCharacteristicEnableStrStatus7}>
+					<td><p class="user-menuMy">${categoryCharacteristicStr7.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("characteristic7")%></h3></td>
+				</tr>
+				<tr ${categoryCharacteristicEnableBoolStatus1}>
+					<td><p class="user-menuMy">${categoryCharacteristicBool1.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("boolCharacteristic1")%></h3></td>
+				</tr>
+				<tr ${categoryCharacteristicEnableBoolStatus2}>
+					<td><p class="user-menuMy">${categoryCharacteristicBool2.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("boolCharacteristic2")%></h3></td>
+				</tr>
+				<tr ${categoryCharacteristicEnableBoolStatus3}>
+					<td><p class="user-menuMy">${categoryCharacteristicBool3.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("boolCharacteristic3")%></h3></td>
+				</tr>
+				<tr ${categoryCharacteristicEnableBoolStatus4}>
+					<td><p class="user-menuMy">${categoryCharacteristicBool4.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("boolCharacteristic4")%></h3></td>
+				</tr>
+				<tr ${categoryCharacteristicEnableBoolStatus5}>
+					<td><p class="user-menuMy">${categoryCharacteristicBool5.categoryCharacteristicNameLanguageOne}</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("boolCharacteristic5")%></h3></td>
+				</tr>
+ 				<tr>
+					<td><p class="user-menuMy">Stock availability</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("stockStatus")%></h3></td>
+				</tr>
+				<tr>
+					<td><p class="user-menuMy">Rating</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("rating")%></h3></td>
+				</tr>
+				<tr>
+					<td><p class="user-menuMy">Price</p></td>
+					<td><p class="user-menuMy" />
+						<h3><%=request.getParameter("price")%></h3></td>
+				</tr>
+			</table>
+
+			<div class="row">
+				<div class="col-md-3 col-sm-6">
+					<div class="single-shop-product">
+						<div class="product-upper"></div>
+						<h2>
+							<a href=""></a>
+						</h2>
+						<sec:authorize access="isAuthenticated()">
+							<div class="product-option-shop">
+								<a class="add_to_cart_button" data-quantity="1"
+									data-product_sku="" data-product_id="70" rel="nofollow"
+									href="${context}/addNewProductToCart?
+description=<%=request.getParameter("description")%>
+&name=<%=request.getParameter("name")%>
+&characteristic1=<%=request.getParameter("characteristic1")%>
+&characteristic2=<%=request.getParameter("characteristic2")%>
+&characteristic3=<%=request.getParameter("characteristic3")%>
+&characteristic4=<%=request.getParameter("characteristic4")%>
+&characteristic6=<%=request.getParameter("characteristic6")%>
+&characteristic7=<%=request.getParameter("characteristic7")%>
+&rating=<%=request.getParameter("rating")%>
+&stockStatus=<%=request.getParameter("stockStatus")%>
+&imagePath=<%=request.getParameter("imagePath")%>
+&price=<%=request.getParameter("price")%>
+&productId=<%=request.getParameter("productId")%>">Add
+									to cart</a>
+							</div>
+						</sec:authorize>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12"></div>
+			</div>
+		</div> --%>
+	</div>
+>>>>>>> Stashed changes
 
 	<div class="footer-top-area">
         <div class="zigzag-bottom"></div>

@@ -34,16 +34,19 @@ import com.superinc.europe.onlineshopping.gu.entities.dto.CategoryDTO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.CustomUserParamDTO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.UserDTO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.Category;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.User;
+import com.superinc.europe.onlineshopping.gu.service.ICurrencyService;
 import com.superinc.europe.onlineshopping.gu.service.IOrderedProductService;
 import com.superinc.europe.onlineshopping.gu.service.IProductService;
 import com.superinc.europe.onlineshopping.gu.service.INavaigationService;
 import com.superinc.europe.onlineshopping.gu.service.IOrderService;
 import com.superinc.europe.onlineshopping.gu.service.IProductCategoryService;
 import com.superinc.europe.onlineshopping.gu.service.IUsersService;
+import com.superinc.europe.onlineshopping.gu.service.exception.ErrorGettingCategoryServiceException;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 import com.superinc.europe.onlineshopping.gu.web.utils.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestConstants;
@@ -98,6 +101,9 @@ public class MainController {
     @Autowired
     private ICategoryCharacteristicService iCategoryCharacteristicService;
     
+    @Autowired
+    private ICurrencyService iCurrencyService;
+    
 //    @PreAuthorize("hasAnyRole('user')")
 //    @PreAuthorize("isAnonymous()")
 	@RequestMapping(value = RequestConstants.PRODUCT, method = RequestMethod.GET, params=RequestParamConstants.CATEGORY)
@@ -126,15 +132,6 @@ public class MainController {
 			@RequestParam(value = RequestParamConstants.BOOL_CHARACTERISTIC_3, defaultValue = RequestParamConstants.FALSE) String boolCharacteristic3,
 			@RequestParam(value = RequestParamConstants.BOOL_CHARACTERISTIC_4, defaultValue = RequestParamConstants.FALSE) String boolCharacteristic4,
 			@RequestParam(value = RequestParamConstants.BOOL_CHARACTERISTIC_5, defaultValue = RequestParamConstants.FALSE) String boolCharacteristic5) {
-		try {
-			CurrencyConverter currencyConverter = new BankUaCom(Currency.USD, Currency.RUB);
-			float value = currencyConverter.convertCurrency((float) 100.0, Currency.USD, Currency.RUB);
-			System.out.println(value);
-		} catch (CurrencyConverterException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		CustomUserParamDTO customUserParam = (CustomUserParamDTO) request.getSession().getAttribute("customUserParam");
 		Map<String, String[]> selectedItems = new HashMap<String, String[]>();
 		if (customUserParam != null) {
@@ -182,6 +179,7 @@ public class MainController {
 			request.getSession().setAttribute("customUserParam", customUserParam);
 		}
 		try {
+			model.put("currentCurrency", iCurrencyService.getCurrentCurrency());
 			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
 					navigationService.getDataToPaginationWidget(productService.getQuantityOfPage()));
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
@@ -412,6 +410,23 @@ public class MainController {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
+		try {
+			String categoryId = request.getParameter("categoryId");
+			List<CategoryDTO> list = productCategoryService.getAllProductCategories(categoryId);
+			for (CategoryDTO categoryDTO : list) {
+				if (categoryDTO.getSelectedItem().equals("active")) {
+					categoryDTO.setSelectedItem("selected");
+					HttpUtils.setCategory(new Category(categoryDTO.getCategoryId(), categoryDTO.getCategoryName()));
+				}
+			}
+			Category category = HttpUtils.getCatrgory();
+			model.put("category", category);
+		} catch (ErrorGettingCategoryServiceException e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY
+					+ e);
+		}
+
+
 		return RequestParamConstants.SINGLE_PRODUCT_PAGE;
 	}
 	
@@ -461,7 +476,7 @@ public class MainController {
 			@RequestParam(value = RequestParamConstants.IMAGE_PATH) String imagePath) {
 
 		Product product = new Product(Integer.parseInt(productId), name, imagePath,
-				Integer.parseInt(price), description);
+				Double.parseDouble(price), description);
 		OrderedProduct goodsOrders = new OrderedProduct(new Order(
 				RequestParamConstants.VALUE_ONE), product,
 				RequestParamConstants.VALUE_ONE);
