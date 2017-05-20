@@ -9,6 +9,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.ICurrencyDao;
+import com.superinc.europe.onlineshopping.gu.entities.dto.Bucket;
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
 import com.superinc.europe.onlineshopping.gu.service.ICurrencyService;
 import com.tunyk.currencyconverter.api.CurrencyConverterException;
@@ -49,6 +50,17 @@ public class CurrencyService implements ICurrencyService{
 	}
 	
 	@Override
+	public String getCurrentCurrencySymbol() {
+		Locale currentLocale = getLocale();
+		if (currentLocale.toString().equals("fr")) {
+			return "€";
+		} else if (currentLocale.toString().equals("ru")){
+			return "p.";
+		}
+		return "$";
+	}
+	
+	@Override
 	public List<QuantityAndSum> quantitySumWidgetFilter(List<QuantityAndSum> ob) throws CurrencyConverterException {
 		List<QuantityAndSum> list = new ArrayList<QuantityAndSum>(ob);
 		for (QuantityAndSum quantityAndSum : list) {
@@ -62,6 +74,19 @@ public class CurrencyService implements ICurrencyService{
 	Locale getLocale () {
 		Locale locale = LocaleContextHolder.getLocale();
 		return locale;
+	}
+
+	/**
+	 * Return updated price with current currency
+	 */
+	@Override
+	public List<Bucket> updateCurrencyInBucket(List<Bucket> bucket) throws CurrencyConverterException {
+		List<Bucket> updatedBucket = new ArrayList<Bucket>(bucket);
+		for (Bucket item : updatedBucket) {
+			double updatedPrice = getCurrentCurrencyValueRounding(item.getPrice());
+			item.setPrice(updatedPrice);
+		}
+		return updatedBucket;
 	}
 	
 }

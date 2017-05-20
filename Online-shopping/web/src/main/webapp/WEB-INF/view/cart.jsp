@@ -116,7 +116,7 @@
                         <ul class="list-unstyled list-inline">
                         
                             <li class="dropdown dropdown-small">
-                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key"><locale:message code="label.currency"/> :</span><span class="value"><c:out value="${currentCurrency}"></c:out> </span><b class="caret"></b></a>
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key"><locale:message code="label.currency"/>:</span><span class="value"><c:out value="${currentCurrency}"></c:out> </span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">${currentCurrency}</a></li>
                                 </ul>
@@ -150,7 +150,7 @@
                        <c:forEach items="${requestScope.quantitiAndSum}" var="quantitiAndSum">
                 			<sec:authorize access="hasRole('user') or isAnonymous()"> 
 	                    		<div class="shopping-item">
-	                      			 <a href="ViewItemsOfCart.html"><locale:message code="label.cart"/> - <span class="cart-amunt"><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
+	                      			 <a href="ViewItemsOfCart.html"><locale:message code="label.cart"/> - <span class="cart-amunt">${currentCurrencySymbol}<c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
 	                  		     </div>
                     		</sec:authorize>
                     	</c:forEach> 
@@ -240,7 +240,7 @@
                                             </td>
 
                                             <td class="product-price">
-                                                <span class="amount"><c:out value="${cart.price}"></c:out></span> 
+                                                <span class="amount">${currentCurrencySymbol}<c:out value="${cart.price}"></c:out></span> 
                                             </td>
 
                                            <td class="product-quantity">

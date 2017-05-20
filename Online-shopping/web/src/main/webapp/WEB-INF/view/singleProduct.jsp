@@ -278,7 +278,7 @@ p.right {
                         <ul class="list-unstyled list-inline">
                         
                             <li class="dropdown dropdown-small">
-                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key"><locale:message code="label.currency"/> :</span><span class="value"><c:out value="${currentCurrency}"></c:out> </span><b class="caret"></b></a>
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key"><locale:message code="label.currency"/>:</span><span class="value"><c:out value="${currentCurrency}"></c:out> </span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">${currentCurrency}</a></li>
                                 </ul>
@@ -311,7 +311,7 @@ p.right {
                        <c:forEach items="${requestScope.quantitiAndSum}" var="quantitiAndSum">
                 			<sec:authorize access="hasRole('user') or isAnonymous()"> 
 	                    		<div class="shopping-item">
-	                      			 <a href="ViewItemsOfCart.html"><locale:message code="label.cart"/> - <span class="cart-amunt"><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
+	                      			 <a href="ViewItemsOfCart.html"><locale:message code="label.cart"/> - <span class="cart-amunt"><c:out value="${currentCurrencySymbol}"></c:out><c:out value="${quantitiAndSum.sum}"></c:out></span> <i class="fa fa-shopping-cart"></i> <span class="product-count"><c:out value="${quantitiAndSum.quantity}"></c:out></span></a>
 	                  		     </div>
                     		</sec:authorize>
                     	</c:forEach> 
@@ -477,7 +477,7 @@ p.right {
                                 <div class="product-inner">
                                     <h2 class="product-name"><%=request.getParameter("characteristic1")%> <%=request.getParameter("description")%></h2>
                                     <div class="product-inner-price">
-                                       <ins>$<%=request.getParameter("price")%></ins> <del><%=request.getParameter("price")%></del>
+                                       <ins><c:out value="${currentCurrencySymbol}"></c:out><%=request.getParameter("price")%></ins> <del><c:out value="${currentCurrencySymbol}"></c:out><%=request.getParameter("price")%></del>
                                     </div>    
                                     
                                     <form action="${context}/addNewProductToCart?" class="cart">

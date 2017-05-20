@@ -180,6 +180,7 @@ public class MainController {
 		}
 		try {
 			model.put("currentCurrency", iCurrencyService.getCurrentCurrency());
+			model.put("currentCurrencySymbol", iCurrencyService.getCurrentCurrencySymbol());
 			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
 					navigationService.getDataToPaginationWidget(productService.getQuantityOfPage()));
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
@@ -438,6 +439,7 @@ public class MainController {
 					+ e);
 		}
 		model.put("currentCurrency", iCurrencyService.getCurrentCurrency());
+		model.put("currentCurrencySymbol", iCurrencyService.getCurrentCurrencySymbol());
 		return RequestParamConstants.SINGLE_PRODUCT_PAGE;
 	}
 	
@@ -553,8 +555,9 @@ public String addNewGoodsToCart2(ModelMap model, HttpServletRequest request, Htt
 		System.out.println(list);
 		List<QuantityAndSum> updatedList = getUpdatedQuantityAndSumWidget(request);
 		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
-		model.put(RequestParamConstants.BUCKET_WIDGET,
-				HttpUtils.getBucket(session));
+		List<Bucket> bucket = HttpUtils.getBucket(session);
+		List<Bucket> updatedBucket = iCurrencyService.updateCurrencyInBucket(bucket);
+		model.put(RequestParamConstants.BUCKET_WIDGET, updatedBucket);
 		model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET,
 				productCategoryService.getNoActiveProductCategories());
 	} catch (Exception e) {
@@ -562,6 +565,7 @@ public String addNewGoodsToCart2(ModelMap model, HttpServletRequest request, Htt
 		return RequestParamConstants.ERROR_PAGE;
 	}
 	model.put("currentCurrency", iCurrencyService.getCurrentCurrency());
+	model.put("currentCurrencySymbol", iCurrencyService.getCurrentCurrencySymbol());
 	return RequestParamConstants.BUCKET_WIDGET;
 }
 	
@@ -617,8 +621,10 @@ public String addNewGoodsToCart2(ModelMap model, HttpServletRequest request, Htt
 			System.out.println(list);
 			List<QuantityAndSum> updatedList = getUpdatedQuantityAndSumWidget(request);
 			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
-			model.put(RequestParamConstants.BUCKET_WIDGET,
-					HttpUtils.getBucket(session));
+//			model.put(RequestParamConstants.BUCKET_WIDGET, HttpUtils.getBucket(session));
+			List<Bucket> bucket = HttpUtils.getBucket(session);
+			List<Bucket> updatedBucket = iCurrencyService.updateCurrencyInBucket(bucket);
+			model.put(RequestParamConstants.BUCKET_WIDGET, updatedBucket);
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET,
 					productCategoryService.getNoActiveProductCategories());
 		} catch (Exception e) {
@@ -626,6 +632,7 @@ public String addNewGoodsToCart2(ModelMap model, HttpServletRequest request, Htt
 			return RequestParamConstants.ERROR_PAGE;
 		}
 		model.put("currentCurrency", iCurrencyService.getCurrentCurrency());
+		model.put("currentCurrencySymbol", iCurrencyService.getCurrentCurrencySymbol());
 		return RequestParamConstants.BUCKET_WIDGET;
 	}
 
@@ -713,6 +720,7 @@ public String addNewGoodsToCart2(ModelMap model, HttpServletRequest request, Htt
 			return RequestParamConstants.ERROR_PAGE;
 		}
 		model.put("currentCurrency", iCurrencyService.getCurrentCurrency());
+		model.put("currentCurrencySymbol", iCurrencyService.getCurrentCurrencySymbol());
 		return RequestParamConstants.CONTACT;
 	}
 
@@ -724,6 +732,7 @@ public String addNewGoodsToCart2(ModelMap model, HttpServletRequest request, Htt
 			modelAndView.addObject(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
 			modelAndView.addObject(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getNoActiveProductCategories());
 			modelAndView.addObject("currentCurrency", iCurrencyService.getCurrentCurrency());
+			modelAndView.addObject("currentCurrencySymbol", iCurrencyService.getCurrentCurrencySymbol());
 			modelAndView.setViewName(RequestParamConstants.INDEX);		
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
