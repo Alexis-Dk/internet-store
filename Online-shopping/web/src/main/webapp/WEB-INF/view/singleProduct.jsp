@@ -469,7 +469,7 @@ p.right {
                                 <div class="product-inner">
                                     <h2 class="product-name"><%=request.getParameter("characteristic1")%> <%=request.getParameter("description")%></h2>
                                     <div class="product-inner-price">
-                                       <ins>$<%=request.getParameter("intCharacteristic1")%></ins> <del><%=request.getParameter("intCharacteristic1")%></del>
+                                       <ins>$<%=request.getParameter("price")%></ins> <del><%=request.getParameter("price")%></del>
                                     </div>    
                                     
                                     <form action="${context}/addNewProductToCart?" class="cart">

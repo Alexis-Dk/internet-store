@@ -438,6 +438,40 @@ public class MainController {
 					+ e);
 		}
 
+		return RequestParamConstants.SINGLE_PRODUCT_PAGE;
+	}
+	
+	@RequestMapping(value = "/singleProduct2", method = RequestMethod.GET)
+	public String singlePage2(HttpServletRequest request, ModelMap model, String productId) {
+		String categoryId = "1";
+		try {
+			Product product = productService.getProductById(Integer.parseInt(productId));
+			request.setAttribute("price", product.getPrice());
+			List<QuantityAndSum> updatedList = getUpdatedQuantityAndSumWidget(request);
+			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
+			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET,
+					productCategoryService.getNoActiveProductCategories());
+			categoryId = String.valueOf(product.getCategoryFk().getCategoryId());
+			initModel(model, categoryId);
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
+			return RequestParamConstants.ERROR_PAGE;
+		}
+		try {
+			//String categoryId = request.getParameter("categoryId");
+			List<CategoryDTO> list = productCategoryService.getAllProductCategories(categoryId);
+			for (CategoryDTO categoryDTO : list) {
+				if (categoryDTO.getSelectedItem().equals("active")) {
+					categoryDTO.setSelectedItem("selected");
+					HttpUtils.setCategory(new Category(categoryDTO.getCategoryId(), categoryDTO.getCategoryName()));
+				}
+			}
+			Category category = HttpUtils.getCatrgory();
+			model.put("category", category);
+		} catch (ErrorGettingCategoryServiceException e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY
+					+ e);
+		}
 
 		return RequestParamConstants.SINGLE_PRODUCT_PAGE;
 	}

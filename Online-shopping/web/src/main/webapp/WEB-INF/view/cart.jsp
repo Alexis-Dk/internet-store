@@ -233,7 +233,7 @@
                                             </td>
 
                                             <td class="product-thumbnail">
-                                                <a href="single-product.html"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="img/<c:out value="${cart.imagePath}"></c:out>"></a>
+                                                <a href="singleProduct2?productId=<c:out value="${cart.productId}"></c:out>"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="img/<c:out value="${cart.imagePath}"></c:out>"></a>
                                             </td>
 
                                             <td class="product-name">
