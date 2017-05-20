@@ -276,6 +276,14 @@ p.right {
                 <div class="col-md-4">
                     <div class="header-right">
                         <ul class="list-unstyled list-inline">
+                        
+                            <li class="dropdown dropdown-small">
+                                <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key"><locale:message code="label.currency"/> :</span><span class="value"><c:out value="${currentCurrency}"></c:out> </span><b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">${currentCurrency}</a></li>
+                                </ul>
+                            </li> 
+                        
                             <li class="dropdown dropdown-small">
                                 <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="#"><span class="key"></span><span class="letter">${pageContext.response.locale} </span><b class="caret"></b></a>
                                 <ul class="dropdown-menu">
@@ -473,9 +481,9 @@ p.right {
                                     </div>    
                                     
                                     <form action="${context}/addNewProductToCart?" class="cart">
-<!--                                         <div class="quantity">
+                                         <div class="quantity">
                                             <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-                                        </div> -->
+                                        </div> 
                                         <input hidden="true" name = "description" value="<%=request.getParameter("description")%>">
                                         <!-- <input hidden="true" name = "" value=""> -->
                                         <input hidden="true" name = "productId" value="<%=request.getParameter("productId")%>">

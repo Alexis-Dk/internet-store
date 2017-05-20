@@ -437,7 +437,7 @@ public class MainController {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER_WHEN_GETTING_CATEGORY
 					+ e);
 		}
-
+		model.put("currentCurrency", iCurrencyService.getCurrentCurrency());
 		return RequestParamConstants.SINGLE_PRODUCT_PAGE;
 	}
 	
@@ -540,6 +540,7 @@ public class MainController {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
+		model.put("currentCurrency", iCurrencyService.getCurrentCurrency());
 		//return RequestParamConstants.BUCKET_WIDGET;
 		//return "redirect:/addNewProductToCart2"+RequestParamConstants.PRODUCT_ID + "=" + productId + "&" ;
 		return "redirect:/redirectedCart";
@@ -560,6 +561,7 @@ public String addNewGoodsToCart2(ModelMap model, HttpServletRequest request, Htt
 		log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 		return RequestParamConstants.ERROR_PAGE;
 	}
+	model.put("currentCurrency", iCurrencyService.getCurrentCurrency());
 	return RequestParamConstants.BUCKET_WIDGET;
 }
 	
@@ -623,6 +625,7 @@ public String addNewGoodsToCart2(ModelMap model, HttpServletRequest request, Htt
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
+		model.put("currentCurrency", iCurrencyService.getCurrentCurrency());
 		return RequestParamConstants.BUCKET_WIDGET;
 	}
 
@@ -643,7 +646,8 @@ public String addNewGoodsToCart2(ModelMap model, HttpServletRequest request, Htt
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
-		return RequestParamConstants.BUCKET_WIDGET;
+		//return RequestParamConstants.BUCKET_WIDGET;
+		return "redirect:/redirectedCart";
 	}
 
 	@SuppressWarnings("unchecked")
@@ -708,6 +712,7 @@ public String addNewGoodsToCart2(ModelMap model, HttpServletRequest request, Htt
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
+		model.put("currentCurrency", iCurrencyService.getCurrentCurrency());
 		return RequestParamConstants.CONTACT;
 	}
 
@@ -718,7 +723,7 @@ public String addNewGoodsToCart2(ModelMap model, HttpServletRequest request, Htt
 			List<QuantityAndSum> updatedList = getUpdatedQuantityAndSumWidget(request);
 			modelAndView.addObject(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
 			modelAndView.addObject(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getNoActiveProductCategories());
-			
+			modelAndView.addObject("currentCurrency", iCurrencyService.getCurrentCurrency());
 			modelAndView.setViewName(RequestParamConstants.INDEX);		
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
