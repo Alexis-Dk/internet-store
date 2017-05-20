@@ -285,11 +285,6 @@ public class RequestInterceptor implements HandlerInterceptor {
 		double sumFinal = 0;
 		if (HttpUtils.checkBucketExistOrEmpty(request.getSession()) == true){
 			sumFinal = HttpUtils.getSum(request.getSession());
-			try {
-				sumFinal = iCurrencyService.getCurrentCurrencyValueRounding(sumFinal);
-			} catch (CurrencyConverterException e) {
-				e.printStackTrace();
-			}
 			list  = HttpUtils.getBucketFromSession(request.getSession());
 			return HttpUtils.addAndGetQuantitySum(request.getSession(), list, sumFinal);
 			}

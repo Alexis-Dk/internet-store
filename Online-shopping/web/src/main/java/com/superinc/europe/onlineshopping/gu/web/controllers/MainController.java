@@ -195,11 +195,23 @@ public class MainController {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
-		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
-				request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+		List<QuantityAndSum> updatedList = getUpdatedQuantityAndSumWidget(request);
+		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
 		return RequestParamConstants.PRODUCT;
 	}
 
+	private List<QuantityAndSum> getUpdatedQuantityAndSumWidget(HttpServletRequest request) {
+		List<QuantityAndSum> list = (List<QuantityAndSum>) request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET);
+		List<QuantityAndSum> updatedList = null;
+		try {
+			updatedList = iCurrencyService.quantitySumWidgetFilter(list);
+		} catch (CurrencyConverterException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return updatedList;
+	}
+	
 	@RequestMapping(value = "/productAdmin", method = RequestMethod.GET, params=RequestParamConstants.CATEGORY)
 	public String setProductPageAdmin(HttpServletRequest request, ModelMap model,
 			@RequestParam(value = RequestParamConstants.INT_CHAR_MIN_1, defaultValue = RequestParamConstants.EMPTY) String intCharacteristicMin1,
@@ -346,8 +358,8 @@ public class MainController {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
-		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
-				request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+		List<QuantityAndSum> updatedList = getUpdatedQuantityAndSumWidget(request);
+		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
 		return RequestParamConstants.PRODUCT_ALL;
 	}
 	
@@ -401,8 +413,8 @@ public class MainController {
 	@RequestMapping(value = RequestConstants.SINGLE_PRODUCT, method = RequestMethod.GET)
 	public String setHelloPage(HttpServletRequest request, ModelMap model) {
 		try {
-			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, request
-					.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+			List<QuantityAndSum> updatedList = getUpdatedQuantityAndSumWidget(request);
+			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET,
 					productCategoryService.getNoActiveProductCategories());
 			initModel(model, request.getParameter("categoryId"));
@@ -486,17 +498,37 @@ public class MainController {
 		try {
 			model.put(RequestParamConstants.BUCKET_WIDGET,
 					HttpUtils.getBucket(session));
-			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
-					HttpUtils.getListQuantityAndSum(session));
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET,
 					productCategoryService.getNoActiveProductCategories());
+			List<QuantityAndSum> updatedList = getUpdatedQuantityAndSumWidget(request);
+			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
-		return RequestParamConstants.BUCKET_WIDGET;
+		//return RequestParamConstants.BUCKET_WIDGET;
+		//return "redirect:/addNewProductToCart2"+RequestParamConstants.PRODUCT_ID + "=" + productId + "&" ;
+		return "redirect:/redirectedCart";
 	}
 
+@RequestMapping(path = "/redirectedCart", method = RequestMethod.GET)
+public String addNewGoodsToCart2(ModelMap model, HttpServletRequest request, HttpSession session){
+	try {
+		List<Bucket> list = HttpUtils.getBucket(session);
+		System.out.println(list);
+		List<QuantityAndSum> updatedList = getUpdatedQuantityAndSumWidget(request);
+		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
+		model.put(RequestParamConstants.BUCKET_WIDGET,
+				HttpUtils.getBucket(session));
+		model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET,
+				productCategoryService.getNoActiveProductCategories());
+	} catch (Exception e) {
+		log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
+		return RequestParamConstants.ERROR_PAGE;
+	}
+	return RequestParamConstants.BUCKET_WIDGET;
+}
+	
 	@RequestMapping(value = RequestParamConstants.INCREASE_QUANTITY, method = RequestMethod.GET)
 	public String increaseQuantity(HttpSession session, ModelMap model,
 			HttpServletRequest request,
@@ -507,15 +539,16 @@ public class MainController {
 		try {
 			model.put(RequestParamConstants.BUCKET_WIDGET,
 					HttpUtils.getBucket(session));
-			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
-					HttpUtils.getListQuantityAndSum(session));
+			List<QuantityAndSum> updatedList = getUpdatedQuantityAndSumWidget(request);
+			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET,
 					productCategoryService.getNoActiveProductCategories());
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
-		return RequestParamConstants.BUCKET_WIDGET;
+//		return RequestParamConstants.BUCKET_WIDGET;
+		return "redirect:/redirectedCart";
 	}
 
 	@RequestMapping(value = RequestParamConstants.DECREASE_QUANTITY, method = RequestMethod.GET)
@@ -528,15 +561,16 @@ public class MainController {
 		try {
 			model.put(RequestParamConstants.BUCKET_WIDGET,
 					HttpUtils.getBucket(session));
-			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
-					HttpUtils.getListQuantityAndSum(session));
+			List<QuantityAndSum> updatedList = getUpdatedQuantityAndSumWidget(request);
+			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET,
 					productCategoryService.getNoActiveProductCategories());
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
 		}
-		return RequestParamConstants.BUCKET_WIDGET;
+//		return RequestParamConstants.BUCKET_WIDGET;
+		return "redirect:/redirectedCart";
 	}
 
 	@RequestMapping(value = RequestConstants.VIEW_ITEMS_OF_CART, method = RequestMethod.GET)
@@ -545,8 +579,8 @@ public class MainController {
 		try {
 			List<Bucket> list = HttpUtils.getBucket(session);
 			System.out.println(list);
-			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, request
-					.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+			List<QuantityAndSum> updatedList = getUpdatedQuantityAndSumWidget(request);
+			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
 			model.put(RequestParamConstants.BUCKET_WIDGET,
 					HttpUtils.getBucket(session));
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET,
@@ -567,8 +601,8 @@ public class MainController {
 					HttpUtils.removeFromBucket(session, deleteByDescription));
 			model.put(RequestParamConstants.BUCKET_WIDGET,
 					HttpUtils.getBucket(session));
-			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
-					HttpUtils.getListQuantityAndSum(session));
+			List<QuantityAndSum> updatedList = getUpdatedQuantityAndSumWidget(request);
+			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET,
 					productCategoryService.getNoActiveProductCategories());
 		} catch (Exception e) {
@@ -599,9 +633,8 @@ public class MainController {
 						.getAttribute(RequestParamConstants.BUCKET));
 				model.put(RequestParamConstants.BUCKET_WIDGET,
 						HttpUtils.cleanAndReturnBucket(session));
-				model.put(
-						RequestParamConstants.QUANTITY_SUM_WIDGET,
-						request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+				List<QuantityAndSum> updatedList = getUpdatedQuantityAndSumWidget(request);
+				model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
 				model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET,
 						productCategoryService.getNoActiveProductCategories());
 			}
@@ -633,8 +666,8 @@ public class MainController {
 	public String setContact(HttpServletRequest request, HttpSession session,
 			ModelMap model) {
 		try {
-			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, request
-					.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+			List<QuantityAndSum> updatedList = getUpdatedQuantityAndSumWidget(request);
+			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET,
 					productCategoryService.getNoActiveProductCategories());
 		} catch (Exception e) {
@@ -648,8 +681,8 @@ public class MainController {
 	public ModelAndView senIndexPage(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
-			modelAndView.addObject(RequestParamConstants.QUANTITY_SUM_WIDGET,
-							request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+			List<QuantityAndSum> updatedList = getUpdatedQuantityAndSumWidget(request);
+			modelAndView.addObject(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
 			modelAndView.addObject(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getNoActiveProductCategories());
 			
 			modelAndView.setViewName(RequestParamConstants.INDEX);		

@@ -18,9 +18,11 @@ import com.superinc.europe.onlineshopping.gu.entities.dto.CustomUserParamDTO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Category;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
+import com.superinc.europe.onlineshopping.gu.service.ICurrencyService;
 import com.superinc.europe.onlineshopping.gu.service.IProductCategoryService;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamConstants;
 import com.superinc.europe.onlineshopping.su.entities.pojo.Characteristic;
+import com.tunyk.currencyconverter.api.CurrencyConverterException;
 
 /**
  * Created by Alexey Druzik on 11.09.2016.
