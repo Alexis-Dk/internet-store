@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
+import com.superinc.europe.onlineshopping.gu.service.exception.ErrorAddingPoductServiceException;
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 import com.superinc.europe.onlineshopping.su.dao.orm.hibernate.IDaoCharacteristic;
@@ -27,7 +28,7 @@ import com.superinc.europe.onlineshopping.su.service.ICharacteristicService;
 
 @Service
 @Transactional
-public class CharacteristicService implements ICharacteristicService {
+public class CharacteristicService implements ICharacteristicService<Characteristic> {
 	
     private static Logger log = Logger.getLogger(CharacteristicService.class);
 
@@ -112,6 +113,43 @@ public class CharacteristicService implements ICharacteristicService {
 			log.error(ExceptionMessages.ERROR_IN_ORDER_SERVICE + e);
 			throw new ServiceException(ExceptionMessages.ERROR_IN_ORDER_SERVICE, e);
 		}
+	}
+
+	@Override
+	public Serializable add(Characteristic ob)
+			throws ErrorAddingPoductServiceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void update(Characteristic ob) throws ServiceException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void get(int id) throws ServiceException {
+		Characteristic characteristic = (Characteristic) iDaoCharacteristic.get(id);
+		System.out.println(characteristic);
+	}
+
+	@Override
+	public Characteristic getCharacteristicById(int id) throws ServiceException {
+		Characteristic characteristic = (Characteristic) iDaoCharacteristic.get(id);
+		return characteristic;
+	}
+	
+	@Override
+	public void delete(int id) throws ServiceException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Characteristic> getAll() throws ServiceException {
+		List<Characteristic> list = iDaoCharacteristic.getAll();
+		return list;
 	}
 
 }

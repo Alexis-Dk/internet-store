@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.superinc.europe.onlineshopping.gu.entities.dto.CharacteristicFourVO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.CharacteristicOneVO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.CharacteristicSevenVO;
 import com.superinc.europe.onlineshopping.gu.entities.dto.CharacteristicTwoVO;
@@ -34,6 +35,11 @@ public class CharacteristicSevenEditor extends PropertyEditorSupport {
 
 		List<Characteristic> list = getCharacteristicSevenList();
 		for (Characteristic characteristic : list) {
+			if (!characteristic.getCategoryCharacteristicFk().isCategoryCharacteristicEnable()){
+				ob = new CharacteristicSevenVO(characteristic.getCharacteristicId(), "Disabled");
+				break;
+			}
+			
 			if (Integer.parseInt(id)==characteristic.getCharacteristicId()){
 				ob =  new CharacteristicSevenVO(characteristic.getCharacteristicId(), characteristic.getCharacteristicName());
 				break;

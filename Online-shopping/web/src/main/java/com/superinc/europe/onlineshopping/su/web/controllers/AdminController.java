@@ -255,8 +255,14 @@ public class AdminController {
 	model.addAttribute("categoryList", categoryList);
 	model.put(RequestParamConstants.PRODUCT_DTO, productDTO);
 	Category category = HttpUtils.getCatrgory();
+	categoryId = Integer.toString(category.getCategoryId());
 	try {
-		List<CategoryDTO> list = productCategoryService.getAllProductCategories(Integer.toString(category.getCategoryId()));
+		initModel(productDTO, categoryId);
+	} catch (ServiceException e1) {
+		e1.printStackTrace();
+	}
+	try {
+		List<CategoryDTO> list = productCategoryService.getAllProductCategories(categoryId);
 		for (CategoryDTO categoryDTO : list) {
 			if(categoryDTO.getSelectedItem().equals("active")){
 				categoryDTO.setSelectedItem("selected");
@@ -798,7 +804,7 @@ public class AdminController {
 		try {
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
 			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, category);
-			iCategoryCharacteristicService.updateCategoryCharacteristic(new CategoryCharacteristic(Integer.parseInt(categoryCharacteristicId), categoryCharacteristicName, lang1, lang2, lang3, Boolean.parseBoolean(optionEnable)));
+			iCategoryCharacteristicService.mergeCategoryCharacteristic(new CategoryCharacteristic(Integer.parseInt(categoryCharacteristicId), categoryCharacteristicName, lang1, lang2, lang3, Boolean.parseBoolean(optionEnable)));
 			model.put("characteristics1", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "1")));
 			model.put("characteristics2", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "2")));
 			model.put("characteristics3", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "3")));
@@ -825,19 +831,19 @@ public class AdminController {
 		for (int i = 0; i < itemsStr.size(); i++) {
 			model.put("categoryCharacteristicStr" + String.valueOf(i + 1), itemsStr.get(i));
 			if (itemsStr.get(i).isCategoryCharacteristicEnable() == true){
-				model.put("categoryCharacteristicEnableStrStatus" + String.valueOf(i + 1), "checked");
+				model.put("categoryCharacteristicEnableStrStatus" + String.valueOf(i + 1), "style='display: none;'");
 			}
 		}
 		for (int i = 0; i < itemsInt.size(); i++) {
 			model.put("categoryCharacteristicInt" + String.valueOf(i + 1), itemsInt.get(i));
 			if (itemsInt.get(i).isCategoryCharacteristicEnable() == true){
-				model.put("categoryCharacteristicEnableIntStatus" + String.valueOf(i + 1), "checked");
+				model.put("categoryCharacteristicEnableIntStatus" + String.valueOf(i + 1), "style='display: none;'");
 			}
 		}
 		for (int i = 0; i < itemsBool.size(); i++) {
 			model.put("categoryCharacteristicBool" + String.valueOf(i + 1), itemsBool.get(i));
 			if (itemsBool.get(i).isCategoryCharacteristicEnable() == true){
-				model.put("categoryCharacteristicEnableBoolStatus" + String.valueOf(i + 1), "checked");
+				model.put("categoryCharacteristicEnableBoolStatus" + String.valueOf(i + 1), "style='display: none;'");
 			}
 		}
 	}
@@ -849,16 +855,90 @@ public class AdminController {
 		List<CategoryCharacteristic> itemsBool = iCategoryCharacteristicService.getCategoryCharacteristicBoolNames(productCategoryService.getCategoryById(category).getCategoryName());
 		for (int i = 0; i < itemsStr.size(); i++) {
 			request.setAttribute("categoryCharacteristicStr" + String.valueOf(i + 1), itemsStr.get(i).getCategoryCharacteristicNameLanguageOne());
+			if (itemsStr.get(i).isCategoryCharacteristicEnable() == false){
+				request.setAttribute("categoryCharacteristicEnableStrStatus" + String.valueOf(i + 1), "style='display: none;'");
+			}
 		}
 		for (int i = 0; i < itemsInt.size(); i++) {
 			request.setAttribute("categoryCharacteristicInt" + String.valueOf(i + 1), itemsInt.get(i).getCategoryCharacteristicNameLanguageOne());
+			if (itemsInt.get(i).isCategoryCharacteristicEnable() == false){
+				request.setAttribute("categoryCharacteristicEnableIntStatus" + String.valueOf(i + 1), "style='display: none;'");
+			}
 		}
 		for (int i = 0; i < itemsBool.size(); i++) {
 			request.setAttribute("categoryCharacteristicBool" + String.valueOf(i + 1), itemsBool.get(i).getCategoryCharacteristicNameLanguageOne());
+			if (itemsBool.get(i).isCategoryCharacteristicEnable() == false){
+				request.setAttribute("categoryCharacteristicEnableBoolStatus" + String.valueOf(i + 1), "style='display: none;'");
+			}
 		}
 	}
 	
 
+	private void initModel(ProductDTO productDTO, String category)
+			throws ServiceException {
+		String categoryName = productCategoryService.getCategoryById(Integer.parseInt(category)).getCategoryName();
+		List<CategoryCharacteristic> itemsInt = iCategoryCharacteristicService.getCategoryCharacteristicIntNames(categoryName);
+		List<CategoryCharacteristic> itemsBool = iCategoryCharacteristicService.getCategoryCharacteristicBoolNames(categoryName);
+		
+		for (int i = 0; i < itemsInt.size(); i++) {
+			if (itemsInt.get(i).isCategoryCharacteristicEnable() == false){
+				if (itemsInt.get(i).getCategoryCharacteristicName().equals(categoryName + "_INT_1")){
+					productDTO.setIntCharacteristic1(1);
+				}
+			}
+			if (itemsInt.get(i).isCategoryCharacteristicEnable() == false){
+				if (itemsInt.get(i).getCategoryCharacteristicName().equals(categoryName + "_INT_2")){
+					productDTO.setIntCharacteristic2(1);
+				}
+			}
+			if (itemsInt.get(i).isCategoryCharacteristicEnable() == false){
+				if (itemsInt.get(i).getCategoryCharacteristicName().equals(categoryName + "_INT_3")){
+					productDTO.setIntCharacteristic3(1);
+				}
+			}
+			if (itemsInt.get(i).isCategoryCharacteristicEnable() == false){
+				if (itemsInt.get(i).getCategoryCharacteristicName().equals(categoryName + "_INT_4")){
+					productDTO.setIntCharacteristic4(1);
+				}
+			}
+			if (itemsInt.get(i).isCategoryCharacteristicEnable() == false){
+				if (itemsInt.get(i).getCategoryCharacteristicName().equals(categoryName + "_INT_5")){
+					productDTO.setIntCharacteristic5(1);
+				}
+			}
+			
+			for (int j = 0; j < itemsBool.size(); j++) {
+				if (itemsBool.get(j).isCategoryCharacteristicEnable() == false){
+					if (itemsBool.get(j).getCategoryCharacteristicName().equals(categoryName + "_BOOL_1")){
+						productDTO.setBoolCharacteristic1("False");
+					}
+				}
+				if (itemsBool.get(j).isCategoryCharacteristicEnable() == false){
+					if (itemsBool.get(j).getCategoryCharacteristicName().equals(categoryName + "_BOOL_2")){
+						productDTO.setBoolCharacteristic2("False");
+					}
+				}
+				if (itemsBool.get(j).isCategoryCharacteristicEnable() == false){
+					if (itemsBool.get(j).getCategoryCharacteristicName().equals(categoryName + "_BOOL_3")){
+						productDTO.setBoolCharacteristic3("False");
+					}
+				}
+				if (itemsBool.get(j).isCategoryCharacteristicEnable() == false){
+					if (itemsBool.get(j).getCategoryCharacteristicName().equals(categoryName + "_BOOL_4")){
+						productDTO.setBoolCharacteristic4("False");
+					}
+				}
+				if (itemsBool.get(j).isCategoryCharacteristicEnable() == false){
+					if (itemsBool.get(j).getCategoryCharacteristicName().equals(categoryName + "_BOOL_5")){
+						productDTO.setBoolCharacteristic5("False");
+					}
+				}
+			}
+			
+		}
+	
+	}
+	
 	@RequestMapping(value = "/singleProductAdmin", method = RequestMethod.GET)
 	public String updatePoductPageAdmin(HttpServletRequest request, ModelMap model) {
 		ProductDTO productDTO = new ProductDTO();
@@ -1021,10 +1101,17 @@ public class AdminController {
 	productDTO.setBoolCharacteristic5(characteristicBoolAdmin[4]);
 	productDTO.setDescription(productDescription);
 
-	model.put(RequestParamConstants.PRODUCT_DTO, productDTO);
 	Category category = HttpUtils.getCatrgory();
+	categoryId = Integer.toString(category.getCategoryId());
 	try {
-		List<CategoryDTO> list = productCategoryService.getAllProductCategories(Integer.toString(category.getCategoryId()));
+		initModel(productDTO, categoryId);
+	} catch (ServiceException e1) {
+		e1.printStackTrace();
+	}
+	
+	model.put(RequestParamConstants.PRODUCT_DTO, productDTO);
+	try {
+		List<CategoryDTO> list = productCategoryService.getAllProductCategories(categoryId);
 		for (CategoryDTO categoryDTO : list) {
 			if(categoryDTO.getSelectedItem().equals("active")){
 				categoryDTO.setSelectedItem("selected");

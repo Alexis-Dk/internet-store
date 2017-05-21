@@ -34,6 +34,12 @@ public class CharacteristicFiveEditor extends PropertyEditorSupport {
 
 		List<Characteristic> list = getCharacteristicFiveList();
 		for (Characteristic characteristic : list) {
+			
+			if (!characteristic.getCategoryCharacteristicFk().isCategoryCharacteristicEnable()){
+				ob = new CharacteristicFiveVO(characteristic.getCharacteristicId(), "Disabled");
+				break;
+			}
+			
 			if (Integer.parseInt(id)==characteristic.getCharacteristicId()){
 				ob =  new CharacteristicFiveVO(characteristic.getCharacteristicId(), characteristic.getCharacteristicName());
 				break;

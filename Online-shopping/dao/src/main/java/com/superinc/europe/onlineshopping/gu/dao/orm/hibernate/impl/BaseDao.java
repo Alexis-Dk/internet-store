@@ -49,6 +49,15 @@ public abstract class BaseDao<T> implements IBaseDao<T> {
         Session session = getSession();
             session.saveOrUpdate(t);
     }
+    
+    /**
+     * merge entity to DB
+     * @param t
+     */
+    public void merge(T t){
+        Session session = getSession();
+        session.merge(t);
+    }
 
     /**
      * get entity from DB, not lazy

@@ -45,4 +45,11 @@ public interface IDaoCharacteristic extends IBaseDao<Characteristic>{
 	List<Characteristic> getCharacteristics(Criteria criteria,
 			String characteristicName) throws DaoException;
 	
+	/**
+	 * Method return all characteristic
+	 * @return
+	 * @throws DaoException
+	 */
+	List<Characteristic> getAll() throws DaoException;
+	
 }

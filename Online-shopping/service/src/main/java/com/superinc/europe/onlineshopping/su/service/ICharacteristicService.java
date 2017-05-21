@@ -4,10 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
+import com.superinc.europe.onlineshopping.gu.service.IBaseService;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 import com.superinc.europe.onlineshopping.su.entities.pojo.Characteristic;
 
-public interface ICharacteristicService {
+public interface ICharacteristicService<T> extends IBaseService<T>  {
 
 	/**
 	 * Method set to Session
@@ -38,5 +39,20 @@ public interface ICharacteristicService {
 	 */
 	List<Characteristic> getCharacteristics(String characteristicsName)
 			throws ServiceException;
+
+	/**
+	 * get characteristic by Id
+	 * @param id
+	 * @return
+	 * @throws ServiceException
+	 */
+	Characteristic getCharacteristicById(int id) throws ServiceException;
+	
+	/**
+	 * Method return all characteristic
+	 * @return
+	 * @throws DaoException
+	 */
+	List<Characteristic> getAll() throws ServiceException;
     
 }

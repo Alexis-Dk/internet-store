@@ -269,4 +269,22 @@ private static final String CHARACTERISTIC = "Characteristic";
 		}
 	}
 	
+	/**
+	 * Method merge category characteristic in database
+	 * @param CategoryCharacteristic
+	 * @throws ServiceException
+	 * @throws DaoException
+	 */
+	@Override
+	public void mergeCategoryCharacteristic(
+			CategoryCharacteristic ob) throws ServiceException {
+		try {
+			categoryCharacteristicDao.merge(ob);
+		} catch (DaoException e) {
+			log.error(ExceptionMessages.ERROR_IN_ORDER_SERVICE + e);
+			throw new ServiceException(
+					ExceptionMessages.ERROR_IN_ORDER_SERVICE, e);
+		}
+	}
+	
 }

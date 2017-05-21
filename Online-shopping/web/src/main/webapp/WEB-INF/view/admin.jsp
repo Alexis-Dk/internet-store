@@ -302,13 +302,11 @@ else {
 					</div>
 				</div>
 
-				<div class="form-group">
-				
+				<div class="form-group" <%= request.getAttribute("categoryCharacteristicEnableStrStatus1") %>>
 					<div class="col-xs-3"><label for="productNameData" class="control-label"><%= request.getAttribute("categoryCharacteristicStr1") %>:</label>
 					</div>
-					<div class="col-xs-5">
-							
-							<sf:errors path="characteristic1" cssStyle="color: red" />
+					<div class="col-xs-5" >
+						<sf:errors path="characteristic1" cssStyle="color: red" />
 						<sf:select path="characteristic1" items="${characteristic1}"
 										itemValue="id" itemLabel="name"/>
 					<%--<sf:input id="name" type="text" value="" path="name"
@@ -334,7 +332,7 @@ else {
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" <%= request.getAttribute("categoryCharacteristicEnableStrStatus2") %>>
 					<div class="col-xs-3">
 						<label for="productCharacteristic1" class="control-label"><%= request.getAttribute("categoryCharacteristicStr2") %>:</label>
 					</div>
@@ -347,7 +345,7 @@ else {
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" <%= request.getAttribute("categoryCharacteristicEnableStrStatus3") %>>
 					<div class="col-xs-3">
 						<label for="productCharacteristic2" class="control-label"><%= request.getAttribute("categoryCharacteristicStr3") %>:</label>
 					</div>
@@ -360,7 +358,7 @@ else {
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" <%= request.getAttribute("categoryCharacteristicEnableStrStatus4") %>>
 					<div class="col-xs-3">
 						<label for="productCharacteristic3" class="control-label"><%= request.getAttribute("categoryCharacteristicStr4") %>:</label>
 					</div>
@@ -373,7 +371,7 @@ else {
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" <%= request.getAttribute("categoryCharacteristicEnableStrStatus5") %>>
 					<div class="col-xs-3">
 						<label for="productCharacteristic4" class="control-label"><%= request.getAttribute("categoryCharacteristicStr5") %>:</label>
 					</div>
@@ -386,7 +384,7 @@ else {
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" <%= request.getAttribute("categoryCharacteristicEnableStrStatus6") %>>
 					<div class="col-xs-3">
 						<label for="productCharacteristic6" class="control-label"><%= request.getAttribute("categoryCharacteristicStr6") %>:</label>
 					</div>
@@ -399,7 +397,7 @@ else {
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" <%= request.getAttribute("categoryCharacteristicEnableStrStatus7") %>>
 					<div class="col-xs-3">
 						<label for="productStockStatus" class="control-label"><%= request.getAttribute("categoryCharacteristicStr7") %>:</label>
 					</div>
@@ -412,7 +410,7 @@ else {
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" <%= request.getAttribute("categoryCharacteristicEnableIntStatus1") %>>
 					<div class="col-xs-3">
 						<label for="intCharacteristicData1" class="control-label"><%= request.getAttribute("categoryCharacteristicInt1") %>:</label>
 					</div>
@@ -423,7 +421,7 @@ else {
 					</div>
 				</div>
 				
-				<div class="form-group">
+				<div class="form-group" <%= request.getAttribute("categoryCharacteristicEnableIntStatus2") %>>
 					<div class="col-xs-3">
 						<label for="intCharacteristicData2" class="control-label"><%= request.getAttribute("categoryCharacteristicInt2") %>:</label>
 					</div>
@@ -434,7 +432,7 @@ else {
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" <%= request.getAttribute("categoryCharacteristicEnableIntStatus3") %>>
 					<div class="col-xs-3">
 						<label for="intCharacteristicData3" class="control-label"><%= request.getAttribute("categoryCharacteristicInt3") %>:</label>
 					</div>
@@ -445,7 +443,7 @@ else {
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" <%= request.getAttribute("categoryCharacteristicEnableIntStatus4") %>>
 					<div class="col-xs-3">
 						<label for="intCharacteristicData4" class="control-label"><%= request.getAttribute("categoryCharacteristicInt4") %>:</label>
 					</div>
@@ -456,7 +454,7 @@ else {
 					</div>
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" <%= request.getAttribute("categoryCharacteristicEnableIntStatus5") %>>
 					<div class="col-xs-3">
 						<label for="intCharacteristicData5" class="control-label"><%= request.getAttribute("categoryCharacteristicInt5") %>:</label>
 					</div>
@@ -467,7 +465,7 @@ else {
 					</div>
 				</div>
  
-  				<div class="form-group">
+  				<div class="form-group" <%= request.getAttribute("categoryCharacteristicEnableBoolStatus1") %>>
 					<div class="col-xs-3">
 						<label for="boolCharacteristicData1" class="control-label"><%= request.getAttribute("categoryCharacteristicBool1") %>:</label>
 					</div>
@@ -478,7 +476,7 @@ else {
 					</div>
 				</div>
  
-  				<div class="form-group">
+  				<div class="form-group" <%= request.getAttribute("categoryCharacteristicEnableBoolStatus2") %>>
 					<div class="col-xs-3">
 						<label for="boolCharacteristicData2" class="control-label"><%= request.getAttribute("categoryCharacteristicBool2") %>:</label>
 					</div>
@@ -489,7 +487,7 @@ else {
 					</div>
 				</div>
  
-  				<div class="form-group">
+  				<div class="form-group" <%= request.getAttribute("categoryCharacteristicEnableBoolStatus3") %>>
 					<div class="col-xs-3">
 						<label for="boolCharacteristicData3" class="control-label"><%= request.getAttribute("categoryCharacteristicBool3") %>:</label>
 					</div>
@@ -500,7 +498,7 @@ else {
 					</div>
 				</div>
  
-  				<div class="form-group">
+  				<div class="form-group" <%= request.getAttribute("categoryCharacteristicEnableBoolStatus4") %>>
 					<div class="col-xs-3">
 						<label for="boolCharacteristicData4" class="control-label"><%= request.getAttribute("categoryCharacteristicBool4") %>:</label>
 					</div>
@@ -511,7 +509,7 @@ else {
 					</div>
 				</div>
  
-  				<div class="form-group">
+  				<div class="form-group" <%= request.getAttribute("categoryCharacteristicEnableBoolStatus5") %>>
 					<div class="col-xs-3">
 						<label for="boolCharacteristicData5" class="control-label"><%= request.getAttribute("categoryCharacteristicBool5") %>:</label>
 					</div>

@@ -26,6 +26,12 @@ public interface IBaseDao<T> {
     void update(T t);
     
     /**
+     * merge entity to DB
+     * @param t
+     */
+    void merge(T t);
+    
+    /**
      * get entity from DB, not lazy
      * @param id
      * @return

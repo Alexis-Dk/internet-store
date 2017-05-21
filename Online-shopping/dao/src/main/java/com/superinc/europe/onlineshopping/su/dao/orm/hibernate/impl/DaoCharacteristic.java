@@ -98,5 +98,16 @@ public class DaoCharacteristic extends BaseDao<Characteristic> implements IDaoCh
 		criteria.add(Restrictions.like("characteristicName", PERCENT_SIGN + name + PERCENT_SIGN));
 		return (List<Characteristic>) criteria.list();
 	}
+
+	/**
+	 * Method return all characteristic
+	 * @return
+	 * @throws DaoException
+	 */
+	@Override
+	public List<Characteristic> getAll() throws DaoException {
+		List<Characteristic> list = getSession().createCriteria(Characteristic.class).list();
+		return list;
+	}
 	
 }
