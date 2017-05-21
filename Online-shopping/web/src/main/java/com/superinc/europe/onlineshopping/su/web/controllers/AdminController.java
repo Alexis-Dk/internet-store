@@ -591,6 +591,7 @@ public class AdminController {
     	product.setPrice(0);
     	product.setOldprice(0);
 	product.setDescription(productDTO.getDescription());
+	product.setComment(productDTO.getComment());
 	int categoryId = productDTO.getDepartment().getId();
 	Category category = productCategoryService.getCategoryById(categoryId);
 	product.setCategoryFk(category);
@@ -832,18 +833,21 @@ public class AdminController {
 			model.put("categoryCharacteristicStr" + String.valueOf(i + 1), itemsStr.get(i));
 			if (itemsStr.get(i).isCategoryCharacteristicEnable() == true){
 				model.put("categoryCharacteristicEnableStrStatus" + String.valueOf(i + 1), "style='display: none;'");
+				model.put("categoryCharacteristicEnableStrStatusC" + String.valueOf(i + 1), "checked");
 			}
 		}
 		for (int i = 0; i < itemsInt.size(); i++) {
 			model.put("categoryCharacteristicInt" + String.valueOf(i + 1), itemsInt.get(i));
 			if (itemsInt.get(i).isCategoryCharacteristicEnable() == true){
 				model.put("categoryCharacteristicEnableIntStatus" + String.valueOf(i + 1), "style='display: none;'");
+				model.put("categoryCharacteristicEnableIntStatusC" + String.valueOf(i + 1), "checked");
 			}
 		}
 		for (int i = 0; i < itemsBool.size(); i++) {
 			model.put("categoryCharacteristicBool" + String.valueOf(i + 1), itemsBool.get(i));
 			if (itemsBool.get(i).isCategoryCharacteristicEnable() == true){
 				model.put("categoryCharacteristicEnableBoolStatus" + String.valueOf(i + 1), "style='display: none;'");
+				model.put("categoryCharacteristicEnableBoolStatusC" + String.valueOf(i + 1), "checked");
 			}
 		}
 	}
@@ -873,7 +877,6 @@ public class AdminController {
 		}
 	}
 	
-
 	private void initModel(ProductDTO productDTO, String category)
 			throws ServiceException {
 		String categoryName = productCategoryService.getCategoryById(Integer.parseInt(category)).getCategoryName();
@@ -1000,7 +1003,9 @@ public class AdminController {
 		characteristicBoolAdmin[3] = boolCharacteristic4;
 		characteristicBoolAdmin[4] = boolCharacteristic5;
 		String productDescription = request.getParameter("description");
+		String comment = request.getParameter("comment");
 		request.getSession().setAttribute("productDescription", productDescription);
+		request.getSession().setAttribute("comment", comment);
 		request.getSession().setAttribute("characteristicBoolAdmin", characteristicBoolAdmin);
 		String categoryId = request.getParameter("categoryId");
 		String productId = request.getParameter("productId");
@@ -1081,6 +1086,7 @@ public class AdminController {
 	int[] characteristicIdAdmin = (int[]) request.getSession().getAttribute("characteristicIdAdmin");
 	String [] characteristicBoolAdmin = (String[]) request.getSession().getAttribute("characteristicBoolAdmin");
 	String productDescription = (String) request.getSession().getAttribute("productDescription");
+	String comment = (String) request.getSession().getAttribute("comment");
 	
 	productDTO.setIntCharacteristic1(characteristicIntAdmin[0]);
 	productDTO.setIntCharacteristic2(characteristicIntAdmin[1]);
@@ -1100,6 +1106,7 @@ public class AdminController {
 	productDTO.setBoolCharacteristic4(characteristicBoolAdmin[3]);
 	productDTO.setBoolCharacteristic5(characteristicBoolAdmin[4]);
 	productDTO.setDescription(productDescription);
+	productDTO.setComment(comment);
 
 	Category category = HttpUtils.getCatrgory();
 	categoryId = Integer.toString(category.getCategoryId());

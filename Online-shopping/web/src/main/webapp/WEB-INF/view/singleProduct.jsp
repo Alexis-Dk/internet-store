@@ -533,8 +533,7 @@ p.right {
                                         <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane fade in active" id="home">
                                                 <h2>Product Description</h2>  
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tristique, diam in consequat iaculis, est purus iaculis mauris,
-                                                 imperdiet facilisis ante ligula at nulla.</p>
+                                                <p><%=request.getParameter("comment")%>.</p>
                                              
 <%-- 												 <div class="dress-name">
 													<h3><%=request.getParameter("characteristic1")%> <%=request.getParameter("description")%></h3>

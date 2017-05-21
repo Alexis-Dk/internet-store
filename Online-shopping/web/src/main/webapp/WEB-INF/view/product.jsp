@@ -562,6 +562,7 @@
                         <div class="product-upper">
                         <sec:authorize access="isAnonymous() or hasRole('user')">
                         <a href="singleProduct?description=<c:out value="${product.description}"></c:out>
+&comment=<c:out value="${product.comment}"></c:out>            
 &name=<c:out value="${product.name}"></c:out>
 &intCharacteristic1=<c:out value="${product.intCharacteristic1}"></c:out>
 &intCharacteristic2=<c:out value="${product.intCharacteristic2}"></c:out>
@@ -595,6 +596,7 @@
                         
                                                 <sec:authorize access="hasRole('admin')">
                         <a href="singleProductAdmin?description=<c:out value="${product.description}"></c:out>
+&comment=<c:out value="${product.comment}"></c:out>
 &name=<c:out value="${product.name}"></c:out>
 &intCharacteristic1=<c:out value="${product.intCharacteristic1}"></c:out>
 &intCharacteristic2=<c:out value="${product.intCharacteristic2}"></c:out>

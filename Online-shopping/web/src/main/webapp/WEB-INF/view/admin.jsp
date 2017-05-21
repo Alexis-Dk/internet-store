@@ -301,6 +301,17 @@ else {
 							class="form-control" name="description" rows="1" cols="50"></sf:textarea>
 					</div>
 				</div>
+				
+				<div class="form-group">
+					<div class="col-xs-3">
+						<label for="productCommentData" class="control-label">Comment:</label>
+					</div>
+					<div class="col-xs-5">
+						<sf:errors path="comment" cssStyle="color: red" />
+						<sf:textarea id="productCommentData" path="comment"
+							class="form-control" name="coment" rows="1" cols="50"></sf:textarea>
+					</div>
+				</div>				
 
 				<div class="form-group" <%= request.getAttribute("categoryCharacteristicEnableStrStatus1") %>>
 					<div class="col-xs-3"><label for="productNameData" class="control-label"><%= request.getAttribute("categoryCharacteristicStr1") %>:</label>

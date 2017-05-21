@@ -23,10 +23,13 @@ public class ProductDTO implements Serializable {
     @Pattern(regexp = "^[-0-9a-zA-Zа-яА-Я]{3,50}$", message="Description has to has between 3 and 50 symbols")
     private String description;
     
+    @Pattern(regexp = "^[-0-9a-zA-Zа-яА-Я]{0,250}$", message="Comment has to has between 0 and 250 symbols")
+    private String comment;
+    
 //    @Pattern(regexp = "^[1-9a-zA-Z]{3,50}$", message="Color has to has between 3 and 50 symbols")
 //	private String characteristic1;
-    
-    @NotNull
+
+	@NotNull
     private CharacteristicOneVO characteristic1;
 	
 //    @Pattern(regexp = "^[1-9a-zA-Z]{3,50}$", message="Socket has to has between 3 and 50 symbols")
@@ -161,6 +164,14 @@ public class ProductDTO implements Serializable {
 		this.description = description;
 	}
 
+    public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+	
 	public CharacteristicOneVO getCharacteristic1() {
 		return characteristic1;
 	}
