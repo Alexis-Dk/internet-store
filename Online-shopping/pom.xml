@@ -222,9 +222,21 @@
 		</dependency>
 
 		<dependency>
-		    <groupId>com.tunyk.currencyconverter</groupId>
-		    <artifactId>currency-converter-api</artifactId>
-		    <version>1.0</version>
+			<groupId>com.tunyk.currencyconverter</groupId>
+			<artifactId>currency-converter-api</artifactId>
+			<version>1.0</version>
+			<!--<exclusions>
+				 <exclusion>
+				  <groupId>org.slf4j</groupId>
+				   <artifactId>slf4j-api</artifactId> 
+				</exclusion>
+			 </exclusions> -->
+		</dependency>
+	
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.25</version>
 		</dependency>
 
 	</dependencies>
