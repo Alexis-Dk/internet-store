@@ -629,7 +629,7 @@
                         <img src="img/<c:out value="${product.image1Path}"></c:out>" alt=""></a></sec:authorize>
                         
                         </div>
-							<h2><a><c:out value="${product.name}"></c:out> <c:out value="${product.description}"></c:out></a></h2>
+							<h2><a><c:out value="${product.characteristic1}"></c:out> <c:out value="${product.description}"></c:out></a></h2>
 						<div class="product-carousel-price">
                             <ins><c:out value="${currentCurrencySymbol}"></c:out><c:out value="${product.price}"></c:out></ins> <del><c:out value="${currentCurrencySymbol}"></c:out><c:out value="${product.price}"></c:out></del>
                         </div>  
