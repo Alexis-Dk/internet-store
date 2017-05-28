@@ -190,7 +190,10 @@
         <div class="zigzag-bottom"></div>
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
+				<div>
+					<div id="map-canvas" style="height: 10px;"></div>
+				</div>
+				<div class="col-md-4">
 
 					<form:form action="${context}/getRegistration" method="post" id="personForm" name="userDTO" modelAttribute="userDTO">
 						<fieldset>
