@@ -82,6 +82,12 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+  <style>
+	.menu {
+		top: 23px;
+		margin-top: 23px;
+	}
+  </style>
   </head>
    <body>
    <%! String s = "";
@@ -205,12 +211,15 @@
             <div class="row">
                <div class="col-md-4">
                     <div class="single-sidebar">
-                    </div>   
+					</div>   
                 </div> 
                 <sec:authorize access="hasRole('user') or isAnonymous()">   
                 <div class="col-md-8">
                     <div class="product-content-right">
                         <div class="woocommerce">
+                        <div class="menu">
+							<div id="map-canvas" style="height: 10px; width: 500px"></div>
+						</div>
                             <form method="get" action="addPurchase">
                       
                                 <table class="shop_table cart" <%= d %>>

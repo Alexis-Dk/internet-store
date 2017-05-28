@@ -296,6 +296,9 @@
 	<div class="single-product-area">
        <div class="zigzag-bottom"></div>
         <div class="container-fluid" >
+                                <div class="menu">
+							<div id="map-canvas" style="height: 10px; width: 500px"></div>
+						</div>
           <div ng-controller="AppCtrl"  style="height:48px;" ng-cloak >
  				  <!--  is-locked-open="$media('min-width: 1000px')"-->
                   <md-sidenav

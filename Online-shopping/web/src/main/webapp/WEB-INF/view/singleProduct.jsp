@@ -362,7 +362,10 @@ p.right {
 
 	<div class="single-product-area">
         <div class="zigzag-bottom"></div>
-        <div class="container">
+		<div>
+			<div id="map-canvas" style="height: 9px; width: 500px"></div>
+		</div>
+		<div class="container">
             <div class="row">
                 <div class="col-md-4">
                     <div class="single-sidebar">

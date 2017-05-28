@@ -721,9 +721,24 @@ public String addNewGoodsToCart2(ModelMap model, HttpServletRequest request, Htt
 		}
 		model.put("currentCurrency", iCurrencyService.getCurrentCurrency());
 		model.put("currentCurrencySymbol", iCurrencyService.getCurrentCurrencySymbol());
+		initCoordinates(model);
 		return RequestParamConstants.CONTACT;
 	}
 
+	private void initCoordinates (ModelMap model) {
+		Locale locale = getLocale();
+			if (locale.toString().equals("en")) {
+				model.put("currentWidth", "40.792865");
+				model.put("currentLenght", "-73.965355");
+			} else if (locale.toString().equals("fr")) {
+				model.put("currentWidth", "48.864716");
+				model.put("currentLenght", "2.349014");
+			} else {
+				model.put("currentWidth", "53.9047");
+				model.put("currentLenght", "27.555");
+			}
+	}
+	
 	@RequestMapping(value = RequestConstants.INDEX, method = RequestMethod.GET)
 	public ModelAndView senIndexPage(HttpServletRequest request) {
 		ModelAndView modelAndView = new ModelAndView();
