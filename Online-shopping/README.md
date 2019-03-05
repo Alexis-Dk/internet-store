@@ -113,6 +113,8 @@
 <br> This tomcat-server differs from the standard server.xml two tags:
 <br> \<Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="100" maxIdle="30" maxWait="10000" name="jdbc/TrainingDB" password="root"  type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/internetshop" username="root"/>
 <br> \<ResourceLink global="jdbc/TrainingDB" name="jdbc/TrainingDB" type="javax.sql.DataSource"/>
+<br> Add to context.xml this tag:
+<br> \<ResourceLink global="jdbc/TrainingDB" name="jdbc/TrainingDB" type="javax.sql.DataSource"/>
 <br> !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Warning!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 <br>---------------------------------------------------------------------------
 <br>DEFAULT USER:
