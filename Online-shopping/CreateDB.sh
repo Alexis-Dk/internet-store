@@ -1,4 +1,4 @@
-mysql --user=root --password=root < CreateDB.sql
+mysql --user=root --password=root < patch_0000001.sql
 
 DROP SCHEMA IF EXISTS internetshop;
 
