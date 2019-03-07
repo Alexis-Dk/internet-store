@@ -40,7 +40,7 @@
     <![endif]   response.sendRedirect("login.jsp"); %>   -->
                   <meta http-equiv="Cache-Control" content="no-cache">
               <meta http-equiv=Content-Type content="text/html;charset=UTF-8">
-              <title>Payments system</title>
+              <title>Internet-shop</title>
 	          <link rel="stylesheet" href="/css/style.css">
               <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
               <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -60,7 +60,7 @@
               <link rel="stylesheet" href="<c:url value="/css/responsive.css" />" rel="stylesheet"> 
 
               <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
-              <script src="js/payments.js"> </script>
+              <script src="js/customMenu.js"> </script>
               
 			  <script>
 			    function setParam(name, value) {

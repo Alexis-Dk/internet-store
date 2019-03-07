@@ -70,7 +70,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     
     <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="js/payments.js"> </script>
+    <script src="js/customMenu.js"> </script>
     <script type="text/javascript">
 
    </script>

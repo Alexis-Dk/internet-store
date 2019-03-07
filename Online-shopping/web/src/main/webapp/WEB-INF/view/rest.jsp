@@ -84,7 +84,7 @@ pageEncoding="ISO-8859-1"%>
              <head>
               <meta http-equiv="Cache-Control" content="no-cache">
               <meta http-equiv=Content-Type content="text/html;charset=UTF-8">
-              <title>Payments system</title>
+              <title>Internet-shop</title>
               <link rel="stylesheet" href="/css/style.css">
               <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
               <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -104,10 +104,10 @@ pageEncoding="ISO-8859-1"%>
               <link rel="stylesheet" href="<c:url value="/css/responsive.css" />" rel="stylesheet"> 
 
               <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
-              <script src="js/payments.js"> </script>
+              <script src="js/customMenu.js"> </script>
 
             </head>
-            <body ng-app="payments"> 
+            <body ng-app="customMenu">
 
               <div ng-controller="AppCtrl" layout="column" style="height:500px;" ng-cloak>
 

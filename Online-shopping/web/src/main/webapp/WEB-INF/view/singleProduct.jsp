@@ -50,7 +50,7 @@
 </script>
 			  <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
               <meta http-equiv=Content-Type content="text/html;charset=UTF-8">
-              <title>Payments system</title>
+              <title>Internet-shop</title>
               <link rel="stylesheet" href="resources/styles/bootstrap.css">
               <link rel="stylesheet" href="resources/styles/style.css">
               <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -72,7 +72,7 @@
               <link rel="stylesheet" href="<c:url value="/css/responsive.css" />" rel="stylesheet"> 
 
               <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
-              <script src="js/payments.js"> </script>
+              <script src="js/customMenu.js"> </script>
               
               <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
