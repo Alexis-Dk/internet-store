@@ -155,7 +155,15 @@ public class MainController {
 //			customUserParam.setBoolCharacteristic3(false);
 //			customUserParam.setBoolCharacteristic4(false);
 //			customUserParam.setBoolCharacteristic5(false);
-			String[] selcectedCharacteristics = {selectedCharacteristic1, selectedCharacteristic2, selectedCharacteristic3, selectedCharacteristic4, selectedCharacteristic5, selectedCharacteristic6, selectedCharacteristic7};
+			String[] selcectedCharacteristics = {
+					selectedCharacteristic1.replace("\"\",", ""),
+					selectedCharacteristic2.replace("\"\",", ""),
+					selectedCharacteristic3.replace("\"\",", ""),
+					selectedCharacteristic4.replace("\"\",", ""),
+					selectedCharacteristic5.replace("\"\",", ""),
+					selectedCharacteristic6.replace("\"\",", ""),
+					selectedCharacteristic7.replace("\"\",", "")
+			};
 			setCustomUserParam(selcectedCharacteristics, customUserParam);
 			selectedItems = getSelectedCharacteristics(selcectedCharacteristics);
 		} else {

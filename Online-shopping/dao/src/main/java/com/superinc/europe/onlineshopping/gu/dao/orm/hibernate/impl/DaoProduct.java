@@ -95,7 +95,7 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 		criteria = addIntCriteria(criteria, customUserParam);
 		
 		for(Map.Entry<String, String[]> entry : selectedItems.entrySet()) {
-			if (entry.getValue().length > 1) {
+			if (entry.getValue().length > 0 && entry.getValue()[0] != "") {
 				String key = entry.getKey();
 				String[] value = entry.getValue();
 				criteria.add(Restrictions.in(key, value));
