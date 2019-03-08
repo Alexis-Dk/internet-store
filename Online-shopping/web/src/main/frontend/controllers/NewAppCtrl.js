@@ -110,7 +110,7 @@ $scope.selected7 = [];
 
     $scope.getCharacteristic5 = () => {
       let params = {};
-      $http.get('/Internet-store/api/accounts/characteristic5', {params})
+      $http.get('api/accounts/characteristic5', {params})
         .then(resp => {
               $scope.items5 = resp.data.characteristics5.toString().split(" ");
         });
@@ -234,7 +234,7 @@ $scope.selected7 = [];
       let params = {};
       $http.post('api/accounts/boolStatusUpdateChar1', {params})
         .then(resp => {
-          $scope.customUserParam = resp.data;
+          $scope.customUserParam.boolCharacteristic1 = resp.data.boolCharacteristic1;
         });
     };
 
@@ -242,7 +242,7 @@ $scope.selected7 = [];
       let params = {};
       $http.post('api/accounts/boolStatusUpdateChar2', {params})
         .then(resp => {
-          $scope.customUserParam = resp.data;
+          $scope.customUserParam.boolCharacteristic2 = resp.data.boolCharacteristic2;
         });
     };
 
@@ -250,7 +250,7 @@ $scope.selected7 = [];
       let params = {};
       $http.post('api/accounts/boolStatusUpdateChar3', {params})
         .then(resp => {
-          $scope.customUserParam = resp.data;
+          $scope.customUserParam.boolCharacteristic3 = resp.data.boolCharacteristic3;
         });
     };
 
@@ -258,7 +258,7 @@ $scope.selected7 = [];
       let params = {};
       $http.post('api/accounts/boolStatusUpdateChar4', {params})
         .then(resp => {
-          $scope.customUserParam = resp.data;
+          $scope.customUserParam.boolCharacteristic4 = resp.data.boolCharacteristic4;
         });
     };
 
@@ -266,7 +266,7 @@ $scope.selected7 = [];
       let params = {};
       $http.post('api/accounts/boolStatusUpdateChar5', {params})
         .then(resp => {
-          $scope.customUserParam = resp.data;
+          $scope.customUserParam.boolCharacteristic5 = resp.data.boolCharacteristic5;
         });
     };
 
