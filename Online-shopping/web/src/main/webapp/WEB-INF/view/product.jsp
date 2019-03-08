@@ -26,19 +26,16 @@
               <!-- Custom CSS -->
               <link rel="stylesheet" href="<c:url value="/css/owl.carousel.css" />" rel="stylesheet">
               <link rel="stylesheet" href="<c:url value="/css/styleMain.css" />" rel="stylesheet"> 
-              <link rel="stylesheet" href="<c:url value="/css/responsive.css" />" rel="stylesheet"> 
-
+              <link rel="stylesheet" href="<c:url value="/css/responsive.css" />" rel="stylesheet">
 			  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-              
 		      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
               <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
-              <script src="js/customMenu.js"> </script>
+              <script type="text/javascript" src="js/customMenu.js"></script>
  <c:set var="context" value="${pageContext.request.contextPath}" />
     <meta charset="ISO-8859-1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>eElectronics - HTML eCommerce Template</title>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
     
     <script>
