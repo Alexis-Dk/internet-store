@@ -341,8 +341,8 @@ public class MainController {
 		selectedCharacteristic = "";
 		for (int i = 0; i < array.length; i++) {
 			if (!array[i].equals("")) {
-				selectedCharacteristic += array[i].replaceAll("[^a-zA-Z]+", "") + " ";	
-			}
+				selectedCharacteristic += array[i].replaceAll("[^a-zA-Z0-9U+0400–U+04FF]+", "") + " ";
+				}
 		}
 		if (selectedCharacteristic.length() > 1) {
 			selectedCharacteristic = selectedCharacteristic.substring(0, selectedCharacteristic.length() - 1);	
