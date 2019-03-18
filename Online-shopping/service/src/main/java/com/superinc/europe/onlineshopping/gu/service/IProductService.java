@@ -81,4 +81,29 @@ public interface IProductService<T> extends IBaseService<T> {
 	 */
 	Product getProductById(int id) throws ServiceException;
 
+	/**
+	 *
+	 * @param userNumberOfElements
+	 * @param categoryId
+	 * @return
+	 * @throws ServiceException
+	 */
+	List<Product> obtainRandomSelectionByCategory(int userNumberOfElements, String categoryId) throws ServiceException;
+
+	/**
+	 *
+	 * @param userNumberOfElements
+	 * @return
+	 * @throws ServiceException
+	 */
+	List<Product> obtainRandomSelection(int userNumberOfElements) throws ServiceException;
+
+	/**
+	 *
+	 * @param userNumberOfElements
+	 * @return
+	 * @throws ServiceException
+	 */
+	List<Product> getLastSelection(int userNumberOfElements) throws ServiceException;
+
 }

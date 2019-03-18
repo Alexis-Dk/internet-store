@@ -44,7 +44,8 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 	private static final String INT_CHAR5_MORE = "intCharacteristic5 >= ";
 	//private static final String SELECT_MAX_PRODUCT_ID_FROM_PRODUCTS = "SELECT MAX(product_id) FROM Products";
 	private static final int DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE = 12;
-	
+	private static final String ORDER_BY_RAND = "1=1 order by rand()";
+
 	Logger log = Logger.getLogger(DaoProduct.class);
 	
 	/**
@@ -179,7 +180,48 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 			throw new DaoException(ExceptionMessages.ERROR_IN_DAO, e);
 		}
 	}
-	
+
+	/**
+	 *
+	 * @param criteria
+	 * @param selectionNumber
+	 * @return
+	 */
+	@Override
+	public List<Product> getRandomSelection(Criteria criteria, int userNumberOfElements) {
+		criteria.add(Restrictions.sqlRestriction("1=1 order by rand()"));
+		criteria.setMaxResults(userNumberOfElements);
+		return criteria.list();
+	}
+
+	/**
+	 *
+	 * @param criteria
+	 * @param userNumberOfElements
+	 * @param categoryId
+	 * @return
+	 */
+	@Override
+	public List<Product> getRandomSelection(Criteria criteria, int userNumberOfElements, String categoryId) {
+		criteria.add(Restrictions.sqlRestriction(CATEGORY_ID + categoryId));
+		criteria.add(Restrictions.sqlRestriction(ORDER_BY_RAND));
+		criteria.setMaxResults(userNumberOfElements);
+		return criteria.list();
+	}
+
+	/**
+	 *
+	 * @param criteria
+	 * @param getLastInsertedId
+	 * @param userNumberOfElements
+	 * @return
+	 */
+	public List<Product> getLastSelection(Criteria criteria, int getLastInsertedId, int userNumberOfElements) {
+		criteria.setFirstResult(getLastInsertedId - userNumberOfElements);
+		criteria.setMaxResults(userNumberOfElements);
+		return criteria.list();
+	}
+
 	private Criteria addBoolCharCriteria(Criteria criteria, CustomUserParamDTO customUserParam) {
 		boolean boolCharacteristic1 = customUserParam.getBoolCharacteristic1();
 		boolean boolCharacteristic2 = customUserParam.getBoolCharacteristic2();

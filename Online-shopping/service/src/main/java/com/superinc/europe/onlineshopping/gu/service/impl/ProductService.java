@@ -107,7 +107,7 @@ public class ProductService implements IProductService<Product> {
 
 	/**
 	 * Method update Session
-	 * @param id
+	 * @param ob
 	 * @throws ServiceException
 	 */
 	@Override
@@ -207,9 +207,55 @@ public class ProductService implements IProductService<Product> {
 				logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
 				throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
 			}
+
 			return products;
 	}
-	
+
+	public List<Product> getLastSelection(int userNumberOfElements) throws ServiceException {
+		Session session = daoProduct.getCurrentSession();
+		List<Product> products = null;
+		try {
+			products = (List<Product>) daoProduct.getLastSelection(
+					session.createCriteria(Product.class, PRODUCT), getLastInsertId(), userNumberOfElements);
+			filterPrice(products);
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
+		}
+		return products;
+	}
+
+	public List<Product> obtainRandomSelection(int userNumberOfElements) throws ServiceException {
+		Session session = daoProduct.getCurrentSession();
+		List<Product> products = null;
+		try {
+			products = (List<Product>) daoProduct.getRandomSelection(
+					session.createCriteria(Product.class, PRODUCT), userNumberOfElements);
+			filterPrice(products);
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
+		}
+		return products;
+	}
+
+	public List<Product> obtainRandomSelectionByCategory(int userNumberOfElements, String categoryId) throws ServiceException {
+		Session session = daoProduct.getCurrentSession();
+		List<Product> products = null;
+		try {
+			products = (List<Product>) daoProduct.getRandomSelection(
+					session.createCriteria(Product.class, PRODUCT), userNumberOfElements, categoryId);
+			filterPrice(products);
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
+		}
+		return products;
+	}
+
 	public List<Product> filterPrice(List<Product> list) throws CurrencyConverterException {
 		for (Product product : list) {
 			double ob = product.getIntCharacteristic1();

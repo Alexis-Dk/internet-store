@@ -74,4 +74,29 @@ public interface IDaoProduct extends IBaseDao<Product>{
 	 */
 	int getLastInsertId(Criteria criteria) throws DaoException;
 
+	/**
+	 *
+	 * @param criteria
+	 * @param selectionNumber
+	 * @return
+	 */
+	List<Product> getRandomSelection(Criteria criteria, int selectionNumber);
+
+	/**
+	 *
+	 * @param criteria
+	 * @param userNumberOfElements
+	 * @param categoryId
+	 * @return
+	 */
+	List<Product> getRandomSelection(Criteria criteria, int userNumberOfElements, String categoryId);
+
+	/**
+	 *
+	 * @param criteria
+	 * @param getLastInsertedId
+	 * @param userNumberOfElements
+	 * @return
+	 */
+	List<Product> getLastSelection(Criteria criteria, int getLastInsertedId, int userNumberOfElements);
 }
