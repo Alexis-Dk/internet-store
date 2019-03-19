@@ -52,7 +52,6 @@ import com.superinc.europe.onlineshopping.gu.web.utils.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestConstants;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpUtils;
 import com.superinc.europe.onlineshopping.gu.web.httpUtils.PdfGenerator;
-import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpMailer;
 import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamConstants;
 import com.superinc.europe.onlineshopping.su.entities.pojo.CategoryCharacteristic;
 import com.superinc.europe.onlineshopping.su.service.ICategoryCharacteristicService;
@@ -68,6 +67,14 @@ import com.tunyk.currencyconverter.api.CurrencyConverterException;
 @Scope("session")
 @SuppressWarnings("rawtypes")
 public class MainController {
+
+	public static final int NUMBER_OF_LATEST_PRODUCTS = 6;
+	public static final int NUMBER_OF_TOP_SELLERS = 3;
+	public static final int NUMBER_OF_RECENTLY_VIEWS = 3;
+	public static final int NUMBER_OF_TOP_NEW = 3;
+	public static final int NUMBER_OF_RELATED_PRODUCTS = 6;
+	public static final int NUMBER_OF_RECENT_POSTS = 5;
+	public static final int NUMBER_OF_RANDOM_PRODUCTS = 4;
 
 	Logger log = Logger.getLogger(MainController.class);
 
@@ -427,6 +434,9 @@ public class MainController {
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET,
 					productCategoryService.getNoActiveProductCategories());
 			initModel(model, request.getParameter("categoryId"));
+			model.put("randomProducts", productService.obtainRandomSelection(NUMBER_OF_RANDOM_PRODUCTS));
+			model.put("recentPosts", productService.getLastSelection(NUMBER_OF_RECENT_POSTS));
+			model.put("relatedProducts", productService.obtainRandomSelectionByCategory(NUMBER_OF_RELATED_PRODUCTS, request.getParameter("categoryId")));
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			return RequestParamConstants.ERROR_PAGE;
@@ -462,6 +472,9 @@ public class MainController {
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET,
 					productCategoryService.getNoActiveProductCategories());
 			categoryId = String.valueOf(product.getCategoryFk().getCategoryId());
+			model.put("randomProducts", productService.obtainRandomSelection(NUMBER_OF_RANDOM_PRODUCTS));
+			model.put("recentPosts", productService.getLastSelection(NUMBER_OF_RECENT_POSTS));
+			model.put("relatedProducts", productService.obtainRandomSelectionByCategory(NUMBER_OF_RELATED_PRODUCTS, request.getParameter("categoryId")));
 			initModel(model, categoryId);
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
@@ -560,7 +573,6 @@ public class MainController {
 public String addNewGoodsToCart2(ModelMap model, HttpServletRequest request, HttpSession session){
 	try {
 		List<Bucket> list = HttpUtils.getBucket(session);
-		System.out.println(list);
 		List<QuantityAndSum> updatedList = getUpdatedQuantityAndSumWidget(request);
 		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
 		List<Bucket> bucket = HttpUtils.getBucket(session);
@@ -626,7 +638,6 @@ public String addNewGoodsToCart2(ModelMap model, HttpServletRequest request, Htt
 			HttpSession session) {
 		try {
 			List<Bucket> list = HttpUtils.getBucket(session);
-			System.out.println(list);
 			List<QuantityAndSum> updatedList = getUpdatedQuantityAndSumWidget(request);
 			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
 //			model.put(RequestParamConstants.BUCKET_WIDGET, HttpUtils.getBucket(session));
@@ -756,7 +767,11 @@ public String addNewGoodsToCart2(ModelMap model, HttpServletRequest request, Htt
 			modelAndView.addObject(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getNoActiveProductCategories());
 			modelAndView.addObject("currentCurrency", iCurrencyService.getCurrentCurrency());
 			modelAndView.addObject("currentCurrencySymbol", iCurrencyService.getCurrentCurrencySymbol());
-			modelAndView.setViewName(RequestParamConstants.INDEX);		
+			modelAndView.addObject("latestProducts", productService.obtainRandomSelection(NUMBER_OF_LATEST_PRODUCTS));
+			modelAndView.addObject("topSellers", productService.obtainRandomSelection(NUMBER_OF_TOP_SELLERS));
+			modelAndView.addObject("recentlyViewed", productService.obtainRandomSelection(NUMBER_OF_RECENTLY_VIEWS));
+			modelAndView.addObject("topNew", productService.obtainRandomSelection(NUMBER_OF_TOP_NEW));
+			modelAndView.setViewName(RequestParamConstants.INDEX);;
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
 			modelAndView.setViewName(RequestParamConstants.ERROR_PAGE);
