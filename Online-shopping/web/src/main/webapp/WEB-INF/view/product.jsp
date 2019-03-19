@@ -71,13 +71,13 @@
         l.search = search;
     }
 </script>
-    
 
-    
- 
+    <script>
+        function myFunction() {
+            //document.getElementById("mainContainer").style.width = "2000px";
+        }
+    </script>
 
-
- 
    <style>
    	.letter {
 	    text-transform: uppercase;
@@ -99,7 +99,7 @@
     }
     
     /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 300px) {
+    @media screen and (max-width: 767px) {
       .sidenav {
         height: auto;
         padding: 15px;

@@ -38,7 +38,7 @@
 <br>db.password = root
 <br>db.url = jdbc:mysql://localhost:3306/internetshop
 <br>
-<br>2. Change username and parol in ExecuteBuild.bat on your username and parol for your DB.
+<br>2. Change username and password in ExecuteBuild.bat on your username and password for your DB.
 <br>
 <br>3.MAVEN http://maven.apache.org/
 <br>Open the file settings.xml in your maven(...\maven3.3.9\conf\settings.xml)
@@ -100,9 +100,13 @@
 <br>
 <br>10. For greater reliability, please copy the Internet-store.war to the folder 'webapps' on your server.
 <br>
-<br>11. Go to http://localhost:8080/Internet-store/
+<br>11. Go to http://localhost:{Your port}/
 <br>
 <br>12. To see cobertura reports, go to root - ..applfolder/web/target/site/cobertura/index
+<br>
+<br>13. Build js files using 'npm install' and 'npm run build'
+<br>
+<br>14. Copy builded js file to 'webapp/js' folder and build jar using 'mvn clean install'
 <br>
 <br> !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Warning!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 <br>    To use JNDI, the original server.xml is not enough. For this, application substitute the original server.xml to own.
