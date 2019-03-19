@@ -61,12 +61,14 @@ public interface IProductService<T> extends IBaseService<T> {
 	 */
 	List<Product> obtainFullSelection(CustomUserParamDTO customUserParam, String userNumberOfPage)
 			throws ServiceException;
-	
+
 	/**
-	 * Method get number integer number products in the page
-	 * @throws DaoException
+	 *
+	 * @param category
+	 * @return
+	 * @throws ServiceException
 	 */
-	int getQuantityOfPage() throws ServiceException;
+	int getQuantityOfPage(String category) throws ServiceException;
 
 	/**
 	 * Method get last insert id

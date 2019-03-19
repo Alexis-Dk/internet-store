@@ -145,9 +145,7 @@ public class AdminController {
 			HttpSession session) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		authentication.getPrincipal();
-		System.out.println("efrrgvrtgtgtgtgt");
 		System.out.println(authentication.getPrincipal());
-		System.out.println("efrrgvrtgtgtgtgt");
 		ModelAndView modelAndView = new ModelAndView();
 		try {
 			modelAndView.setViewName(RequestParamConstants.ADMIN_PAGE_ATTR);
@@ -732,7 +730,7 @@ public class AdminController {
 			@RequestParam(value = RequestParamConstants.SELECTED_PAGE, defaultValue = RequestParamConstants.VALUE_STR_ONE) String selectedPage) {
 		try {
 			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
-					navigationService.getDataToPaginationWidget(productService.getQuantityOfPage()));
+					navigationService.getDataToPaginationWidget(productService.getQuantityOfPage(category)));
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
 			model.put("characteristics1", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "1")));
 			model.put("characteristics2", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(category, "2")));
@@ -1254,7 +1252,7 @@ public class AdminController {
 		Map<String, String[]> selectedItems = new HashMap<String, String[]>();
 		try {productService.delete(Integer.parseInt(productId));
 			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
-					navigationService.getDataToPaginationWidget(productService.getQuantityOfPage()));
+					navigationService.getDataToPaginationWidget(productService.getQuantityOfPage(category)));
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
 			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, category);
 				model.put(RequestParamConstants.PRODUCTS, productService.obtainUsersSelection(customUserParam, selectedPage, (String) category, selectedItems));
@@ -1332,7 +1330,7 @@ public class AdminController {
 	String categoryName = category.getCategoryName();
 	try {
 		model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
-				navigationService.getDataToPaginationWidget(productService.getQuantityOfPage()));
+				navigationService.getDataToPaginationWidget(productService.getQuantityOfPage(categoryId)));
 		model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(categoryId));
 		model.put("characteristics1", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(categoryId, "1")));
 		model.put("characteristics2", characteristicService.getCharacteristics(iCategoryCharacteristicService.getCategoryCharacteristicId(categoryId, "2")));

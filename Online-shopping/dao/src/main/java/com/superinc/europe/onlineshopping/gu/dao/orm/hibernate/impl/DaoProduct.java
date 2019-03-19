@@ -30,7 +30,7 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 	private static final String BOOL_CHARACTERISTIC4_EQUALS = "boolCharacteristic4 = ";
 	private static final String BOOL_CHARACTERISTIC5_EQUALS = "boolCharacteristic5 = ";
 	private static final String EMPTY_FIELD = "";
-	private static final String GET_COUNT_ROW = "select count(*) from Product where delete_status=0";
+	private static final String GET_COUNT_ROW = "select count(*) from Product where delete_status=0 and category_id_FK =";
 	private static final String CATEGORY_ID = "category_id = ";
 	private static final String INT_CHAR1_LESS = "intCharacteristic1 <= ";
 	private static final String INT_CHAR1_MORE = "intCharacteristic1 >= ";
@@ -126,16 +126,17 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 		
 		return criteria.list();
 	}
-	
+
 	/**
-	 * Method get number integer number products in the page
-	 * @throws ServiceException 
+	 *
+	 * @param category
+	 * @return
 	 * @throws DaoException
 	 */
 	@Override
-	public int getQuantityOfPage() throws DaoException {
+	public int getQuantityOfPage(String category) throws DaoException {
 		try {
-			return (int) Math.ceil((double) getQuantityOfTableRow()
+			return (int) Math.ceil((double) getQuantityOfTableRow(category)
 					/ DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE);
 		} catch (Exception e) {
 			log.error(ExceptionMessages.ERROR_IN_DAO + e);
@@ -145,12 +146,11 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 	
 	/**
 	 * Method get last insert id
-	 * @throws ServiceException 
 	 * @throws DaoException
 	 */
 	@Override
-	public int getQuantityOfTableRow() throws DaoException {
-		Number number =(Number) (getCurrentSession().createQuery(GET_COUNT_ROW)).uniqueResult();
+	public int getQuantityOfTableRow(String category) throws DaoException {
+		Number number =(Number) (getCurrentSession().createQuery(GET_COUNT_ROW + category)).uniqueResult();
 		try {
 			return number.intValue();
 		} catch (Exception e) {
@@ -161,7 +161,6 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 	
 	/**
 	 * Method get last insert id
-	 * @throws ServiceException 
 	 * @throws DaoException
 	 */
 	@Override
@@ -184,7 +183,7 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 	/**
 	 *
 	 * @param criteria
-	 * @param selectionNumber
+	 * @param userNumberOfElements
 	 * @return
 	 */
 	@Override

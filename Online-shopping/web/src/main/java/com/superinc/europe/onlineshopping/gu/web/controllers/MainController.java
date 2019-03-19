@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.superinc.europe.onlineshopping.gu.entities.dto.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -29,11 +30,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
-import com.superinc.europe.onlineshopping.gu.entities.dto.Bucket;
-import com.superinc.europe.onlineshopping.gu.entities.dto.CategoryDTO;
-import com.superinc.europe.onlineshopping.gu.entities.dto.CustomUserParamDTO;
-import com.superinc.europe.onlineshopping.gu.entities.dto.UserDTO;
-import com.superinc.europe.onlineshopping.gu.entities.dto.QuantityAndSum;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Category;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
@@ -197,7 +193,7 @@ public class MainController {
 			model.put("currentCurrency", iCurrencyService.getCurrentCurrency());
 			model.put("currentCurrencySymbol", iCurrencyService.getCurrentCurrencySymbol());
 			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
-					navigationService.getDataToPaginationWidget(productService.getQuantityOfPage()));
+					navigationService.getDataToPaginationWidget(productService.getQuantityOfPage(category)));
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
 			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, category);
 			//if (request.getParameter(RequestParamConstants.SELECTED_PAGE) == null) {
@@ -302,7 +298,7 @@ public class MainController {
 		}
 		try {
 			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
-					navigationService.getDataToPaginationWidget(productService.getQuantityOfPage()));
+					navigationService.getDataToPaginationWidget(productService.getQuantityOfPage(category)));
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(category));
 			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, category);
 			//if (request.getParameter(RequestParamConstants.SELECTED_PAGE) == null) {
@@ -367,7 +363,7 @@ public class MainController {
 			customUserParam.setIntCharacteristicMin1(priceLower);
 			customUserParam.setIntCharacteristicMax1(priceHighter);
 			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
-					navigationService.getDataToPaginationWidget(productService.getQuantityOfPage()));
+					navigationService.getDataToPaginationWidget(productService.getQuantityOfPage("1")));
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getDefaultProductCategories());
 			model.put(RequestParamConstants.PRODUCTS, productService.obtainFullSelection(customUserParam, selectedPage));
 		} catch (Exception e) {
@@ -576,6 +572,14 @@ public String addNewGoodsToCart2(ModelMap model, HttpServletRequest request, Htt
 		List<QuantityAndSum> updatedList = getUpdatedQuantityAndSumWidget(request);
 		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
 		List<Bucket> bucket = HttpUtils.getBucket(session);
+		List<ExtendedProductDTO> extendedBucket = new ArrayList<>();
+		for (Bucket item: bucket) {
+			Product product = productService.getProductById(item.getProductId());
+			ExtendedProductDTO extendedProductDTO = new ExtendedProductDTO(product);
+			extendedProductDTO.setQuantity(item.getQuantity());
+			extendedBucket.add(extendedProductDTO);
+		}
+		model.put("extendedBucket", extendedBucket);
 		List<Bucket> updatedBucket = iCurrencyService.updateCurrencyInBucket(bucket);
 		model.put(RequestParamConstants.BUCKET_WIDGET, updatedBucket);
 		model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET,
@@ -642,6 +646,14 @@ public String addNewGoodsToCart2(ModelMap model, HttpServletRequest request, Htt
 			model.put(RequestParamConstants.QUANTITY_SUM_WIDGET, updatedList);
 //			model.put(RequestParamConstants.BUCKET_WIDGET, HttpUtils.getBucket(session));
 			List<Bucket> bucket = HttpUtils.getBucket(session);
+			List<ExtendedProductDTO> extendedBucket = new ArrayList<>();
+			for (Bucket item: bucket) {
+				Product product = productService.getProductById(item.getProductId());
+				ExtendedProductDTO extendedProductDTO = new ExtendedProductDTO(product);
+				extendedProductDTO.setQuantity(item.getQuantity());
+				extendedBucket.add(extendedProductDTO);
+			}
+			model.put("extendedBucket", extendedBucket);
 			List<Bucket> updatedBucket = iCurrencyService.updateCurrencyInBucket(bucket);
 			model.put(RequestParamConstants.BUCKET_WIDGET, updatedBucket);
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET,

@@ -381,7 +381,42 @@ p.right {
                         <c:forEach items="${requestScope.randomProducts}" var="randomProducts">
                             <div class="thubmnail-recent">
                                 <img src="img/<c:out value="${randomProducts.image1Path}"></c:out>" class="recent-thumb" alt="">
-                                <h2><a href=""><c:out value="${randomProducts.characteristic1}"></c:out> <c:out value="${randomProducts.description}"></c:out></a></h2>
+                                <h2>
+                                    <a href="singleProduct?description=<c:out value="${randomProducts.description}"></c:out>
+&comment=<c:out value="${randomProducts.comment}"></c:out>
+&name=<c:out value="${randomProducts.name}"></c:out>
+&intCharacteristic1=<c:out value="${randomProducts.intCharacteristic1}"></c:out>
+&intCharacteristic2=<c:out value="${randomProducts.intCharacteristic2}"></c:out>
+&intCharacteristic3=<c:out value="${randomProducts.intCharacteristic3}"></c:out>
+&intCharacteristic4=<c:out value="${randomProducts.intCharacteristic4}"></c:out>
+&intCharacteristic5=<c:out value="${randomProducts.intCharacteristic5}"></c:out>
+&characteristic1=<c:out value="${randomProducts.characteristic1}"></c:out>
+&characteristic2=<c:out value="${randomProducts.characteristic2}"></c:out>
+&characteristic3=<c:out value="${randomProducts.characteristic3}"></c:out>
+&characteristic4=<c:out value="${randomProducts.characteristic4}"></c:out>
+&characteristic5=<c:out value="${randomProducts.characteristic5}"></c:out>
+&characteristic6=<c:out value="${randomProducts.characteristic6}"></c:out>
+&characteristic7=<c:out value="${randomProducts.characteristic7}"></c:out>
+&boolCharacteristic1=<c:out value="${randomProducts.boolCharacteristic1}"></c:out>
+&boolCharacteristic2=<c:out value="${randomProducts.boolCharacteristic2}"></c:out>
+&boolCharacteristic3=<c:out value="${randomProducts.boolCharacteristic3}"></c:out>
+&boolCharacteristic4=<c:out value="${randomProducts.boolCharacteristic4}"></c:out>
+&boolCharacteristic5=<c:out value="${randomProducts.boolCharacteristic5}"></c:out>
+&rating=<c:out value="${randomProducts.rating}"></c:out>
+&stockStatus=<c:out value="${randomProducts.stockStatus}"></c:out>
+&image1Path=<c:out value="${randomProducts.image1Path}"></c:out>
+&image2Path=<c:out value="${randomProducts.image2Path}"></c:out>
+&image3Path=<c:out value="${randomProducts.image3Path}"></c:out>
+&image4Path=<c:out value="${randomProducts.image4Path}"></c:out>
+&image5Path=<c:out value="${randomProducts.image5Path}"></c:out>
+&image6Path=<c:out value="${randomProducts.image6Path}"></c:out>
+&price=<c:out value="${randomProducts.price}"></c:out>
+&productId=<c:out value="${randomProducts.productId}"></c:out>
+&categoryId=<c:out value="${randomProducts.categoryFk.categoryId}"></c:out>"
+                                    >
+                                        <c:out value="${randomProducts.characteristic1}"></c:out> <c:out value="${randomProducts.description}"></c:out>
+                                    </a>
+                                </h2>
                                 <div class="product-sidebar-price">
                                     <ins>$<c:out value="${randomProducts.price}"></c:out></ins> <del>$<c:out value="${randomProducts.oldprice}"></c:out></del>
                                 </div>
@@ -394,7 +429,38 @@ p.right {
                         <ul>
                             <c:forEach items="${requestScope.recentPosts}" var="recentPosts">
                                 <li>
-                                    <a href="">
+                                    <a href="singleProduct?description=<c:out value="${recentPosts.description}"></c:out>
+&comment=<c:out value="${recentPosts.comment}"></c:out>
+&name=<c:out value="${recentPosts.name}"></c:out>
+&intCharacteristic1=<c:out value="${recentPosts.intCharacteristic1}"></c:out>
+&intCharacteristic2=<c:out value="${recentPosts.intCharacteristic2}"></c:out>
+&intCharacteristic3=<c:out value="${recentPosts.intCharacteristic3}"></c:out>
+&intCharacteristic4=<c:out value="${recentPosts.intCharacteristic4}"></c:out>
+&intCharacteristic5=<c:out value="${recentPosts.intCharacteristic5}"></c:out>
+&characteristic1=<c:out value="${recentPosts.characteristic1}"></c:out>
+&characteristic2=<c:out value="${recentPosts.characteristic2}"></c:out>
+&characteristic3=<c:out value="${recentPosts.characteristic3}"></c:out>
+&characteristic4=<c:out value="${recentPosts.characteristic4}"></c:out>
+&characteristic5=<c:out value="${recentPosts.characteristic5}"></c:out>
+&characteristic6=<c:out value="${recentPosts.characteristic6}"></c:out>
+&characteristic7=<c:out value="${recentPosts.characteristic7}"></c:out>
+&boolCharacteristic1=<c:out value="${recentPosts.boolCharacteristic1}"></c:out>
+&boolCharacteristic2=<c:out value="${recentPosts.boolCharacteristic2}"></c:out>
+&boolCharacteristic3=<c:out value="${recentPosts.boolCharacteristic3}"></c:out>
+&boolCharacteristic4=<c:out value="${recentPosts.boolCharacteristic4}"></c:out>
+&boolCharacteristic5=<c:out value="${recentPosts.boolCharacteristic5}"></c:out>
+&rating=<c:out value="${recentPosts.rating}"></c:out>
+&stockStatus=<c:out value="${recentPosts.stockStatus}"></c:out>
+&image1Path=<c:out value="${recentPosts.image1Path}"></c:out>
+&image2Path=<c:out value="${recentPosts.image2Path}"></c:out>
+&image3Path=<c:out value="${recentPosts.image3Path}"></c:out>
+&image4Path=<c:out value="${recentPosts.image4Path}"></c:out>
+&image5Path=<c:out value="${recentPosts.image5Path}"></c:out>
+&image6Path=<c:out value="${recentPosts.image6Path}"></c:out>
+&price=<c:out value="${recentPosts.price}"></c:out>
+&productId=<c:out value="${recentPosts.productId}"></c:out>
+&categoryId=<c:out value="${recentPosts.categoryFk.categoryId}"></c:out>"
+                                    >
                                         <c:out value="${recentPosts.characteristic1}"></c:out> <c:out
                                             value="${recentPosts.description}"></c:out>
                                     </a>
@@ -458,8 +524,7 @@ p.right {
 								</div>
 							  </div>   
                             </div>
-                       	
-                            
+
                             <div class="col-sm-6">
                                 <div class="product-inner">
                                     <h2 class="product-name"><%=request.getParameter("characteristic1")%> <%=request.getParameter("description")%></h2>
@@ -654,12 +719,64 @@ p.right {
                                         <div class="product-f-image">
                                             <img src="img/<c:out value="${relatedProducts.image1Path}"></c:out>" alt="">
                                             <div class="product-hover">
-                                                <a href="#" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-                                                <a href="single-product.html" class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                                <a href="${context}/addNewProductToCart?
+description=<c:out value="${relatedProducts.description}"></c:out>
+&name=<c:out value="${relatedProducts.name}"></c:out>
+&characteristic1=<c:out value="${relatedProducts.characteristic1}"></c:out>
+&characteristic2=<c:out value="${relatedProducts.characteristic2}"></c:out>
+&characteristic3=<c:out value="${relatedProducts.characteristic3}"></c:out>
+&characteristic4=<c:out value="${relatedProducts.characteristic4}"></c:out>
+&characteristic6=<c:out value="${relatedProducts.characteristic6}"></c:out>
+&characteristic7=<c:out value="${relatedProducts.characteristic7}"></c:out>
+&rating=<c:out value="${relatedProducts.rating}"></c:out>
+&stockStatus=<c:out value="${relatedProducts.stockStatus}"></c:out>
+&image1Path=<c:out value="${relatedProducts.image1Path}"></c:out>
+&price=<c:out value="${relatedProducts.intCharacteristic1}"></c:out>
+&productId=<c:out value="${relatedProducts.productId}"></c:out>"
+                                                    class="add-to-cart-link">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                    Add to cart
+                                                </a>
+                                                <a href="#" class="view-details-link"><i class="fa fa-link"></i> See details</a>
                                             </div>
                                         </div>
 
-                                        <h2><a href="single-product.html"><c:out value="${relatedProducts.characteristic1}"></c:out> <c:out value="${relatedProducts.description}"></c:out></a></h2>
+                                        <h2>
+                                            <a href="singleProduct?description=<c:out value="${relatedProducts.description}"></c:out>
+&comment=<c:out value="${relatedProducts.comment}"></c:out>
+&name=<c:out value="${relatedProducts.name}"></c:out>
+&intCharacteristic1=<c:out value="${relatedProducts.intCharacteristic1}"></c:out>
+&intCharacteristic2=<c:out value="${relatedProducts.intCharacteristic2}"></c:out>
+&intCharacteristic3=<c:out value="${relatedProducts.intCharacteristic3}"></c:out>
+&intCharacteristic4=<c:out value="${relatedProducts.intCharacteristic4}"></c:out>
+&intCharacteristic5=<c:out value="${relatedProducts.intCharacteristic5}"></c:out>
+&characteristic1=<c:out value="${relatedProducts.characteristic1}"></c:out>
+&characteristic2=<c:out value="${relatedProducts.characteristic2}"></c:out>
+&characteristic3=<c:out value="${relatedProducts.characteristic3}"></c:out>
+&characteristic4=<c:out value="${relatedProducts.characteristic4}"></c:out>
+&characteristic5=<c:out value="${relatedProducts.characteristic5}"></c:out>
+&characteristic6=<c:out value="${relatedProducts.characteristic6}"></c:out>
+&characteristic7=<c:out value="${relatedProducts.characteristic7}"></c:out>
+&boolCharacteristic1=<c:out value="${relatedProducts.boolCharacteristic1}"></c:out>
+&boolCharacteristic2=<c:out value="${relatedProducts.boolCharacteristic2}"></c:out>
+&boolCharacteristic3=<c:out value="${relatedProducts.boolCharacteristic3}"></c:out>
+&boolCharacteristic4=<c:out value="${relatedProducts.boolCharacteristic4}"></c:out>
+&boolCharacteristic5=<c:out value="${relatedProducts.boolCharacteristic5}"></c:out>
+&rating=<c:out value="${relatedProducts.rating}"></c:out>
+&stockStatus=<c:out value="${relatedProducts.stockStatus}"></c:out>
+&image1Path=<c:out value="${relatedProducts.image1Path}"></c:out>
+&image2Path=<c:out value="${relatedProducts.image2Path}"></c:out>
+&image3Path=<c:out value="${relatedProducts.image3Path}"></c:out>
+&image4Path=<c:out value="${relatedProducts.image4Path}"></c:out>
+&image5Path=<c:out value="${relatedProducts.image5Path}"></c:out>
+&image6Path=<c:out value="${relatedProducts.image6Path}"></c:out>
+&price=<c:out value="${relatedProducts.price}"></c:out>
+&productId=<c:out value="${relatedProducts.productId}"></c:out>
+&categoryId=<c:out value="${relatedProducts.categoryFk.categoryId}"></c:out>"
+                                            >
+                                                <c:out value="${relatedProducts.characteristic1}"></c:out> <c:out value="${relatedProducts.description}"></c:out>
+                                            </a>
+                                        </h2>
 
                                         <div class="product-carousel-price">
                                             <ins>$<c:out value="${relatedProducts.price}"></c:out></ins> <del>$<c:out value="${relatedProducts.oldprice}"></c:out></del>

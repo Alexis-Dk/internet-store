@@ -52,24 +52,27 @@ public interface IDaoProduct extends IBaseDao<Product>{
 	 * @throws DaoException
 	 */
 	Session getCurrentSession() throws DaoException;
-	
+
 	/**
-	 * Method get number integer number products in the page
+	 *
+	 * @param category
+	 * @return
 	 * @throws DaoException
 	 */
-	int getQuantityOfPage() throws DaoException;
-	
+	int getQuantityOfPage(String category) throws DaoException;
+
+
 	/**
-	 * Method get quantity of row
-	 * @throws ServiceException 
+	 *
+	 * @param category
+	 * @return
 	 * @throws DaoException
 	 */
-	int getQuantityOfTableRow() throws DaoException;
+	int getQuantityOfTableRow(String category) throws DaoException;
 
 	/**
 	 * Method get last insert id
-	 * @param criteria 
-	 * @throws ServiceException 
+	 * @param criteria
 	 * @throws DaoException
 	 */
 	int getLastInsertId(Criteria criteria) throws DaoException;

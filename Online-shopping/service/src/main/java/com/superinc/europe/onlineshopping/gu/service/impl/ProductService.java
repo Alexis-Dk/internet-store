@@ -285,15 +285,17 @@ public class ProductService implements IProductService<Product> {
 		}
 		return products;
 	}
-	
+
 	/**
-	 * Method get number integer number products in the page
-	 * @throws ServiceException 
+	 *
+	 * @param category
+	 * @return
+	 * @throws ServiceException
 	 */
 	@Override
-	public int getQuantityOfPage() throws ServiceException {
+	public int getQuantityOfPage(String category) throws ServiceException {
 		try {
-			return  daoProduct.getQuantityOfPage();
+			return  daoProduct.getQuantityOfPage(category);
 		} catch (Exception e) {
 			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
 			throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);

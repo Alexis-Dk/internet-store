@@ -234,33 +234,66 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    	<c:forEach items="${requestScope.cart}" var="cart">
+                                    <c:forEach items="${requestScope.extendedBucket}" var="extendedBucket">
                                         <tr class="cart_item">
                                             <td class="product-remove">
-                                                <a title="Remove this item" class="remove" href="deleteFromCart?deleteByDescription=<c:out value="${cart.description}"></c:out>">×</a> 
+                                                <a title="Remove this item" class="remove" href="deleteFromCart?deleteByDescription=<c:out value="${extendedBucket.getDescription()}"></c:out>">×</a>
                                             </td>
 
                                             <td class="product-thumbnail">
-                                                <a href="singleProduct2?productId=<c:out value="${cart.productId}"></c:out>"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="img/<c:out value="${cart.imagePath}"></c:out>"></a>
+                                                <a href="singleProduct?description=<c:out value="${extendedBucket.getDescription()}"></c:out>
+&comment=<c:out value="${extendedBucket.getComment()}"></c:out>
+&name=<c:out value="${extendedBucket.getName()}"></c:out>
+&intCharacteristic1=<c:out value="${extendedBucket.getIntCharacteristic1()}"></c:out>
+&intCharacteristic2=<c:out value="${extendedBucket.getIntCharacteristic2()}"></c:out>
+&intCharacteristic3=<c:out value="${extendedBucket.getIntCharacteristic3()}"></c:out>
+&intCharacteristic4=<c:out value="${extendedBucket.getIntCharacteristic4()}"></c:out>
+&intCharacteristic5=<c:out value="${extendedBucket.getIntCharacteristic5()}"></c:out>
+&characteristic1=<c:out value="${extendedBucket.getCharacteristic1()}"></c:out>
+&characteristic2=<c:out value="${extendedBucket.getCharacteristic2()}"></c:out>
+&characteristic3=<c:out value="${extendedBucket.getCharacteristic3()}"></c:out>
+&characteristic4=<c:out value="${extendedBucket.getCharacteristic4()}"></c:out>
+&characteristic5=<c:out value="${extendedBucket.getCharacteristic5()}"></c:out>
+&characteristic6=<c:out value="${extendedBucket.getCharacteristic6()}"></c:out>
+&characteristic7=<c:out value="${extendedBucket.getCharacteristic7()}"></c:out>
+&boolCharacteristic1=<c:out value="${extendedBucket.getBoolCharacteristic1()}"></c:out>
+&boolCharacteristic2=<c:out value="${extendedBucket.getBoolCharacteristic2()}"></c:out>
+&boolCharacteristic3=<c:out value="${extendedBucket.getBoolCharacteristic3()}"></c:out>
+&boolCharacteristic4=<c:out value="${extendedBucket.getBoolCharacteristic4()}"></c:out>
+&boolCharacteristic5=<c:out value="${extendedBucket.getBoolCharacteristic5()}"></c:out>
+&rating=<c:out value="${extendedBucket.getRating()}"></c:out>
+&stockStatus=<c:out value="${extendedBucket.getStockStatus()}"></c:out>
+&image1Path=<c:out value="${extendedBucket.getImage1Path()}"></c:out>
+&image2Path=<c:out value="${extendedBucket.getImage2Path()}"></c:out>
+&image3Path=<c:out value="${extendedBucket.getImage3Path()}"></c:out>
+&image4Path=<c:out value="${extendedBucket.getImage4Path()}"></c:out>
+&image5Path=<c:out value="${extendedBucket.getImage5Path()}"></c:out>
+&image6Path=<c:out value="${extendedBucket.getImage6Path()}"></c:out>
+&price=<c:out value="${extendedBucket.getPrice()}"></c:out>
+&productId=<c:out value="${extendedBucket.getProductId()}"></c:out>
+&categoryId=<c:out value="${extendedBucket.getCategoryId()}"></c:out>"
+                                                >
+                                                    <img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="img/<c:out value="${extendedBucket.getImage1Path()}"></c:out>">
+                                                </a>
                                             </td>
 
                                             <td class="product-name">
-                                                <a href="single-product.html"><c:out value="${cart.name}"></c:out> <c:out value="${cart.description}"></c:out></a> 
+                                                <a href="single-product.html"><c:out value="${extendedBucket.name}"></c:out> <c:out value="${extendedBucket.getDescription()}"></c:out></a>
                                             </td>
 
                                             <td class="product-price">
-                                                <span class="amount">${currentCurrencySymbol}<c:out value="${cart.price}"></c:out></span> 
+                                                <span class="amount">${currentCurrencySymbol}<c:out value="${extendedBucket.getPrice()}"></c:out></span>
                                             </td>
 
                                            <td class="product-quantity">
                                                 <div class="quantity buttons_added">
-                                                    <a href="decreaseQuantity?productId=<c:out value="${cart.productId}"></c:out>"><img width="19" height="19" alt="poster_1_up" class="shop_thumbnail" src="img/dicreaseButton.jpg"></a>
-                                                    <span class="input-text qty text"> <c:out value="${cart.quantity}"></c:out> </span> 
-                                                    <a href="increaseQuantity?productId=<c:out value="${cart.productId}"></c:out>"><img width="19" height="19" alt="poster_1_up" class="shop_thumbnail" src="img/increaseButton.jpg"></a>
+                                                    <a href="decreaseQuantity?productId=<c:out value="${extendedBucket.getProductId()}"></c:out>"><img width="19" height="19" alt="poster_1_up" class="shop_thumbnail" src="img/dicreaseButton.jpg"></a>
+                                                    <span class="input-text qty text"> <c:out value="${extendedBucket.getQuantity()}"></c:out> </span>
+                                                    <a href="increaseQuantity?productId=<c:out value="${extendedBucket.getProductId()}"></c:out>"><img width="19" height="19" alt="poster_1_up" class="shop_thumbnail" src="img/increaseButton.jpg"></a>
                                                 </div>
                                             </td>  
                                             <td class="product-subtotal">
-                                                <span class="amount"><c:out value="${cart.productId}"></c:out></span> 
+                                                <span class="amount"><c:out value="${extendedBucket.getProductId()}"></c:out></span>
                                             </td>
                                         </tr>
                                         </c:forEach>
