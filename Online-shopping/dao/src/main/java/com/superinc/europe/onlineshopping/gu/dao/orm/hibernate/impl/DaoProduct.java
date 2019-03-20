@@ -8,6 +8,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.MatchMode;
 import org.springframework.stereotype.Repository;
 
 import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
@@ -45,6 +46,7 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 	//private static final String SELECT_MAX_PRODUCT_ID_FROM_PRODUCTS = "SELECT MAX(product_id) FROM Products";
 	private static final int DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE = 12;
 	private static final String ORDER_BY_RAND = "1=1 order by rand()";
+	public static final String DESCRIPTION = "description";
 
 	Logger log = Logger.getLogger(DaoProduct.class);
 	
@@ -107,7 +109,24 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 		
 		return criteria.list();
 	}
-	
+
+	/**
+	 *
+	 * @param criteria
+	 * @param customUserParam
+	 * @param numberOfPage
+	 * @param category
+	 * @param description
+	 * @return
+	 */
+	public List<Product> getProductByCategoryAndDescription(Criteria criteria, CustomUserParamDTO customUserParam, int numberOfPage, String category, String description) {
+		criteria.add(Restrictions.sqlRestriction(CATEGORY_ID + category));
+		criteria.add(Restrictions.like(DESCRIPTION, description, MatchMode.START));
+		criteria.setMaxResults(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE);
+		criteria.setFirstResult(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE * (numberOfPage - 1));
+		return criteria.list();
+	}
+
 	/**
 	 * Method get list products
 	 * @param criteria

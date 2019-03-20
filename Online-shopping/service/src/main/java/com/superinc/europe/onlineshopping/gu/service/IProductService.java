@@ -94,6 +94,17 @@ public interface IProductService<T> extends IBaseService<T> {
 
 	/**
 	 *
+	 * @param customUserParam
+	 * @param userNumberOfPage
+	 * @param category
+	 * @param description
+	 * @return
+	 * @throws ServiceException
+	 */
+	List<Product> obtainProductsByCategoryAndDescription(CustomUserParamDTO customUserParam, String userNumberOfPage, String category, String description) throws ServiceException;
+
+	/**
+	 *
 	 * @param userNumberOfElements
 	 * @return
 	 * @throws ServiceException

@@ -211,6 +211,23 @@ public class ProductService implements IProductService<Product> {
 			return products;
 	}
 
+	@Override
+	public List<Product> obtainProductsByCategoryAndDescription(CustomUserParamDTO customUserParam, String userNumberOfPage, String category, String description) throws ServiceException{
+		Session session = daoProduct.getCurrentSession();
+		List<Product> products = null;
+		try {
+			products = (List<Product>) daoProduct.getProductByCategoryAndDescription(
+					session.createCriteria(Product.class, PRODUCT), customUserParam, Integer.parseInt(userNumberOfPage), category, description);
+			filterPrice(products);
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
+		}
+
+		return products;
+	}
+
 	public List<Product> getLastSelection(int userNumberOfElements) throws ServiceException {
 		Session session = daoProduct.getCurrentSession();
 		List<Product> products = null;

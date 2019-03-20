@@ -39,6 +39,18 @@ public interface IDaoProduct extends IBaseDao<Product>{
 			throws DaoException;
 
 	/**
+	 *
+	 * @param criteria
+	 * @param customUserParam
+	 * @param numberOfPage
+	 * @param category
+	 * @param description
+	 * @return
+	 * @throws DaoException
+	 */
+	List<Product> getProductByCategoryAndDescription(Criteria criteria, CustomUserParamDTO customUserParam, int numberOfPage, String category, String description)throws DaoException;
+
+	/**
 	 * Method get list products
 	 * @param criteria
 	 * @param customUserParam
