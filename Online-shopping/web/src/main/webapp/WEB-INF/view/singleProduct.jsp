@@ -737,7 +737,41 @@ description=<c:out value="${relatedProducts.description}"></c:out>
                                                     <i class="fa fa-shopping-cart"></i>
                                                     Add to cart
                                                 </a>
-                                                <a href="#" class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                                <a href="singleProduct?description=<c:out value="${relatedProducts.description}"></c:out>
+&comment=<c:out value="${relatedProducts.comment}"></c:out>
+&name=<c:out value="${relatedProducts.name}"></c:out>
+&intCharacteristic1=<c:out value="${relatedProducts.intCharacteristic1}"></c:out>
+&intCharacteristic2=<c:out value="${relatedProducts.intCharacteristic2}"></c:out>
+&intCharacteristic3=<c:out value="${relatedProducts.intCharacteristic3}"></c:out>
+&intCharacteristic4=<c:out value="${relatedProducts.intCharacteristic4}"></c:out>
+&intCharacteristic5=<c:out value="${relatedProducts.intCharacteristic5}"></c:out>
+&characteristic1=<c:out value="${relatedProducts.characteristic1}"></c:out>
+&characteristic2=<c:out value="${relatedProducts.characteristic2}"></c:out>
+&characteristic3=<c:out value="${relatedProducts.characteristic3}"></c:out>
+&characteristic4=<c:out value="${relatedProducts.characteristic4}"></c:out>
+&characteristic5=<c:out value="${relatedProducts.characteristic5}"></c:out>
+&characteristic6=<c:out value="${relatedProducts.characteristic6}"></c:out>
+&characteristic7=<c:out value="${relatedProducts.characteristic7}"></c:out>
+&boolCharacteristic1=<c:out value="${relatedProducts.boolCharacteristic1}"></c:out>
+&boolCharacteristic2=<c:out value="${relatedProducts.boolCharacteristic2}"></c:out>
+&boolCharacteristic3=<c:out value="${relatedProducts.boolCharacteristic3}"></c:out>
+&boolCharacteristic4=<c:out value="${relatedProducts.boolCharacteristic4}"></c:out>
+&boolCharacteristic5=<c:out value="${relatedProducts.boolCharacteristic5}"></c:out>
+&rating=<c:out value="${relatedProducts.rating}"></c:out>
+&stockStatus=<c:out value="${relatedProducts.stockStatus}"></c:out>
+&image1Path=<c:out value="${relatedProducts.image1Path}"></c:out>
+&image2Path=<c:out value="${relatedProducts.image2Path}"></c:out>
+&image3Path=<c:out value="${relatedProducts.image3Path}"></c:out>
+&image4Path=<c:out value="${relatedProducts.image4Path}"></c:out>
+&image5Path=<c:out value="${relatedProducts.image5Path}"></c:out>
+&image6Path=<c:out value="${relatedProducts.image6Path}"></c:out>
+&price=<c:out value="${relatedProducts.price}"></c:out>
+&productId=<c:out value="${relatedProducts.productId}"></c:out>
+&categoryId=<c:out value="${relatedProducts.categoryFk.categoryId}"></c:out>"
+                                                    class="view-details-link">
+                                                    <i class="fa fa-link"></i>
+                                                    See details
+                                                </a>
                                             </div>
                                         </div>
 

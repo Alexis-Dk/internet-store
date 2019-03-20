@@ -372,7 +372,41 @@ description=<c:out value="${latestProducts.description}"></c:out>
                                                     <i class="fa fa-shopping-cart"></i>
                                                     Add to cart
                                                 </a>
-                                                <a href="#" class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                                                <a href="singleProduct?description=<c:out value="${latestProducts.description}"></c:out>
+&comment=<c:out value="${latestProducts.comment}"></c:out>
+&name=<c:out value="${latestProducts.name}"></c:out>
+&intCharacteristic1=<c:out value="${latestProducts.intCharacteristic1}"></c:out>
+&intCharacteristic2=<c:out value="${latestProducts.intCharacteristic2}"></c:out>
+&intCharacteristic3=<c:out value="${latestProducts.intCharacteristic3}"></c:out>
+&intCharacteristic4=<c:out value="${latestProducts.intCharacteristic4}"></c:out>
+&intCharacteristic5=<c:out value="${latestProducts.intCharacteristic5}"></c:out>
+&characteristic1=<c:out value="${latestProducts.characteristic1}"></c:out>
+&characteristic2=<c:out value="${latestProducts.characteristic2}"></c:out>
+&characteristic3=<c:out value="${latestProducts.characteristic3}"></c:out>
+&characteristic4=<c:out value="${latestProducts.characteristic4}"></c:out>
+&characteristic5=<c:out value="${latestProducts.characteristic5}"></c:out>
+&characteristic6=<c:out value="${latestProducts.characteristic6}"></c:out>
+&characteristic7=<c:out value="${latestProducts.characteristic7}"></c:out>
+&boolCharacteristic1=<c:out value="${latestProducts.boolCharacteristic1}"></c:out>
+&boolCharacteristic2=<c:out value="${latestProducts.boolCharacteristic2}"></c:out>
+&boolCharacteristic3=<c:out value="${latestProducts.boolCharacteristic3}"></c:out>
+&boolCharacteristic4=<c:out value="${latestProducts.boolCharacteristic4}"></c:out>
+&boolCharacteristic5=<c:out value="${latestProducts.boolCharacteristic5}"></c:out>
+&rating=<c:out value="${latestProducts.rating}"></c:out>
+&stockStatus=<c:out value="${latestProducts.stockStatus}"></c:out>
+&image1Path=<c:out value="${latestProducts.image1Path}"></c:out>
+&image2Path=<c:out value="${latestProducts.image2Path}"></c:out>
+&image3Path=<c:out value="${latestProducts.image3Path}"></c:out>
+&image4Path=<c:out value="${latestProducts.image4Path}"></c:out>
+&image5Path=<c:out value="${latestProducts.image5Path}"></c:out>
+&image6Path=<c:out value="${latestProducts.image6Path}"></c:out>
+&price=<c:out value="${latestProducts.price}"></c:out>
+&productId=<c:out value="${latestProducts.productId}"></c:out>
+&categoryId=<c:out value="${latestProducts.categoryFk.categoryId}"></c:out>"
+                                                    class="view-details-link">
+                                                    <i class="fa fa-link"></i>
+                                                    See details
+                                                </a>
                                             </div>
                                         </div>
 
