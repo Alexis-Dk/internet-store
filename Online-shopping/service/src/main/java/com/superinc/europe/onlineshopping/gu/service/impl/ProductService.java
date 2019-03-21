@@ -1,15 +1,5 @@
 package com.superinc.europe.onlineshopping.gu.service.impl;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.log4j.Logger;
-import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
 import com.superinc.europe.onlineshopping.gu.entities.dto.CustomUserParamDTO;
@@ -20,23 +10,32 @@ import com.superinc.europe.onlineshopping.gu.service.exception.ErrorAddingPoduct
 import com.superinc.europe.onlineshopping.gu.service.exception.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
 import com.tunyk.currencyconverter.api.CurrencyConverterException;
+import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
  */
 @Service
-@Transactional 
+@Transactional
 public class ProductService implements IProductService<Product> {
 
 	private static Logger logger = Logger.getLogger(ProductService.class);
-	
+
 	private static final int NUMBER_OF_START_PAGE = 1;
-	
+
 	private static final String PRODUCT = "product";
 
-    @Autowired
-    private ICurrencyService iCurrencyService;
-	
+	@Autowired
+	private ICurrencyService iCurrencyService;
+
 	@Autowired
 	private IDaoProduct daoProduct;
 
@@ -47,7 +46,7 @@ public class ProductService implements IProductService<Product> {
 	 */
 	@Override
 	public Serializable add(Product ob) throws ErrorAddingPoductServiceException {
-		Serializable id = null; 
+		Serializable id = null;
 		try {
 			id = daoProduct.add(ob);
 		} catch (DaoException e) {
@@ -56,7 +55,7 @@ public class ProductService implements IProductService<Product> {
 		}
 		return id;
 	}
-	
+
 	/**
 	 * Method get from Session
 	 * @param id
@@ -71,7 +70,7 @@ public class ProductService implements IProductService<Product> {
 			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
 			throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
 		}
-		
+
 	}
 
 	/**
@@ -89,7 +88,7 @@ public class ProductService implements IProductService<Product> {
 			throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
 		}
 	}
-	
+
 	/**
 	 * Method delete from Session
 	 * @param id
@@ -120,7 +119,7 @@ public class ProductService implements IProductService<Product> {
 		}
 	}
 
-	
+
 	/**
 	 * Method obtain list of goods default numbers of page
 	 * @param customUserParam
@@ -142,7 +141,7 @@ public class ProductService implements IProductService<Product> {
 		}
 		return products;
 	}
-	
+
 	/**
 	 * Method obtain list of goods default numbers of page
 	 * @param customUserParam
@@ -165,7 +164,7 @@ public class ProductService implements IProductService<Product> {
 		}
 		return products;
 	}
-	
+
 	/**
 	 * Method obtain list of goods selection numbers of page
 	 * @param customUserParam
@@ -174,19 +173,19 @@ public class ProductService implements IProductService<Product> {
 	 */
 	@Override
 	public List<Product> obtainUsersSelection(CustomUserParamDTO customUserParam, String userNumberOfPage, String category) throws ServiceException{
-			Session session = daoProduct.getCurrentSession();
-			List<Product> products = null;
-			try {
+		Session session = daoProduct.getCurrentSession();
+		List<Product> products = null;
+		try {
 			products = (List<Product>) daoProduct.getProduct(
 					session.createCriteria(Product.class, PRODUCT), customUserParam, Integer.parseInt(userNumberOfPage), category);
-			} catch (Exception e) {
-				session.getTransaction().rollback();
-				logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
-				throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
-			}
-			return products;
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
+		}
+		return products;
 	}
-	
+
 	/**
 	 * Method obtain list of goods selection numbers of page
 	 * @param customUserParam
@@ -196,19 +195,19 @@ public class ProductService implements IProductService<Product> {
 	 */
 	@Override
 	public List<Product> obtainUsersSelection(CustomUserParamDTO customUserParam, String userNumberOfPage, String category, Map<String, String[]> selectedItems) throws ServiceException{
-			Session session = daoProduct.getCurrentSession();
-			List<Product> products = null;
-			try {
+		Session session = daoProduct.getCurrentSession();
+		List<Product> products = null;
+		try {
 			products = (List<Product>) daoProduct.getProduct(
 					session.createCriteria(Product.class, PRODUCT), customUserParam, Integer.parseInt(userNumberOfPage), category, selectedItems);
 			filterPrice(products);
-			} catch (Exception e) {
-				session.getTransaction().rollback();
-				logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
-				throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
-			}
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			logger.error(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE + e);
+			throw new ServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
+		}
 
-			return products;
+		return products;
 	}
 
 	@Override
@@ -281,7 +280,7 @@ public class ProductService implements IProductService<Product> {
 		}
 		return list;
 	}
-	
+
 	/**
 	 * Method obtain list of goods default numbers of page
 	 * @param customUserParam
@@ -321,7 +320,7 @@ public class ProductService implements IProductService<Product> {
 
 	/**
 	 * Method get last insert id
-	 * @throws ServiceException 
+	 * @throws ServiceException
 	 */
 	@Override
 	public int getLastInsertId() throws ErrorAddingPoductServiceException {
@@ -333,5 +332,5 @@ public class ProductService implements IProductService<Product> {
 			throw new ErrorAddingPoductServiceException(ExceptionMessages.ERROR_IN_PRODUCT_SERVICE, e);
 		}
 	}
-	
+
 }

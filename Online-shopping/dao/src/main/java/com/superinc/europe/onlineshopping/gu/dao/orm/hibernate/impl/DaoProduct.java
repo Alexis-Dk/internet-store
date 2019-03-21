@@ -1,22 +1,21 @@
 package com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.impl;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.log4j.Logger;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.MatchMode;
-import org.springframework.stereotype.Repository;
-
-import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.DaoException;
 import com.superinc.europe.onlineshopping.gu.dao.exceptions.ExceptionMessages;
 import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
 import com.superinc.europe.onlineshopping.gu.entities.dto.CustomUserParamDTO;
 import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
+import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Alexey Druzik on 29.08.2016.
@@ -47,9 +46,10 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 	private static final int DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE = 12;
 	private static final String ORDER_BY_RAND = "1=1 order by rand()";
 	public static final String DESCRIPTION = "description";
+	public static final String CHARACTERISTIC_1 = "characteristic1";
 
 	Logger log = Logger.getLogger(DaoProduct.class);
-	
+
 	/**
 	 * Method get current session
 	 * @throws DaoException
@@ -58,7 +58,7 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 	public Session getCurrentSession() throws DaoException {
 		return getSession();
 	}
-	
+
 	/**
 	 * Method get list products
 	 * @param criteria
@@ -74,12 +74,12 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 		criteria.setFirstResult(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE * (numberOfPage - 1));
 
 		criteria = addBoolCharCriteria(criteria, customUserParam);
-		
+
 		criteria = addBoolCharCriteria(criteria, customUserParam);
-		
+
 		return criteria.list();
 	}
-	
+
 	/**
 	 * Method get list products
 	 * @param criteria
@@ -96,7 +96,7 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 		criteria.setFirstResult(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE * (numberOfPage - 1));
 
 		criteria = addIntCriteria(criteria, customUserParam);
-		
+
 		for(Map.Entry<String, String[]> entry : selectedItems.entrySet()) {
 			if (entry.getValue().length > 0 && entry.getValue()[0] != "") {
 				String key = entry.getKey();
@@ -104,9 +104,9 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 				criteria.add(Restrictions.in(key, value));
 			}
 		}
-		
+
 		criteria = addBoolCharCriteria(criteria, customUserParam);
-		
+
 		return criteria.list();
 	}
 
@@ -121,7 +121,11 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 	 */
 	public List<Product> getProductByCategoryAndDescription(Criteria criteria, CustomUserParamDTO customUserParam, int numberOfPage, String category, String description) {
 		criteria.add(Restrictions.sqlRestriction(CATEGORY_ID + category));
-		criteria.add(Restrictions.like(DESCRIPTION, description, MatchMode.START));
+
+		Criterion rest1= Restrictions.and(Restrictions.like(DESCRIPTION, description, MatchMode.ANYWHERE));
+		Criterion rest2= Restrictions.and(Restrictions.like(CHARACTERISTIC_1, description, MatchMode.ANYWHERE));
+		criteria.add(Restrictions.or(rest1, rest2));
+
 		criteria.setMaxResults(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE);
 		criteria.setFirstResult(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE * (numberOfPage - 1));
 		return criteria.list();
@@ -140,9 +144,9 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 		criteria.setFirstResult(DEFAULT_NUMBER_OF_ELEMENTS_IN_CURRENT_PAGE*(quantityOfPage - 1));
 
 		criteria = addBoolCharCriteria(criteria, customUserParam);
-		
+
 		criteria = addBoolCharCriteria(criteria, customUserParam);
-		
+
 		return criteria.list();
 	}
 
@@ -162,7 +166,7 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 			throw new DaoException(ExceptionMessages.ERROR_IN_DAO, e);
 		}
 	}
-	
+
 	/**
 	 * Method get last insert id
 	 * @throws DaoException
@@ -177,7 +181,7 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 			throw new DaoException(ExceptionMessages.ERROR_IN_DAO, e);
 		}
 	}
-	
+
 	/**
 	 * Method get last insert id
 	 * @throws DaoException
@@ -187,7 +191,7 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 		criteria.setProjection(Projections.max(PRODUCT_ID));
 		Integer lastId = (Integer) criteria.uniqueResult();
 //		Integer lastId = (Integer) getCurrentSession().createSQLQuery(SELECT_MAX_PRODUCT_ID_FROM_PRODUCTS)
-//			    .uniqueResult();  
+//			    .uniqueResult();
 		try {
 			if (lastId == null) {
 				return 0;
@@ -246,7 +250,7 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 		boolean boolCharacteristic3 = customUserParam.getBoolCharacteristic3();
 		boolean boolCharacteristic4 = customUserParam.getBoolCharacteristic4();
 		boolean boolCharacteristic5 = customUserParam.getBoolCharacteristic5();
-		
+
 		if (boolCharacteristic1 == true) {
 			criteria.add(Restrictions.sqlRestriction(BOOL_CHARACTERISTIC1_EQUALS + String.valueOf(boolCharacteristic1)));
 		}
@@ -264,7 +268,7 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 		}
 		return criteria;
 	}
-	
+
 	private Criteria addIntCriteria(Criteria criteria, CustomUserParamDTO customUserParam) {
 		String intCharacteristicMin1 = customUserParam.getIntCharacteristicMin1();
 		String intCharacteristicMax1 = customUserParam.getIntCharacteristicMax1();
@@ -276,7 +280,7 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 		String intCharacteristicMax4 = customUserParam.getIntCharacteristicMax4();
 		String intCharacteristicMin5 = customUserParam.getIntCharacteristicMin5();
 		String intCharacteristicMax5 = customUserParam.getIntCharacteristicMax5();
-		
+
 		if (!intCharacteristicMin1.equals(EMPTY_FIELD)) {
 			criteria.add(Restrictions.sqlRestriction(INT_CHAR1_MORE + intCharacteristicMin1));
 		}
@@ -305,9 +309,9 @@ public class DaoProduct extends BaseDao<Product> implements IDaoProduct{
 			criteria.add(Restrictions.sqlRestriction(INT_CHAR5_MORE + intCharacteristicMin5));
 		}
 		if (!intCharacteristicMax5.equals(EMPTY_FIELD)) {
-		criteria.add(Restrictions.sqlRestriction(INT_CHAR5_LESS + intCharacteristicMax5));
+			criteria.add(Restrictions.sqlRestriction(INT_CHAR5_LESS + intCharacteristicMax5));
 		}
 		return criteria;
 	}
-	
+
 }
