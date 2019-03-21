@@ -52,6 +52,7 @@ public class MainController {
 	public static final int NUMBER_OF_RANDOM_PRODUCTS = 4;
 	public static final int ONE_PAGE = 1;
 	public static final String DEFAULT_USER_NUMBER_OF_PAGE = "1";
+	public static final int ZERO_OF_PAGE_NUMBER = 0;
 
 	Logger log = Logger.getLogger(MainController.class);
 
@@ -305,7 +306,7 @@ public class MainController {
 		CustomUserParamDTO customUserParam = (CustomUserParamDTO) request.getSession().getAttribute("customUserParam");
 		try {
 			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
-					navigationService.getDataToPaginationWidget(ONE_PAGE));
+					navigationService.getDataToPaginationWidget(ZERO_OF_PAGE_NUMBER));
 			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(categoryId));
 			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, categoryId);
 			model.put(RequestParamConstants.PRODUCTS, productService.obtainProductsByCategoryAndDescription(customUserParam, DEFAULT_USER_NUMBER_OF_PAGE, (String) categoryId, value));

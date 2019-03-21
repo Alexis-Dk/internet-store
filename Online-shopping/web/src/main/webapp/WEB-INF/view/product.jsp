@@ -83,7 +83,7 @@
 	    text-transform: uppercase;
 	}
     /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-    .row.content {height: 1375px;}
+    .row.content {height: 100%; min-height: 300px;}
     /* Set gray background color and 100% height */
     .sidenav {
       background-color: #F5F5F5;
@@ -669,7 +669,7 @@
                 </c:forEach>  
             </div>
 
-
+            <c:if test="${requestScope.numberOfPage.size() > 0 }">
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-pagination text-center">
@@ -754,14 +754,15 @@
 								 +'&boolCharacteristic3='+document.getElementById('boolCharacteristic3').value
 								 +'&boolCharacteristic4='+document.getElementById('boolCharacteristic4').value
 								 +'&boolCharacteristic5='+document.getElementById('boolCharacteristic5').value" id="add-product-save-link" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>                        
+                                <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+    </c:if>
 </div>
 </div>
 </div>
