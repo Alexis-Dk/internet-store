@@ -1,24 +1,25 @@
 package com.superinc.europe.onlineshopping.gu.web.controllers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
+import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
 import com.superinc.europe.onlineshopping.gu.entities.dto.*;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.*;
+import com.superinc.europe.onlineshopping.gu.entities.pojo.User;
+import com.superinc.europe.onlineshopping.gu.service.*;
+import com.superinc.europe.onlineshopping.gu.service.exception.ErrorGettingCategoryServiceException;
+import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
+import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpUtils;
+import com.superinc.europe.onlineshopping.gu.web.httpUtils.PdfGenerator;
+import com.superinc.europe.onlineshopping.gu.web.utils.ExceptionMessages;
+import com.superinc.europe.onlineshopping.gu.web.utils.RequestConstants;
+import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamConstants;
+import com.superinc.europe.onlineshopping.su.entities.pojo.CategoryCharacteristic;
+import com.superinc.europe.onlineshopping.su.service.ICategoryCharacteristicService;
+import com.tunyk.currencyconverter.api.CurrencyConverterException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -28,33 +29,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
-import com.superinc.europe.onlineshopping.gu.dao.orm.hibernate.IDaoProduct;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Category;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Product;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.OrderedProduct;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.Order;
-import com.superinc.europe.onlineshopping.gu.entities.pojo.User;
-import com.superinc.europe.onlineshopping.gu.service.ICurrencyService;
-import com.superinc.europe.onlineshopping.gu.service.IOrderedProductService;
-import com.superinc.europe.onlineshopping.gu.service.IProductService;
-import com.superinc.europe.onlineshopping.gu.service.INavaigationService;
-import com.superinc.europe.onlineshopping.gu.service.IOrderService;
-import com.superinc.europe.onlineshopping.gu.service.IProductCategoryService;
-import com.superinc.europe.onlineshopping.gu.service.IUsersService;
-import com.superinc.europe.onlineshopping.gu.service.exception.ErrorGettingCategoryServiceException;
-import com.superinc.europe.onlineshopping.gu.service.exception.ServiceException;
-import com.superinc.europe.onlineshopping.gu.web.utils.ExceptionMessages;
-import com.superinc.europe.onlineshopping.gu.web.utils.RequestConstants;
-import com.superinc.europe.onlineshopping.gu.web.httpUtils.HttpUtils;
-import com.superinc.europe.onlineshopping.gu.web.httpUtils.PdfGenerator;
-import com.superinc.europe.onlineshopping.gu.web.utils.RequestParamConstants;
-import com.superinc.europe.onlineshopping.su.entities.pojo.CategoryCharacteristic;
-import com.superinc.europe.onlineshopping.su.service.ICategoryCharacteristicService;
-import com.tunyk.currencyconverter.BankUaCom;
-import com.tunyk.currencyconverter.api.Currency;
-import com.tunyk.currencyconverter.api.CurrencyConverter;
-import com.tunyk.currencyconverter.api.CurrencyConverterException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import java.util.*;
 
 /**
  * Created by Alexey Druzik on 11.09.2016.
@@ -71,6 +50,8 @@ public class MainController {
 	public static final int NUMBER_OF_RELATED_PRODUCTS = 6;
 	public static final int NUMBER_OF_RECENT_POSTS = 5;
 	public static final int NUMBER_OF_RANDOM_PRODUCTS = 4;
+	public static final int ONE_PAGE = 1;
+	public static final String DEFAULT_USER_NUMBER_OF_PAGE = "1";
 
 	Logger log = Logger.getLogger(MainController.class);
 
@@ -316,7 +297,28 @@ public class MainController {
 				request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
 		return RequestParamConstants.PRODUCT;
 	}
-	
+
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String searchByDescription(HttpServletRequest request, ModelMap model,
+									  @RequestParam(value = RequestParamConstants.CATEGORY_ID, defaultValue = RequestParamConstants.VALUE_STR_ONE) String categoryId,
+									  @RequestParam(value = RequestParamConstants.VALUE, defaultValue = RequestParamConstants.EMPTY) String value) {
+		CustomUserParamDTO customUserParam = (CustomUserParamDTO) request.getSession().getAttribute("customUserParam");
+		try {
+			model.put(RequestParamConstants.NUMBER_PAGE_WIDGET,
+					navigationService.getDataToPaginationWidget(ONE_PAGE));
+			model.put(RequestParamConstants.PRODUCT_CATEGORY_WIDGET, productCategoryService.getAllProductCategories(categoryId));
+			request.getSession().setAttribute(RequestParamConstants.CATEGORY_ID, categoryId);
+			model.put(RequestParamConstants.PRODUCTS, productService.obtainProductsByCategoryAndDescription(customUserParam, DEFAULT_USER_NUMBER_OF_PAGE, (String) categoryId, value));
+			initModel(model, categoryId);
+		} catch (Exception e) {
+			log.error(ExceptionMessages.ERROR_IN_CONTROLLER + e);
+			return RequestParamConstants.ERROR_PAGE;
+		}
+		model.put(RequestParamConstants.QUANTITY_SUM_WIDGET,
+				request.getAttribute(RequestParamConstants.QUANTITY_SUM_WIDGET));
+		return RequestParamConstants.PRODUCT;
+	}
+
 	private Map<String, String[]> getSelectedCharacteristics(String[] selectedCharacteristics) {
 		Map<String, String[]> selectedItems = new HashMap<String, String[]>();
 		selectedItems.put("characteristic1", selectedValueConverter(selectedCharacteristics[0]).split(" "));

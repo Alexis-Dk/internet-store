@@ -65,6 +65,7 @@ public class RequestParamConstants {
 	public static final String PRODUCT_ALL = "productAll";
 	public static final String CATEGORY_NAME = "categoryName";
 	public static final String CATEGORY_CHARACTERISTIC = "adminParam";
+	public static final String VALUE = "value";
     public void handler(){
     }
 }

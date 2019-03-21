@@ -165,10 +165,14 @@ p.right {
 	min-height:80px;
 	padding:0em;
 }
-	
+
+.hideme{
+    display:none;
+    visibility:hidden;
+}
+
 	</style>
-	
-	
+
 <!-- 	  <style>
 		
 
@@ -370,9 +374,10 @@ p.right {
                 <div class="col-md-4">
                     <div class="single-sidebar">
                         <h2 class="sidebar-title">Search Products</h2>
-                        <form action="">
-                            <input type="text" placeholder="Search products...">
+                        <form action="${context}/search?category=&">
+                            <input type="text" name="value">
                             <input type="submit" value="Search">
+                            <input type="text" name="categoryId" value="<c:out value="${category.categoryId}"></c:out>" class="hideme">
                         </form>
                     </div>
                     
