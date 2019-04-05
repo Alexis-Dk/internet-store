@@ -12,9 +12,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>eElectronics - HTML eCommerce Template</title>
-    
-    <script>
+    <title>eElectronics - HTML eCommerce</title>
+
+      <meta name="twitter:url" content="https://digitalcommerce.ml/" />
+      <meta property="og:url" content="https://digitalcommerce.ml/" />
+      <meta name="twitter:title" content="Digital commerce is the buying and selling of goods and services using the Internet, mobile networks and commerce infrastructure." />
+      <meta property="og:title" content="Digital commerce is the buying and selling of goods and services using the Internet, mobile networks and commerce infrastructure." />
+      <meta name="twitter:description" content="Digital commerce is the buying and selling of goods and services using the Internet, mobile networks and commerce infrastructure." />
+      <meta property="og:description" content="Digital commerce is the buying and selling of goods and services using the Internet, mobile networks and commerce infrastructure." />
+      <meta name="twitter:card" content="summary" />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content="https://digitalcommerce.ml/img/services_logo__2.jpg" />
+
+      <script>
         function setParam(name, value) {
             var l = window.location;
 
